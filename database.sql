@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS "schools" (
 
 CREATE TABLE IF NOT EXISTS "availability" (
 	"id" SERIAL PRIMARY KEY,
-	"profile_user_id" INT REFERENCES "profiles.user_id",
+	"user_id" INT REFERENCES "user",
 	"day" INT REFERENCES "days",
 	"time" INT REFERENCES "times"
 );
@@ -62,8 +62,8 @@ CREATE TABLE IF NOT EXISTS "times" (
 CREATE TABLE IF NOT EXISTS "mentorships" (
 	"id" SERIAL PRIMARY KEY,
 	"requested_at" TIMESTAMP NOT NULL DEFAULT NOW(),
-	"mentee_id" INT REFERENCES "profiles.user_id" NOT NULL,
-	"mentor_id" INT REFERENCES "profiles.user_id" NOT NULL,
+	"mentee_id" INT REFERENCES "user" NOT NULL,
+	"mentor_id" INT REFERENCES "user" NOT NULL,
 	"status" VARCHAR DEFAULT 'pending'
 );
 
