@@ -27,6 +27,18 @@ CREATE TABLE IF NOT EXISTS "profiles" (
 	"availability" INT REFERENCES "availability"
 );
 
+CREATE TABLE IF NOT EXISTS "profiles_availability" (
+	"id" SERIAL PRIMARY KEY,
+	"profile_id" INT REFERENCES "profiles",
+	"availability_id" INT REFERENCES "availability"
+);
+
+CREATE TABLE IF NOT EXISTS "profiles_interests" (
+	"id" SERIAL PRIMARY KEY,
+	"profile_id" INT REFERENCES "profiles",
+	"interest_id" INT REFERENCES "interests"
+);
+
 CREATE TABLE IF NOT EXISTS "interests" (
 	"id" SERIAL PRIMARY KEY,
 	"interest" VARCHAR NOT NULL
