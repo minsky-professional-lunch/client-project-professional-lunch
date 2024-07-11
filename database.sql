@@ -7,25 +7,24 @@ CREATE TABLE IF NOT EXISTS "user" (
 	"created_at" TIMESTAMP NOT NULL DEFAULT NOW(),
 	"username" VARCHAR(100) NOT NULL UNIQUE,
 	"password" VARCHAR(100) NOT NULL,
-	"email" VARCHAR NOT NULL,
+	"isAdmin" BOOLEAN DEFAULT FALSE
+);
+
+CREATE TABLE IF NOT EXISTS "profiles" (
+	"id" SERIAL PRIMARY KEY,
+	"user_id" INT REFERENCES "user",
+	"isMentor" BOOLEAN DEFAULT FALSE,
 	"avatar" VARCHAR,
 	"first_name" VARCHAR(100) NOT NULL,
 	"last_name" VARCHAR(100) NOT NULL,
-	"role" INT REFERENCES "roles" NOT NULL
-);
-
-CREATE TABLE IF NOT EXISTS "roles" (
-	"id" SERIAL PRIMARY KEY,
-	"role_type" VARCHAR NOT NULL
-);
-
-CREATE TABLE IF NOT EXISTS "mentees" (
-	"id" SERIAL PRIMARY KEY REFERENCES "user",
+	"email" VARCHAR NOT NULL,
 	"gender" INT REFERENCES "genders" NOT NULL,
-	"interests" INT REFERENCES "interests" NOT NULL,
-	"school" INT REFERENCES "schools" NOT NULL,
+	"interest" INT REFERENCES "interests" NOT NULL,
+	"school" INT REFERENCES "schools",
 	"bio" VARCHAR,
-	"linkedin" VARCHAR
+	"linkedin" VARCHAR,
+	"calendar_link" VARCHAR,
+	"availability" INT REFERENCES "availability"
 );
 
 CREATE TABLE IF NOT EXISTS "interests" (
@@ -43,36 +42,28 @@ CREATE TABLE IF NOT EXISTS "schools" (
 	"school" VARCHAR NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS "mentors" (
-	"id" SERIAL PRIMARY KEY REFERENCES "user",
-	"gender" INT REFERENCES "genders" NOT NULL,
-	"interest" INT REFERENCES "interests" NOT NULL,
-	"bio" VARCHAR(500) NOT NULL,
-	"linkedin" VARCHAR,
-	"calendar_link" VARCHAR
-);
-
 CREATE TABLE IF NOT EXISTS "availability" (
-	"id" SERIAL PRIMARY KEY REFERENCES "mentors",
+	"id" SERIAL PRIMARY KEY,
+	"profile_user_id" INT REFERENCES "profiles.user_id",
 	"day" INT REFERENCES "days",
 	"time" INT REFERENCES "times"
 );
 
 CREATE TABLE IF NOT EXISTS "days" (
 	"id" SERIAL PRIMARY KEY,
-	"day" text NOT NULL
+	"day" VARCHAR NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS "times" (
 	"id" SERIAL PRIMARY KEY,
-	"time" text NOT NULL
+	"time" VARCHAR NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS "mentorships" (
 	"id" SERIAL PRIMARY KEY,
 	"requested_at" TIMESTAMP NOT NULL DEFAULT NOW(),
-	"mentee_id" INT REFERENCES "mentees" NOT NULL,
-	"mentor_id" INT REFERENCES "mentors" NOT NULL,
+	"mentee_id" INT REFERENCES "profiles.user_id" NOT NULL,
+	"mentor_id" INT REFERENCES "profiles.user_id" NOT NULL,
 	"status" VARCHAR DEFAULT 'pending'
 );
 
