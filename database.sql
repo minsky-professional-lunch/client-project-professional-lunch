@@ -19,12 +19,10 @@ CREATE TABLE IF NOT EXISTS "profiles" (
 	"last_name" VARCHAR(100) NOT NULL,
 	"email" VARCHAR NOT NULL,
 	"gender" INT REFERENCES "genders" NOT NULL,
-	"interest" INT REFERENCES "interests" NOT NULL,
 	"school" INT REFERENCES "schools",
 	"bio" VARCHAR,
 	"linkedin" VARCHAR,
-	"calendar_link" VARCHAR,
-	"availability" INT REFERENCES "availability"
+	"calendar_link" VARCHAR
 );
 
 CREATE TABLE IF NOT EXISTS "profiles_availability" (
