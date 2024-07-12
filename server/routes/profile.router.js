@@ -42,14 +42,10 @@ router.post('/', async (req, res) => {
 
 // PUT edit profile
 
-
-
-
-// DELETE profile
-
+// DELETE profile *need to ON DELETE CASCADE mentorships
 router.delete('/', async (req, res) => {
   try {
-    await pool.query(`DELETE FROM "profiles" WHERE id=$1`, [req.body.user_id]);
+    await pool.query(`DELETE FROM "profiles" WHERE id=$1`, [req.user.id]);
     res.sendStatus(200);
   } catch (error) {
     console.log(' error in deleting a profile', error);

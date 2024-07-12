@@ -19,18 +19,16 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 // POST
 router.post('/', rejectUnauthenticated, async (req, res) => {
     console.log(`/resources POST route`);
-    const queryText = `INSERT INTO "resources" ("title", "image", "url", "about", "category", "notes", "user_id")
-VALUES
-('$1', '$2', '$3', '$4', '$5', '$6', $7);`;
+    const queryText = `INSERT INTO "resources" ("title", "image", "url", "about", "category", "notes")
+                        VALUES ($1, $2, $3, $4, $5, $6);`;
   try {
-    const result = await pool.query(queryText, [
-      req.body.title, 
-      req.body.image, 
-      req.body.url, 
-      req.body.about, 
-      req.body.category, 
-      req.body.notes,
-      req.user.id,
+    await pool.query(queryText, [
+    req.body.title, 
+    req.body.image, 
+    req.body.url, 
+    req.body.about, 
+    req.body.category, 
+    req.body.notes
   ]);
     res.sendStatus(200);
   } catch (err) {
@@ -42,7 +40,7 @@ VALUES
 // PUT
 router.put('/:id', async (req, res) => {
     console.log(`/resources PUT route`);
-    const queryText = `UPDATE "resources" SET title=$1, image=$2, url=$3, about=$4, category=$5, notes=$6 WHERE id=$7 and user_id=$8;`;
+    const queryText = `UPDATE "resources" SET title=$1, image=$2, url=$3, about=$4, category=$5, notes=$6 WHERE id=$7;`;
     await pool.query(queryText, [
       req.body.title, 
       req.body.image, 
@@ -50,9 +48,8 @@ router.put('/:id', async (req, res) => {
       req.body.about, 
       req.body.category, 
       req.body.notes,
-      req.params.id, 
-      req.user.id,
-    ]).then((result) => {
+      req.params.id
+    ]).then(() => {
       res.sendStatus(200);
     }).catch((error) => {
       console.log(`Error in put:`, error);

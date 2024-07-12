@@ -83,8 +83,8 @@ CREATE TABLE IF NOT EXISTS "meetings" (
 	"created_at" TIMESTAMP NOT NULL DEFAULT NOW(),
 	"mentorship_id" INT REFERENCES "mentorships" NOT NULL,
 	"date" DATE NOT NULL,
-	"start" TIMESTAMP WITHOUT TIME ZONE NOT NULL,
-	"end" TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+	"start" TIME WITHOUT TIME ZONE NOT NULL,
+	"end" TIME WITHOUT TIME ZONE NOT NULL,
  	"link" VARCHAR,
 	"location" VARCHAR,
 	"notes" VARCHAR,
@@ -100,3 +100,68 @@ CREATE TABLE IF NOT EXISTS "resources" (
   "category" VARCHAR,
   "notes" VARCHAR (500)
 );
+
+INSERT INTO "interests" ("interest")
+VALUES
+('Architecture'),
+('Arts'),
+('Business'),
+('Education'),
+('Engineering'),
+('Health Sciences'),
+('Human Services'),
+('Marketing'),
+('Math'),
+('Psychology'),
+('Veterinary Sciences'),
+('Other');
+
+INSERT INTO "genders" ("gender")
+VALUES
+('Male'),
+('Female'),
+('Non-Binary'),
+('Prefer not to say'),
+('Other');
+
+INSERT INTO "schools" ("school")
+VALUES
+('Fargo Davies'),
+('Fargo North'),
+('Fargo Shanley'),
+('Fargo South'),
+('Horace High'),
+('Moorhead High'),
+('Oak Grove'),
+('Park Christian'),
+('West Fargo High'),
+('West Fargo Sheyenne'),
+('Concordia'),
+('MSCTC'),
+('MSUM'),
+('NDSU'),
+('Rasmussen'),
+('Other');
+
+INSERT INTO "days" ("day")
+VALUES
+('Monday'),
+('Tuesday'),
+('Wednesday'),
+('Thursday'),
+('Friday'),
+('Saturday'),
+('Sunday');
+
+INSERT INTO "times" ("time")
+VALUES
+('Morning'),
+('Lunch'),
+('Afternoon'),
+('Evening');
+
+INSERT INTO "resources" ("title", "image", "url", "about", "category", "notes")
+VALUES
+('Job Service of North Dakota', 'https://play-lh.googleusercontent.com/dLWsSGAegyPMuwSE3mvBSSKCbovH9I0Mc_FbqSfKZ58opcMROedfirw95Smf4idMjg=w240-h480-rw', 'https://www.jobsnd.com/', 'Job Service North Dakota provides workforce and unemployment services across the state in our nine Workforce Centers', 'Jobs', 'A resource for jobs in the state of North Dakota'),
+('Job Service of Minnesota', 'https://i0.wp.com/empowerinclusion.org/wp-content/uploads/2020/05/image.png?resize=395%2C127&ssl=1', 'https://mn.gov/deed/programs-services/mn-job-service/', 'Job Service Minnesotas focus is to deliver services to help job seekers find work and help employers find and retain qualified employees.', 'Jobs', 'A resource for jobs in the state of Minnesota');
+
