@@ -88,3 +88,13 @@ CREATE TABLE IF NOT EXISTS "meetings" (
 	"location" VARCHAR,
 	"notes" VARCHAR
 );
+
+CREATE TABLE IF NOT EXISTS "resources" (
+  "id" SERIAL PRIMARY KEY,
+  "title" VARCHAR NOT NULL, 
+  "image" VARCHAR NOT NULL, 
+  "url" VARCHAR NOT NULL,
+  "about" VARCHAR (500),
+  "category" VARCHAR,
+  "notes" VARCHAR (500)
+);
