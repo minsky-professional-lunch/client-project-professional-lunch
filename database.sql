@@ -2,28 +2,28 @@
 -- You must use double quotes in every query that user is in:
 -- ex. SELECT * FROM "user";
 -- Otherwise you will have errors!
-CREATE TABLE IF NOT EXISTS "user" (
-	"id" SERIAL PRIMARY KEY,
-	"created_at" TIMESTAMP NOT NULL DEFAULT NOW(),
-	"username" VARCHAR(100) NOT NULL UNIQUE,
-	"password" VARCHAR(100) NOT NULL,
-	"isAdmin" BOOLEAN DEFAULT FALSE,
-	"isMentor" BOOLEAN DEFAULT null
+CREATE TABLE "user" (
+    id SERIAL PRIMARY KEY,
+    created_at timestamp without time zone NOT NULL DEFAULT now(),
+    username character varying(100) NOT NULL UNIQUE,
+    password character varying(100) NOT NULL,
+    "isAdmin" boolean DEFAULT false,
+    "isMentor" boolean DEFAULT false
 );
 
-CREATE TABLE IF NOT EXISTS "profiles" (
-	"id" SERIAL PRIMARY KEY,
-	"user_id" INT REFERENCES "user",
-	"isMentor" BOOLEAN DEFAULT FALSE,
-	"avatar" VARCHAR,
-	"first_name" VARCHAR(100) NOT NULL,
-	"last_name" VARCHAR(100) NOT NULL,
-	"email" VARCHAR NOT NULL,
-	"gender" INT REFERENCES "genders" NOT NULL,
-	"school" INT REFERENCES "schools",
-	"bio" VARCHAR,
-	"linkedin" VARCHAR,
-	"calendar_link" VARCHAR
+CREATE TABLE profiles (
+    id SERIAL PRIMARY KEY,
+    user_id integer REFERENCES "user"(id) ON DELETE CASCADE,
+    "isMentor" boolean DEFAULT false,
+    avatar character varying,
+    first_name character varying(100) NOT NULL,
+    last_name character varying(100) NOT NULL,
+    email character varying NOT NULL,
+    gender integer NOT NULL REFERENCES genders(id),
+    school integer REFERENCES schools(id),
+    bio character varying,
+    linkedin character varying,
+    calendar_link character varying
 );
 
 CREATE TABLE IF NOT EXISTS "profiles_availability" (
@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS "profiles_availability" (
 
 CREATE TABLE IF NOT EXISTS "profiles_interests" (
 	"id" SERIAL PRIMARY KEY,
-	"profile_id" INT REFERENCES "profiles",
+	"profile_id" INT REFERENCES "profiles" ON DELETE CASCADE,
 	"interest_id" INT REFERENCES "interests"
 );
 
@@ -55,7 +55,7 @@ CREATE TABLE IF NOT EXISTS "schools" (
 
 CREATE TABLE IF NOT EXISTS "availability" (
 	"id" SERIAL PRIMARY KEY,
-	"user_id" INT REFERENCES "user",
+	"user_id" INT REFERENCES "user" ON DELETE CASCADE,
 	"day" INT REFERENCES "days",
 	"time" INT REFERENCES "times"
 );
@@ -78,17 +78,16 @@ CREATE TABLE IF NOT EXISTS "mentorships" (
 	"status" VARCHAR DEFAULT 'pending'
 );
 
-CREATE TABLE IF NOT EXISTS "meetings" (
-	"id" SERIAL PRIMARY KEY,
-	"created_at" TIMESTAMP NOT NULL DEFAULT NOW(),
-	"mentorship_id" INT REFERENCES "mentorships" NOT NULL,
-	"date" DATE NOT NULL,
-	"start" TIME WITHOUT TIME ZONE NOT NULL,
-	"end" TIME WITHOUT TIME ZONE NOT NULL,
- 	"link" VARCHAR,
-	"location" VARCHAR,
-	"notes" VARCHAR,
-	"status" VARCHAR DEFAULT 'pending'
+CREATE TABLE meetings (
+    id SERIAL PRIMARY KEY,
+    created_at timestamp without time zone NOT NULL DEFAULT now(),
+    mentorship_id integer NOT NULL REFERENCES mentorships(id) ON DELETE CASCADE,
+    date date NOT NULL,
+    start time without time zone NOT NULL,
+    "end" time without time zone NOT NULL,
+    link character varying,
+    location character varying,
+    notes character varying
 );
 
 CREATE TABLE IF NOT EXISTS "resources" (
