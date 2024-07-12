@@ -7,7 +7,8 @@ CREATE TABLE IF NOT EXISTS "user" (
 	"created_at" TIMESTAMP NOT NULL DEFAULT NOW(),
 	"username" VARCHAR(100) NOT NULL UNIQUE,
 	"password" VARCHAR(100) NOT NULL,
-	"isAdmin" BOOLEAN DEFAULT FALSE
+	"isAdmin" BOOLEAN DEFAULT FALSE,
+	"isMentor" BOOLEAN DEFAULT null
 );
 
 CREATE TABLE IF NOT EXISTS "profiles" (
@@ -86,7 +87,8 @@ CREATE TABLE IF NOT EXISTS "meetings" (
 	"end" TIMESTAMP WITHOUT TIME ZONE NOT NULL,
  	"link" VARCHAR,
 	"location" VARCHAR,
-	"notes" VARCHAR
+	"notes" VARCHAR,
+	"status" VARCHAR DEFAULT 'pending'
 );
 
 CREATE TABLE IF NOT EXISTS "resources" (

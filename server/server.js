@@ -9,6 +9,10 @@ const passport = require('./strategies/user.strategy');
 
 // Route Includes
 const userRouter = require('./routes/user.router');
+const profileRouter = require('./routes/profile.router');
+const resourcesRouter = require('./routes/resources.router');
+const meetingsRouter = require('./routes/meetings.router');
+const mentorshipsRouter = require('./routes/mentorships.router');
 
 // Express Middleware
 app.use(express.json());
@@ -24,6 +28,11 @@ app.use(passport.session());
 
 // Routes
 app.use('/api/user', userRouter);
+app.use('/api/profile', profileRouter);
+app.use('/api/resources', resourcesRouter);
+app.use('/api/meetings', meetingsRouter);
+app.use('/api/mentorships', mentorshipsRouter);
+
 
 // Listen Server & Port
 app.listen(PORT, () => {
