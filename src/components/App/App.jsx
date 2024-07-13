@@ -22,6 +22,8 @@ import RegisterPage from '../RegisterPage/RegisterPage';
 
 import './App.css';
 
+import Resources from '../Admin/Resources/Resources';
+
 function App() {
   const dispatch = useDispatch();
 
@@ -66,6 +68,14 @@ function App() {
             path="/info"
           >
             <InfoPage />
+          </ProtectedRoute>
+          
+          <ProtectedRoute
+            // logged in shows UserPage else shows LoginPage
+            exact
+            path="/admin/resources"
+          >
+            <Resources />
           </ProtectedRoute>
 
           <Route
