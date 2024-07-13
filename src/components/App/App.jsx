@@ -23,7 +23,7 @@ import RegisterPage from '../RegisterPage/RegisterPage';
 import './App.css';
 
 import Resources from '../Resources/Resources/Resources';
-import AddResource from '../Resources/AddResource/AddResource';
+import AddResource from '../Resources/AddResourceDialog/AddResourceDialog';
 
 function App() {
   const dispatch = useDispatch();
@@ -83,7 +83,7 @@ function App() {
             exact
             path='/addresource'
           >
-            <AddResource/>
+            <AddResource />
           </ProtectedRoute>
 
           <Route exact path='/login'>

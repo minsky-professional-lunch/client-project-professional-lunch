@@ -1,13 +1,21 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import Grid from '@mui/joy/Grid';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
 import ResourceCards from '../ResourceCards/ResourceCards';
+import AddResource from '../AddResourceDialog/AddResourceDialog';
+import AddResourceDialog from '../AddResourceDialog/AddResourceDialog';
 
 export default function Resources() {
   const dispatch = useDispatch();
   const history = useHistory();
   const resources = useSelector((store) => store.resources);
+
+  const [addResourceIsOpen, setAddResourceIsOpen] = useState(false);
+
+  const closeAddResource = () => setAddResourceIsOpen(false);
 
   useEffect(() => {
     dispatch({ type: 'FETCH_RESOURCES' });
@@ -21,6 +29,17 @@ export default function Resources() {
           <ResourceCards key={resource.id} resource={resource} />
         ))}
       </Grid>
+      <Button
+        sx={{ mb: 8 }}
+        variant='outlined'
+        onClick={() => setAddResourceIsOpen(true)}
+      >
+        Add Resource
+      </Button>
+      <AddResourceDialog
+        open={addResourceIsOpen}
+        closeAddResource={closeAddResource}
+      />
     </div>
   );
 }

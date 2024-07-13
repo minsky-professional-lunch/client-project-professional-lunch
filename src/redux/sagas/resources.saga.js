@@ -10,8 +10,19 @@ function* fetchResources() {
   }
 }
 
+function* addResource(action) {
+  try {
+    yield axios.post('api/resources', action.payload);
+    yield put({ type: 'FETCH_RESOURCES' });
+  } catch (error) {
+    alert(`Error adding resource`);
+    console.error(`Error adding resource`, error);
+  }
+}
+
 function* resourcesSaga() {
   yield takeLatest('FETCH_RESOURCES', fetchResources);
+  yield takeLatest('ADD_RESOURCE', addResource);
 }
 
 export default resourcesSaga;
