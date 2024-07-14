@@ -2,11 +2,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import Grid from '@mui/joy/Grid';
+import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import ResourceCards from '../ResourceCards/ResourceCards';
 import AddResource from '../AddResourceDialog/AddResourceDialog';
 import AddResourceDialog from '../AddResourceDialog/AddResourceDialog';
+import { Container } from '@mui/material';
 
 export default function Resources() {
   const dispatch = useDispatch();
@@ -22,7 +24,7 @@ export default function Resources() {
   }, []);
 
   return (
-    <div>
+    <Box display='flex' flexDirection='column' alignItems='center'>
       <h1>Mentee Resources</h1>
       <Grid container spacing={1}>
         {resources.map((resource) => (
@@ -40,6 +42,6 @@ export default function Resources() {
         open={addResourceIsOpen}
         closeAddResource={closeAddResource}
       />
-    </div>
+    </Box>
   );
 }

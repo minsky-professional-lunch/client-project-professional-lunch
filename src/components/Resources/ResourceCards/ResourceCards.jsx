@@ -1,4 +1,5 @@
 import AspectRatio from '@mui/joy/AspectRatio';
+import Box  from '@mui/material/Box';
 import Button from '@mui/joy/Button';
 import Card from '@mui/joy/Card';
 import CardContent from '@mui/joy/CardContent';
@@ -7,8 +8,8 @@ import Typography from '@mui/joy/Typography';
 
 export default function ResourceCards({ resource }) {
   return (
-    <Grid container item spacing={3}>
-      <Card sx={{ width: 320 }} variant='outlined'>
+    <Box>
+      <Card variant="outlined" spacing={3} sx={{ mb: 1.5, width: 300, display: "flex", flexDirection: "column" }}>
         <div>
           <Typography level='title-lg'>{resource.title}</Typography>
           {/* <Typography level="body-sm">April 24 to May 02, 2021</Typography> */}
@@ -37,8 +38,8 @@ export default function ResourceCards({ resource }) {
               Explore
             </Button>
           </div>
-        </CardContent>
+        </CardContent>      
       </Card>
-    </Grid>
+    </Box>
   );
 }
