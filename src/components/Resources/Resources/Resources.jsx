@@ -17,15 +17,15 @@ export default function Resources() {
   const user = useSelector((store) => store.user);
 
   const [addResourceIsOpen, setAddResourceIsOpen] = useState(false);
-
+  
   const closeAddResource = () => setAddResourceIsOpen(false);
-
+  
   useEffect(() => {
     dispatch({ type: 'FETCH_RESOURCES' });
   }, []);
 
   return (
-    <Box display='flex' flexDirection='column' alignItems='center'>
+    <Container maxWidth='lg'>
       <h1>Resources</h1>
       <Grid container spacing={1}>
         {resources.map((resource) => (
@@ -34,20 +34,19 @@ export default function Resources() {
       </Grid>
       {user.isAdmin && (
         <>
-      <Button
-        sx={{ mb: 8 }}
-        variant='outlined'
-        onClick={() => setAddResourceIsOpen(true)}
-      >
-        Add Resource
-      </Button>
-      
-        <AddResourceDialog
-          open={addResourceIsOpen}
-          closeAddResource={closeAddResource}
-        />
+          <Button
+            sx={{ mb: 8 }}
+            variant='outlined'
+            onClick={() => setAddResourceIsOpen(true)}
+          >
+            Add Resource
+          </Button>
+          <AddResourceDialog
+            open={addResourceIsOpen}
+            closeAddResource={closeAddResource}
+          />
         </>
       )}
-    </Box>
+    </Container>
   );
 }
