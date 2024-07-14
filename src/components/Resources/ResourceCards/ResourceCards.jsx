@@ -17,9 +17,8 @@ export default function ResourceCards({ resource }) {
         <AspectRatio minHeight='120px' maxHeight='200px'>
           <img
             src={resource.image}
-            srcSet='https://images.unsplash.com/photo-1527549993586-dff825b37782?auto=format&fit=crop&w=286&dpr=2 2x'
             loading='lazy'
-            alt=''
+            alt='a logo for the resource'
           />
         </AspectRatio>
         <CardContent orientation='horizontal'>
@@ -32,7 +31,6 @@ export default function ResourceCards({ resource }) {
               variant='solid'
               size='md'
               color='primary'
-              aria-label='Explore Bahamas Islands'
               sx={{ ml: 'auto', alignSelf: 'center', fontWeight: 600 }}
             >
               Explore

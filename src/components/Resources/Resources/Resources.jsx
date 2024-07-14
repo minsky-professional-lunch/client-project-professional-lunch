@@ -25,7 +25,7 @@ export default function Resources() {
 
   return (
     <Box display='flex' flexDirection='column' alignItems='center'>
-      <h1>Mentee Resources</h1>
+      <h1>Resources</h1>
       <Grid container spacing={1}>
         {resources.map((resource) => (
           <ResourceCards key={resource.id} resource={resource} />

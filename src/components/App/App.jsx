@@ -78,13 +78,6 @@ function App() {
           >
             <Resources />
           </ProtectedRoute>
-          <ProtectedRoute
-            // logged in shows UserPage else shows LoginPage
-            exact
-            path='/addresource'
-          >
-            <AddResource />
-          </ProtectedRoute>
 
           <Route exact path='/login'>
             {user.id ? (
