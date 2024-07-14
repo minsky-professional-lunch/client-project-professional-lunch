@@ -13,6 +13,8 @@ const profileRouter = require('./routes/profile.router');
 const resourcesRouter = require('./routes/resources.router');
 const meetingsRouter = require('./routes/meetings.router');
 const mentorshipsRouter = require('./routes/mentorships.router');
+const interestsRouter = require('./routes/interests.router');
+const availabilityRouter = require('./routes/availability.router');
 
 // Express Middleware
 app.use(express.json());
@@ -32,6 +34,8 @@ app.use('/api/profile', profileRouter);
 app.use('/api/resources', resourcesRouter);
 app.use('/api/meetings', meetingsRouter);
 app.use('/api/mentorships', mentorshipsRouter);
+app.use('/api/interests', interestsRouter);
+app.use('/api/availability', availabilityRouter);
 
 
 // Listen Server & Port
