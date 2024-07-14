@@ -14,6 +14,7 @@ export default function Resources() {
   const dispatch = useDispatch();
   const history = useHistory();
   const resources = useSelector((store) => store.resources);
+  const user = useSelector((store) => store.user);
 
   const [addResourceIsOpen, setAddResourceIsOpen] = useState(false);
 
@@ -31,6 +32,8 @@ export default function Resources() {
           <ResourceCards key={resource.id} resource={resource} />
         ))}
       </Grid>
+      {user.isAdmin && (
+        <>
       <Button
         sx={{ mb: 8 }}
         variant='outlined'
@@ -38,10 +41,13 @@ export default function Resources() {
       >
         Add Resource
       </Button>
-      <AddResourceDialog
-        open={addResourceIsOpen}
-        closeAddResource={closeAddResource}
-      />
+      
+        <AddResourceDialog
+          open={addResourceIsOpen}
+          closeAddResource={closeAddResource}
+        />
+        </>
+      )}
     </Box>
   );
 }

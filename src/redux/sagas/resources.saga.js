@@ -20,9 +20,20 @@ function* addResource(action) {
   }
 }
 
+function* deleteResource(action) {
+  try {
+    yield axios.delete(`/api/resources/${action.payload}`);
+      yield put({ type: 'FETCH_RESOURCES'});
+  } catch (error) {
+    alert(`Error deleting resource`);
+    console.error(`Error deleting resource`, error);
+  }
+}
+
 function* resourcesSaga() {
   yield takeLatest('FETCH_RESOURCES', fetchResources);
   yield takeLatest('ADD_RESOURCE', addResource);
+  yield takeLatest('DELETE_RESOURCE', deleteResource);
 }
 
 export default resourcesSaga;
