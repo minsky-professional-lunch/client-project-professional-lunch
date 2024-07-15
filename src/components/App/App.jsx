@@ -72,9 +72,15 @@ function App() {
           </ProtectedRoute>
 
           <ProtectedRoute
-            // logged in shows UserPage else shows LoginPage
             exact
             path='/resources'
+          >
+            <Resources />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            exact
+            path='/admin'
           >
             <Resources />
           </ProtectedRoute>

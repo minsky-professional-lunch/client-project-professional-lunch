@@ -157,7 +157,8 @@ VALUES
 ('Morning'),
 ('Lunch'),
 ('Afternoon'),
-('Evening');
+('Evening'),
+('All Day');
 
 INSERT INTO "resources" ("title", "image", "url", "about", "category", "notes")
 VALUES
