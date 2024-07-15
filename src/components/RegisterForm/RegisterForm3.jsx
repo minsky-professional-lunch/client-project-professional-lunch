@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 export default function RegisterForm3() {
   const [gender, setGender] = useState("");
   const [school, setSchool] = useState("");
@@ -9,6 +9,11 @@ export default function RegisterForm3() {
 
   const history = useHistory();
   const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch({
+      type: "FETCH_INTERESTS",
+    });
+  }, []);
   const nextPage = () => {
     history.push("/registration/4");
     event.preventDefault();

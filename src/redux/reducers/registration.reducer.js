@@ -1,3 +1,5 @@
+import { combineReducers } from "redux";
+
 const initialState = {
   firstName: "",
   lastName: "",
@@ -30,4 +32,24 @@ const registrationReducer = (state = initialState, action) => {
   }
 };
 
-export default registrationReducer;
+const interestReducer = (state = [], action) => {
+  if (action.type === "SET_INTERESTS") {
+    return action.payload;
+  } else {
+    return state;
+  }
+};
+
+const schoolsReducer = (state = [], action) => {
+  if (action.type === "SET_SCHOOLS") {
+    return action.payload;
+  } else {
+    return state;
+  }
+};
+
+export default combineReducers({
+  registrationReducer,
+  schoolsReducer,
+  interestReducer,
+});
