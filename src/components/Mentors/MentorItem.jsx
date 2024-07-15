@@ -25,6 +25,10 @@ export default function MentorItem( {mentor} ) {
         history.push(`/mentor/details/${mentorId}`);
     }
 
+    const connect = (mentorId) => {
+        console.log('Clicked', mentorId);
+    }
+
     return (
         <div className='container'>
             <Grid container justifyContent="center">
@@ -33,7 +37,7 @@ export default function MentorItem( {mentor} ) {
                     <Typography level="title-lg" noWrap>{mentor.first_name} {mentor.last_name}</Typography>
                     <CardActions>
                         <Stack direction="row" justifyContent="space-evenly" alignItems="center" spacing={4}>
-                            <Button>
+                            <Button onClick={() => connect(mentor.id)}>
                                 Connect
                             </Button>
                             <Button onClick={() => mentorDetails(mentor.id)} sx={{ cursor: 'pointer' }}>
