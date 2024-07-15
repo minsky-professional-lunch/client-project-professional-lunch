@@ -10,6 +10,12 @@ export default function RegisterForm3() {
   const history = useHistory();
   const dispatch = useDispatch();
 
+  useEffect(() => {
+dispatch({
+    type: 'FETCH_DAYS'
+})
+  }, [])
+
   const nextPage = () => {
     history.push("/registration/4");
     event.preventDefault();
