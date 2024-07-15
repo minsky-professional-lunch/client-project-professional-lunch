@@ -19,6 +19,9 @@ import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
+import RegisterPage2 from '../RegisterPage/RegisterPage2';
+import RegisterPage3 from '../RegisterPage/RegisterPage3';
+import RegisterPage4 from '../RegisterPage/RegisterPage4';
 
 import './App.css';
 
@@ -98,6 +101,39 @@ function App() {
             ) : (
               // Otherwise, show the registration page
               <RegisterPage />
+            )}
+          </Route>
+
+          <Route exact path='/registration/2'>
+            {user.id ? (
+              // If the user is already logged in,
+              // redirect them to the /user page
+              <Redirect to='/user' />
+            ) : (
+              // Otherwise, show the registration page
+              <RegisterPage2 />
+            )}
+          </Route>
+
+          <Route exact path='/registration/3'>
+            {user.id ? (
+              // If the user is already logged in,
+              // redirect them to the /user page
+              <Redirect to='/user' />
+            ) : (
+              // Otherwise, show the registration page
+              <RegisterPage3 />
+            )}
+          </Route>
+
+          <Route exact path='/registration/4'>
+            {user.id ? (
+              // If the user is already logged in,
+              // redirect them to the /user page
+              <Redirect to='/user' />
+            ) : (
+              // Otherwise, show the registration page
+              <RegisterPage4 />
             )}
           </Route>
 
