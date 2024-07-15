@@ -56,8 +56,8 @@ router.get('/:id', async (req, res) => {
                         WHERE interests_cte.profile_id = $1;`;
     const result2 = await pool.query(queryText2, [req.params.id]);
     const response = {
-      profile: result.rows,
-      details: result2.rows
+      profile: result.rows[0],
+      details: result2.rows[0]
     };
     res.send(response);
   } catch (error) {

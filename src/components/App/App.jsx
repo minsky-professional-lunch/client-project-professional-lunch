@@ -24,6 +24,7 @@ import './App.css';
 
 import Resources from '../Resources/Resources/Resources';
 import AddResource from '../Resources/AddResourceDialog/AddResourceDialog';
+import AvailableMentors from '../Mentors/AvailableMentors';
 
 function App() {
   const dispatch = useDispatch();
@@ -77,6 +78,14 @@ function App() {
             path='/resources'
           >
             <Resources />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows UserPage else shows LoginPage
+            exact
+            path='/available-mentors'
+          >
+            <AvailableMentors />
           </ProtectedRoute>
 
           <Route exact path='/login'>
