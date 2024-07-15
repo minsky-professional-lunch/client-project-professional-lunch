@@ -3,7 +3,6 @@ const pool = require('../modules/pool');
 const router = express.Router();
 
 // GET all profiles
-// Works in Postman
 router.get('/', (req, res) => {
   pool
     .query(`SELECT * FROM "profiles"`)
@@ -14,6 +13,57 @@ router.get('/', (req, res) => {
       res.sendStatus(500);
       console.log('error in getting profiles', error);
     });
+});
+
+// GET profile information for specific user
+router.get('/:id', async (req, res) => {
+  try {
+    const queryText = `SELECT * FROM "profiles" WHERE "user_id"=$1`;
+    const result = await pool.query(queryText, [req.params.id]);
+    const queryText2 = `WITH interests_cte AS (
+                            SELECT
+                                profiles_interests.profile_id,
+                                array_agg(DISTINCT interests.interest) AS interests
+                            FROM
+                                profiles_interests
+                            JOIN
+                                interests ON profiles_interests.interest_id = interests.id
+                            GROUP BY
+                                profiles_interests.profile_id
+                        ),
+                        availability_cte AS (
+                            SELECT
+                                profiles_availability.profile_id,
+                                array_agg(json_build_object(
+                                    'day', availability.day,
+                                    'time', availability.time
+                                )) AS availability
+                            FROM
+                                profiles_availability
+                            JOIN
+                                availability ON profiles_availability.availability_id = availability.id
+                            GROUP BY
+                                profiles_availability.profile_id
+                        )
+                        SELECT
+                            interests_cte.profile_id,
+                            interests_cte.interests,
+                            availability_cte.availability
+                        FROM
+                            interests_cte
+                        LEFT JOIN
+                            availability_cte ON interests_cte.profile_id = availability_cte.profile_id
+                        WHERE interests_cte.profile_id = $1;`;
+    const result2 = await pool.query(queryText2, [req.params.id]);
+    const response = {
+      profile: result.rows,
+      details: result2.rows
+    };
+    res.send(response);
+  } catch (error) {
+    console.log('Error getting profile details', error);
+    res.sendStatus(500);
+  }
 });
 
 // POST new profile
