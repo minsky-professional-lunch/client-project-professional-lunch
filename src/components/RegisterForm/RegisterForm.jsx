@@ -5,9 +5,10 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 function RegisterForm() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
+  // const [firstName, setFirstName] = useState("");
+  // const [lastName, setLastName] = useState("");
+  // const [email, setEmail] = useState("");
+  const [role, setRole] = useState("");
   const errors = useSelector((store) => store.errors);
   const history = useHistory();
   const dispatch = useDispatch();
@@ -28,17 +29,15 @@ function RegisterForm() {
     history.push("/registration/2");
     event.preventDefault();
 
-    console.log("firstname and lastname", firstName, lastName);
     dispatch({
       type: "ADD_FIRST_PAGE_INFO",
-      // firstName: firstName,
-      // lastName: lastName,
+
       payload: {
-        firstName: firstName,
-        lastName: lastName,
         username: username,
         password: password,
-        email: email,
+        isMentor: role,
+
+        // email: email,
       },
     });
   };
@@ -75,7 +74,7 @@ function RegisterForm() {
           />
         </label>
       </div> */}
-      <div>
+      {/* <div>
         First Name
         <input
           type="text"
@@ -90,7 +89,7 @@ function RegisterForm() {
           value={lastName}
           onChange={(event) => setLastName(event.target.value)}
         />
-      </div>
+      </div> */}
       <div>
         <label htmlFor="username">
           Username:
@@ -115,9 +114,31 @@ function RegisterForm() {
           />
         </label>
       </div>
-      <div>
+      {/* <div>
         Email
         <input onChange={(event) => setEmail(event.target.value)}></input>
+      </div> */}
+      <div>
+        <div>
+          Mentor
+          <input
+            id="Mentor"
+            type="radio"
+            value={true}
+            name="role"
+            onChange={(event) => setRole(event.target.value)}
+          />
+        </div>
+        <div>
+          Mentee
+          <input
+            id="Mentee"
+            type="radio"
+            value={false}
+            name="role"
+            onChange={(event) => setRole(event.target.value)}
+          />
+        </div>
       </div>
       <div>
         <input className="btn" type="submit" name="submit" value="Next" />
