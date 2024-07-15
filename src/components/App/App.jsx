@@ -27,6 +27,9 @@ import './App.css';
 
 import Resources from '../Resources/Resources/Resources';
 import AddResource from '../Resources/AddResourceDialog/AddResourceDialog';
+import AvailableMentors from '../Mentors/AvailableMentors';
+import Profile from '../Profile/Profile';
+import MentorDetails from '../Mentors/MentorDetails';
 
 function App() {
   const dispatch = useDispatch();
@@ -60,26 +63,35 @@ function App() {
             Even though it seems like they are different pages, the user is always on localhost:5173/user */}
           <ProtectedRoute
             // logged in shows UserPage else shows LoginPage
-            exact
-            path='/user'
+            exact path='/user'
           >
             <UserPage />
           </ProtectedRoute>
 
+          <ProtectedRoute exact path='/profile'>
+            <Profile />
+          </ProtectedRoute>
+
           <ProtectedRoute
             // logged in shows InfoPage else shows LoginPage
-            exact
-            path='/info'
+            exact path='/info'
           >
             <InfoPage />
           </ProtectedRoute>
 
           <ProtectedRoute
             // logged in shows UserPage else shows LoginPage
-            exact
-            path='/resources'
+            exact path='/resources'
           >
             <Resources />
+          </ProtectedRoute>
+
+          <ProtectedRoute exact path='/available-mentors'>
+            <AvailableMentors />
+          </ProtectedRoute>
+
+          <ProtectedRoute exact path='/mentor/details/:id'>
+            <MentorDetails />
           </ProtectedRoute>
 
           <Route exact path='/login'>
