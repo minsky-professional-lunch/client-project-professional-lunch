@@ -43,9 +43,9 @@ router.get('/:id', (req, res) => {
 
 // GET route for availability of clicked on profile
 router.get('/profile/:id', (req, res) => {
-    const queryText = `SELECT profiles_interests.profile_id, interests.interest, profiles_interests.id FROM interests 
-                          JOIN profiles_interests ON interests.id=profiles_interests.interest_id
-                          WHERE profiles_interests.profile_id=$1;`;
+    const queryText = `SELECT profiles_availability.profile_id, availability."day", availability."time", profiles_availability.id FROM availability
+	                    JOIN profiles_availability ON availability.id=profiles_availability.availability_id
+	                    WHERE profiles_availability.profile_id=$1;`;
       pool.query(queryText, [req.params.id])
           .then(result => {
           res.send(result.rows);

@@ -29,4 +29,18 @@ router.get('/:id', (req, res) => {
     })
 });
 
+router.get('/profile/:id', (req, res) => {
+    const queryText = `SELECT profiles_interests.profile_id, interests.interest, profiles_interests.id FROM interests 
+                          JOIN profiles_interests ON interests.id=profiles_interests.interest_id
+                          WHERE profiles_interests.profile_id=$1;`;
+      pool.query(queryText, [req.params.id])
+          .then(result => {
+          res.send(result.rows);
+          })
+          .catch(err => {
+          console.log('ERROR: Getting interests', err);
+          res.sendStatus(500)
+      })
+  });
+
 module.exports = router;
