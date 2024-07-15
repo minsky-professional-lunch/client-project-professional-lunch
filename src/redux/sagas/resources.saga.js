@@ -31,13 +31,14 @@ function* addResource(action) {
 
 function* editResource(action) {
   try {
-    yield axios.put(`api/resources/${action.payload}`, {
+    yield axios.put(`api/resources/`, {
       title: action.payload.title, 
       image: action.payload.image,
       url: action.payload.url, 
       about: action.payload.about,
       category: action.payload.category,
       notes: action.payload.notes,
+      id: action.payload.id,
     });
     yield put({ type: 'FETCH_RESOURCES' })
   } catch (error) {
