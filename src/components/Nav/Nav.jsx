@@ -28,12 +28,20 @@ function Nav() {
               Home
             </Link>
 
-            <Link className="navLink" to="/info">
-              Info Page
+            <Link className="navLink" to="/available-mentors">
+              Available Mentors
             </Link>
+
+            {/* <Link className="navLink" to="/info">
+              Info Page
+            </Link> */}
 
             <Link className="navLink" to="/resources">
               Resources
+            </Link>
+
+            <Link className="navLink" to="/profile">
+              Profile
             </Link>
 
             <LogOutButton className="navLink" />

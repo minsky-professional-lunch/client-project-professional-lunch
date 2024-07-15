@@ -19,11 +19,17 @@ import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
+import RegisterPage2 from '../RegisterPage/RegisterPage2';
+import RegisterPage3 from '../RegisterPage/RegisterPage3';
+import RegisterPage4 from '../RegisterPage/RegisterPage4';
 
 import './App.css';
 
 import Resources from '../Resources/Resources/Resources';
 import AddResource from '../Resources/AddResourceDialog/AddResourceDialog';
+import AvailableMentors from '../Mentors/AvailableMentors';
+import Profile from '../Profile/Profile';
+import MentorDetails from '../Mentors/MentorDetails';
 
 function App() {
   const dispatch = useDispatch();
@@ -57,32 +63,44 @@ function App() {
             Even though it seems like they are different pages, the user is always on localhost:5173/user */}
           <ProtectedRoute
             // logged in shows UserPage else shows LoginPage
-            exact
-            path='/user'
+            exact path='/user'
           >
             <UserPage />
           </ProtectedRoute>
 
+          <ProtectedRoute exact path='/profile'>
+            <Profile />
+          </ProtectedRoute>
+
           <ProtectedRoute
             // logged in shows InfoPage else shows LoginPage
-            exact
-            path='/info'
+            exact path='/info'
           >
             <InfoPage />
           </ProtectedRoute>
 
           <ProtectedRoute
-            exact
-            path='/resources'
+
+            // logged in shows UserPage else shows LoginPage
+            exact path='/resources'
           >
             <Resources />
           </ProtectedRoute>
+
 
           <ProtectedRoute
             exact
             path='/admin'
           >
             <Resources />
+
+          <ProtectedRoute exact path='/available-mentors'>
+            <AvailableMentors />
+          </ProtectedRoute>
+
+          <ProtectedRoute exact path='/mentor/details/:id'>
+            <MentorDetails />
+
           </ProtectedRoute>
 
           <Route exact path='/login'>
@@ -104,6 +122,39 @@ function App() {
             ) : (
               // Otherwise, show the registration page
               <RegisterPage />
+            )}
+          </Route>
+
+          <Route exact path='/registration/2'>
+            {user.id ? (
+              // If the user is already logged in,
+              // redirect them to the /user page
+              <Redirect to='/user' />
+            ) : (
+              // Otherwise, show the registration page
+              <RegisterPage2 />
+            )}
+          </Route>
+
+          <Route exact path='/registration/3'>
+            {user.id ? (
+              // If the user is already logged in,
+              // redirect them to the /user page
+              <Redirect to='/user' />
+            ) : (
+              // Otherwise, show the registration page
+              <RegisterPage3 />
+            )}
+          </Route>
+
+          <Route exact path='/registration/4'>
+            {user.id ? (
+              // If the user is already logged in,
+              // redirect them to the /user page
+              <Redirect to='/user' />
+            ) : (
+              // Otherwise, show the registration page
+              <RegisterPage4 />
             )}
           </Route>
 
