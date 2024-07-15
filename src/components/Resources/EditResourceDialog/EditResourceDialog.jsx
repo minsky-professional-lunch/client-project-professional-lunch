@@ -56,7 +56,7 @@ export default function EditResourceDialog({ open, closeEditResource }) {
             sx={{ mb: 1.5, mt: 1 }}
             id='title'
             name='title'
-            label='title'
+            label='Title'
             type='text'
             placeholder={resource.title}
             fullWidth
