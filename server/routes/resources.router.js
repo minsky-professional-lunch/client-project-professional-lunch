@@ -6,7 +6,7 @@ const router = express.Router();
 // GET
 router.get('/', rejectUnauthenticated, (req, res) => {
   console.log(`/resources GET route`);
-  const queryText = `SELECT * from "resources";`;
+  const queryText = `SELECT * from "resources" ORDER BY title;`;
   pool.query(queryText).then((result) => {
     res.send(result.rows);
   })
@@ -50,7 +50,7 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
 })
 
 // PUT
-router.put('/:id', async (req, res) => {
+router.put('/', rejectUnauthenticated, async (req, res) => {
     console.log(`/resources PUT route`);
     const queryText = `UPDATE "resources" SET title=$1, image=$2, url=$3, about=$4, category=$5, notes=$6 WHERE id=$7;`;
     await pool.query(queryText, [
@@ -60,7 +60,7 @@ router.put('/:id', async (req, res) => {
       req.body.about, 
       req.body.category, 
       req.body.notes,
-      req.params.id
+      req.body.id
     ]).then(() => {
       res.sendStatus(200);
     }).catch((error) => {

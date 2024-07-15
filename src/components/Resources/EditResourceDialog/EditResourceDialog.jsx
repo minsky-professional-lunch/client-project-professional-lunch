@@ -10,17 +10,16 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
 import DialogTitle from '@mui/material/DialogTitle';
 
-export default function EditResourceDialog({ open, closeEditResource }) {
+export default function EditResourceDialog({ open, closeEditResource, resource }) {
   const dispatch = useDispatch();
-  const resourceId = useParams().id;
-  const resource = useSelector((store) => store.resources);
 
-  const [editResourceTitle, setEditResourceTitle] = useState('');
-  const [editResourceImage, setEditResourceImage] = useState('');
-  const [editResourceUrl, setEditResourceUrl] = useState('');
-  const [editResourceAbout, setEditResourceAbout] = useState('');
-  const [editResourceCategory, setEditResourceCategory] = useState('');
-  const [editResourceNotes, setEditResourceNotes] = useState('');
+  const [editResourceTitle, setEditResourceTitle] = useState(resource.title);
+  const [editResourceImage, setEditResourceImage] = useState(resource.image);
+  const [editResourceUrl, setEditResourceUrl] = useState(resource.url);
+  const [editResourceAbout, setEditResourceAbout] = useState(resource.about);
+  const [editResourceCategory, setEditResourceCategory] = useState(resource.category);
+  const [editResourceNotes, setEditResourceNotes] = useState(resource.notes);
+  const [editResourceId, setEditResourceId] = useState(resource.id);
 
   const editResource = (event) => {
     event.preventDefault();
@@ -33,15 +32,13 @@ export default function EditResourceDialog({ open, closeEditResource }) {
         about: editResourceAbout,
         category: editResourceCategory,
         notes: editResourceNotes,
+        id: editResourceId,
       },
     });
     closeEditResource();
   };
 
-  // useEffect(() => {
-  //   event.preventDefault();
-  //   dispatch({ type: 'FETCH_SELECTED_RESOURCE', payload: resourceId });
-  // }, []);
+  console.log('Resource', resource);
 
   return (
     <>
@@ -50,7 +47,7 @@ export default function EditResourceDialog({ open, closeEditResource }) {
         onClose={closeEditResource}
         PaperProps={{ component: 'form', onSubmit: editResource }}
       >
-        <DialogTitle>EditResource</DialogTitle>
+        <DialogTitle>Edit Resource</DialogTitle>
         <DialogContent>
           <TextField
             sx={{ mb: 1.5, mt: 1 }}

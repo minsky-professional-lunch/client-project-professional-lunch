@@ -80,11 +80,19 @@ function App() {
           </ProtectedRoute>
 
           <ProtectedRoute
+
             // logged in shows UserPage else shows LoginPage
             exact path='/resources'
           >
             <Resources />
           </ProtectedRoute>
+
+
+          <ProtectedRoute
+            exact
+            path='/admin'
+          >
+            <Resources />
 
           <ProtectedRoute exact path='/available-mentors'>
             <AvailableMentors />
@@ -92,6 +100,7 @@ function App() {
 
           <ProtectedRoute exact path='/mentor/details/:id'>
             <MentorDetails />
+
           </ProtectedRoute>
 
           <Route exact path='/login'>

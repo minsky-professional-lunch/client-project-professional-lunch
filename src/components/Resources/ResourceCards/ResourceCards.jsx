@@ -69,6 +69,7 @@ export default function ResourceCards({ resource }) {
                 <EditResourceDialog
                   open={editResourceIsOpen}
                   closeEditResource={closeEditResource}
+                  resource={resource}
                 />
               </>
             )}
