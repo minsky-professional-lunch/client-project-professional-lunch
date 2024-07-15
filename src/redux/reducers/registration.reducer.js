@@ -1,15 +1,27 @@
-const registrationReducer = (state = {}, action) => {
+const initialState = {
+  firstName: "",
+  lastName: "",
+  username: "",
+  email: "",
+  isMentor: "",
+  gender: "",
+  interests: [],
+  bio: "",
+  avatar: "",
+};
+
+const registrationReducer = (state = initialState, action) => {
   if (action.type === "ADD_FIRST_PAGE_INFO") {
-    return [...state, action.payload];
+    return { ...state, ...action.payload };
   }
   if (action.type === "ADD_SECOND_PAGE_INFO") {
-    return [...state, action.payload];
+    return { ...state, ...action.payload };
   }
   if (action.type === "ADD_THIRD_PAGE_INFO") {
-    return [...state, action.payload];
+    return { ...state, ...action.payload };
   }
   if (action.type === "ADD_FOURTH_PAGE_INFO") {
-    return [...state, action.payload];
+    return { ...state, ...action.payload };
   } else {
     return state;
   }

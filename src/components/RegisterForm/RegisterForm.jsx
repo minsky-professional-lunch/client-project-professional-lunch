@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 function RegisterForm() {
   // const [username, setUsername] = useState('');
@@ -7,22 +8,39 @@ function RegisterForm() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const errors = useSelector((store) => store.errors);
+  const history = useHistory();
   const dispatch = useDispatch();
 
-  const registerUser = (event) => {
+  // const registerUser = (event) => {
+  //   event.preventDefault();
+
+  //   // dispatch({
+  //   //   type: 'REGISTER',
+  //   //   payload: {
+  //   //     username: username,
+  //   //     password: password,
+  //   //   },
+  //   // });
+  // }; // end registerUser
+
+  const nextPage = () => {
+    history.push("/registration/2");
     event.preventDefault();
 
-    // dispatch({
-    //   type: 'REGISTER',
-    //   payload: {
-    //     username: username,
-    //     password: password,
-    //   },
-    // });
-  }; // end registerUser
+    console.log("firstname and lastname", firstName, lastName);
+    dispatch({
+      type: "ADD_FIRST_PAGE_INFO",
+      // firstName: firstName,
+      // lastName: lastName,
+      payload: {
+        firstName: firstName,
+        lastName: lastName,
+      },
+    });
+  };
 
   return (
-    <form className="formPanel" onSubmit={registerUser}>
+    <form className="formPanel" onSubmit={nextPage}>
       <h2>Register User</h2>
       {errors.registrationMessage && (
         <h3 className="alert" role="alert">
