@@ -11,7 +11,7 @@ export default function RegisterForm3() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch({
-      type: "FETCH_INTERESTS",
+      type: "FETCH_SCHOOLS",
     });
   }, []);
   const nextPage = () => {

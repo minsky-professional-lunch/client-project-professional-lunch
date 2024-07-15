@@ -16,19 +16,6 @@ router.get("/list", (req, res) => {
     });
 });
 
-router.get("/schools", (req, res) => {
-  const queryText = `SELECT * FROM "schools";`;
-  pool
-    .query(queryText)
-    .then((result) => {
-      res.send(result.rows);
-    })
-    .catch((error) => {
-      console.log(error);
-      res.sendStatus(500);
-    });
-});
-
 // GET route for interests of logged in user
 router.get("/:id", (req, res) => {
   const queryText = `SELECT profiles_interests.profile_id, interests.interest, profiles_interests.id FROM interests 
