@@ -85,6 +85,12 @@ function App() {
             <Resources />
           </ProtectedRoute>
 
+          <ProtectedRoute
+            exact path='/admin/schools'
+          >
+            <Resources />
+          </ProtectedRoute>
+
           <ProtectedRoute exact path='/available-mentors'>
             <AvailableMentors />
           </ProtectedRoute>
