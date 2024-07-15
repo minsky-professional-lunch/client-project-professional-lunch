@@ -16,6 +16,18 @@ router.get('/', rejectUnauthenticated, (req, res) => {
   })
 })
 
+// GET Selected Resource
+router.get('/:id', rejectUnauthenticated, (req, res) => {
+  const queryText = `SELECT * FROM "resources" WHERE "id"=$1;`;
+  pool.query(queryText, [req.params.id])
+    .then((result) => {
+      res.send(result.rows);
+    }).catch((error) => {
+      console.log(`Error in fetching single resource`, error);
+      res.sendStatus(500);
+    })
+})
+
 // POST
 router.post('/', rejectUnauthenticated, async (req, res) => {
     console.log(`/resources POST route`);
