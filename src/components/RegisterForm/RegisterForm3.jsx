@@ -5,7 +5,15 @@ export default function RegisterForm3() {
   const [gender, setGender] = useState("");
   const [school, setSchool] = useState("");
   const [linkedin, setLinkedin] = useState("");
-  const currentUser = useSelector((store) => store.registrationReducer);
+  const currentUser = useSelector(
+    (store) => store.registrationReducer.registrationReducer
+  );
+  const schools = useSelector(
+    (store) => store.registrationReducer.schoolsReducer
+  );
+  const genders = useSelector(
+    (store) => store.registrationReducer.genderReducer
+  );
 
   const history = useHistory();
   const dispatch = useDispatch();
@@ -34,11 +42,9 @@ export default function RegisterForm3() {
           <div>
             Gender
             <select onChange={(event) => setGender(event.target.value)}>
-              <option value={"----"}>----</option>
-              <option value={"Male"}>Male</option>
-              <option value={"Female"}>Female</option>
-              <option value={"Non-Binary"}>Non-Binary</option>
-              <option value={"Prefer Not To Say"}>Prefer Not To Say</option>
+              {genders.map((gender) => (
+                <option value={gender.gender}>{gender.gender}</option>
+              ))}
             </select>
           </div>
           {currentUser.isMentor === "true" ? (
@@ -47,23 +53,9 @@ export default function RegisterForm3() {
             <div>
               School
               <select onChange={(event) => setSchool(event.target.value)}>
-                <option>----</option>
-                <option value="1">Fargo Davies</option>
-                <option value="2">Fargo North</option>
-                <option value="3">Fargo Shanley</option>
-                <option value="4">Fargo South</option>
-                <option value="5">Horace High</option>
-                <option value="6">Moorhead High</option>
-                <option value="7">Oak Grove</option>
-                <option value="8">Park Christian</option>
-                <option value="9">West Fargo High</option>
-                <option value="10">West Fargo Sheyenne</option>
-                <option value="11">Concordia</option>
-                <option value="12">MSCTC</option>
-                <option value="13">MSUM</option>
-                <option value="14">NDSU</option>
-                <option value="15">Rasmussen</option>
-                <option value="16">Other</option>
+                {schools.map((school) => (
+                  <option value={school.school}>{school.school}</option>
+                ))}
               </select>
             </div>
           )}
