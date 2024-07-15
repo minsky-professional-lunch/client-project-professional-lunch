@@ -10,13 +10,10 @@ export default function RegisterForm2() {
   const nextPage = () => {
     history.push("/registration/3");
     event.preventDefault();
-
-    console.log();
     dispatch({
       type: "ADD_SECOND_PAGE_INFO",
       payload: {
         isMentor: role,
-        email: email,
       },
     });
   };

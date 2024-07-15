@@ -5,6 +5,8 @@ const initialState = {
   password: "",
   email: "",
   isMentor: "",
+  school: "",
+  linkedin: "",
   gender: "",
   interests: [],
   bio: "",

@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 function RegisterForm() {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -37,8 +37,8 @@ function RegisterForm() {
         firstName: firstName,
         lastName: lastName,
         username: username,
-        password: password
-
+        password: password,
+        email: email,
       },
     });
   };
@@ -116,11 +116,10 @@ function RegisterForm() {
         </label>
       </div>
       <div>
-          Email
-          <input onChange={(event) => setEmail(event.target.value)}></input>
-        </div>
+        Email
+        <input onChange={(event) => setEmail(event.target.value)}></input>
+      </div>
       <div>
-        
         <input className="btn" type="submit" name="submit" value="Next" />
       </div>
     </form>
