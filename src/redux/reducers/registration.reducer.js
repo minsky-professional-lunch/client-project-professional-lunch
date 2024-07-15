@@ -2,6 +2,7 @@ const initialState = {
   firstName: "",
   lastName: "",
   username: "",
+  password: "",
   email: "",
   isMentor: "",
   gender: "",

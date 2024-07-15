@@ -3,10 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 function RegisterForm() {
-  // const [username, setUsername] = useState('');
-  // const [password, setPassword] = useState('');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
   const errors = useSelector((store) => store.errors);
   const history = useHistory();
   const dispatch = useDispatch();
@@ -35,6 +36,9 @@ function RegisterForm() {
       payload: {
         firstName: firstName,
         lastName: lastName,
+        username: username,
+        password: password
+
       },
     });
   };
@@ -88,6 +92,35 @@ function RegisterForm() {
         />
       </div>
       <div>
+        <label htmlFor="username">
+          Username:
+          <input
+            type="text"
+            name="username"
+            value={username}
+            required
+            onChange={(event) => setUsername(event.target.value)}
+          />
+        </label>
+      </div>
+      <div>
+        <label htmlFor="password">
+          Password:
+          <input
+            type="password"
+            name="password"
+            value={password}
+            required
+            onChange={(event) => setPassword(event.target.value)}
+          />
+        </label>
+      </div>
+      <div>
+          Email
+          <input onChange={(event) => setEmail(event.target.value)}></input>
+        </div>
+      <div>
+        
         <input className="btn" type="submit" name="submit" value="Next" />
       </div>
     </form>
