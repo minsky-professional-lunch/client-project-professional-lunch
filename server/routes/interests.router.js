@@ -4,7 +4,7 @@ const router = express.Router();
 
 // GET route for list of interests
 
-router.get("/list", (req, res) => {
+router.get("/", (req, res) => {
   const queryText = `SELECT * FROM interests`;
   pool
     .query(queryText)

@@ -77,7 +77,7 @@ router.delete('/:id', rejectUnauthenticated, (req, res) => {
       res.sendStatus(200);
     })
     .catch((error) => {
-      console.log(`Error in DELETE resourse`, error);
+      console.log(`Error in DELETE resource`, error);
       res.sendStatus(500);
     })
 })
