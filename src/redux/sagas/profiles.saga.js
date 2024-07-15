@@ -10,9 +10,9 @@ function* fetchProfiles() {
     }
 }
 
-function* fetchDetails() {
+function* fetchDetails(action) {
     try {
-        const result = yield axios.get(`api/profile/${action.payload}`);
+        const result = yield axios.get(`/api/profile/${action.payload}`);
         yield put({ type: 'SET_DETAILS', payload: result.data });
         console.log('Result', result);
     } catch (error) {

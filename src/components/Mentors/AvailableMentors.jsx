@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import {useSelector} from 'react-redux';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import { Stack, Typography } from '@mui/joy';
+import MentorItem from './MentorItem';
 
 export default function AvailableMentors() {
     const dispatch = useDispatch();
@@ -17,11 +19,12 @@ export default function AvailableMentors() {
     return (
         <div className='container'>
             <h1>Available Mentors</h1>
-            <ul>
-                {mentors.map((mentor) =>
-                    <li key={mentor.id}>{mentor.first_name} {mentor.last_name}</li>
+            <Stack>
+                {mentors.map((mentor) => (
+                    <MentorItem key={mentor.id} mentor={mentor} />
+                )
                 )}
-            </ul>
+            </Stack>
         </div>
     )
 }

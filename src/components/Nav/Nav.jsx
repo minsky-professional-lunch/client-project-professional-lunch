@@ -32,12 +32,16 @@ function Nav() {
               Available Mentors
             </Link>
 
-            <Link className="navLink" to="/info">
+            {/* <Link className="navLink" to="/info">
               Info Page
-            </Link>
+            </Link> */}
 
             <Link className="navLink" to="/resources">
               Resources
+            </Link>
+
+            <Link className="navLink" to="/profile">
+              Profile
             </Link>
 
             <LogOutButton className="navLink" />
