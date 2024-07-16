@@ -22,33 +22,7 @@ function* registerUser(action) {
   }
 }
 
-function* fetchInterests(action) {
-  try {
-    const response = yield axios.get("/api/interests/list");
-    yield put({ type: "SET_INTERESTS", payload: response.data });
-  } catch (error) {
-    console.log("error in fetching registration interests");
-  }
-}
 
-function* fetchSchools(action) {
-  try {
-    const response = yield axios.get("/api/schools");
-    yield put({ type: "SET_SCHOOLS", payload: response.data });
-    yield put({ type: "FETCH_GENDERS" });
-  } catch (error) {
-    console.log("error in fetching registration interests");
-  }
-}
-
-function* fetchGenders(action) {
-  try {
-    const response = yield axios.get("/api/genders");
-    yield put({ type: "SET_GENDERS", payload: response.data });
-  } catch (error) {
-    console.log("error in fetching registration interests");
-  }
-}
 
 function* fetchDayAvailability() {
   try {
@@ -71,11 +45,9 @@ function* fetchTimeAvailability() {
 
 function* registrationSaga() {
   yield takeLatest("REGISTER", registerUser);
-  yield takeLatest("FETCH_INTERESTS", fetchInterests);
-  yield takeLatest("FETCH_SCHOOLS", fetchSchools);
-  yield takeLatest("FETCH_GENDERS", fetchGenders);
   yield takeLatest("FETCH_DAYS", fetchDayAvailability);
   yield takeLatest("FETCH_TIMES", fetchTimeAvailability);
+
 }
 
 export default registrationSaga;

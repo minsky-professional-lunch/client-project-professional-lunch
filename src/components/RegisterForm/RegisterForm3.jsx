@@ -4,12 +4,21 @@ import { useEffect, useState } from "react";
 import { TextField, Autocomplete } from "@mui/material";
 export default function RegisterForm3() {
   const [linkedin, setLinkedin] = useState("");
+
+  const currentUser = useSelector(
+    (store) => store.registrationReducer.registrationReducer
+  );
+  const schools = useSelector(
+    (store) => store.schoolsReducer
+  );
+  const genders = useSelector(
+    (store) => store.gendersReducer
+    
   const [bio, setBio] = useState("");
   const [interests, setInterests] = useState([]);
   const [availability, setAvailability] = useState("");
   const interestsStore = useSelector(
-    (store) => store.interestReducer
-  );
+    (store) => store.interestsReducer);
 
   const history = useHistory();
   const dispatch = useDispatch();
