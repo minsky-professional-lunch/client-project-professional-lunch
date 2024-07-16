@@ -5,7 +5,9 @@ export default function RegisterForm4() {
   return (
     <>
       <h2>Register4</h2>
-      <form className="formPanel"></form>
+      <form className="formPanel">
+        
+      </form>
     </>
   );
 }
