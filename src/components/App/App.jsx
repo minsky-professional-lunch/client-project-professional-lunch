@@ -89,6 +89,11 @@ function App() {
           </ProtectedRoute>
 
           <ProtectedRoute
+            exact path='/admin'
+          >
+            <GendersList />
+          </ProtectedRoute>
+          <ProtectedRoute
             exact path='/admin/genders'
           >
             <GendersList />
