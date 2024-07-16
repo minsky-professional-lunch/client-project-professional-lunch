@@ -56,27 +56,9 @@ const genderReducer = (state = [], action) => {
   }
 };
 
-const dayReducer = (state = [], action) => {
-  if (action.type === "SET_DAYS") {
-    return action.payload;
-  } else {
-    return state;
-  }
-};
-
-const timeReducer = (state = [], action) => {
-  if (action.type === "SET_TIMES") {
-    return action.payload;
-  } else {
-    return state;
-  }
-};
-
 export default combineReducers({
   registrationReducer,
   schoolsReducer,
   interestReducer,
   genderReducer,
-  dayReducer,
-  timeReducer,
 });

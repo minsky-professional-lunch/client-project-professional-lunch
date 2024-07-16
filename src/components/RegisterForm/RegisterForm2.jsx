@@ -9,13 +9,13 @@ export default function RegisterForm2() {
   const [gender, setGender] = useState("");
   const [school, setSchool] = useState("");
   const currentUser = useSelector(
-    (store) => store.registrationReducer.registrationReducer
+    (store) => store.registrationReducer
   );
   const schools = useSelector(
-    (store) => store.registrationReducer.schoolsReducer
+    (store) => store.schoolsReducer
   );
   const genders = useSelector(
-    (store) => store.registrationReducer.genderReducer
+    (store) => store.gendersReducer
   );
 
   const history = useHistory();
