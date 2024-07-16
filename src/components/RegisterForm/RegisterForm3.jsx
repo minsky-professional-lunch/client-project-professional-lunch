@@ -33,6 +33,7 @@ export default function RegisterForm3() {
       payload: {
         linkedin: linkedin,
         interests: interests,
+        bio: bio
       },
     });
   };

@@ -13,6 +13,7 @@ const initialState = {
   interests: [],
   bio: "",
   avatar: "",
+  availability: []
 };
 
 const registrationReducer = (state = initialState, action) => {

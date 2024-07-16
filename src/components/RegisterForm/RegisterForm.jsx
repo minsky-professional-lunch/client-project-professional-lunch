@@ -13,17 +13,7 @@ function RegisterForm() {
   const history = useHistory();
   const dispatch = useDispatch();
 
-  // const registerUser = (event) => {
-  //   event.preventDefault();
-
-  //   // dispatch({
-  //   //   type: 'REGISTER',
-  //   //   payload: {
-  //   //     username: username,
-  //   //     password: password,
-  //   //   },
-  //   // });
-  // }; // end registerUser
+ // end registerUser
 
   const nextPage = () => {
     history.push("/registration/2");
