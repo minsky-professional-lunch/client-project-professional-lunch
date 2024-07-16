@@ -31,6 +31,8 @@ import AvailableMentors from '../Mentors/AvailableMentors';
 import Profile from '../Profile/Profile';
 import MentorDetails from '../Mentors/MentorDetails';
 import GendersList from '../Admin/Genders/GendersList/GendersList';
+import SchoolsList from '../Admin/Schools/SchoolsList/SchoolsList';
+import InterestsList from '../Admin/Interests/InterestsList/InterestsList';
 
 function App() {
   const dispatch = useDispatch();
@@ -90,6 +92,16 @@ function App() {
             exact path='/admin/genders'
           >
             <GendersList />
+          </ProtectedRoute>
+          <ProtectedRoute
+            exact path='/admin/schools'
+          >
+            <SchoolsList />
+          </ProtectedRoute>
+          <ProtectedRoute
+            exact path='/admin/interests'
+          >
+            <InterestsList />
           </ProtectedRoute>
 
           <ProtectedRoute exact path='/available-mentors'>
