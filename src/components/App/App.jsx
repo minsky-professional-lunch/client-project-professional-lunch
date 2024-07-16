@@ -30,6 +30,7 @@ import AddResource from '../Resources/AddResourceDialog/AddResourceDialog';
 import AvailableMentors from '../Mentors/AvailableMentors';
 import Profile from '../Profile/Profile';
 import MentorDetails from '../Mentors/MentorDetails';
+import GendersList from '../Admin/Genders/GendersList/GendersList';
 
 function App() {
   const dispatch = useDispatch();
@@ -86,9 +87,9 @@ function App() {
           </ProtectedRoute>
 
           <ProtectedRoute
-            exact path='/admin/schools'
+            exact path='/admin/genders'
           >
-            <Resources />
+            <GendersList />
           </ProtectedRoute>
 
           <ProtectedRoute exact path='/available-mentors'>

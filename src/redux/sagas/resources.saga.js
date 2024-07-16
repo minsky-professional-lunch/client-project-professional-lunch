@@ -3,7 +3,7 @@ import { put, take, takeLatest } from 'redux-saga/effects';
 
 function* fetchResources() {
   try {
-    const response = yield axios.get(`api/resources`);
+    const response = yield axios.get(`/api/resources`);
     yield put({ type: 'SET_RESOURCES', payload: response.data});
   } catch (error) {
     console.error(`Error getting resources`, error);
@@ -12,7 +12,7 @@ function* fetchResources() {
 
 function* fetchSelectedResource(action) {
   try {
-    const response = yield axios.get(`api/resources/${action.payload}`);
+    const response = yield axios.get(`/api/resources/${action.payload}`);
     yield put({ type: 'SET_SELECTED_RESOURCE', payload: response.data})
   } catch (error) {
     console.error(`Error getting single resource`, error);
@@ -21,7 +21,7 @@ function* fetchSelectedResource(action) {
 
 function* addResource(action) {
   try {
-    yield axios.post(`api/resources`, action.payload);
+    yield axios.post(`/api/resources`, action.payload);
     yield put({ type: 'FETCH_RESOURCES' });
   } catch (error) {
     alert(`Error adding resource`);
@@ -31,7 +31,7 @@ function* addResource(action) {
 
 function* editResource(action) {
   try {
-    yield axios.put(`api/resources/`, {
+    yield axios.put(`/api/resources/`, {
       title: action.payload.title, 
       image: action.payload.image,
       url: action.payload.url, 
@@ -49,7 +49,7 @@ function* editResource(action) {
 
 function* deleteResource(action) {
   try {
-    yield axios.delete(`api/resources/${action.payload}`);
+    yield axios.delete(`/api/resources/${action.payload}`);
       yield put({ type: 'FETCH_RESOURCES'});
   } catch (error) {
     alert(`Error deleting resource`);

@@ -41,20 +41,20 @@ function* fetchSchools(action) {
   }
 }
 
-function* fetchGenders(action) {
-  try {
-    const response = yield axios.get("/api/genders");
-    yield put({ type: "SET_GENDERS", payload: response.data });
-  } catch (error) {
-    console.log("error in fetching registration interests");
-  }
-}
+// function* fetchGenders(action) {
+//   try {
+//     const response = yield axios.get("/api/genders");
+//     yield put({ type: "SET_GENDERS", payload: response.data });
+//   } catch (error) {
+//     console.log("error in fetching registration interests");
+//   }
+// }
 
 function* registrationSaga() {
   yield takeLatest("REGISTER", registerUser);
   yield takeLatest("FETCH_INTERESTS", fetchInterests);
   yield takeLatest("FETCH_SCHOOLS", fetchSchools);
-  yield takeLatest("FETCH_GENDERS", fetchGenders)
+  // yield takeLatest("FETCH_GENDERS", fetchGenders)
 }
 
 export default registrationSaga;

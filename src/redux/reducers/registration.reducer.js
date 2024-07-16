@@ -48,17 +48,17 @@ const schoolsReducer = (state = [], action) => {
   }
 };
 
-const genderReducer = (state = [], action) => {
-  if (action.type === "SET_GENDERS") {
-    return action.payload;
-  } else {
-    return state;
-  }
-};
+// const genderReducer = (state = [], action) => {
+//   if (action.type === "SET_GENDERS") {
+//     return action.payload;
+//   } else {
+//     return state;
+//   }
+// };
 
 export default combineReducers({
   registrationReducer,
   schoolsReducer,
   interestReducer,
-  genderReducer,
+  // genderReducer,
 });
