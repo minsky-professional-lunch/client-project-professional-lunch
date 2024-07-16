@@ -33,6 +33,7 @@ import MentorDetails from '../Mentors/MentorDetails';
 import GendersList from '../Admin/Genders/GendersList/GendersList';
 import SchoolsList from '../Admin/Schools/SchoolsList/SchoolsList';
 import InterestsList from '../Admin/Interests/InterestsList/InterestsList';
+import AdminPage from '../Admin/AdminPage/AdminPage';
 
 function App() {
   const dispatch = useDispatch();
@@ -91,7 +92,7 @@ function App() {
           <ProtectedRoute
             exact path='/admin'
           >
-            <GendersList />
+            <AdminPage />
           </ProtectedRoute>
           <ProtectedRoute
             exact path='/admin/genders'
