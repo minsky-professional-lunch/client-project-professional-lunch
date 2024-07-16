@@ -32,33 +32,33 @@ const registrationReducer = (state = initialState, action) => {
   }
 };
 
-const interestReducer = (state = [], action) => {
-  if (action.type === "SET_INTERESTS") {
-    return action.payload;
-  } else {
-    return state;
-  }
-};
+// const interestReducer = (state = [], action) => {
+//   if (action.type === "SET_INTERESTS") {
+//     return action.payload;
+//   } else {
+//     return state;
+//   }
+// };
 
-const schoolsReducer = (state = [], action) => {
-  if (action.type === "SET_SCHOOLS") {
-    return action.payload;
-  } else {
-    return state;
-  }
-};
+// const schoolsReducer = (state = [], action) => {
+//   if (action.type === "SET_SCHOOLS") {
+//     return action.payload;
+//   } else {
+//     return state;
+//   }
+// };
 
-const genderReducer = (state = [], action) => {
-  if (action.type === "SET_GENDERS") {
-    return action.payload;
-  } else {
-    return state;
-  }
-};
+// const genderReducer = (state = [], action) => {
+//   if (action.type === "SET_GENDERS") {
+//     return action.payload;
+//   } else {
+//     return state;
+//   }
+// };
 
 export default combineReducers({
   registrationReducer,
-  schoolsReducer,
-  interestReducer,
-  genderReducer,
+  // schoolsReducer,
+  // interestReducer,
+  // genderReducer,
 });
