@@ -33,6 +33,11 @@ export default function MenteeRequests( {mentor} ) {
         setRequested(!requested);
     }
 
+    const cancel = (mentorshipId) => {
+        console.log('Clicked', mentorshipId);
+        dispatch({ type: 'DELETE_MENTORSHIP', payload: {mentorshipId: mentorshipId} });
+    }
+
     return (
         <div className='container'>
             <Grid container justifyContent="center">
@@ -48,8 +53,8 @@ export default function MenteeRequests( {mentor} ) {
                                 Connect
                             </Button>
                             : 
-                            <Button>
-                                Requested
+                            <Button onClick={() => cancel(mentor.id)}>
+                                Cancel
                             </Button>
                             }
                             <Button onClick={() => mentorDetails(mentor.mentor_id)} sx={{ cursor: 'pointer' }}>
