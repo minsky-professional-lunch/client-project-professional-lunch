@@ -6,8 +6,8 @@ export default function RegisterForm2() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
-  const [gender, setGender] = useState("");
-  const [school, setSchool] = useState("");
+  const [gender, setGender] = useState(0);
+  const [school, setSchool] = useState(0);
   const currentUser = useSelector((store) => store.registrationReducer);
   const schools = useSelector((store) => store.schoolsReducer);
   const genders = useSelector((store) => store.gendersReducer);
@@ -90,7 +90,7 @@ export default function RegisterForm2() {
           Gender
           <select onChange={(event) => setGender(event.target.value)}>
             {genders.map((gender) => (
-              <option key={gender.id} value={gender.gender}>
+              <option key={gender.id} value={gender.id}>
                 {gender.gender}
               </option>
             ))}
@@ -103,7 +103,7 @@ export default function RegisterForm2() {
             School
             <select onChange={(event) => setSchool(event.target.value)}>
               {schools.map((school) => (
-                <option key={school.id} value={school.school}>
+                <option key={school.id} value={school.id}>
                   {school.school}
                 </option>
               ))}

@@ -17,6 +17,7 @@ const interestsRouter = require("./routes/interests.router");
 const availabilityRouter = require("./routes/availability.router");
 const genderRouter = require("./routes/gender.router");
 const schoolsRouter = require("./routes/schools.router");
+const profileAvailabilityRouter = require("./routes/profile.availability.router");
 
 // Express Middleware
 app.use(express.json());
@@ -40,6 +41,7 @@ app.use("/api/interests", interestsRouter);
 app.use("/api/availability", availabilityRouter);
 app.use("/api/genders", genderRouter);
 app.use("/api/schools", schoolsRouter);
+app.use("/api/profileavailability", profileAvailabilityRouter);
 
 // Listen Server & Port
 app.listen(PORT, () => {

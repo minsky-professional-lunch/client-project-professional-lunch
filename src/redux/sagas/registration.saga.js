@@ -22,7 +22,20 @@ function* registerUser(action) {
   }
 }
 
-
+function* registerProfile(action) {
+  try {
+    yield axios.post("/api/profile", {
+      isMentor: action.payload.isMentor,
+      first_name: action.payload.firstName,
+      last_name: action.payload.lastName,
+      email: action.payload.email,
+      gender: action.payload.gender,
+      school: action.payload.school,
+    });
+  } catch (error) {
+    console.log('error in registering profile', error)
+  }
+}
 
 function* fetchDayAvailability() {
   try {
@@ -47,7 +60,7 @@ function* registrationSaga() {
   yield takeLatest("REGISTER", registerUser);
   yield takeLatest("FETCH_DAYS", fetchDayAvailability);
   yield takeLatest("FETCH_TIMES", fetchTimeAvailability);
-
+  yield takeLatest("REGISTER_PROFILE", registerProfile)
 }
 
 export default registrationSaga;

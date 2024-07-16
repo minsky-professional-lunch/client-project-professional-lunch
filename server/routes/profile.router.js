@@ -73,7 +73,7 @@ router.post('/', async (req, res) => {
     const queryText = `INSERT INTO "profiles" ("user_id", "isMentor", "first_name", "last_name", "email", "gender", "school")
                         VALUES ($1, $2, $3, $4, $5, $6, $7)`;
     await pool.query(queryText, [
-      req.body.user_id,
+      req.user.id,
       req.body.isMentor,
       req.body.first_name,
       req.body.last_name,
