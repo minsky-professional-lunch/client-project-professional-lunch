@@ -73,8 +73,8 @@ CREATE TABLE IF NOT EXISTS "times" (
 CREATE TABLE IF NOT EXISTS "mentorships" (
 	"id" SERIAL PRIMARY KEY,
 	"requested_at" TIMESTAMP NOT NULL DEFAULT NOW(),
-	"mentee_id" INT REFERENCES "user" NOT NULL,
-	"mentor_id" INT REFERENCES "user" NOT NULL,
+	"mentee_id" INT REFERENCES "profiles" NOT NULL,
+	"mentor_id" INT REFERENCES "profiles" NOT NULL,
 	"status" VARCHAR DEFAULT 'pending'
 );
 
@@ -165,3 +165,5 @@ VALUES
 ('Job Service of North Dakota', 'https://play-lh.googleusercontent.com/dLWsSGAegyPMuwSE3mvBSSKCbovH9I0Mc_FbqSfKZ58opcMROedfirw95Smf4idMjg=w240-h480-rw', 'https://www.jobsnd.com/', 'Job Service North Dakota provides workforce and unemployment services across the state in our nine Workforce Centers', 'Jobs', 'A resource for jobs in the state of North Dakota'),
 ('Job Service of Minnesota', 'https://i0.wp.com/empowerinclusion.org/wp-content/uploads/2020/05/image.png?resize=395%2C127&ssl=1', 'https://mn.gov/deed/programs-services/mn-job-service/', 'Job Service Minnesotas focus is to deliver services to help job seekers find work and help employers find and retain qualified employees.', 'Jobs', 'A resource for jobs in the state of Minnesota');
 
+ALTER TABLE mentorships
+	ADD UNIQUE ("mentee_id", "mentor_id");

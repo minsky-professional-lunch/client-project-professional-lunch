@@ -10,7 +10,7 @@ function* fetchProfiles() {
     }
 }
 
-function* fetchDetails(action) {
+function* fetchProfileDetails(action) {
     try {
         const result = yield axios.get(`/api/profile/${action.payload}`);
         yield put({ type: 'SET_DETAILS', payload: result.data });
@@ -22,7 +22,7 @@ function* fetchDetails(action) {
 
 function* profilesSaga() {
     yield takeLatest('FETCH_PROFILES', fetchProfiles);
-    yield takeLatest('FETCH_DETAILS', fetchDetails);
+    yield takeLatest('FETCH_PROFILE_DETAILS', fetchProfileDetails);
 }
 
 export default profilesSaga;
