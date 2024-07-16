@@ -25,7 +25,7 @@ export default function GendersList() {
   const handleSubmit = (event) => {
     event.preventDefault();
     dispatch({ type: 'ADD_GENDER', payload: newGender});
-    setNewGender('');
+    setNewGender({gender: ''});
   }
 
   const deleteGender = (genderId) => {
