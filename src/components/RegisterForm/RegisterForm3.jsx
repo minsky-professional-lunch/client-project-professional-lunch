@@ -8,17 +8,13 @@ export default function RegisterForm3() {
   const currentUser = useSelector(
     (store) => store.registrationReducer.registrationReducer
   );
-  const schools = useSelector(
-    (store) => store.schoolsReducer
-  );
-  const genders = useSelector(
-    (store) => store.gendersReducer
-    
+  const schools = useSelector((store) => store.schoolsReducer);
+  const genders = useSelector((store) => store.gendersReducer);
+
   const [bio, setBio] = useState("");
   const [interests, setInterests] = useState([]);
   const [availability, setAvailability] = useState("");
-  const interestsStore = useSelector(
-    (store) => store.interestsReducer);
+  const interestsStore = useSelector((store) => store.interestsReducer);
 
   const history = useHistory();
   const dispatch = useDispatch();

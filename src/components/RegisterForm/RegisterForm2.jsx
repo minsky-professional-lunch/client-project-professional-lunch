@@ -8,15 +8,9 @@ export default function RegisterForm2() {
   const [email, setEmail] = useState("");
   const [gender, setGender] = useState("");
   const [school, setSchool] = useState("");
-  const currentUser = useSelector(
-    (store) => store.registrationReducer
-  );
-  const schools = useSelector(
-    (store) => store.schoolsReducer
-  );
-  const genders = useSelector(
-    (store) => store.gendersReducer
-  );
+  const currentUser = useSelector((store) => store.registrationReducer);
+  const schools = useSelector((store) => store.schoolsReducer);
+  const genders = useSelector((store) => store.gendersReducer);
 
   const history = useHistory();
   const dispatch = useDispatch();
@@ -24,6 +18,9 @@ export default function RegisterForm2() {
   useEffect(() => {
     dispatch({
       type: "FETCH_SCHOOLS",
+    });
+    dispatch({
+      type: "FETCH_GENDERS",
     });
   }, []);
 
