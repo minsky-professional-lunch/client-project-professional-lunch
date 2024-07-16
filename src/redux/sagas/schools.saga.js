@@ -22,7 +22,7 @@ function* addSchool(action) {
 
 function* editSchool(action) {
   try {
-    yield axios.put(`/api/schools/${action.payload.id}`, {school: action.payload.gender});
+    yield axios.put(`/api/schools/${action.payload.id}`, {school: action.payload.school});
     yield put({ type: 'FETCH_SCHOOLS' });
   } catch (error) {
     alert(`Error editing school`);
