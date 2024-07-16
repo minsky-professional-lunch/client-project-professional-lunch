@@ -15,6 +15,8 @@ export default function MentorItem( {mentor} ) {
     const details = useSelector(store => store.profileDetails);
     console.log('Details', details);
 
+    const [requested, setRequested] = useState(false);
+
     useEffect(() => {
         dispatch({ type: 'FETCH_DETAILS', payload: mentor.user_id });
     }, []);
@@ -27,6 +29,8 @@ export default function MentorItem( {mentor} ) {
 
     const connect = (mentorId) => {
         console.log('Clicked', mentorId);
+        dispatch({ type: 'REQUEST_MENTORSHIP', payload: mentorId });
+        setRequested(!requested);
     }
 
     return (
@@ -37,9 +41,15 @@ export default function MentorItem( {mentor} ) {
                     <Typography level="title-lg" noWrap>{mentor.first_name} {mentor.last_name}</Typography>
                     <CardActions>
                         <Stack direction="row" justifyContent="space-evenly" alignItems="center" spacing={4}>
+                            {!requested ? 
                             <Button onClick={() => connect(mentor.id)}>
                                 Connect
                             </Button>
+                            : 
+                            <Button>
+                                Requested
+                            </Button>
+                            }
                             <Button onClick={() => mentorDetails(mentor.id)} sx={{ cursor: 'pointer' }}>
                                 View Profile
                             </Button>

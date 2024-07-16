@@ -10,8 +10,6 @@ export default function MentorDetails() {
     const dispatch = useDispatch();
     const history = useHistory();
     const details = useSelector(store => store.profileDetails);
-    // const availability = details.filter(detail => detail.detail.availability);
-    // console.log('Availability', availability);
     console.log('Details', details);
 
     useEffect(() => {

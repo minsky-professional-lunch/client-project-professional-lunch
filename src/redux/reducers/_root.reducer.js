@@ -5,6 +5,8 @@ import resources from './resources.reducer';
 import profiles from './profiles.reducer';
 import profileDetails from './profileDetails.reducer';
 import registrationReducer from './registration.reducer';
+import mentorships from './mentorship.reducer';
+import mentorshipDetails from './mentorshipDetails.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -18,7 +20,9 @@ const rootReducer = combineReducers({
   resources,
   profiles,
   profileDetails,
-  registrationReducer
+  registrationReducer,
+  mentorships,
+  mentorshipDetails
 });
 
 export default rootReducer;
