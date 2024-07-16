@@ -44,7 +44,8 @@ function* deleteMentorship(action) {
     try {
         yield axios.delete(`/api/mentorships/${action.payload.mentorshipId}`);
         yield put({ type: 'FETCH_MENTORSHIP_DETAILS' });
-        yield put({ type: 'FETCH_MENTORSHIPS' });    
+        yield put({ type: 'FETCH_MENTORSHIPS' });  
+        yield put({ type: 'FETCH_USER' });  
     }  catch (error) {
         console.log('Error deleting mentorship:', error);
     }
