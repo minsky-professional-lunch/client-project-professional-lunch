@@ -54,11 +54,11 @@ router.post('/:id', rejectUnauthenticated, async (req, res) => {
 });
 
 // PUT route for updating a mentorship to approved
-router.put('/:id', rejectUnauthenticated, async (req, res) => {
+router.put('/', rejectUnauthenticated, async (req, res) => {
   try {
     await pool.query(
-      `UPDATE "mentorships" SET status='accepted' WHERE mentor_id=$1 AND mentorships.id=$2;`,
-      [req.user.id, req.params.id]
+      `UPDATE "mentorships" SET status='accepted' WHERE mentorships.id=$1;`,
+      [req.body.mentorshipId]
     );
     res.sendStatus(201);
   } catch (error) {
@@ -69,13 +69,9 @@ router.put('/:id', rejectUnauthenticated, async (req, res) => {
 
 // DELETE route for terminating a mentorship
 router.delete('/:id', rejectUnauthenticated, async (req, res) => {
-  if (req.user.isMentor === true) {
-    queryText = `DELETE FROM "mentorships" WHERE mentor_id=$1 AND mentorships.id=$2;`;
-  } else {
-    queryText = `DELETE FROM "mentorships" WHERE mentee_id=$1 AND mentorships.id=$2;`;
-  }
+    queryText = `DELETE FROM "mentorships" WHERE mentorships.id=$1;`;
   try {
-    await pool.query(queryText, [req.user.id, req.params.id]);
+    await pool.query(queryText, [req.params.id]);
     res.sendStatus(200);
   } catch (error) {
     console.log('error in terminating mentorship', error);

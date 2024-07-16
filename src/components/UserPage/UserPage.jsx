@@ -1,5 +1,9 @@
 import React, { useEffect } from 'react';
 import {useDispatch, useSelector} from 'react-redux';
+import MentorItem from '../Mentors/MentorItem';
+import Requests from '../Mentorships/MentorRequests';
+import MentorRequests from '../Mentorships/MentorRequests';
+import MenteeRequests from '../Mentorships/MenteeRequests';
 
 function UserPage() {
   const dispatch = useDispatch();
@@ -20,15 +24,18 @@ function UserPage() {
     <div className="container">
       <h2>Welcome, {profile?.profile?.first_name}!</h2>
       {user.isMentor ? 
+      <>
       <h3>Mentorship Requests</h3>
+      {pending.map((mentee) => (
+        <MentorRequests key={mentee.id} mentee={mentee} />
+      ))}
+      </>
       :
       <>
       <h3>Pending Mentorships</h3>
-      <ul>
         {pending.map((mentor) => (
-          <li>{mentor.mentor_first_name} {mentor.mentor_last_name}</li>
+          <MenteeRequests key={mentor.id} mentor={mentor} />
         ))}
-      </ul>
       </>
       }
       <h3>Upcoming Meetings</h3>

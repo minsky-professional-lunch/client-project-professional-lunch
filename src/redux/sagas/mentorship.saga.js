@@ -23,27 +23,30 @@ function* requestMentorship(action) {
     try {
         yield axios.post(`/api/mentorships/${action.payload}`);
         yield put({ type: 'FETCH_MENTORSHIP_DETAILS' });
-        yield put({ type: 'FETCH_MENTORSHIPS' });    
+        yield put({ type: 'FETCH_MENTORSHIPS' }); 
+        yield put({ type: 'FETCH_USER' });   
     }  catch (error) {
         console.log('Error posting mentorship:', error);
     }
 }
 
-function* putMentorship(action) {
+function* acceptMentorship(action) {
     try {
-        yield axios.put(`/api/mentorships/${action.payload}`);
+        yield axios.put('/api/mentorships/', action.payload);
         yield put({ type: 'FETCH_MENTORSHIP_DETAILS' });
-        yield put({ type: 'FETCH_MENTORSHIPS' });    }  catch (error) {
-        console.log('Error accepting/denying mentorship:', error);
+        yield put({ type: 'FETCH_MENTORSHIPS' });    
+    }  catch (error) {
+        console.log('Error accepting mentorship:', error);
     }
 }
 
 function* deleteMentorship(action) {
     try {
-        yield axios.delete(`/api/mentorships/${action.payload}`);
+        yield axios.delete(`/api/mentorships/${action.payload.mentorshipId}`);
         yield put({ type: 'FETCH_MENTORSHIP_DETAILS' });
-        yield put({ type: 'FETCH_MENTORSHIPS' });    }  catch (error) {
-        console.log('Error posting mentorship:', error);
+        yield put({ type: 'FETCH_MENTORSHIPS' });    
+    }  catch (error) {
+        console.log('Error deleting mentorship:', error);
     }
 }
 
@@ -51,7 +54,7 @@ function* mentorshipSaga() {
     yield takeLatest('FETCH_MENTORSHIPS', fetchMentorships);
     yield takeLatest('FETCH_MENTORSHIP_DETAILS', fetchMentorshipDetails);
     yield takeLatest('REQUEST_MENTORSHIP', requestMentorship);
-    yield takeLatest('PUT_MENTORSHIP', putMentorship);
+    yield takeLatest('ACCEPT_MENTORSHIP', acceptMentorship);
     yield takeLatest('DELETE_MENTORSHIP', deleteMentorship);
 }
 
