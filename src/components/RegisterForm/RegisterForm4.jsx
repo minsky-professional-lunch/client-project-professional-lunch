@@ -8,7 +8,9 @@ export default function RegisterForm4() {
   const [availability, setAvailability] = useState([{ day: "", time: "" }]);
   const days = useSelector((store) => store.dayReducer);
   const times = useSelector((store) => store.timeReducer);
-  const regInfo = useSelector((store) => store.registrationReducer.registrationReducer);
+  const regInfo = useSelector(
+    (store) => store.registrationReducer.registrationReducer
+  );
 
   useEffect(() => {
     dispatch({
@@ -28,7 +30,8 @@ export default function RegisterForm4() {
     setAvailability(newAvailability);
   };
 
-  const handleAdd = () => {
+  const handleAdd = (event) => {
+    event.preventDefault();
     setAvailability([...availability, { day: "", time: "" }]);
   };
 
@@ -48,6 +51,17 @@ export default function RegisterForm4() {
   };
 
   const registerUser = (event) => {
+    if (availability.every((a) => a.day && a.time)) {
+      dispatch({
+        type: "ADD_FOURTH_PAGE_INFO",
+        payload: {
+          availability: availability,
+        },
+      });
+      history.push("/");
+    } else {
+      alert("Please select both a day and a time for all availabilities.");
+    }
     event.preventDefault();
 
     dispatch({
@@ -55,6 +69,16 @@ export default function RegisterForm4() {
       payload: {
         username: regInfo.username,
         password: regInfo.password,
+        first_name: regInfo.firstName,
+        last_name: regInfo.lastName,
+        isMentor: Boolean(regInfo.isMentor),
+        email: regInfo.email,
+        gender: Number(regInfo.gender),
+        school: Number(regInfo.school),
+        bio: regInfo.bio,
+        linkedin: regInfo.linkedin,
+        availability: regInfo.availability,
+        interests: regInfo.interests,
       },
     });
   };

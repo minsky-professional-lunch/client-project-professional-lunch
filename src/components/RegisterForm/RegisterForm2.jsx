@@ -89,6 +89,7 @@ export default function RegisterForm2() {
         <div>
           Gender
           <select onChange={(event) => setGender(event.target.value)}>
+            <option>-------</option>
             {genders.map((gender) => (
               <option key={gender.id} value={gender.id}>
                 {gender.gender}
