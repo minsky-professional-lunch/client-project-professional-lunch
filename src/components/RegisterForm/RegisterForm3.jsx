@@ -9,10 +9,10 @@ export default function RegisterForm3() {
     (store) => store.registrationReducer.registrationReducer
   );
   const schools = useSelector(
-    (store) => store.registrationReducer.schoolsReducer
+    (store) => store.schoolsReducer
   );
   const genders = useSelector(
-    (store) => store.registrationReducer.genderReducer
+    (store) => store.gendersReducer
   );
 
   const history = useHistory();
