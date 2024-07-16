@@ -28,9 +28,17 @@ function Nav() {
               Home
             </Link>
 
-            <Link className='navLink' to='/available-mentors'>
+
+         
+
+            
+            {!user.isMentor && (
+            <Link className="navLink" to="/available-mentors">
+
               Available Mentors
             </Link>
+            )}
+
 
             {/* <Link className="navLink" to="/info">
               Info Page

@@ -11,6 +11,10 @@ export default function AvailableMentors() {
     console.log('Profiles:', profiles);
     const mentors = profiles.filter(profile => profile.isMentor);
     console.log('Mentors', mentors);
+    const user = useSelector(store => store.user);
+    console.log('User', user);
+    const availableMentors = mentors.filter(mentor => !user.mentorships.includes(mentor.id));
+    console.log('Available Mentors', availableMentors);
 
     useEffect(() => {
         dispatch({ type: 'FETCH_PROFILES' });
@@ -20,7 +24,7 @@ export default function AvailableMentors() {
         <div className='container'>
             <h1>Available Mentors</h1>
             <Stack>
-                {mentors.map((mentor) => (
+                {availableMentors.map((mentor) => (
                     <MentorItem key={mentor.id} mentor={mentor} />
                 )
                 )}

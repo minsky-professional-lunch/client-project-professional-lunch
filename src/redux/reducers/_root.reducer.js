@@ -5,6 +5,8 @@ import resources from './resources.reducer';
 import profiles from './profiles.reducer';
 import profileDetails from './profileDetails.reducer';
 import registrationReducer from './registration.reducer';
+import mentorships from './mentorship.reducer';
+import mentorshipDetails from './mentorshipDetails.reducer';
 import gendersReducer from './genders.reducer';
 import schoolsReducer from './schools.reducer';
 import interestsReducer from './interests.reducer';
@@ -22,6 +24,8 @@ const rootReducer = combineReducers({
   profiles,
   profileDetails,
   registrationReducer,
+  mentorships,
+  mentorshipDetails,
   gendersReducer,
   schoolsReducer,
   interestsReducer,
