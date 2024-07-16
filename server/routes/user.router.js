@@ -25,12 +25,11 @@ router.post("/register", (req, res, next) => {
     VALUES ($1, $2) RETURNING id`;
   pool
     .query(queryText, [username, password])
-
     .then((result) => {
       const userID = result.rows[0].id;
-      pool.query(
+      return pool.query(
         `INSERT INTO "profiles" ("user_id", "isMentor", "first_name", "last_name", "email", "gender", "school", "bio", "linkedin")
-      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)`,
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING user_id`,
         [
           userID,
           req.body.isMentor,
@@ -40,10 +39,19 @@ router.post("/register", (req, res, next) => {
           req.body.gender,
           req.body.school,
           req.body.bio,
-          req.body.linkedin
+          req.body.linkedin,
         ]
       );
-      console.log(req.body);
+    })
+    .then((result) => {
+      const userID = result.rows[0].user_id;
+      console.log(result.rows);
+      for (let availability of req.body.availability) {
+        pool.query(
+          `INSERT INTO "availability" (user_id, day, time) VALUES ($1, $2, $3);`,
+          [userID, Number(availability.day), Number(availability.time)]
+        );
+      }
       res.sendStatus(201);
     })
     .catch((err) => {

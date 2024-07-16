@@ -35,20 +35,20 @@ export default function RegisterForm4() {
     setAvailability([...availability, { day: "", time: "" }]);
   };
 
-  const nextPage = (event) => {
-    event.preventDefault();
-    if (availability.every((a) => a.day && a.time)) {
-      dispatch({
-        type: "ADD_FOURTH_PAGE_INFO",
-        payload: {
-          availability: availability,
-        },
-      });
-      history.push("/");
-    } else {
-      alert("Please select both a day and a time for all availabilities.");
-    }
-  };
+  // const nextPage = (event) => {
+  //   event.preventDefault();
+  //   if (availability.every((a) => a.day && a.time)) {
+  //     dispatch({
+  //       type: "ADD_FOURTH_PAGE_INFO",
+  //       payload: {
+  //         availability: availability,
+  //       },
+  //     });
+  //     history.push("/");
+  //   } else {
+  //     alert("Please select both a day and a time for all availabilities.");
+  //   }
+  // };
 
   const registerUser = (event) => {
     if (availability.every((a) => a.day && a.time)) {
