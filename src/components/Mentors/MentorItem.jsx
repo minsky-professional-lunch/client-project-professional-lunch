@@ -18,7 +18,7 @@ export default function MentorItem( {mentor} ) {
     const [requested, setRequested] = useState(false);
 
     useEffect(() => {
-        dispatch({ type: 'FETCH_DETAILS', payload: mentor.user_id });
+        dispatch({ type: 'FETCH_PROFILE_DETAILS', payload: mentor.user_id });
     }, []);
 
     const mentorDetails = (mentorId) => {
