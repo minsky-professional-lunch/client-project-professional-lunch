@@ -34,9 +34,9 @@ availability_cte AS (
         profiles_availability.profile_id
 )
 SELECT
-	profiles.id,
-	profiles.user_id,
-	profiles.avatar,
+    profiles.id,
+    profiles.user_id,
+    profiles.avatar,
     profiles.first_name,
     profiles.last_name,
     profiles.email,
@@ -51,7 +51,7 @@ FROM
     profiles
 JOIN
     genders ON genders.id = profiles.gender
-JOIN
+LEFT JOIN
     schools ON schools.id = profiles.school
 LEFT JOIN
     interests_cte ON profiles.id = interests_cte.profile_id
