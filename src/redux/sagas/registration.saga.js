@@ -33,7 +33,7 @@ function* registerProfile(action) {
       bio: action.payload.bio,
       linkedin: action.payload.linkedin,
       availability: action.payload.availability,
-      interests: action.payload.interest,
+      interests: action.payload.interests,
     });
   } catch (error) {
     console.log("error in registering profile", error);

@@ -94,7 +94,15 @@ router.post("/", async (req, res) => {
       );
     }
 
-    console.log("profile id", result.rows[0]);
+    for (interest of req.body.interests) {
+      const interestID = interest.id;
+      await pool.query(
+        `INSERT INTO profiles_interests (profile_id, interest_id) VALUES ($1, $2)`,
+        [result.rows[0].id, interestID]
+      );
+    }
+
+    console.log("interests:", req.body);
     // const queryText2 = `UPDATE "user" SET "isMentor"=$1 WHERE "user".id=$2;`;
     // await pool.query(queryText2, [req.body.isMentor, req.user.id]);
     await pool.query;
