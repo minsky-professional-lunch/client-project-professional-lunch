@@ -3,6 +3,17 @@ const pool = require('../modules/pool');
 const router = express.Router();
 
 // GET all profiles
+// router.get('/', (req, res) => {
+//   pool
+//     .query(`SELECT * FROM "profiles";`)
+//     .then((result) => {
+//       res.send(result.rows);
+//     })
+//     .catch((error) => {
+//       res.sendStatus(500);
+//       console.log('error in getting profiles', error);
+//     });
+// });
 router.get('/', (req, res) => {
   pool
     .query(`WITH interests_cte AS (

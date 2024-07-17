@@ -7,16 +7,14 @@ export default function MenteeList() {
   const dispatch = useDispatch();
 
   const profiles = useSelector((store) => store.profiles);
-  // const profileDetails = useSelector((store) => store.profileDetails);
   console.log('Profiles', profiles);
-  // console.log('Profile Details', profileDetails);
+ 
   const mentees = profiles.filter(profile => !profile.isMentor);
   console.log('Mentees', mentees);
   const [stripe, setStripe] = useState('odd');
 
   useEffect(() => {
     dispatch({ type: 'FETCH_PROFILES'});
-    // dispatch({ type: 'FETCH_PROFILE_DETAILS'});
   }, [])
   
   return (
