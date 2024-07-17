@@ -14,10 +14,11 @@ const router = express.Router();
 //       console.log('error in getting profiles', error);
 //     });
 // });
-router.get('/', (req, res) => {
+router.get("/", (req, res) => {
   pool
-    .query(`SELECT * FROM "profiles";`)
-    .query(`WITH interests_cte AS (
+    // .query(`SELECT * FROM "profiles";`)
+    .query(
+      `WITH interests_cte AS (
     SELECT
         profiles_interests.profile_id,
         string_agg(DISTINCT interests.interest, ', ') AS interests
@@ -66,7 +67,8 @@ JOIN
 LEFT JOIN
     interests_cte ON profiles.id = interests_cte.profile_id
 LEFT JOIN
-    availability_cte ON profiles.id = availability_cte.profile_id;`)
+    availability_cte ON profiles.id = availability_cte.profile_id;`
+    )
     .then((result) => {
       res.send(result.rows);
     })
@@ -181,7 +183,7 @@ router.get("/:id", async (req, res) => {
                       LEFT JOIN
                           availability_cte ON interests_cte.profile_id = availability_cte.profile_id
                       WHERE
-                          interests_cte.profile_id = $1;`
+                          interests_cte.profile_id = $1;`;
     const result2 = await pool.query(queryText2, [req.params.id]);
     const response = {
       profile: result.rows[0],
@@ -263,4 +265,5 @@ router.delete("/", async (req, res) => {
     res.sendStatus(500);
   }
 });
+
 module.exports = router;
