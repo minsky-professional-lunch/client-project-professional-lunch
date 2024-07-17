@@ -3,17 +3,18 @@ import {useSelector} from 'react-redux';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Stack, Typography } from '@mui/joy';
+import MyMentorsItem from './MyMentorsItem';
 
 export default function MyMentors() {
     const dispatch = useDispatch();
-    const profiles = useSelector(store => store.profiles);
-    console.log('Profiles:', profiles);
-    const mentors = profiles.filter(profile => profile.isMentor);
-    console.log('Mentors', mentors);
+    // const profiles = useSelector(store => store.profiles);
+    // console.log('Profiles:', profiles);
+    // const mentors = profiles.filter(profile => profile.isMentor);
+    // console.log('Mentors', mentors);
     const user = useSelector(store => store.user);
     console.log('User', user);
-    const myMentors = mentors.filter(mentor => user.mentorships.includes(mentor.id));
-    console.log('My Mentors', myMentors);
+    // const myMentors = mentors.filter(mentor => user.mentorships.includes(mentor.id));
+    // console.log('My Mentors', myMentors);
     const mentorships = useSelector(store => store.mentorships);
     console.log('Mentorships', mentorships);
     const pendingMentorships = mentorships.filter(ment => ment.status === 'pending');
@@ -29,6 +30,26 @@ export default function MyMentors() {
     return (
         <div className='container'>
             <h1>My Mentors</h1>
+            {acceptedMentorships.length > 0 ?
+            <>
+            <h3>Accepted</h3>
+            {acceptedMentorships.map((mentor) => (
+                <MyMentorsItem key={mentor.id} mentor={mentor} />
+            ))}
+            </>
+            :
+            <></>
+            }
+            {pendingMentorships.length > 0 ? 
+            <>
+            <h3>Pending</h3>
+            {pendingMentorships.map((mentor) => (
+                <MyMentorsItem key={mentor.id} mentor={mentor} />
+            ))}
+            </>
+            :
+            <></>
+            }
         </div>
     )
 }

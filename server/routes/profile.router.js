@@ -5,11 +5,7 @@ const router = express.Router();
 // GET all profiles
 router.get('/', (req, res) => {
   pool
-<<<<<<< Updated upstream
-    .query(`SELECT * FROM "profiles"`)
-=======
     .query(`SELECT * FROM "profiles";`)
->>>>>>> Stashed changes
     .then((result) => {
       res.send(result.rows);
     })

@@ -10,14 +10,14 @@ function UserPage() {
   const user = useSelector(store => store.user);
   const profile = useSelector(store => store.profileDetails);
   console.log('Profile', profile);
-  const mentorships = useSelector(store => store.mentorshipDetails);
+  const mentorships = useSelector(store => store.mentorships);
   console.log('Mentorships', mentorships);
   const pending = mentorships.filter(mentor => mentor.status === 'pending');
   console.log('Pending', pending);
 
   useEffect(() => {
     dispatch({ type: 'FETCH_PROFILE_DETAILS', payload: user.id });
-    dispatch({ type: 'FETCH_MENTORSHIP_DETAILS', payload: user.id });
+    dispatch({ type: 'FETCH_MENTORSHIPS' });
   }, []);
 
   return (
