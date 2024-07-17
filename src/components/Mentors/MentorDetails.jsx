@@ -13,7 +13,7 @@ export default function MentorDetails() {
     console.log('Details', details);
 
     useEffect(() => {
-        dispatch({ type: 'FETCH_DETAILS', payload: params.id });
+        dispatch({ type: 'FETCH_PROFILE_DETAILS', payload: params.id });
     }, []);
 
     const connect = (mentorId) => {

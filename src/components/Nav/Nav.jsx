@@ -28,15 +28,15 @@ function Nav() {
               Home
             </Link>
 
-
-         
-
-            
             {!user.isMentor && (
+            <>
             <Link className="navLink" to="/available-mentors">
-
               Available Mentors
             </Link>
+            <Link className="navLink" to="/my-mentors">
+              My Mentors
+            </Link>
+            </>
             )}
 
 
