@@ -8,7 +8,8 @@ import mentorshipSaga from './mentorship.saga';
 import gendersSaga from './genders.saga';
 import schoolsSaga from './schools.saga';
 import interestsSaga from './interests.saga';
-import adminProfilesSaga from './adminProfiles.saga';
+import adminProfilesSaga from './adminprofiles.saga';
+
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
