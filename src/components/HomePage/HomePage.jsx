@@ -5,7 +5,7 @@ import Requests from '../Mentorships/MentorRequests';
 import MentorRequests from '../Mentorships/MentorRequests';
 import MenteeRequests from '../Mentorships/MenteeRequests';
 
-function UserPage() {
+function HomePage() {
   const dispatch = useDispatch();
   const user = useSelector(store => store.user);
   const profile = useSelector(store => store.profileDetails);
@@ -44,4 +44,4 @@ function UserPage() {
 }
 
 // this allows us to use <App /> in index.js
-export default UserPage;
+export default HomePage;
