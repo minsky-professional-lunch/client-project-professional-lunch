@@ -84,14 +84,16 @@ router.post("/", async (req, res) => {
       req.body.linkedin,
     ]);
 
-    console.log("availability:", req.body.availability);
+    const availabilityIDs = [];
+    // console.log("availability:", req.body.availability);
     for (availability of req.body.availability) {
       const day = availability.day;
       const time = availability.time;
-      await pool.query(
-        `INSERT INTO "availability" ("user_id", "day", "time") VALUES ($1, $2, $3)`,
+      const availabilityID = await pool.query(
+        `INSERT INTO "availability" ("user_id", "day", "time") VALUES ($1, $2, $3) RETURNING id;`,
         [result.rows[0].user_id, Number(day), Number(time)]
       );
+      availabilityIDs.push(availabilityID.rows[0].id);
     }
 
     for (interest of req.body.interests) {
@@ -102,9 +104,17 @@ router.post("/", async (req, res) => {
       );
     }
 
+    // console.log("AVAILABILITY IDS", availabilityIDs.Result.rows);
+    for (availabilityID of availabilityIDs) {
+      await pool.query(
+        `INSERT INTO "profiles_availability" (profile_id, availability_id) VALUES ($1, $2)`,
+        [result.rows[0].id, Number(availabilityID)]
+      );
+    }
+
     console.log("interests:", req.body);
-    // const queryText2 = `UPDATE "user" SET "isMentor"=$1 WHERE "user".id=$2;`;
-    // await pool.query(queryText2, [req.body.isMentor, req.user.id]);
+    const queryText2 = `UPDATE "user" SET "isMentor"=$1 WHERE "user".id=$2;`;
+    await pool.query(queryText2, [req.body.isMentor, req.user.id]);
     await pool.query;
     res.sendStatus(200);
   } catch (error) {
