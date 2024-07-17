@@ -31,11 +31,12 @@ function* registerProfile(action) {
       gender: action.payload.gender,
       school: action.payload.school,
       bio: action.payload.bio,
-      linkedin: action.payload.linkedin
-
+      linkedin: action.payload.linkedin,
+      availability: action.payload.availability,
+      interests: action.payload.interest,
     });
   } catch (error) {
-    console.log('error in registering profile', error)
+    console.log("error in registering profile", error);
   }
 }
 
@@ -62,7 +63,7 @@ function* registrationSaga() {
   yield takeLatest("REGISTER", registerUser);
   yield takeLatest("FETCH_DAYS", fetchDayAvailability);
   yield takeLatest("FETCH_TIMES", fetchTimeAvailability);
-  yield takeLatest("REGISTER_PROFILE", registerProfile)
+  yield takeLatest("REGISTER_PROFILE", registerProfile);
 }
 
 export default registrationSaga;

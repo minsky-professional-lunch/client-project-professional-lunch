@@ -71,8 +71,8 @@ router.post("/", async (req, res) => {
   console.log("/profile POST route");
   try {
     const queryText = `INSERT INTO "profiles" ("user_id", "isMentor", "first_name", "last_name", "email", "gender", "school", "bio", "linkedin")
-                        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING id;`;
-   const result =  await pool.query(queryText, [
+                        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING id, user_id;`;
+    const result = await pool.query(queryText, [
       req.user.id,
       Boolean(req.user.isMentor),
       req.body.first_name,
@@ -84,10 +84,20 @@ router.post("/", async (req, res) => {
       req.body.linkedin,
     ]);
 
-    console.log('profile id', result.rows[0])
+    console.log("availability:", req.body.availability);
+    for (availability of req.body.availability) {
+      const day = availability.day;
+      const time = availability.time;
+      await pool.query(
+        `INSERT INTO "availability" ("user_id", "day", "time") VALUES ($1, $2, $3)`,
+        [result.rows[0].user_id, Number(day), Number(time)]
+      );
+    }
+
+    console.log("profile id", result.rows[0]);
     // const queryText2 = `UPDATE "user" SET "isMentor"=$1 WHERE "user".id=$2;`;
     // await pool.query(queryText2, [req.body.isMentor, req.user.id]);
-    await pool.query 
+    await pool.query;
     res.sendStatus(200);
   } catch (error) {
     console.log("Error in post profile", error);
