@@ -4,6 +4,7 @@ import registrationSaga from './registration.saga';
 import userSaga from './user.saga';
 import resourcesSaga from './resources.saga';
 import profilesSaga from './profiles.saga';
+import mentorshipSaga from './mentorship.saga';
 import gendersSaga from './genders.saga';
 import schoolsSaga from './schools.saga';
 import interestsSaga from './interests.saga';
@@ -22,6 +23,7 @@ export default function* rootSaga() {
     userSaga(),
     resourcesSaga(),
     profilesSaga(),
+    mentorshipSaga(),
     gendersSaga(),
     schoolsSaga(),
     interestsSaga(),

@@ -9,28 +9,30 @@ import { Box, CardOverflow, Grid } from '@mui/joy';
 import { CardActions, CardContent, Stack } from "@mui/material";
 import Button from '@mui/joy/Button';
 
-export default function MentorItem( {mentor} ) {
+export default function MentorRequests( {mentee} ) {
     const dispatch = useDispatch();
     const history = useHistory();
     const details = useSelector(store => store.profileDetails);
     console.log('Details', details);
 
-    const [requested, setRequested] = useState(false);
-
     useEffect(() => {
-        dispatch({ type: 'FETCH_PROFILE_DETAILS', payload: mentor.user_id });
+        dispatch({ type: 'FETCH_DETAILS', payload: mentee.user_id });
     }, []);
 
-    const mentorDetails = (mentorId) => {
-        console.log('Clicked', mentorId);
-        dispatch({ type: 'FETCH_DETAILS', payload: mentorId });
-        history.push(`/mentor/details/${mentorId}`);
+    const mentorDetails = (menteeId) => {
+        console.log('Clicked', menteeId);
+        // dispatch({ type: 'FETCH_DETAILS', payload: mentorId });
+        // history.push(`/mentor/details/${mentorId}`);
     }
 
-    const connect = (mentorId) => {
-        console.log('Clicked', mentorId);
-        dispatch({ type: 'REQUEST_MENTORSHIP', payload: mentorId });
-        setRequested(!requested);
+    const connect = (mentorshipId) => {
+        console.log('Clicked', mentorshipId);
+        dispatch({ type: 'ACCEPT_MENTORSHIP', payload: {mentorshipId: mentorshipId} });
+    }
+
+    const deny = (mentorshipId) => {
+        console.log('Clicked', mentorshipId);
+        dispatch({ type: 'DELETE_MENTORSHIP', payload: {mentorshipId: mentorshipId} });
     }
 
     return (
@@ -39,20 +41,17 @@ export default function MentorItem( {mentor} ) {
                 <Box sx={{ maxHeight: '80vh' }}>
                 <Card sx={{ width: '80vw' }}>
                     <Typography level="title-lg" noWrap>
-                        {mentor.first_name} {mentor.last_name}
+                        {mentee.mentee_first_name} {mentee.mentee_last_name}
                     </Typography>
                     <CardActions>
-                        <Stack direction="row" justifyContent="space-evenly" alignItems="center" spacing={4}>
-                            {mentor.status != 'pending' ? 
-                            <Button onClick={() => connect(mentor.id)}>
-                                Connect
+                        <Stack direction="row" alignItems="center" spacing={1}>
+                            <Button onClick={() => connect(mentee.id)}>
+                                Accept
                             </Button>
-                            : 
-                            <Button>
-                                Requested
+                            <Button onClick={() => deny(mentee.id)}>
+                                Deny
                             </Button>
-                            }
-                            <Button onClick={() => mentorDetails(mentor.id)} sx={{ cursor: 'pointer' }}>
+                            <Button onClick={() => mentorDetails(mentee.mentee_id)} sx={{ cursor: 'pointer' }}>
                                 View Profile
                             </Button>
                         </Stack>
