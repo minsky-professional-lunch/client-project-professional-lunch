@@ -3,7 +3,7 @@ import { put, take, takeLatest } from 'redux-saga/effects';
 
 function* fetchAdminProfiles() {
     try {
-        const result = yield axios.get('/api/adminprofile');
+        const result = yield axios.get('/api/adminprofiles');
         yield put({ type: 'SET_ADMIN_PROFILES', payload: result.data });
     } catch (error) {
         console.log('Error getting profiles:', error);
@@ -11,7 +11,7 @@ function* fetchAdminProfiles() {
 }
 
 function* adminProfilesSaga() {
-    yield takeLatest('FETCH_PROFILES', fetchAdminProfiles);
+    yield takeLatest('FETCH_ADMIN_PROFILES', fetchAdminProfiles);
 }
 
 export default adminProfilesSaga;

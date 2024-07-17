@@ -6,7 +6,7 @@ import Sheet from '@mui/joy/Sheet';
 export default function MenteeList() {
   const dispatch = useDispatch();
 
-  const profiles = useSelector((store) => store.profiles);
+  const profiles = useSelector((store) => store.adminProfiles);
   console.log('Profiles', profiles);
  
   const mentees = profiles.filter(profile => !profile.isMentor);
@@ -41,7 +41,7 @@ export default function MenteeList() {
               <td>{mentee.last_name}</td>
               <td>{mentee.email}</td>
               <td>{mentee.school}</td>
-              <td>{mentee.linkedin}</td>
+              <td><a href="{mentee.linkedin}">Link</a></td>
               <td>{mentee.bio}</td>
               <td>{mentee.availability}</td>
               <td>{mentee.interests}</td>

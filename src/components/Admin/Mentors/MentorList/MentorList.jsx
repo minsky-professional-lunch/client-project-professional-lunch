@@ -6,14 +6,14 @@ import Sheet from '@mui/joy/Sheet';
 export default function MentorList() {
   const dispatch = useDispatch();
 
-  const profiles = useSelector((store) => store.profiles);
-  console.log('Profiles', profiles);
-  const mentors = profiles.filter(profile => profile.isMentor);
+  const adminProfiles = useSelector((store) => store.adminProfiles);
+  console.log('Profiles', adminProfiles);
+  const mentors = adminProfiles.filter(profile => profile.isMentor);
   console.log('Mentors', mentors);
   const [stripe, setStripe] = useState('odd');
 
   useEffect(() => {
-    dispatch({ type: 'FETCH_PROFILES'});
+    dispatch({ type: 'FETCH_ADMIN_PROFILES'});
   }, [])
   
   return (
@@ -40,7 +40,7 @@ export default function MentorList() {
               <td>{mentor.last_name}</td>
               <td>{mentor.email}</td>
               <td>{mentor.school}</td>
-              <td>{mentor.linkedin}</td>
+              <td><a href={mentor.linkedin}>Go to Profile</a></td>
               <td>{mentor.bio}</td>
               <td>{mentor.availability}</td>
               <td>{mentor.interests}</td>
