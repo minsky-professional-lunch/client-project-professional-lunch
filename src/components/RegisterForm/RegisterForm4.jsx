@@ -65,13 +65,10 @@ export default function RegisterForm4() {
     event.preventDefault();
 
     dispatch({
-      type: "REGISTER",
+      type: "REGISTER_PROFILE",
       payload: {
-        username: regInfo.username,
-        password: regInfo.password,
         first_name: regInfo.firstName,
         last_name: regInfo.lastName,
-        isMentor: Boolean(regInfo.isMentor),
         email: regInfo.email,
         gender: Number(regInfo.gender),
         school: Number(regInfo.school),

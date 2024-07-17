@@ -135,37 +135,39 @@ function App() {
             )}
           </Route>
 
+          
+
           <Route exact path='/registration/2'>
-            {user.id ? (
+            {/* {user.id ? (
               // If the user is already logged in,
               // redirect them to the /user page
-              <Redirect to='/user' />
-            ) : (
-              // Otherwise, show the registration page
+              <Redirect to='/user' /> */}
+            {/* ) : ( */}
+              {/* // Otherwise, show the registration page */}
               <RegisterPage2 />
-            )}
+            {/* )} */}
           </Route>
 
           <Route exact path='/registration/3'>
-            {user.id ? (
+            {/* {user.id ? (
               // If the user is already logged in,
               // redirect them to the /user page
               <Redirect to='/user' />
-            ) : (
-              // Otherwise, show the registration page
+            ) : ( */}
+              {/* // Otherwise, show the registration page */}
               <RegisterPage3 />
-            )}
+            {/* )} */}
           </Route>
 
           <Route exact path='/registration/4'>
-            {user.id ? (
-              // If the user is already logged in,
-              // redirect them to the /user page
-              <Redirect to='/user' />
-            ) : (
-              // Otherwise, show the registration page
+            {/* {user.id ? ( */}
+              {/* // If the user is already logged in,
+              // redirect them to the /user page */}
+              {/* <Redirect to='/user' /> */}
+            {/* ) : ( */}
+              {/* // Otherwise, show the registration page */}
               <RegisterPage4 />
-            )}
+            {/* )} */}
           </Route>
 
           <Route exact path='/home'>

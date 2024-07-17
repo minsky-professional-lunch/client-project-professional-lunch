@@ -25,12 +25,14 @@ function* registerUser(action) {
 function* registerProfile(action) {
   try {
     yield axios.post("/api/profile", {
-      isMentor: action.payload.isMentor,
-      first_name: action.payload.firstName,
-      last_name: action.payload.lastName,
+      first_name: action.payload.first_name,
+      last_name: action.payload.last_name,
       email: action.payload.email,
       gender: action.payload.gender,
       school: action.payload.school,
+      bio: action.payload.bio,
+      linkedin: action.payload.linkedin
+
     });
   } catch (error) {
     console.log('error in registering profile', error)

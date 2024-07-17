@@ -3,10 +3,7 @@ import { combineReducers } from "redux";
 const initialState = {
   firstName: "",
   lastName: "",
-  username: "",
-  password: "",
   email: "",
-  isMentor: "",
   school: "",
   linkedin: "",
   gender: "",
