@@ -1,12 +1,14 @@
 import GendersList from '../Genders/GendersList/GendersList';
 import InterestsList from '../Interests/InterestsList/InterestsList';
 import MenteeList from '../Mentees/MenteeList/MenteeList';
+import MentorList from '../Mentors/MentorList/MentorList';
 import SchoolsList from '../Schools/SchoolsList/SchoolsList';
 
 
 export default function AdminPage() {
   return (
     <div>
+      <MentorList />
       <MenteeList />
       <GendersList />
       <InterestsList />
