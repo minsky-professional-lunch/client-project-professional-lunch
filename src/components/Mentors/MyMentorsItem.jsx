@@ -6,10 +6,20 @@ import AspectRatio from '@mui/joy/AspectRatio';
 import Card from '@mui/joy/Card';
 import Typography from '@mui/joy/Typography';
 import { Box, CardOverflow, Grid } from '@mui/joy';
-import { CardActions, CardContent, Stack } from "@mui/material";
+import { CardActions, CardContent } from "@mui/material";
 import Button from '@mui/joy/Button';
+import FormControl from '@mui/joy/FormControl';
+import FormLabel from '@mui/joy/FormLabel';
+import Input from '@mui/joy/Input';
+import Modal from '@mui/joy/Modal';
+import ModalDialog from '@mui/joy/ModalDialog';
+import DialogTitle from '@mui/joy/DialogTitle';
+import DialogContent from '@mui/joy/DialogContent';
+import Stack from '@mui/joy/Stack';
+import Add from '@mui/icons-material/Add';
 
 export default function MyMentorsItem( {mentor} ) {
+    const [open, setOpen] = React.useState(false);
     const dispatch = useDispatch();
     const history = useHistory();
     // const details = useSelector(store => store.profileDetails);
@@ -46,9 +56,39 @@ export default function MyMentorsItem( {mentor} ) {
                     <CardActions>
                         <Stack direction="row" justifyContent="space-evenly" alignItems="center" spacing={4}>
                             {mentor.status === 'accepted' ? 
-                            <Button onClick={() => request(mentor.mentor_id)}>
+                            <React.Fragment>
+                            <Button startDecorator={<Add />} onClick={() => setOpen(true)}>
                                 Request Meeting
                             </Button>
+                            <Modal open={open} onClose={() => setOpen(false)}>
+                                <ModalDialog>
+                                <DialogTitle>Request new meeting</DialogTitle>
+                                <DialogContent>Please select a date and time</DialogContent>
+                                <form
+                                    onSubmit={(event) => {
+                                    event.preventDefault();
+                                    setOpen(false);
+                                    }}
+                                >
+                                    <Stack spacing={2}>
+                                    <FormControl>
+                                        <FormLabel>Date</FormLabel>
+                                        <Input autoFocus required type="date" />
+                                    </FormControl>
+                                    <FormControl>
+                                        <FormLabel>Time</FormLabel>
+                                        <Input required type="time" />
+                                    </FormControl>
+                                    <FormControl>
+                                        <FormLabel>Notes</FormLabel>
+                                        <Input />
+                                    </FormControl>
+                                    <Button type="submit" onClick={() => request(mentor.mentor_id)}>Submit</Button>
+                                    </Stack>
+                                </form>
+                                </ModalDialog>
+                            </Modal>
+                            </React.Fragment>
                             : 
                             <Button onClick={() => cancel(mentor.id)}>
                                 Cancel Request
