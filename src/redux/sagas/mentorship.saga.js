@@ -4,7 +4,7 @@ import { put, takeLatest } from 'redux-saga/effects';
 function* fetchMentorships() {
     try {
         const result = yield axios.get('/api/mentorships/all');
-        yield put({ type: 'SET_MEMBERSHIPS', payload: result.data})
+        yield put({ type: 'SET_MENTORSHIPS', payload: result.data})
     } catch (error) {
         console.log('Error getting all mentorships:', error);
     }
