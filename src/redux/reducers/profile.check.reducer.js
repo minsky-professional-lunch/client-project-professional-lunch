@@ -7,7 +7,7 @@ const profileCheck = (state = false, action) => {
     return action.payload;
   }
   if (action.type === "CLEAR_PROFILE_CHECK") {
-    return state;
+    return false;
   } else {
     return state;
   }
