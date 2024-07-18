@@ -4,7 +4,10 @@ import { put, take, takeLatest } from "redux-saga/effects";
 function* checkforProfile() {
   try {
     const result = yield axios.get("/api/check");
-    yield put({ type: "SET_PROFILE_CHECK_RESULT", payload: result.data });
+    yield put({
+      type: "SET_PROFILE_CHECK_RESULT",
+      payload: Boolean(result.data),
+    });
   } catch (error) {
     console.log("error in checking for profile", error);
   }

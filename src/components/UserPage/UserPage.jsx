@@ -1,14 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import LogOutButton from "../LogOutButton/LogOutButton";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { useDispatch } from "react-redux";
 
 function UserPage() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch({ type: "CHECK_FOR_PROFILE" });
+  }, []);
   const history = useHistory();
 
   const createProfile = () => {
-    console.log("button clicked")
-    history.push('/registration/2');
+    console.log("button clicked");
+    history.push("/registration/2");
   };
   // this component doesn't do much to start, just renders some user reducer info to the DOM
   const user = useSelector((store) => store.user);
