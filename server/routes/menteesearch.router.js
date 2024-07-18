@@ -8,18 +8,25 @@ const router = express.Router();
 // Need to figure out how to get the mentors based on req.user.id not profile_id
 router.get('/', rejectUnauthenticated, async (req, res) => {
   console.log(`Get mentors based on specific mentees interests`);
-  const queryText = `SELECT DISTINCT p2.*, i2.interest, i2.id 
-FROM profiles p2
-JOIN profiles_interests pi2 ON p2.id = pi2.profile_id
-JOIN interests i2 ON pi2.interest_id = i2.id
-WHERE p2."isMentor" = true
-AND i2.id IN (
-    SELECT i.id 
-    FROM interests i
-    JOIN profiles_interests pi ON i.id = pi.interest_id
-    WHERE pi.profile_id = $1
+  const queryText = `WITH user_interests AS (
+    SELECT i.id AS interest_id
+    FROM profiles p
+    JOIN "user" u ON u.id = p.user_id
+    JOIN profiles_interests pi ON p.id = pi.profile_id
+    JOIN interests i ON pi.interest_id = i.id
+    WHERE p."isMentor" = false AND u.id = $1
+),
+mentor_profiles AS (
+    SELECT p.*, i.interest, i.id AS interest_id
+    FROM profiles p
+    JOIN profiles_interests pi ON p.id = pi.profile_id
+    JOIN interests i ON pi.interest_id = i.id
+    WHERE p."isMentor" = true
 )
-ORDER BY p2.id;`;
+SELECT DISTINCT mp.*
+FROM mentor_profiles mp
+JOIN user_interests ui ON mp.interest_id = ui.interest_id
+ORDER BY mp.id;`;
 try {
  const result= await pool.query(queryText, [req.user.id]);
   res.send(result.rows);
