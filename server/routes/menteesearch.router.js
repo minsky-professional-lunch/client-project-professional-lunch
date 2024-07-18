@@ -5,8 +5,7 @@ const {
 } = require('../modules/authentication-middleware');
 const router = express.Router();
 
-// Need to figure out how to get the mentors based on req.user.id not profile_id
-router.get('/', rejectUnauthenticated, async (req, res) => {
+router.get('/interest', rejectUnauthenticated, async (req, res) => {
   console.log(`Get mentors based on specific mentees interests`);
   const queryText = `WITH user_interests AS (
     SELECT i.id AS interest_id
@@ -27,13 +26,27 @@ SELECT DISTINCT mp.*
 FROM mentor_profiles mp
 JOIN user_interests ui ON mp.interest_id = ui.interest_id
 ORDER BY mp.id;`;
-try {
- const result= await pool.query(queryText, [req.user.id]);
-  res.send(result.rows);
-} catch (error) {
-  console.log(`Error in GET Mentors for specific mentee`, error);
-  res.sendStatus(500);
-}
-})
+  try {
+    const result = await pool.query(queryText, [req.user.id]);
+    res.send(result.rows);
+  } catch (error) {
+    console.log(`Error in GET Mentors for specific mentee`, error);
+    res.sendStatus(500);
+  }
+});
+
+router.get('/gender/:id', rejectUnauthenticated, async (req, res) => {
+  console.log(`Get mentors based on gender`);
+  const queryText = `SELECT p.*
+                      FROM profiles p
+                      WHERE p."isMentor" = TRUE AND p.gender = $1; `;
+  try {
+    const result = await pool.query(queryText, [req.params.id]);
+    res.send(result.rows);
+  } catch (error) {
+    console.log(`Error in GET Mentors for specific mentee`, error);
+    res.sendStatus(500);
+  }
+});
 
 module.exports = router;
