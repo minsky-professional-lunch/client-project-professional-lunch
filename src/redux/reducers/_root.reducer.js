@@ -12,6 +12,7 @@ import schoolsReducer from './schools.reducer';
 import interestsReducer from './interests.reducer';
 import dayReducer from "./day.reducer";
 import timeReducer from "./time.reducer";
+import profileCheck from './profile.check.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -33,6 +34,7 @@ const rootReducer = combineReducers({
   interestsReducer,
   dayReducer,
   timeReducer,
+  profileCheck
 });
 
 export default rootReducer;

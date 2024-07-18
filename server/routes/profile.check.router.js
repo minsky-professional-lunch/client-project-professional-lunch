@@ -6,7 +6,12 @@ router.get("/", (req, res) => {
   pool
     .query(`SELECT * FROM "profiles" WHERE user_id=$1;`, [req.user.id])
     .then((result) => {
-      res.send(result.rows);
+      if (result.rows.length > 0) {
+        res.send(true);
+      } else if (result.rows.length === 0) {
+        res.send(false);
+      }
+      // res.send(result.rows);
       console.log(req.user.id);
     })
     .catch((error) => {
