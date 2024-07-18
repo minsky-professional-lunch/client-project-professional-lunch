@@ -16,7 +16,6 @@ router.get('/', (req, res) => {
     });
 });
 
-
 // GET profile information for specific user
 router.get("/:id", async (req, res) => {
   try {

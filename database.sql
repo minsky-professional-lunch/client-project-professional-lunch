@@ -87,7 +87,8 @@ CREATE TABLE meetings (
     "end" time without time zone NOT NULL,
     link character varying,
     location character varying,
-    notes character varying
+    notes character varying,
+    status character varying DEFAULT 'pending'::character varying
 );
 
 CREATE TABLE IF NOT EXISTS "resources" (
