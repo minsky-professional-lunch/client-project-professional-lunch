@@ -18,6 +18,7 @@
     "dotenv": "^16.0.3",
     "express": "^4.17.1",
     "express-session": "^1.18.0",
+    "fullcalendar": "^6.1.15",
     "passport": "^0.7.0",
     "passport-local": "^1.0.0",
     "pg": "^8.5.1",
@@ -31,7 +32,7 @@
   },
   "scripts": {
     "start": "node server/server.js",
-    "client": "vite",
+    "client": "vite --host",
     "server": "nodemon --watch server server/server.js",
     "build": "vite build",
     "test": "vitest"
