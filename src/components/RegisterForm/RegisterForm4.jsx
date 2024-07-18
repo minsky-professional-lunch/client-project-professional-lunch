@@ -22,6 +22,9 @@ export default function RegisterForm4() {
     dispatch({
       type: "FETCH_DAYS",
     });
+    dispatch({
+      type: "FETCH_TIMES",
+    });
   }, [dispatch]);
 
   const openWidget = () => {
@@ -59,22 +62,8 @@ export default function RegisterForm4() {
     setAvailability([...availability, { day: "", time: "" }]);
   };
 
-  // const nextPage = (event) => {
-  //   event.preventDefault();
-  //   if (availability.every((a) => a.day && a.time)) {
-  //     dispatch({
-  //       type: "ADD_FOURTH_PAGE_INFO",
-  //       payload: {
-  //         availability: availability,
-  //       },
-  //     });
-  //     history.push("/");
-  //   } else {
-  //     alert("Please select both a day and a time for all availabilities.");
-  //   }
-  // };
-
   const registerUser = (event) => {
+    event.preventDefault();
     if (availability.every((a) => a.day && a.time)) {
       dispatch({
         type: "ADD_FOURTH_PAGE_INFO",
@@ -83,11 +72,10 @@ export default function RegisterForm4() {
           avatar: avatar,
         },
       });
-      history.push("/");
+      history.push("/"); 
     } else {
       alert("Please select both a day and a time for all availabilities.");
     }
-    event.preventDefault();
 
     dispatch({
       type: "REGISTER_PROFILE",
@@ -100,7 +88,7 @@ export default function RegisterForm4() {
         avatar: avatar,
         bio: regInfo.bio,
         linkedin: regInfo.linkedin,
-        availability: regInfo.availability,
+        availability: availability,
         interests: regInfo.interests,
       },
     });
@@ -169,7 +157,7 @@ export default function RegisterForm4() {
         </form>
       ))}
 
-      <button onClick={() => registerUser(event)}>Bye</button>
+      <button onClick={(event) => registerUser(event)}>Register</button>
     </>
   );
 }

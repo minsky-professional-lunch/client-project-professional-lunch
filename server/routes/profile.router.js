@@ -76,7 +76,7 @@ router.get("/:id", async (req, res) => {
 
 // POST new profile
 router.post("/", async (req, res) => {
-  console.log("/profile POST route");
+  console.log("/profile POST route", req.body);
   try {
     const queryText = `INSERT INTO "profiles" ("user_id", "isMentor", "first_name", "last_name", "email", "gender", "school", "bio", "linkedin", "avatar")
                         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10 ) RETURNING id, user_id;`;
