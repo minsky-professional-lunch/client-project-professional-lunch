@@ -21,11 +21,22 @@ export default function AvailableMentors() {
   console.log('Interest Mentors', interestMentors);
   const genderMentors = useSelector((store) => store.menteeSearchProfiles);
   console.log('Gender Mentors', genderMentors);
+  const maleMentors = mentors.filter((mentors) => mentors.gender === 1);
+  console.log('Male Mentors', maleMentors);
+  const femaleMentors = mentors.filter((mentors) => mentors.gender === 2);
+  console.log('Female Mentors', femaleMentors);
+  const nonbinaryMentors = mentors.filter((mentors) => mentors.gender === 3);
+  console.log('NonBinary Mentors', nonbinaryMentors);
+  const preferNotToSayMentors = mentors.filter((mentors) => mentors.gender === 4);
+  console.log('Prefer Not to Say Mentors', preferNotToSayMentors);
+  const otherGenderMentors = mentors.filter((mentors) => mentors.gender === 5);
+  console.log('Other Gender Mentors', otherGenderMentors);
+
 
   useEffect(() => {
     dispatch({ type: 'FETCH_PROFILES' });
     dispatch({ type: 'FETCH_INTEREST_PROFILES'});
-    dispatch({ type: 'FETCH_GENDER_PROFILES'});
+    // dispatch({ type: 'FETCH_GENDER_PROFILES'});
   }, []);
 
   return (
