@@ -39,10 +39,16 @@ export default function AvailableMentors() {
         </Stack>
       </div>
       <div>
-        <h1>Similar Mentors</h1>
-          {/* <Stack>
-            {interestMentors.map((mentor) =>)}
-          </Stack> */}
+        <h1>Mentors Based on Interests</h1>
+          <Stack>
+            {interestMentors.map((mentor) => (
+              <MentorItem key = {mentor.id} mentor={mentor}/>
+            ))}
+          </Stack>
+      </div>
+      <div>
+        <h1>Mentors Based on Gender</h1>
+            
       </div>
     </>
   );
