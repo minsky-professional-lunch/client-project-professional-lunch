@@ -3,7 +3,12 @@ import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Stack, Typography } from '@mui/joy';
+import Accordion from '@mui/material/Accordion';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import MentorItem from './MentorItem';
+import MentorsByGender from './MentorsByGender/MentorsByGender';
 
 export default function AvailableMentors() {
   const dispatch = useDispatch();
@@ -19,47 +24,59 @@ export default function AvailableMentors() {
   console.log('Available Mentors', availableMentors);
   const interestMentors = useSelector((store) => store.menteeSearchProfiles);
   console.log('Interest Mentors', interestMentors);
-  const genderMentors = useSelector((store) => store.menteeSearchProfiles);
-  console.log('Gender Mentors', genderMentors);
-  const maleMentors = mentors.filter((mentors) => mentors.gender === 1);
-  console.log('Male Mentors', maleMentors);
-  const femaleMentors = mentors.filter((mentors) => mentors.gender === 2);
-  console.log('Female Mentors', femaleMentors);
-  const nonbinaryMentors = mentors.filter((mentors) => mentors.gender === 3);
-  console.log('NonBinary Mentors', nonbinaryMentors);
-  const preferNotToSayMentors = mentors.filter((mentors) => mentors.gender === 4);
-  console.log('Prefer Not to Say Mentors', preferNotToSayMentors);
-  const otherGenderMentors = mentors.filter((mentors) => mentors.gender === 5);
-  console.log('Other Gender Mentors', otherGenderMentors);
-
 
   useEffect(() => {
     dispatch({ type: 'FETCH_PROFILES' });
-    dispatch({ type: 'FETCH_INTEREST_PROFILES'});
-    // dispatch({ type: 'FETCH_GENDER_PROFILES'});
+    dispatch({ type: 'FETCH_INTEREST_PROFILES' });
   }, []);
 
   return (
     <>
       <div className='container'>
-        <h1>All Available Mentors</h1>
-        <Stack>
-          {availableMentors.map((mentor) => (
-            <MentorItem key={mentor.id} mentor={mentor} />
-          ))}
-        </Stack>
-      </div>
-      <div>
-        <h1>Mentors Based on Interests</h1>
-          <Stack>
-            {interestMentors.map((mentor) => (
-              <MentorItem key = {mentor.id} mentor={mentor}/>
-            ))}
-          </Stack>
-      </div>
-      <div>
-        <h1>Mentors Based on Gender</h1>
-            
+        <h1>Available Mentors</h1>
+        <div>
+          <h3>All Mentors</h3>
+          <Accordion>
+            <AccordionSummary
+              expandIcon={<ArrowDropDownIcon />}
+              aria-controls='panel1-content'
+              id='panel1-header'
+            >
+              <Typography>All Mentors</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <Stack>
+                {availableMentors.map((mentor) => (
+                  <MentorItem key={mentor.id} mentor={mentor} />
+                ))}
+              </Stack>
+            </AccordionDetails>
+          </Accordion>
+        </div>
+        <div>
+          <h3>Mentors Based on Your Interests</h3>
+
+          <Accordion>
+            <AccordionSummary
+              expandIcon={<ArrowDropDownIcon />}
+              aria-controls='panel1-content'
+              id='panel1-header'
+            >
+              <Typography>Mentors with similar interests</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <Stack>
+                {interestMentors.map((mentor) => (
+                  <MentorItem key={mentor.id} mentor={mentor} />
+                ))}
+              </Stack>
+            </AccordionDetails>
+          </Accordion>
+        </div>
+        <div>
+          <h3>Mentors Based on Gender</h3>
+          <MentorsByGender />
+        </div>
       </div>
     </>
   );
