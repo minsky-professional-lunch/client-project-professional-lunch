@@ -22,11 +22,17 @@ export default function MyMentorsItem( {mentor} ) {
     const [open, setOpen] = React.useState(false);
     const dispatch = useDispatch();
     const history = useHistory();
-    // const details = useSelector(store => store.profileDetails);
-    // console.log('Details', details);
+    const meetings = useSelector(store => store.meetings);
+    console.log('Meetings', meetings);
+
+    const [newMeeting, setNewMeeting] = useState({mentorship_id: mentor.id, date: '', start: '', end: '', link: '', notes: ''});
+    console.log('New meeting', newMeeting);
+
+    const [requested, setRequested] = useState(false);
 
     useEffect(() => {
         dispatch({ type: 'FETCH_PROFILES' });
+        dispatch({ type: 'FETCH_MEETINGS' });
     }, []);
 
     const mentorDetails = (mentorId) => {
@@ -35,14 +41,39 @@ export default function MyMentorsItem( {mentor} ) {
         history.push(`/mentor/details/${mentorId}`);
     }
 
-    const request = (mentorId) => {
-        console.log('Clicked', mentorId);
-        // dispatch({ type: 'REQUEST_MENTORSHIP', payload: mentorId });
-    }
-
     const cancel = (mentorshipId) => {
         console.log('Clicked', mentorshipId);
         dispatch({ type: 'DELETE_MENTORSHIP', payload: {mentorshipId: mentorshipId} });
+    }
+
+    const request = (event) => {
+        event.preventDefault();
+        setOpen(false);
+        dispatch({ type: 'REQUEST_MEETING', payload: {newMeeting: newMeeting, mentorID: mentor.mentor_id} });
+        setRequested(!requested);
+        console.log('submit');
+        console.table(newMeeting);
+    }
+
+    const handleChange = (event) => {
+        console.log(event.target.id);
+        switch (event.target.id) {
+            case 'date':
+                setNewMeeting({...newMeeting, date: event.target.value});
+                break;
+            case 'start':
+                setNewMeeting({...newMeeting, start: event.target.value});
+                break;
+            case 'end':
+                setNewMeeting({...newMeeting, end: event.target.value});
+                break;
+            case 'link':
+                setNewMeeting({...newMeeting, link: event.target.value});
+                break;
+            case 'notes':
+                setNewMeeting({...newMeeting, notes: event.target.value});
+                break;
+        }
     }
 
     return (
@@ -57,38 +88,43 @@ export default function MyMentorsItem( {mentor} ) {
                         <Stack direction="row" justifyContent="space-evenly" alignItems="center" spacing={4}>
                             {mentor.status === 'accepted' ? 
                             <React.Fragment>
-                            <Button startDecorator={<Add />} onClick={() => setOpen(true)}>
-                                Request Meeting
-                            </Button>
+                                <Button startDecorator={<Add />} onClick={() => setOpen(true)}>
+                                    Request Meeting
+                                </Button>
                             <Modal open={open} onClose={() => setOpen(false)}>
                                 <ModalDialog>
                                 <DialogTitle>Request new meeting</DialogTitle>
                                 <DialogContent>Please select a date and time</DialogContent>
                                 <form
-                                    onSubmit={(event) => {
-                                    event.preventDefault();
-                                    setOpen(false);
-                                    }}
+                                    onSubmit={request}
                                 >
                                     <Stack spacing={2}>
                                     <FormControl>
                                         <FormLabel>Date</FormLabel>
-                                        <Input autoFocus required type="date" />
+                                        <Input autoFocus required type="date" slotProps={{ input: {id: 'date'} }} value={newMeeting.date} onChange={handleChange}/>
                                     </FormControl>
                                     <FormControl>
-                                        <FormLabel>Time</FormLabel>
-                                        <Input required type="time" />
+                                        <FormLabel>Start Time</FormLabel>
+                                        <Input required type="time" slotProps={{ input: {id: 'start'} }} value={newMeeting.start} onChange={handleChange}/>
+                                    </FormControl>
+                                    <FormControl>
+                                        <FormLabel>End Time</FormLabel>
+                                        <Input required type="time" slotProps={{ input: {id: 'end'} }} value={newMeeting.end} onChange={handleChange}/>
+                                    </FormControl>
+                                    <FormControl>
+                                        <FormLabel>Link/Location</FormLabel>
+                                        <Input value={newMeeting.link} slotProps={{ input: {id: 'link'} }} onChange={handleChange}/>
                                     </FormControl>
                                     <FormControl>
                                         <FormLabel>Notes</FormLabel>
-                                        <Input />
+                                        <Input value={newMeeting.notes} slotProps={{ input: {id: 'notes'} }} onChange={handleChange}/>
                                     </FormControl>
-                                    <Button type="submit" onClick={() => request(mentor.mentor_id)}>Submit</Button>
+                                    <Button type="submit">Submit</Button>
                                     </Stack>
                                 </form>
                                 </ModalDialog>
-                            </Modal>
-                            </React.Fragment>
+                                </Modal>
+                                </React.Fragment>
                             : 
                             <Button onClick={() => cancel(mentor.id)}>
                                 Cancel Request

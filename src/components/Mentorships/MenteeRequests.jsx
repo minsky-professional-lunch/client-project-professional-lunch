@@ -23,14 +23,8 @@ export default function MenteeRequests( {mentor} ) {
 
     const mentorDetails = (mentorId) => {
         console.log('Clicked', mentorId);
-        // dispatch({ type: 'FETCH_DETAILS', payload: mentorId });
-        // history.push(`/mentor/details/${mentorId}`);
-    }
-
-    const connect = (mentorId) => {
-        console.log('Clicked', mentorId);
-        dispatch({ type: 'REQUEST_MENTORSHIP', payload: mentorId });
-        setRequested(!requested);
+        dispatch({ type: 'FETCH_DETAILS', payload: mentorId });
+        history.push(`/mentor/details/${mentorId}`);
     }
 
     const cancel = (mentorshipId) => {
@@ -48,15 +42,9 @@ export default function MenteeRequests( {mentor} ) {
                     </Typography>
                     <CardActions>
                         <Stack direction="row" justifyContent="space-evenly" alignItems="center" spacing={4}>
-                            {mentor.status != 'pending' ? 
-                            <Button onClick={() => connect(mentor.id)}>
-                                Connect
-                            </Button>
-                            : 
                             <Button onClick={() => cancel(mentor.id)}>
-                                Cancel
+                                Cancel Request
                             </Button>
-                            }
                             <Button onClick={() => mentorDetails(mentor.mentor_id)} sx={{ cursor: 'pointer' }}>
                                 View Profile
                             </Button>

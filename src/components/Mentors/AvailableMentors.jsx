@@ -30,10 +30,11 @@ export default function AvailableMentors() {
     dispatch({ type: 'FETCH_INTEREST_PROFILES' });
   }, []);
 
-  return (
-    <>
-      <div className='container'>
-        <h1>Available Mentors</h1>
+    return (
+        <div className='container'>
+            <h1>Available Mentors</h1>
+            {availableMentors.length > 0 ? 
+            <h1>Available Mentors</h1>
         <div>
           <h3>All Mentors</h3>
           <Accordion>
@@ -52,8 +53,6 @@ export default function AvailableMentors() {
               </Stack>
             </AccordionDetails>
           </Accordion>
-        </div>
-        <div>
           <h3>Mentors Based on Your Interests</h3>
           <Accordion>
             <AccordionSummary
@@ -76,6 +75,11 @@ export default function AvailableMentors() {
           <h3>Mentors Based on Gender</h3>
           <MentorsByGender />
         </div>
+            : 
+            <h3>There currently are no available mentors.</h3>
+            }
+        </div>
+        
       </div>
     </>
   );

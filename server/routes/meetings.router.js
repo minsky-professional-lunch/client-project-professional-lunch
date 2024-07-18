@@ -10,8 +10,12 @@ router.get('/', rejectUnauthenticated, (req, res) => {
   console.log('/meetings GET route');
   console.log('user', req.user);
   if (req.user.isMentor === false) {
-    queryText = `SELECT * FROM "meetings" JOIN "mentorships" ON meetings.mentorship_id=mentorships.id
-	                    WHERE mentorships.mentee_id=$1;`;
+    queryText = `SELECT meetings.id AS meeting_id, meetings.created_at AS meeting_created, meetings.mentorship_id AS mentorship_id, 
+                  meetings.date, meetings."start", meetings."end", meetings.link AS meeting_link, meetings.location, "user".id AS "user_id", meetings.status
+                  FROM "meetings" JOIN "mentorships" ON meetings.mentorship_id=mentorships.id
+                  JOIN "profiles" ON profiles.id=mentorships.mentee_id
+                  JOIN "user" ON "user".id=profiles.user_id
+                  WHERE "user".id=$1;`;
   } else {
     queryText = `SELECT * FROM "meetings" JOIN "mentorships" ON meetings.mentorship_id=mentorships.id
 	                    WHERE mentorships.mentor_id=$1;`;
@@ -19,6 +23,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
   pool
     .query(queryText, [req.user.id])
     .then((result) => {
+      console.log('meetings data', result.rows);
       res.send(result.rows);
     })
     .catch((error) => {
@@ -30,6 +35,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 // POST
 router.post('/:id', rejectUnauthenticated, (req, res) => {
     console.log('/meetings POST route');
+    console.log('req.body', req.body.newMeeting);
     if (req.user.isMentor === false) {
         queryText = `INSERT INTO "meetings" ("mentorship_id", "date", "start", "end", "link", "location", "notes")
 	                VALUES ((SELECT "id" FROM "mentorships" WHERE "mentorships"."mentee_id"=$1 AND "mentorships"."mentor_id"=$2), $3, $4, $5, $6, $7, $8);`
@@ -40,12 +46,12 @@ router.post('/:id', rejectUnauthenticated, (req, res) => {
     pool.query(queryText, [
         req.user.id,
         req.params.id,
-        req.body.date,
-        req.body.start,
-        req.body.end,
-        req.body.link,
-        req.body.location,
-        req.body.notes
+        req.body.newMeeting.date,
+        req.body.newMeeting.start,
+        req.body.newMeeting.end,
+        req.body.newMeeting.link,
+        req.body.newMeeting.location,
+        req.body.newMeeting.notes
     ])
     .then(() => {
         res.sendStatus(200);
