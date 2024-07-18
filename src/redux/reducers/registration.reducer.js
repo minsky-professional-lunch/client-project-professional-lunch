@@ -3,16 +3,15 @@ import { combineReducers } from "redux";
 const initialState = {
   firstName: "",
   lastName: "",
-  username: "",
-  password: "",
+  avatar: "",
   email: "",
-  isMentor: "",
   school: "",
   linkedin: "",
   gender: "",
   interests: [],
   bio: "",
   avatar: "",
+  availability: [],
 };
 
 const registrationReducer = (state = initialState, action) => {

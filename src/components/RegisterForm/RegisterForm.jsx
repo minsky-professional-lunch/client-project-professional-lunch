@@ -8,36 +8,35 @@ function RegisterForm() {
   // const [firstName, setFirstName] = useState("");
   // const [lastName, setLastName] = useState("");
   // const [email, setEmail] = useState("");
-  const [role, setRole] = useState("");
+  const [role, setRole] = useState(false);
   const errors = useSelector((store) => store.errors);
   const history = useHistory();
   const dispatch = useDispatch();
 
-  // const registerUser = (event) => {
-  //   event.preventDefault();
-
-  //   // dispatch({
-  //   //   type: 'REGISTER',
-  //   //   payload: {
-  //   //     username: username,
-  //   //     password: password,
-  //   //   },
-  //   // });
-  // }; // end registerUser
+  // end registerUser
 
   const nextPage = () => {
-    history.push("/registration/2");
+    // history.push("/registration/2");
     event.preventDefault();
+    // console.log(role);
 
+    // dispatch({
+    //   type: "ADD_FIRST_PAGE_INFO",
+
+    //   payload: {
+    //     username: username,
+    //     password: password,
+    //     isMentor: role,
+
+    //     // email: email,
+    //   },
+    // });
     dispatch({
-      type: "ADD_FIRST_PAGE_INFO",
-
+      type: "REGISTER",
       payload: {
         username: username,
         password: password,
-        isMentor: role,
-
-        // email: email,
+        isMentor: role
       },
     });
   };

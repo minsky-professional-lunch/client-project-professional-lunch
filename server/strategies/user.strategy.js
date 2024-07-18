@@ -17,7 +17,7 @@ passport.deserializeUser((id, done) => {
     .then((result) => {
       // Handle Errors
       const user = result && result.rows && result.rows[0];
-      console.log(`from session lookup`, user);
+      // console.log(`from session lookup`, user);
 
       if (user) {
         // user found

@@ -10,6 +10,9 @@ import schoolsSaga from './schools.saga';
 import interestsSaga from './interests.saga';
 import meetingsSaga from './meetings.saga';
 
+import profileCheckSaga from './profile.check.saga';
+import adminProfilesSaga from './adminProfiles.saga';
+
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
 // This is imported in index.js as rootSaga
@@ -28,6 +31,8 @@ export default function* rootSaga() {
     gendersSaga(),
     schoolsSaga(),
     interestsSaga(),
-    meetingsSaga()
+    meetingsSaga(),
+    profileCheckSaga(),
+    adminProfilesSaga(),
   ]);
 }

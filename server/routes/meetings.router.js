@@ -11,7 +11,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
   console.log('user', req.user);
   if (req.user.isMentor === false) {
     queryText = `SELECT meetings.id AS meeting_id, meetings.created_at AS meeting_created, meetings.mentorship_id AS mentorship_id, 
-                  meetings.date, meetings."start", meetings."end", meetings.link AS meeting_link, meetings.location, "user".id AS "user_id"
+                  meetings.date, meetings."start", meetings."end", meetings.link AS meeting_link, meetings.location, "user".id AS "user_id", meetings.status
                   FROM "meetings" JOIN "mentorships" ON meetings.mentorship_id=mentorships.id
                   JOIN "profiles" ON profiles.id=mentorships.mentee_id
                   JOIN "user" ON "user".id=profiles.user_id
