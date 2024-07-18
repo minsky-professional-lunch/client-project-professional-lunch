@@ -27,6 +27,7 @@ function* registerProfile(action) {
     yield axios.post("/api/profile", {
       first_name: action.payload.first_name,
       last_name: action.payload.last_name,
+      avatar: action.payload.avatar,
       email: action.payload.email,
       gender: action.payload.gender,
       school: action.payload.school,
