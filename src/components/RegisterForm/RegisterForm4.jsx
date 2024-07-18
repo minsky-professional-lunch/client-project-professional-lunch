@@ -17,6 +17,7 @@ export default function RegisterForm4() {
   const regInfo = useSelector(
     (store) => store.registrationReducer.registrationReducer
   );
+  const user = useSelector((store) => store.user);
 
   useEffect(() => {
     dispatch({
@@ -72,7 +73,7 @@ export default function RegisterForm4() {
           avatar: avatar,
         },
       });
-      history.push("/"); 
+      history.push("/");
     } else {
       alert("Please select both a day and a time for all availabilities.");
     }
@@ -84,7 +85,7 @@ export default function RegisterForm4() {
         last_name: regInfo.lastName,
         email: regInfo.email,
         gender: Number(regInfo.gender),
-        school: Number(regInfo.school),
+        school: user.isMentor ? 16 : Number(regInfo.school),
         avatar: avatar,
         bio: regInfo.bio,
         linkedin: regInfo.linkedin,
