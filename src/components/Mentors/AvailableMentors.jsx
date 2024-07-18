@@ -55,7 +55,6 @@ export default function AvailableMentors() {
         </div>
         <div>
           <h3>Mentors Based on Your Interests</h3>
-
           <Accordion>
             <AccordionSummary
               expandIcon={<ArrowDropDownIcon />}
