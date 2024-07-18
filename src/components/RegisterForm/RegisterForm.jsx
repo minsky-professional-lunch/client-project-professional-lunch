@@ -36,7 +36,7 @@ function RegisterForm() {
       payload: {
         username: username,
         password: password,
-        isMentor: role
+        isMentor: Boolean(role)
       },
     });
   };
