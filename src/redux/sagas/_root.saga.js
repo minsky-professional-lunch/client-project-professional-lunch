@@ -8,6 +8,7 @@ import mentorshipSaga from './mentorship.saga';
 import gendersSaga from './genders.saga';
 import schoolsSaga from './schools.saga';
 import interestsSaga from './interests.saga';
+import meetingsSaga from './meetings.saga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -27,5 +28,6 @@ export default function* rootSaga() {
     gendersSaga(),
     schoolsSaga(),
     interestsSaga(),
+    meetingsSaga()
   ]);
 }

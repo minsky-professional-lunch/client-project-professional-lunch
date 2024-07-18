@@ -10,6 +10,7 @@ import mentorshipDetails from './mentorshipDetails.reducer';
 import gendersReducer from './genders.reducer';
 import schoolsReducer from './schools.reducer';
 import interestsReducer from './interests.reducer';
+import meetings from './meetings.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -29,6 +30,7 @@ const rootReducer = combineReducers({
   gendersReducer,
   schoolsReducer,
   interestsReducer,
+  meetings
 });
 
 export default rootReducer;

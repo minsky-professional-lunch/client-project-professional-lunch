@@ -27,6 +27,7 @@ export default function MentorDetails() {
     console.log('This mentorship', thisMentorship);
     console.log('Mentorships', mentorships);
     const [open, setOpen] = React.useState(false);
+    const [requested, setRequested] = useState(false);
 
     let mentorshipID = '';
 
@@ -45,12 +46,14 @@ export default function MentorDetails() {
 
     const connect = (mentorId) => {
         console.log('Clicked', mentorId);
-        // FINISH DISPATCH
+        dispatch({ type: 'REQUEST_MENTORSHIP', payload: mentorId });
+        setRequested(!requested);
     }
 
     const remove = (mentorshipId) => {
         console.log('Clicked', mentorshipId);
         dispatch({ type: 'DELETE_MENTORSHIP', payload: {mentorshipId: mentorshipId} });
+        history.push('/home');
     }
 
     const request = (event) => {
@@ -94,10 +97,10 @@ export default function MentorDetails() {
                 <Typography>{details?.profile?.first_name} {details?.profile?.last_name}</Typography>
                 <Typography>Areas of Expertise: <ul>{details?.details?.interests?.map(interest => <li>{interest.interest}</li>)}</ul></Typography>
                 <Typography>Availability: <ul>{details?.details?.availability?.map(avail => <li>{avail.day} @ {avail.time}</li>)}</ul></Typography>
-                {!user.mentorships.includes(details.profile.id) ? 
-                <Button onClick={() => connect(details?.profile?.id)}>Connect</Button>
-                : 
-                <Button onClick={() => remove(thisMentorship[0].id)}>Remove</Button>
+                {!user.mentorships.includes(details.profile.id) ?
+                    <Button onClick={() => connect(details?.profile?.id)}>Connect</Button>
+                    :
+                    <Button onClick={() => remove(thisMentorship[0].id)}>Remove</Button>
                 }
                 {user.mentorships.includes(details.profile.id) && thisMentorship.status === 'accepted' ?
                 <React.Fragment>
