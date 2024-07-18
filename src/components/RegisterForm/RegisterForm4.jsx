@@ -35,9 +35,7 @@ export default function RegisterForm4() {
           },
           (error, result) => {
             if (!error && result && result.event === "success") {
-              setAvatar({
-                avatar: result.info.secure_url,
-              });
+              setAvatar(result.info.secure_url);
             }
           }
         )
@@ -137,7 +135,7 @@ export default function RegisterForm4() {
           <Avatar
             variant="outlined"
             sx={{ width: 150, height: 150 }}
-            src={regInfo.avatar}
+            src={avatar}
           />
         </Badge>
         {useScript("https://widget.cloudinary.com/v2.0/global/all.js")}
