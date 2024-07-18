@@ -6,10 +6,17 @@ import { useDispatch } from "react-redux";
 
 function UserPage() {
   const dispatch = useDispatch();
-
   useEffect(() => {
-    dispatch({ type: "CHECK_FOR_PROFILE" });
+    const hasReloaded = localStorage.getItem("hasReloaded");
+
+    if (!hasReloaded) {
+      localStorage.setItem("hasReloaded", "true");
+      location.reload();
+    } else {
+      dispatch({ type: "CHECK_FOR_PROFILE" });
+    }
   }, []);
+
   const history = useHistory();
 
   const createProfile = () => {
