@@ -25,6 +25,13 @@ export default function RegisterForm3() {
     });
   }, []);
 
+  const handleInterestsChange = (event, newValue) => {
+    if (newValue.length <= 5){
+      setInterests(newValue)
+    }
+    
+  }
+
   const nextPage = () => {
     history.push("/registration/4");
     event.preventDefault();
@@ -62,9 +69,10 @@ export default function RegisterForm3() {
             <Autocomplete
               multiple
               options={interestsStore}
+              value={interests}
               getOptionLabel={(option) => option.interest}
               disableCloseOnSelect
-              onChange={(event, newValue) => setInterests(newValue)}
+              onChange={handleInterestsChange}
               renderInput={(params) => (
                 <TextField
                   {...params}
