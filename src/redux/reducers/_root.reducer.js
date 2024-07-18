@@ -15,6 +15,7 @@ import dayReducer from "./day.reducer";
 import timeReducer from "./time.reducer";
 import profileCheck from './profile.check.reducer';
 import adminProfiles from './adminProfiles.reducer';
+import menteeSearchProfiles from './menteesearch.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -39,6 +40,7 @@ const rootReducer = combineReducers({
   timeReducer,
   profileCheck,
   adminProfiles,
+  menteeSearchProfiles,
 });
 
 export default rootReducer;
