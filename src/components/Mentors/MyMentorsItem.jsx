@@ -22,12 +22,17 @@ export default function MyMentorsItem( {mentor} ) {
     const [open, setOpen] = React.useState(false);
     const dispatch = useDispatch();
     const history = useHistory();
+    const meetings = useSelector(store => store.meetings);
+    console.log('Meetings', meetings);
 
-    const [newMeeting, setNewMeeting] = useState({mentorship_id: '', date: '', start: '', end: '', link: '', notes: ''});
+    const [newMeeting, setNewMeeting] = useState({mentorship_id: mentor.id, date: '', start: '', end: '', link: '', notes: ''});
     console.log('New meeting', newMeeting);
+
+    const [requested, setRequested] = useState(false);
 
     useEffect(() => {
         dispatch({ type: 'FETCH_PROFILES' });
+        dispatch({ type: 'FETCH_MEETINGS' });
     }, []);
 
     const mentorDetails = (mentorId) => {
@@ -44,6 +49,8 @@ export default function MyMentorsItem( {mentor} ) {
     const request = (event) => {
         event.preventDefault();
         setOpen(false);
+        dispatch({ type: 'REQUEST_MEETING', payload: {newMeeting: newMeeting, mentorID: mentor.mentor_id} });
+        setRequested(!requested);
         console.log('submit');
         console.table(newMeeting);
     }
@@ -81,9 +88,9 @@ export default function MyMentorsItem( {mentor} ) {
                         <Stack direction="row" justifyContent="space-evenly" alignItems="center" spacing={4}>
                             {mentor.status === 'accepted' ? 
                             <React.Fragment>
-                            <Button startDecorator={<Add />} onClick={() => setOpen(true)}>
-                                Request Meeting
-                            </Button>
+                                <Button startDecorator={<Add />} onClick={() => setOpen(true)}>
+                                    Request Meeting
+                                </Button>
                             <Modal open={open} onClose={() => setOpen(false)}>
                                 <ModalDialog>
                                 <DialogTitle>Request new meeting</DialogTitle>

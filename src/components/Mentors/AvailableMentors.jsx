@@ -23,12 +23,16 @@ export default function AvailableMentors() {
     return (
         <div className='container'>
             <h1>Available Mentors</h1>
+            {availableMentors.length > 0 ? 
             <Stack>
                 {availableMentors.map((mentor) => (
                     <MentorItem key={mentor.id} mentor={mentor} />
                 )
                 )}
             </Stack>
+            : 
+            <h3>There currently are no available mentors.</h3>
+            }
         </div>
     )
 }
