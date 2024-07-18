@@ -4,38 +4,38 @@ import {
   Redirect,
   Route,
   Switch,
-} from 'react-router-dom';
+} from "react-router-dom";
 
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from "react-redux";
 
-import Nav from '../Nav/Nav';
-import Footer from '../Footer/Footer';
+import Nav from "../Nav/Nav";
+import Footer from "../Footer/Footer";
 
-import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
-import AboutPage from '../AboutPage/AboutPage';
-import UserPage from '../UserPage/UserPage';
-import InfoPage from '../InfoPage/InfoPage';
-import LandingPage from '../LandingPage/LandingPage';
-import LoginPage from '../LoginPage/LoginPage';
-import RegisterPage from '../RegisterPage/RegisterPage';
-import RegisterPage2 from '../RegisterPage/RegisterPage2';
-import RegisterPage3 from '../RegisterPage/RegisterPage3';
-import RegisterPage4 from '../RegisterPage/RegisterPage4';
+import AboutPage from "../AboutPage/AboutPage";
+import UserPage from "../UserPage/UserPage";
+import InfoPage from "../InfoPage/InfoPage";
+import LandingPage from "../LandingPage/LandingPage";
+import LoginPage from "../LoginPage/LoginPage";
+import RegisterPage from "../RegisterPage/RegisterPage";
+import RegisterPage2 from "../RegisterPage/RegisterPage2";
+import RegisterPage3 from "../RegisterPage/RegisterPage3";
+import RegisterPage4 from "../RegisterPage/RegisterPage4";
 
-import './App.css';
+import "./App.css";
 
-import Resources from '../Resources/Resources/Resources';
-import AddResource from '../Resources/AddResourceDialog/AddResourceDialog';
-import AvailableMentors from '../Mentors/AvailableMentors';
-import Profile from '../Profile/Profile';
-import MentorDetails from '../Mentors/MentorDetails';
-import GendersList from '../Admin/Genders/GendersList/GendersList';
-import SchoolsList from '../Admin/Schools/SchoolsList/SchoolsList';
-import InterestsList from '../Admin/Interests/InterestsList/InterestsList';
-import AdminPage from '../Admin/AdminPage/AdminPage';
-import MyMentors from '../Mentors/MyMentors';
-import HomePage from '../HomePage/HomePage';
+import Resources from "../Resources/Resources/Resources";
+import AddResource from "../Resources/AddResourceDialog/AddResourceDialog";
+import AvailableMentors from "../Mentors/AvailableMentors";
+import Profile from "../Profile/Profile";
+import MentorDetails from "../Mentors/MentorDetails";
+import GendersList from "../Admin/Genders/GendersList/GendersList";
+import SchoolsList from "../Admin/Schools/SchoolsList/SchoolsList";
+import InterestsList from "../Admin/Interests/InterestsList/InterestsList";
+import AdminPage from "../Admin/AdminPage/AdminPage";
+import MyMentors from "../Mentors/MyMentors";
+import HomePage from "../HomePage/HomePage";
 
 function App() {
   const dispatch = useDispatch();
@@ -69,18 +69,17 @@ function App() {
             Visiting localhost:5173/user will show the UserPage if the user is logged in.
             If the user is not logged in, the ProtectedRoute will show the LoginPage (component).
             Even though it seems like they are different pages, the user is always on localhost:5173/user */}
-          {<ProtectedRoute
-            // logged in shows UserPage else shows LoginPage
-            exact
-            path="/user"
-          >
+          {
+            <ProtectedRoute
+              // logged in shows UserPage else shows LoginPage
+              exact
+              path="/user"
+            >
+              {profile ? <Redirect to="/profile" /> : <UserPage />}
+            </ProtectedRoute>
+          }
 
-            {profile ? <Redirect to="/profile" /> : <UserPage />}
-
-            <UserPage />
-          </ProtectedRoute>}
-
-          <ProtectedRoute exact path='/home'>
+          <ProtectedRoute exact path="/home">
             <HomePage />
           </ProtectedRoute>
 
