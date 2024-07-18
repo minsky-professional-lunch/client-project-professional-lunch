@@ -8,7 +8,7 @@ export default function RegisterForm2() {
   const [email, setEmail] = useState("");
   const [gender, setGender] = useState(0);
   const [school, setSchool] = useState(0);
-  const currentUser = useSelector((store) => store.registrationReducer);
+  const currentUser = useSelector((store) => store.user);
   const schools = useSelector((store) => store.schoolsReducer);
   const genders = useSelector((store) => store.gendersReducer);
 
@@ -97,12 +97,13 @@ export default function RegisterForm2() {
             ))}
           </select>
         </div>
-        {currentUser.isMentor === "true" ? (
+        {currentUser.isMentor === true ? (
           ""
         ) : (
           <div>
             School
             <select onChange={(event) => setSchool(event.target.value)}>
+              <option>-------</option>
               {schools.map((school) => (
                 <option key={school.id} value={school.id}>
                   {school.school}
