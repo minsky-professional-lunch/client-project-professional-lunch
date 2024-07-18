@@ -30,56 +30,57 @@ export default function AvailableMentors() {
     dispatch({ type: 'FETCH_INTEREST_PROFILES' });
   }, []);
 
-    return (
-        <div className='container'>
-            <h1>Available Mentors</h1>
-            {availableMentors.length > 0 ? 
-            <h1>Available Mentors</h1>
+  return (
+    <>
+      <div className='container'>
+        {/* {availableMentors.length > 0 ?  */}
         <div>
-          <h3>All Mentors</h3>
-          <Accordion>
-            <AccordionSummary
-              expandIcon={<ArrowDropDownIcon />}
-              aria-controls='panel1-content'
-              id='panel1-header'
-            >
-              <Typography>All Mentors</Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              <Stack>
-                {availableMentors.map((mentor) => (
-                  <MentorItem key={mentor.id} mentor={mentor} />
-                ))}
-              </Stack>
-            </AccordionDetails>
-          </Accordion>
-          <h3>Mentors Based on Your Interests</h3>
-          <Accordion>
-            <AccordionSummary
-              expandIcon={<ArrowDropDownIcon />}
-              aria-controls='panel1-content'
-              id='panel1-header'
-            >
-              <Typography>Mentors with similar interests</Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              <Stack>
-                {interestMentors.map((mentor) => (
-                  <MentorItem key={mentor.id} mentor={mentor} />
-                ))}
-              </Stack>
-            </AccordionDetails>
-          </Accordion>
+          <h1>Available Mentors</h1>
+          <div>
+            <h3>All Mentors</h3>
+            <Accordion>
+              <AccordionSummary
+                expandIcon={<ArrowDropDownIcon />}
+                aria-controls='panel1-content'
+                id='panel1-header'
+              >
+                <Typography>All Mentors</Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                <Stack>
+                  {availableMentors.map((mentor) => (
+                    <MentorItem key={mentor.id} mentor={mentor} />
+                  ))}
+                </Stack>
+              </AccordionDetails>
+            </Accordion>
+          </div>
+          <div>
+            <h3>Mentors Based on Your Interests</h3>
+            <Accordion>
+              <AccordionSummary
+                expandIcon={<ArrowDropDownIcon />}
+                aria-controls='panel1-content'
+                id='panel1-header'
+              >
+                <Typography>Mentors with similar interests</Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                <Stack>
+                  {interestMentors.map((mentor) => (
+                    <MentorItem key={mentor.id} mentor={mentor} />
+                  ))}
+                </Stack>
+              </AccordionDetails>
+            </Accordion>
+          </div>
+          <div>
+            <h3>Mentors Based on Gender</h3>
+            <MentorsByGender />
+          </div>
+
+          {/* <h3>There currently are no available mentors.</h3> */}
         </div>
-        <div>
-          <h3>Mentors Based on Gender</h3>
-          <MentorsByGender />
-        </div>
-            : 
-            <h3>There currently are no available mentors.</h3>
-            }
-        </div>
-        
       </div>
     </>
   );
