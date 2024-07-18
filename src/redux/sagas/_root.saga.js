@@ -8,6 +8,7 @@ import mentorshipSaga from './mentorship.saga';
 import gendersSaga from './genders.saga';
 import schoolsSaga from './schools.saga';
 import interestsSaga from './interests.saga';
+import profileCheckSaga from './profile.check.saga';
 import adminProfilesSaga from './adminProfiles.saga';
 
 
@@ -29,6 +30,7 @@ export default function* rootSaga() {
     gendersSaga(),
     schoolsSaga(),
     interestsSaga(),
+    profileCheckSaga(),
     adminProfilesSaga(),
   ]);
 }
