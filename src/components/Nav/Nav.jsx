@@ -24,12 +24,17 @@ function Nav() {
         {/* If a user is logged in, show these links */}
         {user.id && (
           <>
-            <Link className='navLink' to='/home'>
+            {user.isMentor && (
+            <Link className='navLink' to='/mentor-home'>
               Home
             </Link>
+            )}
 
             {!user.isMentor && (
             <>
+            <Link className='navLink' to='/mentee-home'>
+              Home
+            </Link>
             <Link className="navLink" to="/available-mentors">
               Available Mentors
             </Link>
@@ -38,11 +43,6 @@ function Nav() {
             </Link>
             </>
             )}
-
-
-            {/* <Link className="navLink" to="/info">
-              Info Page
-            </Link> */}
 
             <Link className='navLink' to='/resources'>
               Resources
