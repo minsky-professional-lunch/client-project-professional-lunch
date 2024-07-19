@@ -10,15 +10,71 @@ router.get('/', rejectUnauthenticated, (req, res) => {
   console.log('/meetings GET route');
   console.log('user', req.user);
   if (req.user.isMentor === false) {
-    queryText = `SELECT meetings.id AS meeting_id, meetings.created_at AS meeting_created, meetings.mentorship_id AS mentorship_id, 
-                  meetings.date, meetings."start", meetings."end", meetings.link AS meeting_link, meetings.location, "user".id AS "user_id", meetings.status
-                  FROM "meetings" JOIN "mentorships" ON meetings.mentorship_id=mentorships.id
-                  JOIN "profiles" ON profiles.id=mentorships.mentee_id
-                  JOIN "user" ON "user".id=profiles.user_id
-                  WHERE "user".id=$1;`;
+    // queryText = `SELECT meetings.id AS meeting_id, meetings.created_at AS meeting_created, meetings.mentorship_id AS mentorship_id, 
+    //               meetings.date, meetings."start", meetings."end", meetings.link AS meeting_link, meetings.location, "user".id AS "user_id", meetings.status
+    //               FROM "meetings" JOIN "mentorships" ON meetings.mentorship_id=mentorships.id
+    //               JOIN "profiles" ON profiles.id=mentorships.mentee_id
+    //               JOIN "user" ON "user".id=profiles.user_id
+    //               WHERE "user".id=$1;`;
+    queryText = `SELECT 
+                        meetings.id AS meeting_id,
+                        meetings.date AS meeting_date,
+                        meetings.start AS meeting_start,
+                        meetings."end" AS meeting_end,
+                        meetings.link AS meeting_link,
+                        meetings.location AS meeting_location,
+                        meetings.notes AS meeting_notes,
+                        meetings.status AS meeting_status,
+                        mentee_profile.first_name AS mentee_first_name,
+                        mentee_profile.last_name AS mentee_last_name,
+                        mentee_profile.email AS mentee_email,
+                        mentor_profile.first_name AS mentor_first_name,
+                        mentor_profile.last_name AS mentor_last_name,
+                        mentor_profile.email AS mentor_email
+                    FROM 
+                        meetings
+                    JOIN 
+                        mentorships ON meetings.mentorship_id = mentorships.id
+                    JOIN 
+                        profiles AS mentee_profile ON mentorships.mentee_id = mentee_profile.id
+                    JOIN 
+                        profiles AS mentor_profile ON mentorships.mentor_id = mentor_profile.id
+                    JOIN 
+                        "user" AS mentee_user ON mentee_profile.user_id = mentee_user.id
+                    JOIN 
+                        "user" AS mentor_user ON mentor_profile.user_id = mentor_user.id
+                    WHERE 
+                        mentee_user.id = $1;`;
   } else {
-    queryText = `SELECT * FROM "meetings" JOIN "mentorships" ON meetings.mentorship_id=mentorships.id
-	                    WHERE mentorships.mentor_id=$1;`;
+    queryText = `SELECT 
+                        meetings.id AS meeting_id,
+                        meetings.date AS meeting_date,
+                        meetings.start AS meeting_start,
+                        meetings."end" AS meeting_end,
+                        meetings.link AS meeting_link,
+                        meetings.location AS meeting_location,
+                        meetings.notes AS meeting_notes,
+                        meetings.status AS meeting_status,
+                        mentee_profile.first_name AS mentee_first_name,
+                        mentee_profile.last_name AS mentee_last_name,
+                        mentee_profile.email AS mentee_email,
+                        mentor_profile.first_name AS mentor_first_name,
+                        mentor_profile.last_name AS mentor_last_name,
+                        mentor_profile.email AS mentor_email
+                    FROM 
+                        meetings
+                    JOIN 
+                        mentorships ON meetings.mentorship_id = mentorships.id
+                    JOIN 
+                        profiles AS mentee_profile ON mentorships.mentee_id = mentee_profile.id
+                    JOIN 
+                        profiles AS mentor_profile ON mentorships.mentor_id = mentor_profile.id
+                    JOIN 
+                        "user" AS mentee_user ON mentee_profile.user_id = mentee_user.id
+                    JOIN 
+                        "user" AS mentor_user ON mentor_profile.user_id = mentor_user.id
+                    WHERE 
+                        mentor_user.id = $1;`;
   }
   pool
     .query(queryText, [req.user.id])
