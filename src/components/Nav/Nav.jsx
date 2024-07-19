@@ -10,7 +10,7 @@ function Nav() {
   return (
     <div className='nav'>
       <Link to='/home'>
-        <h2 className='nav-title'>Professional Launch</h2>
+        <img className='header-logo' src="../images/pro-launch-logo.png" alt="Professional Launch Logo" />
       </Link>
       <div>
         {/* If no user is logged in, show these links */}
@@ -22,13 +22,26 @@ function Nav() {
         )}
 
         {/* If a user is logged in, show these links */}
+        {user.isAdmin && (
+          <>
+            <Link className='navLink' to='/admin'>
+              Admin
+            </Link>
+          </>
+        )}
         {user.id && (
           <>
+          
+            {/* <Link className='navLink' to='/home'>
+              Home
+            </Link> */}
+
             {user.isMentor && (
             <Link className='navLink' to='/mentor-home'>
               Home
             </Link>
             )}
+
 
             {!user.isMentor && (
             <>
@@ -44,9 +57,17 @@ function Nav() {
             </>
             )}
 
+
+            {/* <Link className="navLink" to="/info">
+              Info Page
+            </Link> */}
+
+            {/* <Link className='navLink' to='/resources'>
+
             <Link className='navLink' to='/resources'>
+
               Resources
-            </Link>
+            </Link> */}
 
             <Link className='navLink' to='/profile'>
               Profile
@@ -55,13 +76,7 @@ function Nav() {
             <LogOutButton className='navLink' />
           </>
         )}
-        {user.isAdmin && (
-          <>
-            <Link className='navLink' to='/admin'>
-              Admin
-            </Link>
-          </>
-        )}
+        
 
         <Link className='navLink' to='/about'>
           About
