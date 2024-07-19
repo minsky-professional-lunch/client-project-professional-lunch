@@ -24,6 +24,7 @@ function* fetchMentDetails(action) {
     try {
         const result = yield axios.get(`/api/profile/${action.payload}`);
         yield put({ type: 'SET_MENT_DETAILS', payload: result.data });
+        yield put({ type: 'FETCH_MENTORSHIPS' });
         console.log('Result', result);
     } catch (error) {
         console.log('Error getting profile details:', error);

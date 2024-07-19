@@ -31,8 +31,9 @@ export default function MentorItem( {mentor} ) {
 
     const connect = (mentorId) => {
         console.log('Clicked', mentorId);
-        // dispatch({ type: 'REQUEST_MENTORSHIP', payload: {mentorId: mentorId, menteeId: details.profile.user_id} });
-        // setRequested(!requested);
+        dispatch({ type: 'FETCH_MENT_DETAILS', payload: mentorId });
+        dispatch({ type: 'REQUEST_MENTORSHIP', payload: {mentorId: mentorId, menteeId: details.profile.id} });
+        setRequested(!requested);
     }
 
     return (

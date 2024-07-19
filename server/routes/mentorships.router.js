@@ -9,14 +9,39 @@ const {
 router.get('/', rejectUnauthenticated, async (req, res) => {
   try {
     const result = await pool.query(
-      `SELECT mentorships.id, mentorships.mentee_id AS mentee_id, mentorships.mentor_id AS mentor_id, mentorships.status, mentor.first_name AS mentor_first_name, 
-        mentor.last_name AS mentor_last_name, mentor.email AS mentor_email, mentor.gender AS mentor_gender, mentor.bio AS mentor_bio, mentor.linkedin AS mentor_linkedin, 
-        mentor.calendar_link AS mentor_calendar_link, mentor.avatar AS mentor_avatar, mentee.first_name AS mentee_first_name, mentee.last_name AS mentee_last_name, 
-        mentee.email AS mentee_email, mentee.bio AS mentee_bio, mentee.linkedin AS mentee_linkedin, mentee.school AS mentee_school, mentee.calendar_link AS mentee_calendar_link, mentee.avatar AS mentee_avatar
-        FROM "mentorships" 
-        JOIN profiles AS mentee ON mentorships.mentee_id = mentee.id
-        JOIN profiles AS mentor ON mentorships.mentor_id = mentor.id 
-        WHERE mentee_id=$1 OR mentor_id=$1;`,
+                  `SELECT 
+                mentorships.id, 
+                mentorships.mentee_id AS mentee_id, 
+                mentorships.mentor_id AS mentor_id, 
+                mentorships.status, 
+                mentor.first_name AS mentor_first_name, 
+                mentor.last_name AS mentor_last_name, 
+                mentor.email AS mentor_email, 
+                mentor.gender AS mentor_gender, 
+                mentor.bio AS mentor_bio, 
+                mentor.linkedin AS mentor_linkedin, 
+                mentor.calendar_link AS mentor_calendar_link, 
+                mentor.avatar AS mentor_avatar, 
+                mentee.first_name AS mentee_first_name, 
+                mentee.last_name AS mentee_last_name, 
+                mentee.email AS mentee_email, 
+                mentee.bio AS mentee_bio, 
+                mentee.linkedin AS mentee_linkedin, 
+                mentee.school AS mentee_school, 
+                mentee.calendar_link AS mentee_calendar_link, 
+                mentee.avatar AS mentee_avatar
+            FROM 
+                mentorships 
+            JOIN 
+                profiles AS mentee ON mentorships.mentee_id = mentee.id
+            JOIN 
+                profiles AS mentor ON mentorships.mentor_id = mentor.id
+            JOIN 
+                "user" AS mentee_user ON mentee.user_id = mentee_user.id
+            JOIN 
+                "user" AS mentor_user ON mentor.user_id = mentor_user.id
+            WHERE 
+                mentee_user.id = $1 OR mentor_user.id = $1;`,
       [req.user.id]
     );
     res.send(result.rows);
@@ -26,18 +51,6 @@ router.get('/', rejectUnauthenticated, async (req, res) => {
   }
 });
 
-// GET all mentorships
-// router.get('/all', rejectUnauthenticated, async (req, res) => {
-//   try {
-//     const result = await pool.query(
-//       `SELECT * FROM "mentorships";`
-//     );
-//     res.send(result.rows);
-//   } catch (error) {
-//     console.log('error in getting mentorship', error);
-//     res.sendStatus(500);
-//   }
-// });
 router.get('/all', rejectUnauthenticated, async (req, res) => {
   try {
     const result = await pool.query(
@@ -64,7 +77,7 @@ router.post('/:id', rejectUnauthenticated, async (req, res) => {
   try {
     await pool.query(
       `INSERT INTO "mentorships" (mentee_id, mentor_id) VALUES ($1, $2);`,
-      [req.user.id, req.params.id]
+      [req.body.menteeId, req.params.id]
     );
     res.sendStatus(201);
   } catch (error) {
