@@ -140,6 +140,10 @@ function RegisterForm() {
             onChange={(event) => setRole(false)}
           />
         </div>
+        <div>
+          I am 18 or older:
+          <input type="checkbox" required></input>
+        </div>
       </div>
       <div>
         <input className="btn" type="submit" name="submit" value="Next" />
