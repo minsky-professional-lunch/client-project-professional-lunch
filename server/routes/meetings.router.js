@@ -94,14 +94,13 @@ router.post('/:id', rejectUnauthenticated, (req, res) => {
     console.log('req.body', req.body.newMeeting);
     if (req.user.isMentor === false) {
         queryText = `INSERT INTO "meetings" ("mentorship_id", "date", "start", "end", "link", "location", "notes")
-	                VALUES ((SELECT "id" FROM "mentorships" WHERE "mentorships"."mentee_id"=$1 AND "mentorships"."mentor_id"=$2), $3, $4, $5, $6, $7, $8);`
+	                VALUES ($1, $2, $3, $4, $5, $6, $7);`
     } else {
         queryText = `INSERT INTO "meetings" ("mentorship_id", "date", "start", "end", "link", "location", "notes")
 	                VALUES ((SELECT "id" FROM "mentorships" WHERE "mentorships"."mentor_id"=$1 AND "mentorships"."mentee_id"=$2), $3, $4, $5, $6, $7, $8);`
     }
     pool.query(queryText, [
-        req.user.id,
-        req.params.id,
+        req.body.newMeeting.mentorship_id,
         req.body.newMeeting.date,
         req.body.newMeeting.start,
         req.body.newMeeting.end,
