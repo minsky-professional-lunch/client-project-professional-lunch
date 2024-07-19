@@ -31,12 +31,23 @@ function Nav() {
         )}
         {user.id && (
           <>
+          
             {/* <Link className='navLink' to='/home'>
               Home
             </Link> */}
 
+            {user.isMentor && (
+            <Link className='navLink' to='/mentor-home'>
+              Home
+            </Link>
+            )}
+
+
             {!user.isMentor && (
             <>
+            <Link className='navLink' to='/mentee-home'>
+              Home
+            </Link>
             <Link className="navLink" to="/available-mentors">
               Available Mentors
             </Link>
@@ -52,6 +63,9 @@ function Nav() {
             </Link> */}
 
             {/* <Link className='navLink' to='/resources'>
+
+            <Link className='navLink' to='/resources'>
+
               Resources
             </Link> */}
 

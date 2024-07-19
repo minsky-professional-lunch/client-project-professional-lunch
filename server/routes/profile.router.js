@@ -16,51 +16,126 @@ router.get('/', (req, res) => {
     });
 });
 
+// GET profile information for logged in user
+router.get("/my-details", async (req, res) => {
+  try {
+    const queryText = `SELECT * FROM "profiles" WHERE "user_id"=$1`;
+    const result = await pool.query(queryText, [req.user.id]);
+    const queryText2 = `WITH interests_cte AS (
+                            SELECT
+                                profiles.user_id,
+                                json_agg(DISTINCT interests.*) AS interests
+                            FROM
+                                profiles_interests
+                            JOIN
+                                interests ON profiles_interests.interest_id = interests.id
+                            JOIN
+                                profiles ON profiles_interests.profile_id = profiles.id
+                            GROUP BY
+                                profiles.user_id
+                        ),
+                        availability_cte AS (
+                            SELECT
+                                profiles.user_id,
+                                array_agg(json_build_object(
+                                    'availability_id', availability.id,
+                                    'day', days.day,
+                                    'time', times.time
+                                )) AS availability
+                            FROM
+                                profiles_availability
+                            JOIN
+                                availability ON profiles_availability.availability_id = availability.id
+                            JOIN
+                                days ON availability.day = days.id
+                            JOIN
+                                times ON availability.time = times.id
+                            JOIN
+                                profiles ON profiles_availability.profile_id = profiles.id
+                            GROUP BY
+                                profiles.user_id
+                        )
+                        SELECT
+                            "user".id AS user_id,
+                            "user".username,
+                            interests_cte.interests,
+                            availability_cte.availability
+                        FROM
+                            "user"
+                        JOIN
+                            profiles ON "user".id = profiles.user_id
+                        LEFT JOIN
+                            interests_cte ON profiles.user_id = interests_cte.user_id
+                        LEFT JOIN
+                            availability_cte ON profiles.user_id = availability_cte.user_id
+                        WHERE
+                            "user".id = $1;`
+    const result2 = await pool.query(queryText2, [req.user.id]);
+    const response = {
+      profile: result.rows[0],
+      details: result2.rows[0],
+    };
+    res.send(response);
+  } catch (error) {
+    console.log("Error getting profile details", error);
+    res.sendStatus(500);
+  }
+});
+
 // GET profile information for specific user
 router.get("/:id", async (req, res) => {
   try {
     const queryText = `SELECT * FROM "profiles" WHERE "user_id"=$1`;
     const result = await pool.query(queryText, [req.params.id]);
     const queryText2 = `WITH interests_cte AS (
-                          SELECT
-                              profiles_interests.profile_id,
-                              json_agg(DISTINCT interests.*) AS interests
-                          FROM
-                              profiles_interests
-                          JOIN
-                              interests ON profiles_interests.interest_id = interests.id
-                          GROUP BY
-                              profiles_interests.profile_id
-                      ),
-                      availability_cte AS (
-                          SELECT
-                              profiles_availability.profile_id,
-                              array_agg(json_build_object(
-                                  'availability_id', availability.id,
-                                  'day', days.day,
-                                  'time', times.time
-                              )) AS availability
-                          FROM
-                              profiles_availability
-                          JOIN
-                              availability ON profiles_availability.availability_id = availability.id
-                          JOIN
-                              days ON availability.day = days.id
-                          JOIN
-                              times ON availability.time = times.id
-                          GROUP BY
-                              profiles_availability.profile_id
-                      )
-                      SELECT
-                          interests_cte.profile_id,
-                          interests_cte.interests,
-                          availability_cte.availability
-                      FROM
-                          interests_cte
-                      LEFT JOIN
-                          availability_cte ON interests_cte.profile_id = availability_cte.profile_id
-                      WHERE
-                          interests_cte.profile_id = $1;`;
+                            SELECT
+                                profiles.user_id,
+                                json_agg(DISTINCT interests.*) AS interests
+                            FROM
+                                profiles_interests
+                            JOIN
+                                interests ON profiles_interests.interest_id = interests.id
+                            JOIN
+                                profiles ON profiles_interests.profile_id = profiles.id
+                            GROUP BY
+                                profiles.user_id
+                        ),
+                        availability_cte AS (
+                            SELECT
+                                profiles.user_id,
+                                array_agg(json_build_object(
+                                    'availability_id', availability.id,
+                                    'day', days.day,
+                                    'time', times.time
+                                )) AS availability
+                            FROM
+                                profiles_availability
+                            JOIN
+                                availability ON profiles_availability.availability_id = availability.id
+                            JOIN
+                                days ON availability.day = days.id
+                            JOIN
+                                times ON availability.time = times.id
+                            JOIN
+                                profiles ON profiles_availability.profile_id = profiles.id
+                            GROUP BY
+                                profiles.user_id
+                        )
+                        SELECT
+                            "user".id AS user_id,
+                            "user".username,
+                            interests_cte.interests,
+                            availability_cte.availability
+                        FROM
+                            "user"
+                        JOIN
+                            profiles ON "user".id = profiles.user_id
+                        LEFT JOIN
+                            interests_cte ON profiles.user_id = interests_cte.user_id
+                        LEFT JOIN
+                            availability_cte ON profiles.user_id = availability_cte.user_id
+                        WHERE
+                            "user".id = $1;`
     const result2 = await pool.query(queryText2, [req.params.id]);
     const response = {
       profile: result.rows[0],
@@ -99,8 +174,8 @@ router.post("/", async (req, res) => {
       const day = availability.day;
       const time = availability.time;
       const availabilityID = await pool.query(
-        `INSERT INTO "availability" ("user_id", "day", "time") VALUES ($1, $2, $3) RETURNING id;`,
-        [result.rows[0].user_id, Number(day), Number(time)]
+        `INSERT INTO "availability" ("profile_id", "day", "time") VALUES ($1, $2, $3) RETURNING id;`,
+        [result.rows[0].id, Number(day), Number(time)]
       );
       availabilityIDs.push(availabilityID.rows[0].id);
     }
@@ -123,7 +198,7 @@ router.post("/", async (req, res) => {
 
     console.log("interests:", req.body);
     const queryText2 = `UPDATE "user" SET "isMentor"=$1 WHERE "user".id=$2;`;
-    await pool.query(queryText2, [req.body.isMentor, req.user.id]);
+    await pool.query(queryText2, [req.user.isMentor, req.user.id]);
     await pool.query;
     res.sendStatus(200);
   } catch (error) {

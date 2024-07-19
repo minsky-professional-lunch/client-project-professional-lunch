@@ -12,7 +12,7 @@ function* fetchMentorships() {
 
 function* requestMentorship(action) {
     try {
-        yield axios.post(`/api/mentorships/${action.payload}`);
+        yield axios.post(`/api/mentorships/${action.payload.mentorId}`, {menteeId: action.payload.menteeId});
         yield put({ type: 'FETCH_MENTORSHIPS' }); 
         yield put({ type: 'FETCH_USER' });   
     }  catch (error) {

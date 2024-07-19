@@ -35,13 +35,15 @@ import SchoolsList from "../Admin/Schools/SchoolsList/SchoolsList";
 import InterestsList from "../Admin/Interests/InterestsList/InterestsList";
 import AdminPage from "../Admin/AdminPage/AdminPage";
 import MyMentors from "../Mentors/MyMentors";
-import HomePage from "../HomePage/HomePage";
+import HomePage from "../HomePage/MentorHomePage";
+import MenteeHomePage from "../HomePage/MenteeHomePage";
+import MentorHomePage from "../HomePage/MentorHomePage";
 
 function App() {
   const dispatch = useDispatch();
 
   const user = useSelector((store) => store.user);
-
+  console.log('user', user);
   const profile = useSelector((store) => store.profileCheck);
 
   useEffect(() => {
@@ -71,16 +73,27 @@ function App() {
             Even though it seems like they are different pages, the user is always on localhost:5173/user */}
           {
             <ProtectedRoute
-              // logged in shows UserPage else shows LoginPage
-              exact
-              path="/user"
+              exact path="/user"
             >
-              {profile ? <Redirect to="/profile" /> : <UserPage />}
+              {profile ? 
+                <>
+                {user.isMentor ? 
+                  <Redirect to="/mentor-home" /> 
+                  : 
+                  <Redirect to="mentee-home" />
+                }
+                </>
+                : 
+                <UserPage />}
             </ProtectedRoute>
           }
 
-          <ProtectedRoute exact path="/home">
-            <HomePage />
+          <ProtectedRoute exact path="/mentor-home">
+            <MentorHomePage />
+          </ProtectedRoute>
+
+          <ProtectedRoute exact path="/mentee-home">
+            <MenteeHomePage />
           </ProtectedRoute>
 
           <ProtectedRoute exact path="/profile">
@@ -88,7 +101,6 @@ function App() {
           </ProtectedRoute>
 
           <ProtectedRoute
-            // logged in shows InfoPage else shows LoginPage
             exact
             path="/info"
           >

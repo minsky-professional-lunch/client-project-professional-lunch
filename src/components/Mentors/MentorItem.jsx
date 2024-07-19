@@ -13,23 +13,26 @@ export default function MentorItem( {mentor} ) {
     const dispatch = useDispatch();
     const history = useHistory();
     const details = useSelector(store => store.profileDetails);
+    const mentDetails = useSelector(store => store.mentDetails);
+    console.log('Ment details', mentDetails);
     console.log('Details', details);
 
     const [requested, setRequested] = useState(false);
 
     useEffect(() => {
-        dispatch({ type: 'FETCH_PROFILE_DETAILS', payload: mentor.user_id });
+        dispatch({ type: 'FETCH_PROFILE_DETAILS' });
     }, []);
 
     const mentorDetails = (mentorId) => {
         console.log('Clicked', mentorId);
-        dispatch({ type: 'FETCH_DETAILS', payload: mentorId });
+        dispatch({ type: 'FETCH_MENT_DETAILS', payload: mentorId });
         history.push(`/mentor/details/${mentorId}`);
     }
 
     const connect = (mentorId) => {
         console.log('Clicked', mentorId);
-        dispatch({ type: 'REQUEST_MENTORSHIP', payload: mentorId });
+        dispatch({ type: 'FETCH_MENT_DETAILS', payload: mentorId });
+        dispatch({ type: 'REQUEST_MENTORSHIP', payload: {mentorId: mentorId, menteeId: details.profile.id} });
         setRequested(!requested);
     }
 
@@ -52,7 +55,7 @@ export default function MentorItem( {mentor} ) {
                                 Requested
                             </Button>
                             }
-                            <Button onClick={() => mentorDetails(mentor.id)} sx={{ cursor: 'pointer' }}>
+                            <Button onClick={() => mentorDetails(mentor.user_id)} sx={{ cursor: 'pointer' }}>
                                 View Profile
                             </Button>
                         </Stack>
