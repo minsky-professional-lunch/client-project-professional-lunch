@@ -123,7 +123,7 @@ router.post("/", async (req, res) => {
 
     console.log("interests:", req.body);
     const queryText2 = `UPDATE "user" SET "isMentor"=$1 WHERE "user".id=$2;`;
-    await pool.query(queryText2, [req.body.isMentor, req.user.id]);
+    await pool.query(queryText2, [req.user.isMentor, req.user.id]);
     await pool.query;
     res.sendStatus(200);
   } catch (error) {
