@@ -75,13 +75,14 @@ router.get("/:id", async (req, res) => {
 
 // POST new profile
 router.post("/", async (req, res) => {
-  console.log("/profile POST route", req.body);
+  // console.log("/profile POST route", req.body);
+  console.log("user:", req.user);
   try {
     const queryText = `INSERT INTO "profiles" ("user_id", "isMentor", "first_name", "last_name", "email", "gender", "school", "bio", "linkedin", "avatar")
                         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10 ) RETURNING id, user_id;`;
     const result = await pool.query(queryText, [
       req.user.id,
-      Boolean(req.user.isMentor),
+      req.user.isMentor,
       req.body.first_name,
       req.body.last_name,
       req.body.email,
@@ -98,8 +99,8 @@ router.post("/", async (req, res) => {
       const day = availability.day;
       const time = availability.time;
       const availabilityID = await pool.query(
-        `INSERT INTO "availability" ("user_id", "day", "time") VALUES ($1, $2, $3) RETURNING id;`,
-        [result.rows[0].user_id, Number(day), Number(time)]
+        `INSERT INTO "availability" ("profile_id", "day", "time") VALUES ($1, $2, $3) RETURNING id;`,
+        [result.rows[0].id, Number(day), Number(time)]
       );
       availabilityIDs.push(availabilityID.rows[0].id);
     }
@@ -122,7 +123,7 @@ router.post("/", async (req, res) => {
 
     console.log("interests:", req.body);
     const queryText2 = `UPDATE "user" SET "isMentor"=$1 WHERE "user".id=$2;`;
-    await pool.query(queryText2, [req.body.isMentor, req.user.id]);
+    await pool.query(queryText2, [req.user.isMentor, req.user.id]);
     await pool.query;
     res.sendStatus(200);
   } catch (error) {

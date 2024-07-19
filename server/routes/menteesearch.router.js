@@ -22,10 +22,11 @@ mentor_profiles AS (
     JOIN interests i ON pi.interest_id = i.id
     WHERE p."isMentor" = true
 )
-SELECT DISTINCT mp.*
+SELECT DISTINCT ON (mp.id) mp.*
 FROM mentor_profiles mp
 JOIN user_interests ui ON mp.interest_id = ui.interest_id
-ORDER BY mp.id;`;
+ORDER BY mp.id;
+`;
   try {
     const result = await pool.query(queryText, [req.user.id]);
     res.send(result.rows);
