@@ -99,8 +99,8 @@ router.post("/", async (req, res) => {
       const day = availability.day;
       const time = availability.time;
       const availabilityID = await pool.query(
-        `INSERT INTO "availability" ("user_id", "day", "time") VALUES ($1, $2, $3) RETURNING id;`,
-        [result.rows[0].user_id, Number(day), Number(time)]
+        `INSERT INTO "availability" ("profile_id", "day", "time") VALUES ($1, $2, $3) RETURNING id;`,
+        [result.rows[0].id, Number(day), Number(time)]
       );
       availabilityIDs.push(availabilityID.rows[0].id);
     }

@@ -36,9 +36,11 @@ function RegisterForm() {
       payload: {
         username: username,
         password: password,
-        isMentor: Boolean(role)
+        isMentor: Boolean(role),
       },
     });
+
+    setRole(false);
   };
 
   return (
@@ -125,7 +127,7 @@ function RegisterForm() {
             type="radio"
             value={true}
             name="role"
-            onChange={(event) => setRole(event.target.value)}
+            onChange={(event) => setRole(true)}
           />
         </div>
         <div>
@@ -135,7 +137,7 @@ function RegisterForm() {
             type="radio"
             value={false}
             name="role"
-            onChange={(event) => setRole(event.target.value)}
+            onChange={(event) => setRole(false)}
           />
         </div>
       </div>
