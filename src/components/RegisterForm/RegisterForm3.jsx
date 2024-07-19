@@ -77,8 +77,8 @@ export default function RegisterForm3() {
                 <TextField
                   {...params}
                   variant="outlined"
-                  label="Multiple Autocomplete"
-                  placeholder="Multiple Autocomplete"
+                  label="Add Up To 5 Interests"
+                  placeholder="Interests..."
                 />
               )}
             />
