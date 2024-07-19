@@ -19,7 +19,7 @@ const settings = ['Profile', 'Available Mentors', 'Logout']
 export default function MuiNavBar() {
   return (
     <div>
-
+      <h1>Mui NavBar</h1>
     </div>
   )
 }
