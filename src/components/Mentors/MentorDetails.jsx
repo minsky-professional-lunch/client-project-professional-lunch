@@ -18,7 +18,7 @@ export default function MentorDetails() {
     console.log('Params.id', params.id);
     const dispatch = useDispatch();
     const history = useHistory();
-    const details = useSelector(store => store.profileDetails);
+    const details = useSelector(store => store.mentDetails);
     console.log('Details', details);
     const user = useSelector(store => store.user);
     console.log('User', user);
@@ -41,7 +41,7 @@ export default function MentorDetails() {
     console.log('New meeting', newMeeting);
 
     useEffect(() => {
-        dispatch({ type: 'FETCH_PROFILE_DETAILS', payload: params.id });
+        dispatch({ type: 'FETCH_MENT_DETAILS', payload: params.id });
     }, []);
 
     const connect = (mentorId) => {

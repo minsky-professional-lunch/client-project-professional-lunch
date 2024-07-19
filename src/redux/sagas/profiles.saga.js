@@ -10,10 +10,20 @@ function* fetchProfiles() {
     }
 }
 
-function* fetchProfileDetails(action) {
+function* fetchProfileDetails() {
+    try {
+        const result = yield axios.get(`/api/profile/my-details`);
+        yield put({ type: 'SET_DETAILS', payload: result.data });
+        console.log('Result', result);
+    } catch (error) {
+        console.log('Error getting profile details:', error);
+    }
+}
+
+function* fetchMentDetails(action) {
     try {
         const result = yield axios.get(`/api/profile/${action.payload}`);
-        yield put({ type: 'SET_DETAILS', payload: result.data });
+        yield put({ type: 'SET_MENT_DETAILS', payload: result.data });
         console.log('Result', result);
     } catch (error) {
         console.log('Error getting profile details:', error);
@@ -23,6 +33,7 @@ function* fetchProfileDetails(action) {
 function* profilesSaga() {
     yield takeLatest('FETCH_PROFILES', fetchProfiles);
     yield takeLatest('FETCH_PROFILE_DETAILS', fetchProfileDetails);
+    yield takeLatest('FETCH_MENT_DETAILS', fetchMentDetails);
 }
 
 export default profilesSaga;
