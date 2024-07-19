@@ -29,7 +29,9 @@ router.get('/', rejectUnauthenticated, async (req, res) => {
                 mentee.linkedin AS mentee_linkedin, 
                 mentee.school AS mentee_school, 
                 mentee.calendar_link AS mentee_calendar_link, 
-                mentee.avatar AS mentee_avatar
+                mentee.avatar AS mentee_avatar,
+                mentee_user.id AS mentee_user_id,
+                mentor_user.id AS mentor_user_id
             FROM 
                 mentorships 
             JOIN 
