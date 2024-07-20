@@ -45,7 +45,7 @@ export default function MuiNavBar() {
     // {isAdmin && (
     //   <></>
     // )}
-    else if (setting === 'Admin') {
+    else if (setting === 'Admin' && user.isAdmin) {
       history.push('/admin');
     } else if (setting === 'Logout') {
       dispatch({ type: 'LOGOUT' });
@@ -62,6 +62,8 @@ export default function MuiNavBar() {
       history.push('/');
     }
   };
+
+  const filteredSettings = settings.filter(setting => setting !== 'Admin' || user.isAdmin);
 
   return (
     <AppBar position="static" sx={{ bgcolor: "#15A140", height: "75px", padding: "10px" }}>
@@ -123,7 +125,7 @@ export default function MuiNavBar() {
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
               >
-                {settings.map((setting) => (
+                {filteredSettings.map((setting) => (
                   <MenuItem key={setting} onClick={handleCloseUserMenu}>
                     <Typography textAlign="center"  onClick={() => {navToSetting(setting)}}>{setting}</Typography>
                   </MenuItem>
