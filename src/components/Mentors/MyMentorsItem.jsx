@@ -8,20 +8,11 @@ import Typography from '@mui/joy/Typography';
 import { Box, CardOverflow, Grid } from '@mui/joy';
 import { CardActions, CardContent } from '@mui/material';
 import Button from '@mui/joy/Button';
-import FormControl from '@mui/joy/FormControl';
-import FormLabel from '@mui/joy/FormLabel';
-import Input from '@mui/joy/Input';
-import Modal from '@mui/joy/Modal';
-import ModalDialog from '@mui/joy/ModalDialog';
-import DialogTitle from '@mui/joy/DialogTitle';
-import DialogContent from '@mui/joy/DialogContent';
 import Stack from '@mui/joy/Stack';
-import Add from '@mui/icons-material/Add';
 
 export default function MyMentorsItem({ mentor }) {
   const dispatch = useDispatch();
   const history = useHistory();
-  const meetings = useSelector((store) => store.meetings);
 
   useEffect(() => {
     dispatch({ type: 'FETCH_PROFILES' });

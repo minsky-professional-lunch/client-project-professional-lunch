@@ -17,6 +17,10 @@ function MentorHomePage() {
   console.log('Pending', pending);
   const meetings = useSelector(store => store.meetings);
   console.log('Meetings', meetings);
+  const meetingRequests = meetings.filter(meeting => meeting.meeting_status === 'pending');
+  console.log('Meeting requests', meetingRequests);
+  const acceptedMeetings = meetings.filter(meeting => meeting.meeting_status === 'accepted');
+  console.log('Accepted meetings', acceptedMeetings);
 
   useEffect(() => {
     dispatch({ type: 'FETCH_PROFILE_DETAILS', payload: user.id });
@@ -40,8 +44,12 @@ function MentorHomePage() {
 
       {meetings.length > 0 ? 
       <>
+      <h3>Meeting Requests</h3>
+      {meetingRequests.map((meeting) => (
+        <MeetingItem key={meeting.id} meeting={meeting} />
+      ))}
       <h3>Upcoming Meetings</h3>
-      {meetings.map((meeting) => (
+      {acceptedMeetings.map((meeting) => (
         <MeetingItem key={meeting.id} meeting={meeting} />
       ))}
       </>

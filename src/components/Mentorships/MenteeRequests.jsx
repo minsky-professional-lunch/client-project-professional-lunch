@@ -45,7 +45,7 @@ export default function MenteeRequests( {mentor} ) {
                             <Button onClick={() => cancel(mentor.id)}>
                                 Cancel Request
                             </Button>
-                            <Button onClick={() => mentorDetails(mentor.mentor_id)} sx={{ cursor: 'pointer' }}>
+                            <Button onClick={() => mentorDetails(mentor.mentor_user_id)} sx={{ cursor: 'pointer' }}>
                                 View Profile
                             </Button>
                         </Stack>

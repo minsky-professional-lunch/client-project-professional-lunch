@@ -7,14 +7,8 @@ import MyMentorsItem from './MyMentorsItem';
 
 export default function MyMentors() {
     const dispatch = useDispatch();
-    // const profiles = useSelector(store => store.profiles);
-    // console.log('Profiles:', profiles);
-    // const mentors = profiles.filter(profile => profile.isMentor);
-    // console.log('Mentors', mentors);
     const user = useSelector(store => store.user);
     console.log('User', user);
-    // const myMentors = mentors.filter(mentor => user.mentorships.includes(mentor.id));
-    // console.log('My Mentors', myMentors);
     const mentorships = useSelector(store => store.mentorships);
     console.log('Mentorships', mentorships);
     const pendingMentorships = mentorships.filter(ment => ment.status === 'pending');
