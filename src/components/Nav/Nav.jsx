@@ -3,26 +3,28 @@ import { Link } from 'react-router-dom';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import './Nav.css';
 import { useSelector } from 'react-redux';
+import MuiNavBar from '../MuiNavBar/MuiNavBar';
 
 function Nav() {
   const user = useSelector((store) => store.user);
 
   return (
     <div className='nav'>
-      <Link to='/home'>
+      <MuiNavBar />
+      {/* <Link to='/home'>
         <img className='header-logo' src="../images/pro-launch-logo.png" alt="Professional Launch Logo" />
-      </Link>
-      <div>
+      </Link> */}
+      {/* <div> */}
         {/* If no user is logged in, show these links */}
-        {!user.id && (
+        {/* {!user.id && (
           // If there's no user, show login/registration links
           <Link className='navLink' to='/login'>
             Login / Register
           </Link>
-        )}
+        )} */}
 
         {/* If a user is logged in, show these links */}
-        {user.isAdmin && (
+        {/* {user.isAdmin && (
           <>
             <Link className='navLink' to='/admin'>
               Admin
@@ -30,12 +32,12 @@ function Nav() {
           </>
         )}
         {user.id && (
-          <>
+          <> */}
           
             {/* <Link className='navLink' to='/home'>
               Home
             </Link> */}
-
+{/* 
             {user.isMentor && (
             <Link className='navLink' to='/mentor-home'>
               Home
@@ -55,7 +57,7 @@ function Nav() {
               My Mentors
             </Link>
             </>
-            )}
+            )} */}
 
 
             {/* <Link className="navLink" to="/info">
@@ -69,7 +71,7 @@ function Nav() {
               Resources
             </Link> */}
 
-            <Link className='navLink' to='/profile'>
+            {/* <Link className='navLink' to='/profile'>
               Profile
             </Link>
 
@@ -81,7 +83,7 @@ function Nav() {
         <Link className='navLink' to='/about'>
           About
         </Link>
-      </div>
+      </div> */}
     </div>
   );
 }
