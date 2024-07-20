@@ -25,8 +25,7 @@ export default function MentorDetails() {
   const mentorships = useSelector((store) => store.mentorships);
   const thisMentorship = mentorships?.filter(
     (mentor) =>
-      mentor.mentor_id === Number(params.id) &&
-      user?.mentorships?.includes(Number(params.id))
+      mentor.mentor_user_id === Number(params.id)
   )[0];
   console.log('This mentorship', thisMentorship);
   console.log('Mentorships', mentorships);
@@ -141,7 +140,7 @@ export default function MentorDetails() {
         ) : (
           <Button onClick={() => remove(thisMentorship[0].id)}>Remove</Button>
         )}
-        {user.mentorships.includes(details.profile.user_id) &&
+        {user.mentorships.includes(details.profile.id) &&
         thisMentorship?.status === 'accepted' ? (
           <React.Fragment>
             <Button startDecorator={<Add />} onClick={() => setOpen(true)}>

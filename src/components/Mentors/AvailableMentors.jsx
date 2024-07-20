@@ -27,6 +27,7 @@ export default function AvailableMentors() {
   console.log('Available Mentors', availableMentors);
   const interestMentors = useSelector((store) => store.menteeSearchProfiles);
   console.log('Interest Mentors', interestMentors);
+  const filterInterestMentors = interestMentors.filter(mentor => !user.mentorships.includes(mentor.id));
 
   useEffect(() => {
     dispatch({ type: 'FETCH_PROFILES' });
@@ -35,13 +36,13 @@ export default function AvailableMentors() {
 
   const mentorsPerPage = 3;
   const [currentIndex, setCurrentIndex] = useState(0);
-  const currentMentors = interestMentors.slice(
+  const currentMentors = filterInterestMentors.slice(
     currentIndex,
     currentIndex + mentorsPerPage
   );
 
   const nextMentors = () => {
-    if (currentIndex + mentorsPerPage >= interestMentors.length) {
+    if (currentIndex + mentorsPerPage >= filterInterestMentors.length) {
       setCurrentIndex(0);
     } else {
       setCurrentIndex(currentIndex + mentorsPerPage);
@@ -49,7 +50,7 @@ export default function AvailableMentors() {
   };
 
   const previousMentors = () => {
-    if (currentIndex + mentorsPerPage >= interestMentors.length) {
+    if (currentIndex + mentorsPerPage >= filterInterestMentors.length) {
       setCurrentIndex(0);
     } else {
       if (currentIndex === 0) {
@@ -68,6 +69,8 @@ export default function AvailableMentors() {
             <div>
               <h1>Mentors</h1>
               <div>
+                {filterInterestMentors.length > 0 ? 
+                <>
                 <h3>Mentors that match your interests</h3>
 
                 <Stack
@@ -93,6 +96,10 @@ export default function AvailableMentors() {
                     <ArrowForwardIosIcon />
                   </IconButton>
                 </Stack>
+                </>
+                : 
+                <></>
+                }
               </div>
               <div>
                 <h3>All Available Mentors</h3>
