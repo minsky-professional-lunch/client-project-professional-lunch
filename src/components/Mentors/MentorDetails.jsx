@@ -70,6 +70,10 @@ export default function MentorDetails() {
     console.table(newMeeting);
   };
 
+  const back = () => {
+    history.push('/my-mentors');
+  }
+
   const handleChange = (event) => {
     console.log(event.target.id);
     let myMeetingId = thisMentorship?.id;
@@ -208,6 +212,9 @@ export default function MentorDetails() {
         ) : (
           <></>
         )}
+        <Button onClick={back}>
+          Back
+        </Button>
       </Stack>
     </div>
   );
