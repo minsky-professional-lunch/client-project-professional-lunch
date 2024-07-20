@@ -24,7 +24,7 @@ function Footer() {
   }
 
   const goMeetings = () => {
-    history.push('/my-groups');
+    history.push('/my-meetings');
   }
   
   const goResources = () => {
