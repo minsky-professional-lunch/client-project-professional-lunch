@@ -3,6 +3,9 @@ import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Stack, Typography } from '@mui/joy';
+import { IconButton } from '@mui/material';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import MentorItem from '../MentorItem';
 
 export default function MaleMentors() {
@@ -20,12 +23,51 @@ export default function MaleMentors() {
     dispatch({ type: 'FETCH_PROFILES' });
   }, []);
 
+  const mentorsPerPage = 3;
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const currentMentors = maleMentors.slice(
+    currentIndex,
+    currentIndex + mentorsPerPage
+  );
+
+  const nextMentors = () => {
+    if (currentIndex + mentorsPerPage >= maleMentors.length) {
+      setCurrentIndex(0);
+    } else {
+      setCurrentIndex(currentIndex + mentorsPerPage);
+    }
+  };
+
+  const previousMentors = () => {
+    if (currentIndex + mentorsPerPage >= maleMentors.length) {
+      setCurrentIndex(0);
+    } else {
+      if (currentIndex === 0) {
+        return;
+      } else {
+        setCurrentIndex(currentIndex - mentorsPerPage);
+      }
+    }
+  };
+
   return (
     <div>
       <Stack>
-        {maleMentors.map((mentor) => (
+        {currentMentors.map((mentor) => (
           <MentorItem key={mentor.id} mentor={mentor} />
         ))}
+      </Stack>
+      <Stack
+        direction='row'
+        justifyContent='space-between'
+        sx={{ margin: '6px' }}
+      >
+        <IconButton onClick={previousMentors}>
+          <ArrowBackIosNewIcon />
+        </IconButton>
+        <IconButton onClick={nextMentors}>
+          <ArrowForwardIosIcon />
+        </IconButton>
       </Stack>
     </div>
   );

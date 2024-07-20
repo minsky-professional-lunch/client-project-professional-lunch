@@ -7,8 +7,11 @@ import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import { IconButton } from '@mui/material';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import MentorItem from './MentorItem';
-import MentorsByGender from './MentorsByGender/MentorsByGender';
+import MentorAccordions from './MentorsByGender/Mentor Accordions';
 
 export default function AvailableMentors() {
   const dispatch = useDispatch();
@@ -30,57 +33,78 @@ export default function AvailableMentors() {
     dispatch({ type: 'FETCH_INTEREST_PROFILES' });
   }, []);
 
+  const mentorsPerPage = 3;
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const currentMentors = interestMentors.slice(
+    currentIndex,
+    currentIndex + mentorsPerPage
+  );
+
+  const nextMentors = () => {
+    if (currentIndex + mentorsPerPage >= interestMentors.length) {
+      setCurrentIndex(0);
+    } else {
+      setCurrentIndex(currentIndex + mentorsPerPage);
+    }
+  };
+
+  const previousMentors = () => {
+    if (currentIndex + mentorsPerPage >= interestMentors.length) {
+      setCurrentIndex(0);
+    } else {
+      if (currentIndex === 0) {
+        return;
+      } else {
+        setCurrentIndex(currentIndex - mentorsPerPage);
+      }
+    }
+  };
+
   return (
     <>
       <div className='container'>
-        {/* {availableMentors.length > 0 ?  */}
-        <div>
-          <h1>Available Mentors</h1>
-          <div>
-            <h3>All Mentors</h3>
-            <Accordion>
-              <AccordionSummary
-                expandIcon={<ArrowDropDownIcon />}
-                aria-controls='panel1-content'
-                id='panel1-header'
-              >
-                <Typography>All Mentors</Typography>
-              </AccordionSummary>
-              <AccordionDetails>
-                <Stack>
-                  {availableMentors.map((mentor) => (
-                    <MentorItem key={mentor.id} mentor={mentor} />
-                  ))}
-                </Stack>
-              </AccordionDetails>
-            </Accordion>
-          </div>
-          <div>
-            <h3>Mentors Based on Your Interests</h3>
-            <Accordion>
-              <AccordionSummary
-                expandIcon={<ArrowDropDownIcon />}
-                aria-controls='panel1-content'
-                id='panel1-header'
-              >
-                <Typography>Mentors with similar interests</Typography>
-              </AccordionSummary>
-              <AccordionDetails>
-                <Stack>
-                  {interestMentors.map((mentor) => (
-                    <MentorItem key={mentor.id} mentor={mentor} />
-                  ))}
-                </Stack>
-              </AccordionDetails>
-            </Accordion>
-          </div>
-          <div>
-            <h3>Mentors Based on Gender</h3>
-            <MentorsByGender />
-          </div>
+        {availableMentors.length > 0 ? (
+          <>
+            <div>
+              <h1>Mentors</h1>
+              <div>
+                <h3>Mentors that match your interests</h3>
 
-          {/* <h3>There currently are no available mentors.</h3> */}
-        </div>
+                <Stack
+                  direction='column'
+                  justifyContent='space-around'
+                  alignItems='center'
+                  spacing={1}
+                  sx={{ paddingBottom: '10px' }}
+                >
+                  {currentMentors.map((mentor) => (
+                    <MentorItem key={mentor.id} mentor={mentor} />
+                  ))}
+                </Stack>
+                <Stack
+                  direction='row'
+                  justifyContent='space-between'
+                  sx={{ margin: '6px' }}
+                >
+                  <IconButton onClick={previousMentors}>
+                    <ArrowBackIosNewIcon />
+                  </IconButton>
+                  <IconButton onClick={nextMentors}>
+                    <ArrowForwardIosIcon />
+                  </IconButton>
+                </Stack>
+              </div>
+              <div>
+                <h3>All Available Mentors</h3>
+                <MentorAccordions />
+              </div>
+            </div>
+          </>
+        ) : (
+          <>
+            <h3>There currently are no available mentors.</h3>
+          </>
+        )}
       </div>
     </>
   );
