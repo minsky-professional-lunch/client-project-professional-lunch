@@ -20,7 +20,11 @@ function Footer() {
   }
 
   const goMentorships = () => {
-    history.push('/my-mentors');
+    {user.isMentor ? 
+      history.push('/my-mentees')
+      : 
+      history.push('/my-mentors')
+    }
   }
 
   const goMeetings = () => {

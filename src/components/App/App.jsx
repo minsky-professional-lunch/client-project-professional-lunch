@@ -41,6 +41,7 @@ import MentorHomePage from "../HomePage/MentorHomePage";
 import MeetingDetails from "../Meetings/MeetingDetails";
 import MyMentees from '../Mentees/MyMentees';
 import MyMeetings from "../Meetings/MyMeetings";
+import MenteeDetails from '../Mentees/MenteeDetails';
 
 function App() {
   const dispatch = useDispatch();
@@ -131,17 +132,18 @@ function App() {
             <AvailableMentors />
           </ProtectedRoute>
 
+          <ProtectedRoute exact path="/my-mentors">
+            <MyMentors />
+          </ProtectedRoute>
           <ProtectedRoute exact path="/mentor/details/:id">
             <MentorDetails />
           </ProtectedRoute>
 
-          <ProtectedRoute exact path="/my-mentors">
-            <MyMentors />
-          </ProtectedRoute>
-          
-          
           <ProtectedRoute exact path="/my-mentees">
             <MyMentees />
+          </ProtectedRoute>
+          <ProtectedRoute exact path="/mentee/details/:id">
+            <MenteeDetails />
           </ProtectedRoute>
 
 
