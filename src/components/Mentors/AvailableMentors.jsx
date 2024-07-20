@@ -11,11 +11,6 @@ import { IconButton } from '@mui/material';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import MentorItem from './MentorItem';
-import MentorsByGender from './MentorsByGender/MentorsByGender';
-import NotSayMentors from './MentorsByGender/NotSayMentors';
-import NonBinaryMentors from './MentorsByGender/NonBinaryMentors';
-import FemaleMentors from './MentorsByGender/FemaleMentors';
-import MaleMentors from './MentorsByGender/MaleMentors';
 import MentorAccordions from './MentorsByGender/Mentor Accordions';
 
 export default function AvailableMentors() {

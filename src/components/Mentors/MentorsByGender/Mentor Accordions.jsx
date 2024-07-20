@@ -10,8 +10,6 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import { IconButton } from '@mui/material';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
-
-
 import MentorItem from '../MentorItem';
 import MaleMentors from './MaleMentors';
 import FemaleMentors from './FemaleMentors';
