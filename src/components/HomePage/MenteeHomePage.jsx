@@ -17,6 +17,10 @@ function MenteeHomePage() {
   console.log('Pending', pending);
   const meetings = useSelector(store => store.meetings);
   console.log('Meetings', meetings);
+  const pendingMeetings = meetings.filter(meeting => meeting.meeting_status === 'pending');
+  console.log('Pending meetings', pendingMeetings);
+  const acceptedMeetings = meetings.filter(meeting => meeting.meeting_status === 'accepted');
+  console.log('Accepted meetings', acceptedMeetings);
 
   useEffect(() => {
     dispatch({ type: 'FETCH_PROFILE_DETAILS', payload: user.id });
@@ -38,15 +42,32 @@ function MenteeHomePage() {
         <></>
       }
 
-      {meetings.length > 0 ? 
+      {acceptedMeetings.length > 0 ? 
       <>
       <h3>Upcoming Meetings</h3>
-      {meetings.map((meeting) => (
+      {acceptedMeetings.map((meeting) => (
         <MeetingItem key={meeting.id} meeting={meeting} />
       ))}
       </>
       :
-      <h3>No upcoming meetings. Request a meeting with your mentor to keep learning!</h3> 
+      <></>
+      // <h3>No upcoming meetings. Request a meeting with your mentor to keep learning!</h3> 
+      }
+      {pendingMeetings.length > 0 ? 
+      <>
+      <h3>Pending Meetings</h3>
+        {pendingMeetings.map((meeting) => (
+          <MeetingItem key={meeting.id} meeting={meeting} />
+        ))}
+      </>
+      :
+      <></>
+      // <h3>No upcoming meetings. Request a meeting with your mentor to keep learning!</h3> 
+      }
+      {meetings.length < 0 ? 
+      <h3>No upcoming meetings. Schedule a meeting with your mentor to grow your network!</h3>
+      :
+      <></>
       }
     </div>
   );
