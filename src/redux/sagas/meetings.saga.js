@@ -20,9 +20,29 @@ function* requestMeeting(action) {
     }
 }
 
+function* acceptMeeting(action) {
+    try {
+        yield axios.put(`/api/meetings/accept/${action.payload}`);
+        yield put({ type: 'FETCH_MEETNGS' });
+    } catch (error) {
+        console.log('Error accepting meeting', error);
+    }
+}
+
+function* deleteMeeting(action) {
+    try {
+        yield axios.delete(`/api/meetings/${action.payload}`);
+        yield put({ type: 'FETCH_MEETINGS' });
+    } catch (error) {
+        console.log('Error deleting meeting', error);
+    }
+}
+
 function* meetingsSaga() {
     yield takeLatest('FETCH_MEETINGS', fetchMeetings);
     yield takeLatest('REQUEST_MEETING', requestMeeting);
+    yield takeLatest('ACCEPT_MEETING', acceptMeeting);
+    yield takeLatest('DELETE_MEETING', deleteMeeting);
 }
 
 export default meetingsSaga;

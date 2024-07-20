@@ -117,6 +117,19 @@ router.post('/:id', rejectUnauthenticated, (req, res) => {
       });
   });
 
+// Accept meeting
+router.put('/accept/:id', rejectUnauthenticated, (req, res) => {
+  queryText = `UPDATE "meetings" SET "status"='accepted' WHERE "meetings".id=$1;`;
+  pool.query(queryText, [req.params.id])
+  .then(() => {
+    res.sendStatus(201);
+  })
+  .catch((error) => {
+    console.log('error accepting meeting', error);
+    res.sendStatus(500);
+  });
+});
+
 // PUT
 router.put('/:id', rejectUnauthenticated, (req, res) => {
     console.log('user', req.user);
@@ -149,7 +162,7 @@ router.put('/:id', rejectUnauthenticated, (req, res) => {
     });
 });
 
-// DELETE
+// DELETE or deny meeting
 router.delete('/:id', rejectUnauthenticated, (req, res) => {
   pool
     .query(
