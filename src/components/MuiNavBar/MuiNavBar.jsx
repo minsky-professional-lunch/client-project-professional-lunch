@@ -41,11 +41,7 @@ export default function MuiNavBar() {
       history.push('/available-mentors');
     } else if (setting === 'Resources') {
       history.push('/resources');
-    } 
-    // {isAdmin && (
-    //   <></>
-    // )}
-    else if (setting === 'Admin' && user.isAdmin) {
+    } else if (setting === 'Admin' && user.isAdmin) {
       history.push('/admin');
     } else if (setting === 'Logout') {
       dispatch({ type: 'LOGOUT' });

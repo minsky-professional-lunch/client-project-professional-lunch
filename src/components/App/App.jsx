@@ -39,6 +39,7 @@ import HomePage from "../HomePage/MentorHomePage";
 import MenteeHomePage from "../HomePage/MenteeHomePage";
 import MentorHomePage from "../HomePage/MentorHomePage";
 import MeetingDetails from "../Meetings/MeetingDetails";
+import MyMentees from '../Mentees/MyMentees';
 import MyMeetings from "../Meetings/MyMeetings";
 
 function App() {
@@ -137,6 +138,13 @@ function App() {
           <ProtectedRoute exact path="/my-mentors">
             <MyMentors />
           </ProtectedRoute>
+          
+          
+          <ProtectedRoute exact path="/my-mentees">
+            <MyMentees />
+          </ProtectedRoute>
+
+
 
           <ProtectedRoute exact path ='/my-meetings'>
             <MyMeetings />
