@@ -20,6 +20,8 @@ export default function RegisterForm2() {
   const currentUser = useSelector((store) => store.user);
   const schools = useSelector((store) => store.schoolsReducer);
   const genders = useSelector((store) => store.gendersReducer);
+  console.log('genders', genders);
+  console.log('schools', schools);
 
   const history = useHistory();
   const dispatch = useDispatch();
@@ -114,7 +116,7 @@ export default function RegisterForm2() {
           </FormControl>
           <FormControl>
             <FormLabel>Gender:</FormLabel>
-            <Select placeholder='Select a gender' onChange={(event) => setGender(event.target.value)} >
+            <Select placeholder='Select a gender' onChange={(event, value) => setGender(value)} >
               {/* Will only take in 0 as a value for gender.id and school.id and I can't figure out why */}
               {genders.map((gender) => (
                 <Option key={gender.id} value={gender.id}>
@@ -128,7 +130,7 @@ export default function RegisterForm2() {
         ) : (
           <FormControl>
             <FormLabel>School:</FormLabel>
-            <Select placeholder='Select your school' onChange={(event) => setSchool(event.target.value)} >
+            <Select placeholder='Select your school' onChange={(event, value) => setSchool(value)} >
               
               {schools.map((school) => (
                 <Option key={school.id} value={school.id}>
