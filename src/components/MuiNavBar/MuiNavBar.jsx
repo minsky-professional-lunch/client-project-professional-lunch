@@ -54,8 +54,8 @@ export default function MuiNavBar() {
       history.push('/login');
     } else if (log === 'Register') {
       history.push('/registration');
-    } else if (log === 'About Us') {
-      history.push('/');
+    } else if (log === 'About') {
+      history.push('/about');
     }
   };
 
