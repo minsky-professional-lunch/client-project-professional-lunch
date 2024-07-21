@@ -54,7 +54,7 @@ function MentorHomePage() {
       ))}
       </>
       :
-      <h3>No upcoming meetings. Request a meeting with your mentor to keep learning!</h3> 
+      <h3>No upcoming meetings.</h3> 
       }
     </div>
   );

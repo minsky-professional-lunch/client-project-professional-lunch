@@ -85,6 +85,10 @@ export default function MeetingItem( {meeting} ) {
                     <Typography level="title-md" noWrap>
                         {moment(meeting.meeting_start, "hh:mm:ss").format('h:mm A')} - {moment(meeting.meeting_end, "hh:mm:ss").format('h:mm A')}
                     </Typography>
+                    <Typography level="title-md" noWrap>
+                        Status: {meeting.meeting_status}
+                    </Typography>
+                  
                     <CardActions>
                         <Stack direction="row" justifyContent="space-evenly" alignItems="center" spacing={4}>
                             <Button >
