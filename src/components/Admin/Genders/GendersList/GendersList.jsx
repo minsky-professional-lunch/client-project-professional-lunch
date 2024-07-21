@@ -52,7 +52,6 @@ export default function GendersList() {
   return (
     <div>
       <div>
-        <h1>Genders</h1>
         <div>
           <Box
             component='form'

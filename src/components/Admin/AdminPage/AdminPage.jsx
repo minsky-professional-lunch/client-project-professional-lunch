@@ -48,7 +48,9 @@ export default function AdminPage() {
   };
 
   return (
-    <>
+    <div className='container'>
+      <h1>Admin Page</h1>
+
       <Box sx={{ width: '100%' }}>
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
           <Tabs
@@ -83,6 +85,6 @@ export default function AdminPage() {
           <GendersList />
         </CustomTabPanel>
       </Box>
-    </>
+    </div>
   );
 }

@@ -18,7 +18,6 @@ export default function MentorList() {
 
   return (
     <>
-      <h1>Mentors</h1>
       <Sheet>
         <Table stripe={stripe}>
           <thead>

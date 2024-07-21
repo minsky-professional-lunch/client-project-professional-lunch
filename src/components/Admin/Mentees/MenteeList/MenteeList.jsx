@@ -19,7 +19,6 @@ export default function MenteeList() {
 
   return (
     <>
-      <h1>Mentees</h1>
       <Sheet>
         <Table stripe={stripe}>
           <thead>
