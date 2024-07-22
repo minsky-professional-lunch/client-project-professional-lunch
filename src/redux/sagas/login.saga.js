@@ -59,6 +59,10 @@ function* logoutUser(action) {
     yield put({ type: 'CLEAR_MENT_DETAILS' });
     yield put({ type: 'UNSET_MENTORSHIP_DETAILS' });
     yield put({ type: 'UNSET_PROF_DETAILS' });
+
+    if (action.callback) {
+      action.callback(); // probably a history.push function from the component
+    }
   } catch (error) {
     console.log('Error with user logout:', error);
   }

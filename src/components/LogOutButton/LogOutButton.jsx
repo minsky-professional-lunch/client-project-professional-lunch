@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux';
 import Button from '@mui/joy/Button';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
-
 function LogOutButton(props) {
   const dispatch = useDispatch();
   const history = useHistory();
@@ -16,9 +15,10 @@ function LogOutButton(props) {
       color='danger'
       className={props.className}
       onClick={() => {
-        dispatch({ type: 'LOGOUT' })
-        history.push('/login')}
-      } 
+        dispatch({ type: 'LOGOUT' });
+        history.push('/login');
+        alert('should not see this?');
+      }}
     >
       Log Out
     </Button>
