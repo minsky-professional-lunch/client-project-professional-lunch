@@ -3,11 +3,11 @@ import './AboutPage.css';
 
 function AboutPage() {
   return (
-    <div className="container">
-      <div className="section">
-        <img src="../images/PLaunch.png" alt="Professional Launch Logo" className="logo"/>
-        <h1>What Is Professional Launch?</h1>
-        <p>
+    <div className="about-container">
+      <div className="about-section">
+        <img src="../images/PLaunch.png" alt="Professional Launch Logo" className="about-logo" />
+        <h1 className="about-title">What Is Professional Launch?</h1>
+        <p className="about-text">
           The Professional Launch Mentorship management system is a web-based,
           mobile-first application designed to facilitate and manage mentorship
           relationships. The system allows mentors and mentees to create
@@ -16,9 +16,9 @@ function AboutPage() {
           receive guidance on career advancement to achieve career goals.
         </p>
       </div>
-      <div className="section">
-        <h1>What Is Our Mission?</h1>
-        <p>
+      <div className="about-section">
+        <h1 className="about-title">What Is Our Mission?</h1>
+        <p className="about-text">
           We are positively connecting the less connected, bridging gaps, and building
           futures in the community. Our mentorship program is dedicated to
           fostering meaningful relationships, empowering individuals, and
