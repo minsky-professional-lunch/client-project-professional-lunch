@@ -54,12 +54,16 @@ export default function RegisterForm4() {
   };
 
   const handleDayChange = (index, event) => {
+    console.log('Day Change event', event);
+    console.log('Day Change index', index);
     const newAvailability = [...availability];
     newAvailability[index].day = event.target.value;
     setAvailability(newAvailability);
   };
 
   const handleTimeChange = (index, event) => {
+    console.log('Time Change event', event);
+    console.log('Time Change index', index);
     const newAvailability = [...availability];
     newAvailability[index].time = event.target.value;
     setAvailability(newAvailability);
