@@ -3,6 +3,8 @@ import LogOutButton from "../LogOutButton/LogOutButton";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { useDispatch } from "react-redux";
+import Box from '@mui/joy/Box';
+import Button from '@mui/joy/Button';
 
 function UserPage() {
   const dispatch = useDispatch();
@@ -29,8 +31,10 @@ function UserPage() {
     <div className="container">
       <h2>Welcome, {user.username}!</h2>
       <p>Your ID is: {user.id}</p>
+      <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
+      <Button onClick={() => createProfile()}>Create Profile</Button>
       <LogOutButton className="btn" />
-      <button onClick={() => createProfile()}>Create Profile</button>
+      </Box>
     </div>
   );
 }
