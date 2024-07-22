@@ -56,8 +56,6 @@ export default function MuiNavBar() {
     } else if (setting === 'Admin' && user.isAdmin) {
       history.push('/admin');
     } else if (setting === 'Logout') {
-      alert('logging out');
-      // history.push('/login');
       dispatch({ type: 'LOGOUT', callback: () => history.push('/login') });
     }
   };
@@ -120,7 +118,7 @@ export default function MuiNavBar() {
           </Typography>
           {user.id && (
             <Box sx={{ flexGrow: 0 }}>
-              <Tooltip title='Open settings'>
+              <Tooltip title='Open Navbar'>
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                   <Avatar
                     alt={profiles.first_name}
@@ -163,7 +161,7 @@ export default function MuiNavBar() {
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title='Open settings'>
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar src='/images/DefaultAvatar.png' />
+                  <Avatar src={Avatar} />
                 </IconButton>
               </Tooltip>
               <Menu

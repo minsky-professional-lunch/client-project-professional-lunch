@@ -6,7 +6,7 @@ const router = express.Router();
 // GET route for list of interests
 
 router.get("/", (req, res) => {
-  const queryText = `SELECT * FROM interests`;
+  const queryText = `SELECT * FROM interests ORDER BY interest;`;
   pool
     .query(queryText)
     .then((result) => {

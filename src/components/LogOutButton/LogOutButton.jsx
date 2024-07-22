@@ -17,7 +17,6 @@ function LogOutButton(props) {
       onClick={() => {
         dispatch({ type: 'LOGOUT' });
         history.push('/login');
-        alert('should not see this?');
       }}
     >
       Log Out
