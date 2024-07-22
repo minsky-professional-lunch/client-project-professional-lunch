@@ -21,8 +21,8 @@ export default function MentorRequests( {mentee} ) {
 
     const mentorDetails = (menteeId) => {
         console.log('Clicked', menteeId);
-        // dispatch({ type: 'FETCH_DETAILS', payload: mentorId });
-        // history.push(`/mentor/details/${mentorId}`);
+        dispatch({ type: 'FETCH_DETAILS', payload: menteeId });
+        history.push(`/mentor/details/${menteeId}`);
     }
 
     const connect = (mentorshipId) => {
@@ -51,7 +51,7 @@ export default function MentorRequests( {mentee} ) {
                             <Button onClick={() => deny(mentee.id)}>
                                 Deny
                             </Button>
-                            <Button onClick={() => mentorDetails(mentee.mentee_id)} sx={{ cursor: 'pointer' }}>
+                            <Button onClick={() => mentorDetails(mentee.mentee_user_id)} sx={{ cursor: 'pointer' }}>
                                 View Profile
                             </Button>
                         </Stack>
