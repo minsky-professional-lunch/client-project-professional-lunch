@@ -213,8 +213,19 @@ router.post("/", async (req, res) => {
 // PUT edit profile
 router.put('/', rejectUnauthenticated, async (req, res) => {
   try {
-    const queryText = `UPDATE "profiles" SET "avatar"=$1 WHERE "profiles"."user_id"=$2;`;
-    await pool.query(queryText, [req.body.avatar, req.user.id]);
+    const queryText = `UPDATE "profiles" SET "avatar"=$1, "bio"=$2, "linkedin"=$3, "email"=$4, "gender"=$5,
+                        "school"=$6 
+                        WHERE "profiles"."user_id"=$7;`;
+    await pool.query(queryText, [req.body.profile.avatar, req.body.profile.bio, req.body.profile.linkedin, 
+                                 req.body.profile.email, req.body.profile.gender, req.body.profile.school, req.user.id]);
+    // await pool.query(`DELETE from profiles_interests WHERE profile_id=$1;`, req.body.profile.id);
+    // for (interest of req.body.details.interests) {
+    //   const interestID = interest.id;
+    //   await pool.query(
+    //     `INSERT INTO profiles_interests (profile_id, interest_id) VALUES ($1, $2)`,
+    //     [req.body.profile.id, interestID]
+    //   );
+    // }
     res.sendStatus(200);
   } catch (error) {
     console.log("Error in updating profile", error);
