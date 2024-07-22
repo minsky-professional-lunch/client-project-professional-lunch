@@ -31,10 +31,20 @@ function* fetchMentDetails(action) {
     }
 }
 
+function* editProfile(action) {
+    try {
+      yield axios.put(`/api/profile`, action.payload);
+      yield put({ type: 'FETCH_USER' });
+    } catch (error) {
+      console.log(`Error editing profile`, error);
+  }
+  }
+
 function* profilesSaga() {
     yield takeLatest('FETCH_PROFILES', fetchProfiles);
     yield takeLatest('FETCH_PROFILE_DETAILS', fetchProfileDetails);
     yield takeLatest('FETCH_MENT_DETAILS', fetchMentDetails);
+    yield takeLatest('EDIT_PROFILE', editProfile);
 }
 
 export default profilesSaga;
