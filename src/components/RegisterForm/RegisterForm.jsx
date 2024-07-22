@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import Button from '@mui/joy/Button';
+import ButtonGroup from '@mui/joy/ButtonGroup';
 import Checkbox from '@mui/joy/Checkbox';
 import Radio from '@mui/joy/Radio';
 import RadioGroup from '@mui/joy/RadioGroup';
@@ -154,9 +155,12 @@ function RegisterForm() {
           <FormLabel>Confirm age?</FormLabel>
           <Checkbox label='I am 18 years of age or older' required />
         </FormControl>
-        <Button className='btn' type='submit' name='submit' value='Next'>
-          Next
-        </Button>
+        <ButtonGroup spacing='0.5rem' color='primary' variant='solid'>
+          <Button onClick={() => history.push('/login')} >Back</Button>
+          <Button className='btn' type='submit' name='submit' value='Next'>
+            Next
+          </Button>
+        </ButtonGroup>
       </Box>
       {/* <div>
         Email

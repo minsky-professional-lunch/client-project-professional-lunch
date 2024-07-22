@@ -4,6 +4,7 @@ import { useScript } from '../../hooks/useScript';
 import { useEffect, useState } from 'react';
 import { Avatar, Stack, Typography } from '@mui/joy';
 import Button from '@mui/joy/Button';
+import ButtonGroup from '@mui/joy/ButtonGroup';
 import Badge from '@mui/joy/Badge';
 import Box from '@mui/joy/Box';
 import Input from '@mui/joy/Input';
@@ -144,9 +145,9 @@ export default function RegisterForm4() {
       <br />
       <h4>Select Availability</h4>
       {availability.map((avail, index) => (
-        <form className="formPanel" key={index}>
+        <form className='formPanel' key={index}>
           <select onChange={(e) => handleDayChange(index, e)} value={avail.day}>
-            <option value="" disabled>
+            <option value='' disabled>
               Select a day
             </option>
             {days.map((day) => (
@@ -159,7 +160,7 @@ export default function RegisterForm4() {
             onChange={(e) => handleTimeChange(index, e)}
             value={avail.time}
           >
-            <option value="" disabled>
+            <option value='' disabled>
               Select a time
             </option>
             {times.map((time) => (
@@ -202,8 +203,10 @@ export default function RegisterForm4() {
           <Button onClick={handleAdd}>Add Availability</Button>
         </form>
       ))} */}
-
-      <Button onClick={(event) => registerUser(event)}>Register</Button>
+      <ButtonGroup spacing='0.5rem' color='primary' variant='solid'>
+        <Button onClick={() => history.push('/registration/3')}>Back</Button>
+        <Button onClick={(event) => registerUser(event)}>Register</Button>
+      </ButtonGroup>
     </div>
   );
 }

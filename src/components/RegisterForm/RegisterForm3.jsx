@@ -9,6 +9,7 @@ import FormLabel from '@mui/joy/FormLabel';
 import FormHelperText from '@mui/joy/FormHelperText';
 import Textarea from '@mui/joy/Textarea';
 import Button from '@mui/joy/Button';
+import ButtonGroup from '@mui/joy/ButtonGroup';
 import Select from '@mui/joy/Select';
 import Option from '@mui/joy/Option';
 
@@ -105,9 +106,12 @@ export default function RegisterForm3() {
                 )}
               />
             </FormControl>
-            <Button className='btn' type='submit' name='submit'>
-              Next
-            </Button>
+            <ButtonGroup spacing='0.5rem' color='primary' variant='solid'>
+              <Button onClick={() => history.push('/registration/2')}>Back</Button>
+              <Button className='btn' type='submit' name='submit' value='Next'>
+                Next
+              </Button>
+            </ButtonGroup>
           </Box>
 
           {/* <div>
