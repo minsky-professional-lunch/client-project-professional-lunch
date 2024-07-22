@@ -26,7 +26,7 @@ export default function MentorshipList() {
               <th style={{width: '20%' }}>Mentor Email</th>
               <th style={{width: '20%' }}>Mentee Email</th>
               <th style={{width: '15%' }}>Mentee School</th>
-              <th style={{width: '15%' }}>Status</th>
+              <th style={{width: '10%' }}>Status</th>
               
             </tr>
           </thead>

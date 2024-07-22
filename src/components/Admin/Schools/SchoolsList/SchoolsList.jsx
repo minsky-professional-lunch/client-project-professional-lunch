@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
+import Button from '@mui/joy/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
@@ -22,7 +22,7 @@ export default function SchoolsList() {
   const dispatch = useDispatch();
   const schools = useSelector((store) => store.schoolsReducer);
 
-  const [newSchool, setNewSchool] = useState({ school: ''});
+  const [newSchool, setNewSchool] = useState({ school: '' });
   const [open, setOpen] = useState(false);
 
   const [schoolToDelete, setSchoolToDelete] = useState(null);
@@ -66,9 +66,7 @@ export default function SchoolsList() {
                 setNewSchool({ school: event.target.value });
               }}
             />
-            <Button type='submit' variant='outlined'>
-              Add
-            </Button>
+            <Button type='submit'>Add</Button>
           </Box>
         </div>
 
@@ -89,10 +87,7 @@ export default function SchoolsList() {
                   >
                     <TableCell>{school.school}</TableCell>
                     <TableCell>
-                      <Button
-                        variant='outlined'
-                        onClick={() => handleOpen(school.id)}
-                      >
+                      <Button onClick={() => handleOpen(school.id)}>
                         Delete
                       </Button>
                     </TableCell>

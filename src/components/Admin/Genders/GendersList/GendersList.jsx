@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
+import Button from '@mui/joy/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
@@ -67,9 +67,7 @@ export default function GendersList() {
                 setNewGender({ gender: event.target.value });
               }}
             />
-            <Button type='submit' variant='outlined'>
-              Add
-            </Button>
+            <Button type='submit'>Add</Button>
           </Box>
         </div>
 
@@ -90,10 +88,7 @@ export default function GendersList() {
                   >
                     <TableCell>{gender.gender}</TableCell>
                     <TableCell>
-                      <Button
-                        variant='outlined'
-                        onClick={() => handleOpen(gender.id)}
-                      >
+                      <Button onClick={() => handleOpen(gender.id)}>
                         Delete
                       </Button>
                     </TableCell>
