@@ -110,7 +110,7 @@ export default function MuiNavBar() {
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt={profiles.first_name} src={profiles.profile.avatar} />
+                  <Avatar alt={profiles.first_name} src={profiles?.profile?.avatar} />
                 </IconButton>
               </Tooltip>
               <Menu
@@ -130,8 +130,8 @@ export default function MuiNavBar() {
                 onClose={handleCloseUserMenu}
               >
                 {filteredSettings.map((setting) => (
-                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                    <Typography textAlign="center"  onClick={() => {navToSetting(setting)}}>{setting}</Typography>
+                  <MenuItem key={setting} onClick={() => {handleCloseUserMenu, navToSetting(setting)}}>
+                    <Typography textAlign="center">{setting}</Typography>
                   </MenuItem>
                 ))}
               </Menu>
@@ -162,8 +162,8 @@ export default function MuiNavBar() {
               onClose={handleCloseUserMenu}
             >
               {loggedOut.map((log) => (
-                <MenuItem key={log} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center"  onClick={() => {navToLog(log)}}>{log}</Typography>
+                <MenuItem key={log} onClick={() => {handleCloseUserMenu, navToLog(log)}}>
+                  <Typography textAlign="center">{log}</Typography>
                 </MenuItem>
               ))}
             </Menu>
