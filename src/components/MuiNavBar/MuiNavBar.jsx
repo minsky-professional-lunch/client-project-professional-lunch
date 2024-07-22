@@ -56,8 +56,6 @@ export default function MuiNavBar() {
     } else if (setting === 'Admin' && user.isAdmin) {
       history.push('/admin');
     } else if (setting === 'Logout') {
-      alert('logging out');
-      // history.push('/login');
       dispatch({ type: 'LOGOUT', callback: () => history.push('/login') });
     }
   };
