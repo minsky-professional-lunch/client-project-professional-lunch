@@ -51,7 +51,6 @@ export default function InterestsList() {
   return (
     <div>
       <div>
-        <h1>Interests</h1>
         <div>
           <Box
             component='form'

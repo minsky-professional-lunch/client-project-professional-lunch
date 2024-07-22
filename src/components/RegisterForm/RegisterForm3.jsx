@@ -42,6 +42,7 @@ export default function RegisterForm3() {
     }
   };
 
+
   const nextPage = () => {
     history.push('/registration/4');
     event.preventDefault();

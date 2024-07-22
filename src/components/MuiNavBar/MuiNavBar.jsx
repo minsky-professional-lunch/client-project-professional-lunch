@@ -22,7 +22,7 @@ export default function MuiNavBar() {
   const history = useHistory();
   const dispatch = useDispatch();
   const user = useSelector((store) => store.user);
-  const profiles = useSelector((store) => store.profiles);
+  const profiles = useSelector((store) => store.profileDetails);
 
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
@@ -44,8 +44,8 @@ export default function MuiNavBar() {
     } else if (setting === 'Admin' && user.isAdmin) {
       history.push('/admin');
     } else if (setting === 'Logout') {
-      dispatch({ type: 'LOGOUT' });
       history.push('/login');
+      dispatch({ type: 'LOGOUT' });
     }
   };
 
@@ -59,7 +59,10 @@ export default function MuiNavBar() {
     }
   };
 
-  const filteredSettings = settings.filter(setting => setting !== 'Admin' || user.isAdmin);
+  const filteredSettings = settings.filter(setting => 
+    (setting !== 'Admin' || user.isAdmin) &&
+    (setting !== 'Available Mentors' || !user.isMentor)
+  );
 
   return (
     <AppBar position="static" sx={{ bgcolor: "#15A140", height: "75px", padding: "10px" }}>
@@ -102,7 +105,7 @@ export default function MuiNavBar() {
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt={profiles.first_name} src={profiles.avatar} />
+                  <Avatar alt={profiles.first_name} src={profiles.profile.avatar} />
                 </IconButton>
               </Tooltip>
               <Menu

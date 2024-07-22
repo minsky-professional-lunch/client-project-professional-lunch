@@ -71,7 +71,11 @@ export default function MentorDetails() {
   };
 
   const back = () => {
-    history.push('/my-mentors');
+    if (!user.isMentor) {
+      history.push('/my-mentors');
+    } else if (user.isMentor) {
+      history.push('/my-mentees');
+    }
   }
 
   const handleChange = (event) => {
@@ -142,7 +146,7 @@ export default function MentorDetails() {
         {!user.mentorships.includes(details.profile.id) ? (
           <Button onClick={() => connect(details?.profile?.id)}>Connect</Button>
         ) : (
-          <Button onClick={() => remove(thisMentorship[0].id)}>Remove</Button>
+          <Button onClick={() => remove(thisMentorship.id)}>Remove</Button>
         )}
         {user.mentorships.includes(details.profile.id) &&
         thisMentorship?.status === 'accepted' ? (

@@ -1,6 +1,9 @@
 const express = require("express");
 const pool = require("../modules/pool");
 const router = express.Router();
+const {
+  rejectUnauthenticated,
+} = require('../modules/authentication-middleware');
 
 // GET all profiles
 router.get('/', (req, res) => {
@@ -208,6 +211,16 @@ router.post("/", async (req, res) => {
 });
 
 // PUT edit profile
+router.put('/', rejectUnauthenticated, async (req, res) => {
+  try {
+    const queryText = `UPDATE "profiles" SET "avatar"=$1 WHERE "profiles"."user_id"=$2;`;
+    await pool.query(queryText, [req.body.avatar, req.user.id]);
+    res.sendStatus(200);
+  } catch (error) {
+    console.log("Error in updating profile", error);
+    res.sendStatus(500);
+  }
+})
 
 // DELETE profile *need to ON DELETE CASCADE mentorships
 router.delete("/", async (req, res) => {

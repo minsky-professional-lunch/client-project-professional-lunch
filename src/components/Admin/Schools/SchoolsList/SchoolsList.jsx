@@ -51,7 +51,6 @@ export default function SchoolsList() {
   return (
     <div>
       <div>
-        <h1>Schools</h1>
         <div>
           <Box
             component='form'
