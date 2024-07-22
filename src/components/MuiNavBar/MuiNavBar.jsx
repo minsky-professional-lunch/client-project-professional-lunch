@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useEffect } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -23,6 +24,10 @@ export default function MuiNavBar() {
   const dispatch = useDispatch();
   const user = useSelector((store) => store.user);
   const profiles = useSelector((store) => store.profileDetails);
+
+  useEffect(() => {
+    dispatch({ type: 'FETCH_PROFILE_DETAILS' });
+  }, []);
 
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
