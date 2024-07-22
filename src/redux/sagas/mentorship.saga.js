@@ -10,6 +10,15 @@ function* fetchMentorships() {
     }
 }
 
+function* fetchAllMentorships() {
+  try {
+    const result = yield axios.get('/api/mentorships/all');
+    yield put({ type: 'SET_ALL_MENTORSHIPS', payload: result.data})
+} catch (error) {
+    console.log('Error getting all mentorships:', error);
+}
+}
+
 function* requestMentorship(action) {
     try {
         yield axios.post(`/api/mentorships/${action.payload.mentorId}`, {menteeId: action.payload.menteeId});
@@ -41,6 +50,7 @@ function* deleteMentorship(action) {
 
 function* mentorshipSaga() {
     yield takeLatest('FETCH_MENTORSHIPS', fetchMentorships);
+    yield takeLatest('FETCH_ALL_MENTORSHIPS', fetchAllMentorships);
     yield takeLatest('REQUEST_MENTORSHIP', requestMentorship);
     yield takeLatest('ACCEPT_MENTORSHIP', acceptMentorship);
     yield takeLatest('DELETE_MENTORSHIP', deleteMentorship);

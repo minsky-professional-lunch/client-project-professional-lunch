@@ -12,12 +12,11 @@ export default function MentorshipList() {
   const [stripe, setStripe] = useState('odd');
 
   useEffect(() => {
-    dispatch({ type: 'FETCH_MENTORSHIPS'});
+    dispatch({ type: 'FETCH_ALL_MENTORSHIPS'});
   }, [])
 
   return (
     <>
-      <h1>Mentorships</h1>
       <Sheet>
         <Table stripe={stripe}>
           <thead>

@@ -59,7 +59,10 @@ export default function MuiNavBar() {
     }
   };
 
-  const filteredSettings = settings.filter(setting => setting !== 'Admin' || user.isAdmin);
+  const filteredSettings = settings.filter(setting => 
+    (setting !== 'Admin' || user.isAdmin) &&
+    (setting !== 'Available Mentors' || !user.isMentor)
+  );
 
   return (
     <AppBar position="static" sx={{ bgcolor: "#15A140", height: "75px", padding: "10px" }}>

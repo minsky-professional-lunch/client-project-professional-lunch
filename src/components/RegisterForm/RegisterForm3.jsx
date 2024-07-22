@@ -29,7 +29,6 @@ export default function RegisterForm3() {
     if (newValue.length <= 5){
       setInterests(newValue)
     }
-    
   }
 
   const nextPage = () => {
