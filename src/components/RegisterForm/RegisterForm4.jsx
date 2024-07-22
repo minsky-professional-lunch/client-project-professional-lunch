@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import { useScript } from '../../hooks/useScript';
 import { useEffect, useState } from 'react';
 import { Avatar, Stack, Typography } from '@mui/joy';
+import Box from '@mui/material/Box';
 import Button from '@mui/joy/Button';
 import ButtonGroup from '@mui/joy/ButtonGroup';
 import Badge from '@mui/joy/Badge';
@@ -147,7 +148,7 @@ export default function RegisterForm4() {
         {useScript('https://widget.cloudinary.com/v2.0/global/all.js')}
       </Stack>
       <br />
-      <h4>Select Availability</h4>
+      <h4>Select Availabilities</h4>
       {/* {availability.map((avail, index) => (
         <form className='formPanel' key={index}>
           <select onChange={(e) => handleDayChange(index, e)} value={avail.day}>
@@ -178,9 +179,17 @@ export default function RegisterForm4() {
       ))} */}
       {availability.map((avail, index) => (
         <form className='formPanel' key={index}>
-          <FormControl>
+          <Box sx={{
+            py: 2,
+            display: 'grid',
+            gap: 2,
+            alignItems: 'center',
+            flexWrap: 'wrap',
+          }}>
+          <FormControl size='small'>
+            <InputLabel>Select a day</InputLabel>
             <Select
-              placeholder='Select a day'
+              label='Select a day'
               onChange={(e) => handleDayChange(index, e)}
               slotProps={{ input: { id: 'day' }}}
               value={avail.day}
@@ -192,9 +201,10 @@ export default function RegisterForm4() {
               ))}
             </Select>
           </FormControl>
-          <FormControl>
+          <FormControl size='small'>
+            <InputLabel>Select a time of day</InputLabel>
             <Select
-              placeholder='Select a time'
+              label='Select a time of day'
               onChange={(e) => handleTimeChange(index, e)}
               slotProps={{ input: { id: 'time' }}}
               value={avail.time}
@@ -206,7 +216,8 @@ export default function RegisterForm4() {
               ))}
             </Select>
           </FormControl>
-          <Button onClick={handleAdd}>Add Availability</Button>
+          <Button sx={{ mb:1}} onClick={handleAdd}>Add Availability</Button>
+          </Box>
         </form>
       ))}
       <ButtonGroup spacing='0.5rem' color='primary' variant='solid'>

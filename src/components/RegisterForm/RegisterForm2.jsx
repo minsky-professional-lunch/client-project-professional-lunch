@@ -120,7 +120,7 @@ export default function RegisterForm2() {
             </FormHelperText>
           </FormControl>
           <FormControl>
-            <FormLabel>Gender:</FormLabel>
+            <FormLabel>Gender</FormLabel>
             <Select
               placeholder='Select a gender'
               onChange={(event, value) => setGender(value)}
@@ -137,7 +137,7 @@ export default function RegisterForm2() {
             ''
           ) : (
             <FormControl>
-              <FormLabel>School:</FormLabel>
+              <FormLabel>School</FormLabel>
               <Select
                 placeholder='Select your school'
                 onChange={(event, value) => setSchool(value)}
