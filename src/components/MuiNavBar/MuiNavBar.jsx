@@ -14,8 +14,15 @@ import MenuItem from '@mui/material/MenuItem';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
-const settings = ['Home', 'Profile', 'Available Mentors', 'Resources', 'Admin', 'Logout'];
-const loggedOut = ['Login', 'Register', 'About'];
+const settings = [
+  "Home",
+  "Profile",
+  "Available Mentors",
+  "Resources",
+  "Admin",
+  "Logout",
+];
+const loggedOut = ["Login", "Register", "About"];
 
 export default function MuiNavBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -38,39 +45,43 @@ export default function MuiNavBar() {
   };
 
   const navToSetting = (setting) => {
-    if (setting === 'Home') {
-      history.push('/home');
-    } else if (setting === 'Profile') {
-      history.push('/profile');
-    } else if (setting === 'Available Mentors') {
-      history.push('/available-mentors');
-    } else if (setting === 'Resources') {
-      history.push('/resources');
-    } else if (setting === 'Admin' && user.isAdmin) {
-      history.push('/admin');
-    } else if (setting === 'Logout') {
-      history.push('/login');
-      dispatch({ type: 'LOGOUT' });
+    if (setting === "Home") {
+      history.push("/home");
+    } else if (setting === "Profile") {
+      history.push("/profile");
+    } else if (setting === "Available Mentors") {
+      history.push("/available-mentors");
+    } else if (setting === "Resources") {
+      history.push("/resources");
+    } else if (setting === "Admin" && user.isAdmin) {
+      history.push("/admin");
+    } else if (setting === "Logout") {
+      history.push("/login");
+      dispatch({ type: "LOGOUT" });
     }
   };
 
   const navToLog = (log) => {
-    if (log === 'Login') {
-      history.push('/login');
-    } else if (log === 'Register') {
-      history.push('/registration');
-    } else if (log === 'About') {
-      history.push('/about');
+    if (log === "Login") {
+      history.push("/login");
+    } else if (log === "Register") {
+      history.push("/registration");
+    } else if (log === "About") {
+      history.push("/about");
     }
   };
 
-  const filteredSettings = settings.filter(setting => 
-    (setting !== 'Admin' || user.isAdmin) &&
-    (setting !== 'Available Mentors' || !user.isMentor)
+  const filteredSettings = settings.filter(
+    (setting) =>
+      (setting !== "Admin" || user.isAdmin) &&
+      (setting !== "Available Mentors" || !user.isMentor)
   );
 
   return (
-    <AppBar position="static" sx={{ bgcolor: "#15A140", height: "75px", padding: "10px" }}>
+    <AppBar
+      position="static"
+      sx={{ bgcolor: "#15A140", height: "75px", padding: "10px" }}
+    >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Typography
@@ -79,12 +90,12 @@ export default function MuiNavBar() {
             component="a"
             sx={{
               mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
+              display: { xs: "none", md: "flex" },
+              fontFamily: "monospace",
               fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
+              letterSpacing: ".3rem",
+              color: "inherit",
+              textDecoration: "none",
             }}
           >
             Professional Launch
@@ -95,13 +106,13 @@ export default function MuiNavBar() {
             component="a"
             sx={{
               mr: 2,
-              display: { xs: 'flex', md: 'none' },
+              display: { xs: "flex", md: "none" },
               flexGrow: 1,
-              fontFamily: 'monospace',
+              fontFamily: "monospace",
               fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
+              letterSpacing: ".3rem",
+              color: "inherit",
+              textDecoration: "none",
             }}
           >
             Professional Launch
@@ -114,17 +125,17 @@ export default function MuiNavBar() {
                 </IconButton>
               </Tooltip>
               <Menu
-                sx={{ mt: '45px' }}
+                sx={{ mt: "45px" }}
                 id="menu-appbar"
                 anchorEl={anchorElUser}
                 anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
+                  vertical: "top",
+                  horizontal: "right",
                 }}
                 keepMounted
                 transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
+                  vertical: "top",
+                  horizontal: "right",
                 }}
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
@@ -137,7 +148,7 @@ export default function MuiNavBar() {
               </Menu>
             </Box>
           )}
-          
+
           {!user.id && (
             <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
