@@ -9,14 +9,7 @@ import Button from '@mui/joy/Button';
 function UserPage() {
   const dispatch = useDispatch();
   useEffect(() => {
-    const hasReloaded = localStorage.getItem("hasReloaded");
-
-    if (!hasReloaded) {
-      localStorage.setItem("hasReloaded", "true");
-      location.reload();
-    } else {
-      dispatch({ type: "CHECK_FOR_PROFILE" });
-    }
+      dispatch({ type: "CHECK_FOR_PROFILE" }); 
   }, []);
 
   const history = useHistory();

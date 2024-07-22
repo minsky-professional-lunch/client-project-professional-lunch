@@ -133,7 +133,7 @@ function RegisterForm() {
           />
         </FormControl>
         <FormControl>
-          <FormLabel>Select Mentor or Mentee:</FormLabel>
+          <FormLabel>Select Mentor or Mentee</FormLabel>
           <RadioGroup>
             <Radio
               id='Mentor'
