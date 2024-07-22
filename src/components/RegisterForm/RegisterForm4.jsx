@@ -6,12 +6,12 @@ import { Avatar, Stack, Typography } from '@mui/joy';
 import Button from '@mui/joy/Button';
 import ButtonGroup from '@mui/joy/ButtonGroup';
 import Badge from '@mui/joy/Badge';
-import Box from '@mui/joy/Box';
 import Input from '@mui/joy/Input';
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
-import Select from '@mui/joy/Select';
-import Option from '@mui/joy/Option';
-import FormControl from '@mui/joy/FormControl';
+import Select from '@mui/material/Select';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/joy/FormLabel';
 import FormHelperText from '@mui/joy/FormHelperText';
 
@@ -19,7 +19,7 @@ export default function RegisterForm4() {
   const history = useHistory();
   const dispatch = useDispatch();
   const [availability, setAvailability] = useState([{ day: '', time: '' }]);
-  const [avatar, setAvatar] = useState('');
+  const [avatar, setAvatar] = useState({avatar: ''});
   const days = useSelector((store) => store.dayReducer);
   const times = useSelector((store) => store.timeReducer);
   const regInfo = useSelector(
@@ -47,9 +47,11 @@ export default function RegisterForm4() {
           },
           (error, result) => {
             if (!error && result && result.event === 'success') {
-              setAvatar(result.info.secure_url);
+              setAvatar({...avatar,
+                avatar: result.info.secure_url
+              })
             }
-          }
+          },
         )
         .open();
   };
@@ -57,6 +59,7 @@ export default function RegisterForm4() {
   const handleDayChange = (index, event) => {
     console.log('Day Change event', event);
     console.log('Day Change index', index);
+    console.log('target.value', event.target.value);
     const newAvailability = [...availability];
     newAvailability[index].day = event.target.value;
     setAvailability(newAvailability);
@@ -65,6 +68,7 @@ export default function RegisterForm4() {
   const handleTimeChange = (index, event) => {
     console.log('Time Change event', event);
     console.log('Time Change index', index);
+    console.log('target.value', event.target.value);
     const newAvailability = [...availability];
     newAvailability[index].time = event.target.value;
     setAvailability(newAvailability);
@@ -144,7 +148,7 @@ export default function RegisterForm4() {
       </Stack>
       <br />
       <h4>Select Availability</h4>
-      {availability.map((avail, index) => (
+      {/* {availability.map((avail, index) => (
         <form className='formPanel' key={index}>
           <select onChange={(e) => handleDayChange(index, e)} value={avail.day}>
             <option value='' disabled>
@@ -171,38 +175,40 @@ export default function RegisterForm4() {
           </select>
           <button onClick={handleAdd}>+</button>
         </form>
-      ))}
-      {/* {availability.map((avail, index) => (
+      ))} */}
+      {availability.map((avail, index) => (
         <form className='formPanel' key={index}>
-          <FormControl value=''>
+          <FormControl>
             <Select
               placeholder='Select a day'
               onChange={(e) => handleDayChange(index, e)}
+              slotProps={{ input: { id: 'day' }}}
               value={avail.day}
             >
               {days.map((day) => (
-                <Option value={day.id} key={day.id}>
+                <MenuItem value={day.id} key={day.id}>
                   {day.day}
-                </Option>
+                </MenuItem>
               ))}
             </Select>
           </FormControl>
-          <FormControl value=''>
+          <FormControl>
             <Select
               placeholder='Select a time'
               onChange={(e) => handleTimeChange(index, e)}
+              slotProps={{ input: { id: 'time' }}}
               value={avail.time}
             >
               {times.map((time) => (
-                <Option key={time.id} value={time.id}>
+                <MenuItem key={time.id} value={time.id}>
                   {time.time}
-                </Option>
+                </MenuItem>
               ))}
             </Select>
           </FormControl>
           <Button onClick={handleAdd}>Add Availability</Button>
         </form>
-      ))} */}
+      ))}
       <ButtonGroup spacing='0.5rem' color='primary' variant='solid'>
         <Button onClick={() => history.push('/registration/3')}>Back</Button>
         <Button onClick={(event) => registerUser(event)}>Register</Button>
