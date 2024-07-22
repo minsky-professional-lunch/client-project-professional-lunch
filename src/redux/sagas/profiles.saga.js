@@ -34,7 +34,7 @@ function* fetchMentDetails(action) {
 function* editProfile(action) {
     try {
       yield axios.put(`/api/profile`, action.payload);
-      yield put({ type: 'FETCH_USER' });
+      yield put({ type: 'FETCH_PROFILE_DETAILS' });
     } catch (error) {
       console.log(`Error editing profile`, error);
   }

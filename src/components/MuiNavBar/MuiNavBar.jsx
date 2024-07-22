@@ -1,18 +1,18 @@
-import * as React from "react";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import Menu from "@mui/material/Menu";
-import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import Tooltip from "@mui/material/Tooltip";
-import MenuItem from "@mui/material/MenuItem";
-import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-import { useEffect } from "react";
+import * as React from 'react';
+import { useEffect } from 'react';
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import Menu from '@mui/material/Menu';
+import Container from '@mui/material/Container';
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
+import Tooltip from '@mui/material/Tooltip';
+import MenuItem from '@mui/material/MenuItem';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 const settings = [
   "Home",
@@ -33,7 +33,7 @@ export default function MuiNavBar() {
   const profiles = useSelector((store) => store.profileDetails);
 
   useEffect(() => {
-    dispatch({ type: "FETCH_PROFILE_DETAILS" });
+    dispatch({ type: 'FETCH_PROFILE_DETAILS' });
   }, []);
 
   const handleOpenUserMenu = (event) => {
@@ -121,10 +121,7 @@ export default function MuiNavBar() {
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar
-                    alt={profiles.first_name}
-                    src={profiles.profile.avatar}
-                  />
+                  <Avatar alt={profiles.first_name} src={profiles?.profile?.avatar} />
                 </IconButton>
               </Tooltip>
               <Menu
@@ -144,15 +141,8 @@ export default function MuiNavBar() {
                 onClose={handleCloseUserMenu}
               >
                 {filteredSettings.map((setting) => (
-                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                    <Typography
-                      textAlign="center"
-                      onClick={() => {
-                        navToSetting(setting);
-                      }}
-                    >
-                      {setting}
-                    </Typography>
+                  <MenuItem key={setting} onClick={() => {handleCloseUserMenu, navToSetting(setting)}}>
+                    <Typography textAlign="center">{setting}</Typography>
                   </MenuItem>
                 ))}
               </Menu>
@@ -161,41 +151,34 @@ export default function MuiNavBar() {
 
           {!user.id && (
             <Box sx={{ flexGrow: 0 }}>
-              <Tooltip title="Open settings">
-                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar src="/images/DefaultAvatar.png" />
-                </IconButton>
-              </Tooltip>
-              <Menu
-                sx={{ mt: "45px" }}
-                id="menu-appbar"
-                anchorEl={anchorElUser}
-                anchorOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                open={Boolean(anchorElUser)}
-                onClose={handleCloseUserMenu}
-              >
-                {loggedOut.map((log) => (
-                  <MenuItem key={log} onClick={handleCloseUserMenu}>
-                    <Typography
-                      textAlign="center"
-                      onClick={() => {
-                        navToLog(log);
-                      }}
-                    >
-                      {log}
-                    </Typography>
-                  </MenuItem>
-                ))}
-              </Menu>
-            </Box>
+            <Tooltip title="Open settings">
+              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                <Avatar src="/images/DefaultAvatar.png" />
+              </IconButton>
+            </Tooltip>
+            <Menu
+              sx={{ mt: '45px' }}
+              id="menu-appbar"
+              anchorEl={anchorElUser}
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              open={Boolean(anchorElUser)}
+              onClose={handleCloseUserMenu}
+            >
+              {loggedOut.map((log) => (
+                <MenuItem key={log} onClick={() => {handleCloseUserMenu, navToLog(log)}}>
+                  <Typography textAlign="center">{log}</Typography>
+                </MenuItem>
+              ))}
+            </Menu>
+          </Box>
           )}
         </Toolbar>
       </Container>

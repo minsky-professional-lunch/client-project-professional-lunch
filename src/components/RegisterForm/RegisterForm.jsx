@@ -1,10 +1,20 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import Button from '@mui/joy/Button';
+import ButtonGroup from '@mui/joy/ButtonGroup';
+import Checkbox from '@mui/joy/Checkbox';
+import Radio from '@mui/joy/Radio';
+import RadioGroup from '@mui/joy/RadioGroup';
+import Box from '@mui/joy/Box';
+import Input from '@mui/joy/Input';
+import FormControl from '@mui/joy/FormControl';
+import FormLabel from '@mui/joy/FormLabel';
+import FormHelperText from '@mui/joy/FormHelperText';
 
 function RegisterForm() {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   // const [firstName, setFirstName] = useState("");
   // const [lastName, setLastName] = useState("");
   // const [email, setEmail] = useState("");
@@ -32,7 +42,7 @@ function RegisterForm() {
     //   },
     // });
     dispatch({
-      type: "REGISTER",
+      type: 'REGISTER',
       payload: {
         username: username,
         password: password,
@@ -44,13 +54,7 @@ function RegisterForm() {
   };
 
   return (
-    <form className="formPanel" onSubmit={nextPage}>
-      <h2>Register User</h2>
-      {errors.registrationMessage && (
-        <h3 className="alert" role="alert">
-          {errors.registrationMessage}
-        </h3>
-      )}
+    <form className='formPanel' onSubmit={nextPage}>
       {/* <div>
         <label htmlFor="username">
           Username:
@@ -91,63 +95,77 @@ function RegisterForm() {
           onChange={(event) => setLastName(event.target.value)}
         />
       </div> */}
-      <div>
-        <label htmlFor="username">
-          Username:
-          <input
-            type="text"
-            name="username"
+      <Box
+        sx={{
+          py: 2,
+          display: 'grid',
+          gap: 2,
+          alignItems: 'center',
+          flexWrap: 'wrap',
+        }}
+      >
+        <h2>Register User</h2>
+        {errors.registrationMessage && (
+          <h3 className='alert' role='alert'>
+            {errors.registrationMessage}
+          </h3>
+        )}
+        <FormControl>
+          <FormLabel>Username</FormLabel>
+          <Input
+            label='Username'
+            placeholder='Username'
             value={username}
             required
             onChange={(event) => setUsername(event.target.value)}
           />
-        </label>
-      </div>
-      <div>
-        <label htmlFor="password">
-          Password:
-          <input
-            type="password"
-            name="password"
+          <FormHelperText>Please use an email address.</FormHelperText>
+        </FormControl>
+        <FormControl>
+          <FormLabel>Password</FormLabel>
+          <Input
+            label='Password'
+            placeholder='Password'
+            type='password'
             value={password}
             required
             onChange={(event) => setPassword(event.target.value)}
           />
-        </label>
-      </div>
+        </FormControl>
+        <FormControl>
+          <FormLabel>Select Mentor or Mentee:</FormLabel>
+          <RadioGroup>
+            <Radio
+              id='Mentor'
+              label='Mentor'
+              value={true}
+              name='role'
+              onChange={(event) => setRole(true)}
+            />
+            <Radio
+              id='Mentee'
+              label='Mentee'
+              value={false}
+              name='role'
+              onChange={(event) => setRole(false)}
+            />
+          </RadioGroup>
+        </FormControl>
+        <FormControl>
+          <FormLabel>Confirm age?</FormLabel>
+          <Checkbox label='I am 18 years of age or older' required />
+        </FormControl>
+        <ButtonGroup spacing='0.5rem' color='primary' variant='solid'>
+          <Button onClick={() => history.push('/login')} >Back</Button>
+          <Button className='btn' type='submit' name='submit' value='Next'>
+            Next
+          </Button>
+        </ButtonGroup>
+      </Box>
       {/* <div>
         Email
         <input onChange={(event) => setEmail(event.target.value)}></input>
       </div> */}
-      <div>
-        <div>
-          Mentor
-          <input
-            id="Mentor"
-            type="radio"
-            value={true}
-            name="role"
-            onChange={(event) => setRole(true)}
-          />
-        </div>
-        <div>
-          Mentee
-          <input
-            id="Mentee"
-            type="radio"
-            value={false}
-            name="role"
-            onChange={(event) => setRole(false)}
-          />
-        </div>
-        <div>
-          I am 18 or older:
-          <input type="checkbox" required></input>
-        </div>
-      </div>
-      <div>
-        <input className="btn" type="submit" name="submit" value="Next" />
-      </div>
     </form>
   );
 }
