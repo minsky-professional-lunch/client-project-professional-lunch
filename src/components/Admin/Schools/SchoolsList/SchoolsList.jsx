@@ -80,16 +80,16 @@ export default function SchoolsList() {
             setNewSchool({ school: event.target.value });
           }}
         />
-        <Button type='submit'>Add</Button>
+        <Button type='submit' variant='outlined'>Add</Button>
       </Stack>
 
       <div>
         <TableContainer>
-          <Table sx={{ maxWidth: 600 }} size='small'>
+          <Table sx={{ maxWidth: 1000 }} size='small'>
             <TableHead>
               <TableRow>
                 <StyledTableCell>Current Schools</StyledTableCell>
-                <StyledTableCell>Delete</StyledTableCell>
+                <StyledTableCell align='center'>Delete</StyledTableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -99,8 +99,8 @@ export default function SchoolsList() {
                   sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                 >
                   <TableCell>{school.school}</TableCell>
-                  <TableCell>
-                    <Button onClick={() => handleOpen(school.id)}>
+                  <TableCell align='center'>
+                    <Button onClick={() => handleOpen(school.id)} variant='outlined'>
                       Delete
                     </Button>
                   </TableCell>
@@ -114,8 +114,8 @@ export default function SchoolsList() {
         <Dialog open={open} onClose={handleClose}>
           <DialogTitle>{'Are you sure you want to delete school?'}</DialogTitle>
           <DialogActions>
-            <Button onClick={handleClose}>Cancel</Button>
-            <Button onClick={deleteSchool}>Yes, Delete</Button>
+            <Button onClick={handleClose} variant='outlined'>Cancel</Button>
+            <Button onClick={deleteSchool} variant='outlined' color='danger'>Yes, Delete</Button>
           </DialogActions>
         </Dialog>
       </div>

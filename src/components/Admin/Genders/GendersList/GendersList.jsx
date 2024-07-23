@@ -81,15 +81,15 @@ export default function GendersList() {
             setNewGender({ gender: event.target.value });
           }}
         />
-        <Button type='submit'>Add</Button>
+        <Button type='submit' variant='outlined'>Add</Button>
       </Stack>
       <div>
         <TableContainer >
-          <Table sx={{ maxWidth: 400 }} size='small'>
+          <Table sx={{ maxWidth: 1000 }} size='small'>
             <TableHead>
               <TableRow>
                 <StyledTableCell>Current Genders</StyledTableCell>
-                <StyledTableCell>Delete</StyledTableCell>
+                <StyledTableCell align='center'>Delete</StyledTableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -99,8 +99,8 @@ export default function GendersList() {
                   sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                 >
                   <TableCell>{gender.gender}</TableCell>
-                  <TableCell>
-                    <Button onClick={() => handleOpen(gender.id)}>
+                  <TableCell align='center'>
+                    <Button onClick={() => handleOpen(gender.id)} variant='outlined'>
                       Delete
                     </Button>
                   </TableCell>
@@ -114,8 +114,8 @@ export default function GendersList() {
         <Dialog open={open} onClose={handleClose}>
           <DialogTitle>{'Are you sure you want to delete gender?'}</DialogTitle>
           <DialogActions>
-            <Button onClick={handleClose}>Cancel</Button>
-            <Button onClick={deleteGender}>Yes, Delete</Button>
+            <Button onClick={handleClose} variant='outlined'>Cancel</Button>
+            <Button onClick={deleteGender} variant='outlined' color='danger'>Yes, Delete</Button>
           </DialogActions>
         </Dialog>
       </div>

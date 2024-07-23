@@ -74,18 +74,18 @@ export default function InterestsList() {
             setNewInterest({ interest: event.target.value });
           }}
         />
-        <Button type='submit' size='sm'>
+        <Button type='submit' variant='outlined'>
           Add
         </Button>
       </Stack>
 
       <div>
         <TableContainer>
-          <Table sx={{ maxWidth: 400 }} size='small'>
+          <Table sx={{ maxWidth: 1000 }} size='small'>
             <TableHead>
               <TableRow>
                 <StyledTableCell>Current Fields/Interests</StyledTableCell>
-                <StyledTableCell>Delete</StyledTableCell>
+                <StyledTableCell align='center'>Delete</StyledTableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -95,8 +95,8 @@ export default function InterestsList() {
                   sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                 >
                   <TableCell>{interest.interest}</TableCell>
-                  <TableCell>
-                    <Button onClick={() => handleOpen(interest.id)}>
+                  <TableCell align='center'>
+                    <Button onClick={() => handleOpen(interest.id)} variant='outlined'>
                       Delete
                     </Button>
                   </TableCell>
@@ -112,8 +112,8 @@ export default function InterestsList() {
             {'Are you sure you want to delete interest?'}
           </DialogTitle>
           <DialogActions>
-            <Button onClick={handleClose}>Cancel</Button>
-            <Button onClick={deleteInterest}>Yes, Delete</Button>
+            <Button onClick={handleClose} variant='outlined'>Cancel</Button>
+            <Button onClick={deleteInterest} variant='outlined'color='danger'>Yes, Delete</Button>
           </DialogActions>
         </Dialog>
       </div>

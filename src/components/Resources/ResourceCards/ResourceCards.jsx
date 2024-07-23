@@ -28,7 +28,7 @@ export default function ResourceCards({ resource }) {
   let description = resource.about;
 
   if (!showFullDescription) {
-    description = description.substring(0, 110) + '....';
+    description = description.substring(0, 90) + '....';
   }
 
   return (
@@ -41,8 +41,7 @@ export default function ResourceCards({ resource }) {
           ml: 1,
           mr: 1,
           width: 300,
-          height: 390
-          ,
+          height: 400,
           display: 'flex',
           flexDirection: 'column',
         }}
