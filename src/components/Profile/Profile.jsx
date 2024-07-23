@@ -73,24 +73,6 @@ export default function Profile() {
     console.log("selected avail obj", newValueObj);
     console.log("state Availability", availability);
 
-    // setEditProfile({
-    //   ...editProfile,
-    //   details: {
-    //     ...editProfile.details,
-    //     availability: [
-    //       ...editProfile.details.availability,
-    //       day_id: newValueId
-    //     ]
-    //   }
-    // })
-
-    // const updatedAvailability = [...editProfile.details.availability][index];
-    // console.log("updatedavail", updatedAvailability);
-    // updatedAvailability.day_id = Number(newValueId);
-    // console.log("updatedavail2", updatedAvailability);
-    // const myNewAvail = availability[index];
-    // myNewAvail.day_id = Number(newValueId);
-
     let copyAvail = [...availability];
     let updateCopyList = copyAvail.map((k) => {
       console.log("item to change...", k);
@@ -106,12 +88,6 @@ export default function Profile() {
     console.log("changes made to avail", updateCopyList);
     setAvailability(updateCopyList);
 
-    // setAvailability[index] = {
-    //   setEditProfile
-    //   ...updatedAvailability[index],
-    //   day_id: Number(event.target.value),
-    // };
-
     setEditProfile({
       ...editProfile,
       details: {
@@ -121,24 +97,47 @@ export default function Profile() {
     });
   };
 
-  const handleTimeChange = (index, event) => {
-    console.log("Time Change event", event);
-    console.log("Time Change index", index);
-    console.log("target.value", event.target.value);
+  const handleTimeChange = (index, newValueId, newValueObj) => {
+    let copyAvail = [...availability];
+    let updateCopyList = copyAvail.map((k) => {
+      console.log("item to change...", k);
+      if (k.availability_id === newValueObj?.availability_id) {
+        let copyK = { ...k };
+        copyK.time_id = Number(newValueId);
+        return copyK;
+      } else {
+        return k;
+      }
+    });
 
-    const updatedAvailability = [...editProfile.details.availability];
-    updatedAvailability[index] = {
-      ...updatedAvailability[index],
-      time_id: Number(event.target.value),
-    };
+    console.log("changes made to avail", updateCopyList);
+    setAvailability(updateCopyList);
 
     setEditProfile({
       ...editProfile,
       details: {
         ...editProfile.details,
-        availability: updatedAvailability,
+        availability: updateCopyList,
       },
     });
+
+    // console.log("Time Change event", event);
+    // console.log("Time Change index", index);
+    // console.log("target.value", event.target.value);
+
+    // const updatedAvailability = [...editProfile.details.availability];
+    // updatedAvailability[index] = {
+    //   ...updatedAvailability[index],
+    //   time_id: Number(event.target.value),
+    // };
+
+    // setEditProfile({
+    //   ...editProfile,
+    //   details: {
+    //     ...editProfile.details,
+    //     availability: updatedAvailability,
+    //   },
+    // });
   };
 
   const openWidget = () => {
@@ -341,7 +340,9 @@ export default function Profile() {
               </select>
               <select
                 value={availabilityItem?.time_id}
-                onChange={(event) => handleTimeChange(event.target.value)}
+                onChange={(event) =>
+                  handleTimeChange(index, event.target.value, availabilityItem)
+                }
               >
                 {times?.map((time) => (
                   <option key={time.id} value={time.id}>
