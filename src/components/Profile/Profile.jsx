@@ -247,11 +247,18 @@ export default function Profile() {
           </select> */}
           {profileAvailability.map((availabilityItem) => (
             <div>
-              <select>
-                <option>{availabilityItem.day}</option>
+              <select
+              defaultValue={availabilityItem.day}>
+                {days.map((day) => (
+                  <option>{day.day}</option>
+                ))}
               </select>
-              <select>
-                <option>{availabilityItem.time}</option>
+              <select
+                defaultValue={availabilityItem.time}
+              >
+                {times.map((time) => (
+                  <option>{time.time}</option>
+                ))}
               </select>
             </div>
           ))}
