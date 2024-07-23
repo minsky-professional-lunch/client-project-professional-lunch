@@ -1,14 +1,14 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { useScript } from '../../hooks/useScript';
-import React, { useEffect, useState } from 'react';
-import { Avatar, Stack, Typography } from '@mui/joy';
-import Button from '@mui/joy/Button';
-import Badge from '@mui/joy/Badge';
-import CameraAltIcon from '@mui/icons-material/CameraAlt';
-import Textarea from '@mui/joy/Textarea';
-import { TextField, Autocomplete } from '@mui/material';
-import Select from '@mui/joy/Select';
-import Option from '@mui/joy/Option';
+import { useDispatch, useSelector } from "react-redux";
+import { useScript } from "../../hooks/useScript";
+import React, { useEffect, useState } from "react";
+import { Avatar, Stack, Typography } from "@mui/joy";
+import Button from "@mui/joy/Button";
+import Badge from "@mui/joy/Badge";
+import CameraAltIcon from "@mui/icons-material/CameraAlt";
+import Textarea from "@mui/joy/Textarea";
+import { TextField, Autocomplete } from "@mui/material";
+import Select from "@mui/joy/Select";
+import Option from "@mui/joy/Option";
 
 export default function Profile() {
   const dispatch = useDispatch();
@@ -16,16 +16,23 @@ export default function Profile() {
   const schools = useSelector((store) => store.schoolsReducer);
   const genders = useSelector((store) => store.gendersReducer);
   const interestsStore = useSelector((store) => store.interestsReducer);
+  const profileAvailability = useSelector(
+    (store) => store.profileDetails.details.availability
+  );
+  const days = useSelector((store) => store.dayReducer);
+  const times = useSelector((store) => store.timeReducer);
   const [interests, setInterests] = useState(profile?.details?.interests);
 
   const [editProfile, setEditProfile] = useState({ profile: {}, details: {} });
-  console.log('Profile', profile, editProfile);
+  console.log("Profile", profile, editProfile);
 
   useEffect(() => {
-    dispatch({ type: 'FETCH_PROFILE_DETAILS' });
-    dispatch({ type: 'FETCH_SCHOOLS' });
-    dispatch({ type: 'FETCH_GENDERS' });
-    dispatch({ type: 'FETCH_INTERESTS' });
+    dispatch({ type: "FETCH_PROFILE_DETAILS" });
+    dispatch({ type: "FETCH_SCHOOLS" });
+    dispatch({ type: "FETCH_GENDERS" });
+    dispatch({ type: "FETCH_INTERESTS" });
+    dispatch({ type: "FETCH_DAYS" });
+    dispatch({ type: "FETCH_TIMES" });
   }, []);
 
   useEffect(() => {
@@ -34,14 +41,14 @@ export default function Profile() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log('clicked');
-    console.log('editProfile', editProfile);
-     dispatch({ type: 'EDIT_PROFILE', payload: editProfile });
+    console.log("clicked");
+    console.log("editProfile", editProfile);
+    dispatch({ type: "EDIT_PROFILE", payload: editProfile });
   };
 
   const handleInterestsChange = (event, newValue) => {
-    console.log('The New Value', newValue);
-    console.log('interests', interests);
+    console.log("The New Value", newValue);
+    console.log("interests", interests);
     if (newValue.length <= 5) {
       setInterests(newValue);
       setEditProfile({
@@ -59,12 +66,12 @@ export default function Profile() {
       window.cloudinary
         .createUploadWidget(
           {
-            sources: ['local', 'url', 'camera'],
-            cloudName: 'dz2bil44j',
-            uploadPreset: 'hl5wdxak',
+            sources: ["local", "url", "camera"],
+            cloudName: "dz2bil44j",
+            uploadPreset: "hl5wdxak",
           },
           (error, result) => {
-            if (!error && result && result.event === 'success') {
+            if (!error && result && result.event === "success") {
               setEditProfile({
                 ...editProfile,
                 profile: {
@@ -84,49 +91,49 @@ export default function Profile() {
   }
 
   return (
-    <div className='container'>
+    <div className="container">
       <h1>My Profile</h1>
       <form onSubmit={handleSubmit}>
         <Stack
-          direction='column'
-          justifyContent='space-evenly'
-          alignItems='center'
+          direction="column"
+          justifyContent="space-evenly"
+          alignItems="center"
           spacing={3}
         >
           {/* <Typography>Edit Profile Picture</Typography> */}
           <Badge
             onClick={openWidget}
-            anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-            variant='outlined'
+            anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+            variant="outlined"
             badgeContent={
               <CameraAltIcon
                 sx={{
-                  width: '35px',
-                  height: '35px',
-                  color: '#343A40',
-                  cursor: 'pointer',
+                  width: "35px",
+                  height: "35px",
+                  color: "#343A40",
+                  cursor: "pointer",
                 }}
               />
             }
-            badgeInset='14%'
-            sx={{ '--Badge-paddingX': '0px' }}
+            badgeInset="14%"
+            sx={{ "--Badge-paddingX": "0px" }}
           >
             <Avatar
-              variant='outlined'
+              variant="outlined"
               sx={{ width: 150, height: 150 }}
               src={editProfile?.profile.avatar}
             />
           </Badge>
-          {useScript('https://widget.cloudinary.com/v2.0/global/all.js')}
+          {useScript("https://widget.cloudinary.com/v2.0/global/all.js")}
         </Stack>
-        <Stack direction='row' spacing={3}>
+        <Stack direction="row" spacing={3}>
           <Typography>Bio</Typography>
           <Textarea
-            placeholder='Bio'
-            type='text'
-            id='bio'
+            placeholder="Bio"
+            type="text"
+            id="bio"
             value={editProfile?.profile?.bio}
-            className='form-control'
+            className="form-control"
             onChange={(event) =>
               setEditProfile({
                 ...editProfile,
@@ -135,13 +142,13 @@ export default function Profile() {
             }
           />
         </Stack>
-        <Stack direction='row' spacing={3}>
+        <Stack direction="row" spacing={3}>
           <Typography>Email</Typography>
           <Textarea
-            placeholder='Email'
-            type='text'
-            id='email'
-            className='form-control'
+            placeholder="Email"
+            type="text"
+            id="email"
+            className="form-control"
             value={editProfile?.profile?.email}
             onChange={(event) =>
               setEditProfile({
@@ -151,13 +158,13 @@ export default function Profile() {
             }
           />
         </Stack>
-        <Stack direction='row' spacing={3}>
+        <Stack direction="row" spacing={3}>
           <Typography>LinkedIn</Typography>
           <Textarea
-            placeholder='LinkedIn'
-            className='form-control'
-            type='text'
-            id='linkedin'
+            placeholder="LinkedIn"
+            className="form-control"
+            type="text"
+            id="linkedin"
             value={editProfile?.profile?.linkedin}
             onChange={(e) =>
               setEditProfile({
@@ -170,7 +177,7 @@ export default function Profile() {
             }
           />
         </Stack>
-        <Stack direction='row' spacing={3}>
+        <Stack direction="row" spacing={3}>
           <Typography>Gender</Typography>
           <select
             value={editProfile?.profile.gender}
@@ -191,7 +198,7 @@ export default function Profile() {
             ))}
           </select>
         </Stack>
-        <Stack direction='row' spacing={3}>
+        <Stack direction="row" spacing={3}>
           <Typography>School</Typography>
           <select
             value={editProfile?.profile.school}
@@ -220,19 +227,42 @@ export default function Profile() {
           renderInput={(params) => (
             <TextField
               {...params}
-              variant='outlined'
-              label='Add Up To 5 Interests'
-              placeholder='Interests...'
+              variant="outlined"
+              label="Add Up To 5 Interests"
+              placeholder="Interests..."
             />
           )}
         />
-        <Typography>Availability</Typography>
-        <Button sx={{ bgcolor: '#1BAC5C' }} type='submit'>
+        <div>
+          <Typography>Availability</Typography>
+          {/* <select>
+            {days.map((day) => (
+              <option>{day.day}</option>
+            ))}
+          </select>
+          <select>
+            {times.map((time) => (
+              <option>{time.time}</option>
+            ))}
+          </select> */}
+          {profileAvailability.map((availabilityItem) => (
+            <div>
+              <select>
+                <option>{availabilityItem.day}</option>
+              </select>
+              <select>
+                <option>{availabilityItem.time}</option>
+              </select>
+            </div>
+          ))}
+        </div>
+
+        <Button sx={{ bgcolor: "#1BAC5C" }} type="submit">
           Save Changes
         </Button>
       </form>
       {/* This just sets up the window.cloudinary widget */}
-      {useScript('https://widget.cloudinary.com/v2.0/global/all.js')}
+      {useScript("https://widget.cloudinary.com/v2.0/global/all.js")}
       <br />
     </div>
   );
