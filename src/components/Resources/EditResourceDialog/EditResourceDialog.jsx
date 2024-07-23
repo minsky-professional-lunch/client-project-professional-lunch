@@ -122,12 +122,13 @@ export default function EditResourceDialog({ open, closeEditResource, resource }
         <DialogActions>
           <Button
             color='neutral'
+            variant='outlined'
             type='button'
             onClick={() => closeEditResource()}
           >
             Cancel
           </Button>
-          <Button type='submit'>Submit</Button>
+          <Button type='submit' color='primary' variant='outlined'>Submit</Button>
         </DialogActions>
       </Dialog>
     </>

@@ -75,18 +75,18 @@ export default function ResourceCards({ resource }) {
             {user.isAdmin && (
               <>
                 <Button
-                  variant='solid'
                   size='md'
-                  color='primary'
+                  color='danger'
+                  variant='outlined'
                   sx={{ ml: 'auto', alignSelf: 'center', fontWeight: 600 }}
                   onClick={() => deleteResource(resource.id)}
                 >
                   Remove
                 </Button>
                 <Button
-                  variant='solid'
                   size='md'
-                  color='primary'
+                  color='neutral'
+                  variant='outlined'
                   sx={{ ml: '4px', alignSelf: 'center', fontWeight: 600 }}
                   onClick={() => setEditResourceIsOpen(true)}
                 >
