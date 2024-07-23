@@ -33,33 +33,7 @@ export default function MyMenteesItem({ mentee }) {
 
   return (
     <>
-    {/* <div className='container'>
-      <Grid container justifyContent='center'>
-        <Box sx={{ maxHeight: '80vh' }}>
-          <Card sx={{ width: '80vw' }}>
-            <Typography level='title-lg' noWrap>
-              {mentee.mentee_first_name} {mentee.mentee_last_name}
-            </Typography>
-            <CardActions>
-              <Stack
-                direction='row'
-                justifyContent='space-evenly'
-                alignItems='center'
-                spacing={4}
-              >
-                <Button
-                  onClick={() => menteeDetails(mentee.mentee_user_id)}
-                  sx={{ cursor: 'pointer' }}
-                >
-                  View Profile
-                </Button>
-              </Stack>
-            </CardActions>
-          </Card>
-        </Box>
-      </Grid>
-    </div> */}
-        <div className='container'>
+    <div className='container'>
         <Grid container justifyContent='center'>
           <Box sx={{ maxHeight: '80vh', marginBottom: '10px' }}>
             <Card sx={{ width: '75vw', boxShadow: 'lg', bgcolor: 'background.level1', cursor: 'pointer' }}>

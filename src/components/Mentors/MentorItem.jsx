@@ -40,9 +40,10 @@ export default function MentorItem( {mentor} ) {
         <div className='container'>
             <Grid container justifyContent="center">
                 <Box sx={{ maxHeight: '80vh' }}>
-                <Card sx={{ width: '80vw' }}>
+                <Card sx={{ width: '80vw', margin: '5px' }}>
                     <Stack direction='row' alignItems='center' spacing={2}>
-                        <Avatar src={mentor.avatar} sx={{ '--Avatar-size': '6rem', marginBottom: '3px' }} />
+                        <Avatar src={mentor.avatar} sx={{ '--Avatar-size': '6rem', marginBottom: '3px', cursor: 'pointer' }}
+                            onClick={() => mentorDetails(mentor.user_id)} />
                         <Stack direction='column'>
                             <Typography level="h3" noWrap>
                                 {mentor.first_name} {mentor.last_name}
@@ -57,28 +58,9 @@ export default function MentorItem( {mentor} ) {
                                     Requested
                                 </Button>
                                 }
-                                <Button onClick={() => mentorDetails(mentor.user_id)} sx={{ cursor: 'pointer' }}>
-                                    View Profile
-                                </Button>
                             </Stack>
                         </Stack>
                     </Stack>
-                    {/* <CardActions>
-                        <Stack direction="row" justifyContent="space-evenly" alignItems="center" spacing={4}>
-                            {mentor.status != 'pending' ? 
-                            <Button onClick={() => connect(mentor.id)}>
-                                Connect
-                            </Button>
-                            : 
-                            <Button>
-                                Requested
-                            </Button>
-                            }
-                            <Button onClick={() => mentorDetails(mentor.user_id)} sx={{ cursor: 'pointer' }}>
-                                View Profile
-                            </Button>
-                        </Stack>
-                    </CardActions> */}
                 </Card>
                 </Box>
             </Grid>
