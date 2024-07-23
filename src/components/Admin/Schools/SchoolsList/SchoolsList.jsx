@@ -85,7 +85,7 @@ export default function SchoolsList() {
 
       <div>
         <TableContainer>
-          <Table sx={{ maxWidth: 1000 }} size='small'>
+          <Table sx={{ maxWidth: 800 }} size='small'>
             <TableHead>
               <TableRow>
                 <StyledTableCell>Current Schools</StyledTableCell>
