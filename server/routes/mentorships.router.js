@@ -27,7 +27,7 @@ router.get('/', rejectUnauthenticated, async (req, res) => {
                 mentee.email AS mentee_email, 
                 mentee.bio AS mentee_bio, 
                 mentee.linkedin AS mentee_linkedin, 
-                mentee.school AS mentee_school, 
+                mentee_school.school AS mentee_school, 
                 mentee.calendar_link AS mentee_calendar_link, 
                 mentee.avatar AS mentee_avatar,
                 mentee_user.id AS mentee_user_id,
@@ -42,6 +42,8 @@ router.get('/', rejectUnauthenticated, async (req, res) => {
                 "user" AS mentee_user ON mentee.user_id = mentee_user.id
             JOIN 
                 "user" AS mentor_user ON mentor.user_id = mentor_user.id
+            LEFT JOIN 
+                schools AS mentee_school ON mentee.school = mentee_school.id
             WHERE 
                 mentee_user.id = $1 OR mentor_user.id = $1;`,
       [req.user.id]

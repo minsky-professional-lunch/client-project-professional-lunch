@@ -48,10 +48,16 @@ function MentorHomePage() {
       {meetingRequests.map((meeting) => (
         <MeetingItem key={meeting.id} meeting={meeting} />
       ))}
-      <h3>Upcoming Meetings</h3>
-      {acceptedMeetings.map((meeting) => (
-        <MeetingItem key={meeting.id} meeting={meeting} />
-      ))}
+        {acceptedMeetings.length > 0 ? 
+          <>
+          <h3>Upcoming Meetings</h3>
+          {acceptedMeetings.map((meeting) => (
+            <MeetingItem key={meeting.id} meeting={meeting} />
+          ))}
+          </>
+        : 
+          <></>
+        }
       </>
       :
       <h3>No upcoming meetings.</h3> 

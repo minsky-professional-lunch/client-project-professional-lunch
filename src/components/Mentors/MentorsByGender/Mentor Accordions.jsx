@@ -128,7 +128,7 @@ export default function MentorAccordions() {
           <NonBinaryMentors />
         </AccordionDetails>
       </Accordion>
-      <Accordion>
+      {/* <Accordion>
         <AccordionSummary
           expandIcon={<ArrowDropDownIcon />}
           aria-controls='panel1-content'
@@ -151,7 +151,7 @@ export default function MentorAccordions() {
         <AccordionDetails>
           <OtherMentors />
         </AccordionDetails>
-      </Accordion>
+      </Accordion> */}
     </>
   );
 }

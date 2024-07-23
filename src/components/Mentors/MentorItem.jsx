@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom';
 import AspectRatio from '@mui/joy/AspectRatio';
 import Card from '@mui/joy/Card';
 import Typography from '@mui/joy/Typography';
-import { Box, CardOverflow, Grid } from '@mui/joy';
+import { Avatar, Box, CardOverflow, Grid } from '@mui/joy';
 import { CardActions, CardContent, Stack } from "@mui/material";
 import Button from '@mui/joy/Button';
 
@@ -40,26 +40,27 @@ export default function MentorItem( {mentor} ) {
         <div className='container'>
             <Grid container justifyContent="center">
                 <Box sx={{ maxHeight: '80vh' }}>
-                <Card sx={{ width: '80vw' }}>
-                    <Typography level="title-lg" noWrap>
-                        {mentor.first_name} {mentor.last_name}
-                    </Typography>
-                    <CardActions>
-                        <Stack direction="row" justifyContent="space-evenly" alignItems="center" spacing={4}>
-                            {mentor.status != 'pending' ? 
-                            <Button onClick={() => connect(mentor.id)}>
-                                Connect
-                            </Button>
-                            : 
-                            <Button>
-                                Requested
-                            </Button>
-                            }
-                            <Button onClick={() => mentorDetails(mentor.user_id)} sx={{ cursor: 'pointer' }}>
-                                View Profile
-                            </Button>
+                <Card sx={{ width: '80vw', margin: '5px' }}>
+                    <Stack direction='row' alignItems='center' spacing={2}>
+                        <Avatar src={mentor.avatar} sx={{ '--Avatar-size': '6rem', marginBottom: '3px', cursor: 'pointer' }}
+                            onClick={() => mentorDetails(mentor.user_id)} />
+                        <Stack direction='column'>
+                            <Typography level="h3" noWrap>
+                                {mentor.first_name} {mentor.last_name}
+                            </Typography>
+                            <Stack direction='row' justifyContent="space-evenly" alignItems="center" spacing={2} sx={{ marginTop: '10px'}}>
+                                {mentor.status != 'pending' ? 
+                                <Button onClick={() => connect(mentor.id)}>
+                                    Connect
+                                </Button>
+                                : 
+                                <Button>
+                                    Requested
+                                </Button>
+                                }
+                            </Stack>
                         </Stack>
-                    </CardActions>
+                    </Stack>
                 </Card>
                 </Box>
             </Grid>
