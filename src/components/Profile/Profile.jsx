@@ -60,6 +60,45 @@ export default function Profile() {
       });
     }
   };
+  const handleDayChange = (index, event) => {
+    console.log("Day Change event", event);
+    console.log("Day Change index", index);
+    console.log("target.value", event.target.value);
+
+    const updatedAvailability = [...editProfile.details.availability];
+    updatedAvailability[index] = {
+      ...updatedAvailability[index],
+      day_id: Number(event.target.value),
+    };
+
+    setEditProfile({
+      ...editProfile,
+      details: {
+        ...editProfile.details,
+        availability: updatedAvailability,
+      },
+    });
+  };
+
+  const handleTimeChange = (index, event) => {
+    console.log("Time Change event", event);
+    console.log("Time Change index", index);
+    console.log("target.value", event.target.value);
+
+    const updatedAvailability = [...editProfile.details.availability];
+    updatedAvailability[index] = {
+      ...updatedAvailability[index],
+      time_id: Number(event.target.value),
+    };
+
+    setEditProfile({
+      ...editProfile,
+      details: {
+        ...editProfile.details,
+        availability: updatedAvailability,
+      },
+    });
+  };
 
   const openWidget = () => {
     !!window.cloudinary &&
@@ -245,19 +284,26 @@ export default function Profile() {
               <option>{time.time}</option>
             ))}
           </select> */}
-          {profileAvailability.map((availabilityItem) => (
-            <div>
+          {profileAvailability.map((availabilityItem, index) => (
+            <div key={index}>
               <select
-              defaultValue={availabilityItem.day}>
+                value={availabilityItem.day_id}
+                onChange={(event) => handleDayChange(index, event)}
+              >
                 {days.map((day) => (
-                  <option>{day.day}</option>
+                  <option key={day.id} value={day.id}>
+                    {day.day}
+                  </option>
                 ))}
               </select>
               <select
-                defaultValue={availabilityItem.time}
+                value={availabilityItem.time_id}
+                onChange={(event) => handleTimeChange(index, event)}
               >
                 {times.map((time) => (
-                  <option>{time.time}</option>
+                  <option key={time.id} value={time.id}>
+                    {time.time}
+                  </option>
                 ))}
               </select>
             </div>
