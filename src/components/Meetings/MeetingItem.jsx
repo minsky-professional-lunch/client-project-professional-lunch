@@ -5,10 +5,11 @@ import { useHistory } from 'react-router-dom';
 import AspectRatio from '@mui/joy/AspectRatio';
 import Card from '@mui/joy/Card';
 import Typography from '@mui/joy/Typography';
-import { Box, CardOverflow, Grid } from '@mui/joy';
-import { CardActions, CardContent, Stack } from "@mui/material";
+import { Avatar, Box, CardOverflow, Grid } from '@mui/joy';
+import { CardActions, CardContent, Stack } from "@mui/joy";
 import Button from '@mui/joy/Button';
 import moment from 'moment/moment';
+import ButtonGroup from '@mui/joy/ButtonGroup';
 
 export default function MeetingItem( {meeting} ) {
     const user = useSelector(store => store.user);
@@ -36,39 +37,36 @@ export default function MeetingItem( {meeting} ) {
             {user.isMentor ? 
             <Grid container justifyContent="center">
                 <Box sx={{ maxHeight: '80vh' }}>
-                <Card sx={{ width: '80vw' }}>
-                    <Typography level="title-lg" noWrap>
-                        Meeting with {meeting.mentee_first_name} {meeting.mentee_last_name}
-                    </Typography>
-                    <Typography level="title-lg" noWrap>
-                        {moment(meeting.meeting_date).format('LL')}
-                    </Typography>
-                    <Typography level="title-md" noWrap>
-                        {moment(meeting.meeting_start, "hh:mm:ss").format('h:mm A')} - {moment(meeting.meeting_end, "hh:mm:ss").format('h:mm A')}
-                    </Typography>
-                    <CardActions>
-                        <Stack direction="row" justifyContent="space-evenly" alignItems="center" spacing={2}>
-                            {meeting.meeting_status === 'pending' ? 
-                                <>
-                                <Button onClick={() => accept(meeting.meeting_id)}>
-                                    Accept
-                                </Button>
-                                <Button onClick={() => deny(meeting.meeting_id)}>
-                                    Deny
-                                </Button>
-                                <Button onClick={() => seeDetails(meeting.meeting_id)}>
-                                    View Details
-                                </Button>
-                                </>
-                            : 
-                                <>
-                                 <Button onClick={() => seeDetails(meeting.meeting_id)}>
-                                    View Details
-                                </Button>
-                                </>
-                            }
+                <Card sx={{ width: '80vw', boxShadow: 'lg', bgcolor: 'background.level1' }}>
+                <CardContent sx={{ cursor: 'pointer' }}
+                                      onClick={() => seeDetails(meeting.meeting_id)}>
+                    <Stack direction='row' spacing={2}>
+                        <Avatar src={meeting.mentee_avatar} sx={{ '--Avatar-size': '5rem'}}/>
+                        <Stack direction='column'>
+                            <Typography level="title-lg" noWrap sx={{ width: '95%' }}>
+                                Meeting with {meeting.mentee_first_name} {meeting.mentee_last_name}
+                            </Typography>
+                            <Typography level="body-md" noWrap>
+                                {moment(meeting.meeting_date).format('LL')}
+                            </Typography>
+                            <Typography level="body-md" noWrap>
+                                {moment(meeting.meeting_start, "hh:mm:ss").format('h:mm A')} - {moment(meeting.meeting_end, "hh:mm:ss").format('h:mm A')}
+                            </Typography>
                         </Stack>
-                    </CardActions>
+                    </Stack>
+                </CardContent>
+                    {meeting.meeting_status === 'pending' ? 
+                    <CardOverflow sx={{ bgcolor: 'background.level2', alignItems: 'center' }}>
+                        <CardActions buttonFlex="1">
+                            <ButtonGroup variant="outlined" size='lg' sx={{ bgcolor: 'background.surface' }}>
+                                <Button onClick={() => accept(meeting.meeting_id)}>Accept</Button>
+                                <Button onClick={() => deny(meeting.meeting_id)}>Deny</Button>
+                            </ButtonGroup>
+                        </CardActions>
+                    </CardOverflow>
+                    :
+                    <></> 
+                    }
                 </Card>
                 </Box>
             </Grid>     

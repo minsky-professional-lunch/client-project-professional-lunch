@@ -108,7 +108,9 @@ router.get("/:id", async (req, res) => {
                                 profiles.user_id,
                                 array_agg(json_build_object(
                                     'availability_id', availability.id,
+                                    'day_id', days.id,
                                     'day', days.day,
+                                    'time_id', times.id,
                                     'time', times.time
                                 )) AS availability
                             FROM
