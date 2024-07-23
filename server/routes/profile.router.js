@@ -203,7 +203,7 @@ router.post("/", async (req, res) => {
       );
     }
 
-    console.log("interests:", req.body);
+    // console.log("interests:", req.body);
     const queryText2 = `UPDATE "user" SET "isMentor"=$1 WHERE "user".id=$2;`;
     await pool.query(queryText2, [req.user.isMentor, req.user.id]);
     await pool.query;
@@ -239,6 +239,18 @@ router.put("/", rejectUnauthenticated, async (req, res) => {
       await pool.query(
         `INSERT INTO profiles_interests (profile_id, interest_id) VALUES ($1, $2)`,
         [req.body.profile.id, interest.id]
+      );
+    }
+
+    await pool.query(`DELETE FROM availability WHERE profile_id=$1`, [
+      req.body.profile.id,
+    ]);
+    const availabilities = req.body.details.availability;
+    console.log('availabilities:', availabilities)
+    for (availability of availabilities) {
+      await pool.query(
+        `INSERT INTO availability (profile_id, day, time) VALUES ($1, $2, $3)`,
+        [req.body.profile.id, availability.day_id, availability.time_id]
       );
     }
     res.sendStatus(200);
