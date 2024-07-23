@@ -11,12 +11,15 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
+import TableCell, {tableCellClasses}  from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import { Divider } from '@mui/material';
+import Stack from '@mui/material/Stack';
+import { styled } from '@mui/material/styles';
 
 export default function InterestsList() {
   const dispatch = useDispatch();
@@ -48,36 +51,41 @@ export default function InterestsList() {
     setNewInterest({ interest: '' });
   };
 
+  const StyledTableCell = styled(TableCell)(({ theme }) => ({
+    [`&.${tableCellClasses.head}`]: {
+      backgroundColor: theme.palette.common.black,
+      color: theme.palette.common.white,
+    },
+    [`&.${tableCellClasses.body}`]: {
+      fontSize: 14,
+    },
+  }));
+
   return (
-    <Box textAlign='center' sx={{}}>
-      <div>
-        <Box
-          component='form'
-          sx={{ '& > :not(style)': { m: 1, width: '25ch' } }}
-          onSubmit={handleSubmit}
-        >
-          <TextField
-            label='Add Interest'
-            id='outlined-size-small'
-            size='small'
-            value={newInterest.interest}
-            onChange={(event) => {
-              setNewInterest({ interest: event.target.value });
-            }}
-          />
-          <Button type='submit'>
-            Add
-          </Button>
-        </Box>
-      </div>
+    <Box sx={{}}>
+      <Typography>Add New Interest</Typography>
+      <Stack component='form' direction='row' spacing={2} mb={2} onSubmit={handleSubmit}>
+        <TextField
+          label='Add Interest'
+          id='outlined-size-small'
+          size='small'
+          value={newInterest.interest}
+          onChange={(event) => {
+            setNewInterest({ interest: event.target.value });
+          }}
+        />
+        <Button type='submit' size='sm'>
+          Add
+        </Button>
+      </Stack>
 
       <div>
-        <TableContainer component={Paper}>
+        <TableContainer>
           <Table sx={{ maxWidth: 400 }} size='small'>
             <TableHead>
               <TableRow>
-                <TableCell>Interest</TableCell>
-                <TableCell>Delete</TableCell>
+                <StyledTableCell>Current Fields/Interests</StyledTableCell>
+                <StyledTableCell>Delete</StyledTableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -88,9 +96,7 @@ export default function InterestsList() {
                 >
                   <TableCell>{interest.interest}</TableCell>
                   <TableCell>
-                    <Button
-                      onClick={() => handleOpen(interest.id)}
-                    >
+                    <Button onClick={() => handleOpen(interest.id)}>
                       Delete
                     </Button>
                   </TableCell>

@@ -9,15 +9,18 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import Stack from '@mui/material/Stack';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
+import TableCell, {tableCellClasses} from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import { Divider } from '@mui/material';
 import EditGenderDialog from '../EditGenderDialog/EditGenderDialog';
+import { styled } from '@mui/material/styles';
 
 export default function GendersList() {
   const dispatch = useDispatch();
@@ -49,67 +52,73 @@ export default function GendersList() {
     setNewGender({ gender: '' });
   };
 
-  return (
-    <div>
-      <div>
-        <div>
-          <Box
-            component='form'
-            sx={{ '& > :not(style)': { m: 1, width: '25ch' } }}
-            onSubmit={handleSubmit}
-          >
-            <TextField
-              label='Add Gender'
-              id='outlined-size-small'
-              size='small'
-              value={newGender.gender}
-              onChange={(event) => {
-                setNewGender({ gender: event.target.value });
-              }}
-            />
-            <Button type='submit'>Add</Button>
-          </Box>
-        </div>
+  const StyledTableCell = styled(TableCell)(({ theme }) => ({
+    [`&.${tableCellClasses.head}`]: {
+      backgroundColor: theme.palette.common.black,
+      color: theme.palette.common.white,
+    },
+    [`&.${tableCellClasses.body}`]: {
+      fontSize: 14,
+    },
+  }));
 
-        <div>
-          <TableContainer component={Paper}>
-            <Table sx={{ maxWidth: 400 }} size='small'>
-              <TableHead>
-                <TableRow>
-                  <TableCell>Gender</TableCell>
-                  <TableCell>Delete</TableCell>
+  return (
+    <Box>
+      <Typography>Add New Gender</Typography>
+      <Stack
+        component='form'
+        direction='row'
+        spacing={2}
+        mb={2}
+        onSubmit={handleSubmit}
+      >
+        <TextField
+          label='Add Gender'
+          id='outlined-size-small'
+          size='small'
+          value={newGender.gender}
+          onChange={(event) => {
+            setNewGender({ gender: event.target.value });
+          }}
+        />
+        <Button type='submit'>Add</Button>
+      </Stack>
+      <div>
+        <TableContainer >
+          <Table sx={{ maxWidth: 400 }} size='small'>
+            <TableHead>
+              <TableRow>
+                <StyledTableCell>Current Genders</StyledTableCell>
+                <StyledTableCell>Delete</StyledTableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {genders.map((gender) => (
+                <TableRow
+                  key={gender.id}
+                  sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                >
+                  <TableCell>{gender.gender}</TableCell>
+                  <TableCell>
+                    <Button onClick={() => handleOpen(gender.id)}>
+                      Delete
+                    </Button>
+                  </TableCell>
                 </TableRow>
-              </TableHead>
-              <TableBody>
-                {genders.map((gender) => (
-                  <TableRow
-                    key={gender.id}
-                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                  >
-                    <TableCell>{gender.gender}</TableCell>
-                    <TableCell>
-                      <Button onClick={() => handleOpen(gender.id)}>
-                        Delete
-                      </Button>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
-        </div>
-        <div>
-          <Dialog open={open} onClose={handleClose}>
-            <DialogTitle>
-              {'Are you sure you want to delete gender?'}
-            </DialogTitle>
-            <DialogActions>
-              <Button onClick={handleClose}>Cancel</Button>
-              <Button onClick={deleteGender}>Yes, Delete</Button>
-            </DialogActions>
-          </Dialog>
-        </div>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
       </div>
-    </div>
+      <div>
+        <Dialog open={open} onClose={handleClose}>
+          <DialogTitle>{'Are you sure you want to delete gender?'}</DialogTitle>
+          <DialogActions>
+            <Button onClick={handleClose}>Cancel</Button>
+            <Button onClick={deleteGender}>Yes, Delete</Button>
+          </DialogActions>
+        </Dialog>
+      </div>
+    </Box>
   );
 }
