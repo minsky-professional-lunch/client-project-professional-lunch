@@ -241,18 +241,30 @@ router.put("/", rejectUnauthenticated, async (req, res) => {
         [req.body.profile.id, interest.id]
       );
     }
-
+    await pool.query(`DELETE FROM profiles_availability WHERE profile_id=$1`, [
+      req.body.profile.id,
+    ]);
     await pool.query(`DELETE FROM availability WHERE profile_id=$1`, [
       req.body.profile.id,
     ]);
+
     const availabilities = req.body.details.availability;
-    console.log('availabilities:', availabilities)
-    for (availability of availabilities) {
-      await pool.query(
-        `INSERT INTO availability (profile_id, day, time) VALUES ($1, $2, $3)`,
+    console.log("availabilities:", availabilities);
+    for (const availability of availabilities) {
+      const result = await pool.query(
+        `INSERT INTO availability (profile_id, day, time) VALUES ($1, $2, $3)
+    RETURNING id;`,
         [req.body.profile.id, availability.day_id, availability.time_id]
       );
+
+      const availabilityID = result.rows[0].id;
+
+      await pool.query(
+        `INSERT INTO profiles_availability (profile_id, availability_id) VALUES ($1, $2);`,
+        [req.body.profile.id, availabilityID]
+      );
     }
+
     res.sendStatus(200);
   } catch (error) {
     console.log("Error in updating profile", error);
