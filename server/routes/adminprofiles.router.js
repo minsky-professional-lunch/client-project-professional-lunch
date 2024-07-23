@@ -56,7 +56,8 @@ LEFT JOIN
 LEFT JOIN
     interests_cte ON profiles.id = interests_cte.profile_id
 LEFT JOIN
-    availability_cte ON profiles.id = availability_cte.profile_id;`)
+    availability_cte ON profiles.id = availability_cte.profile_id
+ORDER BY profiles.last_name;`)
     .then((result) => {
       res.send(result.rows);
     })

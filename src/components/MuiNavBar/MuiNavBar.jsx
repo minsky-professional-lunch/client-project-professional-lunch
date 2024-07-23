@@ -83,7 +83,7 @@ export default function MuiNavBar() {
     >
       <Container maxWidth='xl'>
         <Toolbar disableGutters>
-          {/* <Typography
+          <Typography
             variant='h6'
             noWrap
             component='a'
@@ -98,7 +98,7 @@ export default function MuiNavBar() {
             }}
           >
             Professional Launch
-          </Typography> */}
+          </Typography>
           <Typography
             variant='h6'
             noWrap

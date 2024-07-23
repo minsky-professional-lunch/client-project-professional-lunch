@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import Grid from '@mui/joy/Grid';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
+import Button from '@mui/joy/Button';
 import Typography from '@mui/material/Typography';
 import ResourceCards from '../ResourceCards/ResourceCards';
 import AddResource from '../AddResourceDialog/AddResourceDialog';
@@ -37,6 +37,7 @@ export default function Resources() {
           <Button
             sx={{ mb: 8 }}
             variant='outlined'
+            color='success'
             onClick={() => setAddResourceIsOpen(true)}
           >
             Add Resource

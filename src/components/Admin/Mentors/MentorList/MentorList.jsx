@@ -22,8 +22,8 @@ export default function MentorList() {
         <Table stripe={stripe}>
           <thead>
             <tr>
-              <th style={{ width: '10%' }}>First Name</th>
               <th style={{ width: '10%' }}>Last Name</th>
+              <th style={{ width: '10%' }}>First Name</th>
               <th style={{ width: '15%' }}>Email</th>
               <th style={{ width: '15%' }}>School</th>
               <th style={{ width: '15%' }}>LinkedIn</th>
@@ -35,8 +35,8 @@ export default function MentorList() {
           <tbody>
             {mentors.map((mentor) => (
               <tr key={mentor.id}>
-                <td>{mentor.first_name}</td>
                 <td>{mentor.last_name}</td>
+                <td>{mentor.first_name}</td>
                 <td>{mentor.email}</td>
                 <td>{mentor.school}</td>
                 <td>

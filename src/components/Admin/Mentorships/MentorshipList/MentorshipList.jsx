@@ -33,8 +33,8 @@ export default function MentorshipList() {
           <tbody>
             {mentorships.map((mentorship) => (
             <tr key={mentorship.id}>
-              <td>{mentorship.mentor_first_name} {mentorship.mentor_last_name}</td>
-              <td>{mentorship.mentee_first_name} {mentorship.mentee_last_name}</td>
+              <td>{mentorship.mentor_last_name}, {mentorship.mentor_first_name}</td>
+              <td>{mentorship.mentee_last_name}, {mentorship.mentee_first_name}</td>
               <td>{mentorship.mentor_email}</td>
               <td>{mentorship.mentee_email}</td>
               <td>{mentorship.school}</td>
