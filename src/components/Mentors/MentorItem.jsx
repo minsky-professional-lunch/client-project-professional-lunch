@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom';
 import AspectRatio from '@mui/joy/AspectRatio';
 import Card from '@mui/joy/Card';
 import Typography from '@mui/joy/Typography';
-import { Box, CardOverflow, Grid } from '@mui/joy';
+import { Avatar, Box, CardOverflow, Grid } from '@mui/joy';
 import { CardActions, CardContent, Stack } from "@mui/material";
 import Button from '@mui/joy/Button';
 
@@ -41,10 +41,29 @@ export default function MentorItem( {mentor} ) {
             <Grid container justifyContent="center">
                 <Box sx={{ maxHeight: '80vh' }}>
                 <Card sx={{ width: '80vw' }}>
-                    <Typography level="title-lg" noWrap>
-                        {mentor.first_name} {mentor.last_name}
-                    </Typography>
-                    <CardActions>
+                    <Stack direction='row' alignItems='center' spacing={2}>
+                        <Avatar src={mentor.avatar} sx={{ '--Avatar-size': '6rem', marginBottom: '3px' }} />
+                        <Stack direction='column'>
+                            <Typography level="h3" noWrap>
+                                {mentor.first_name} {mentor.last_name}
+                            </Typography>
+                            <Stack direction='row' justifyContent="space-evenly" alignItems="center" spacing={2} sx={{ marginTop: '10px'}}>
+                                {mentor.status != 'pending' ? 
+                                <Button onClick={() => connect(mentor.id)}>
+                                    Connect
+                                </Button>
+                                : 
+                                <Button>
+                                    Requested
+                                </Button>
+                                }
+                                <Button onClick={() => mentorDetails(mentor.user_id)} sx={{ cursor: 'pointer' }}>
+                                    View Profile
+                                </Button>
+                            </Stack>
+                        </Stack>
+                    </Stack>
+                    {/* <CardActions>
                         <Stack direction="row" justifyContent="space-evenly" alignItems="center" spacing={4}>
                             {mentor.status != 'pending' ? 
                             <Button onClick={() => connect(mentor.id)}>
@@ -59,7 +78,7 @@ export default function MentorItem( {mentor} ) {
                                 View Profile
                             </Button>
                         </Stack>
-                    </CardActions>
+                    </CardActions> */}
                 </Card>
                 </Box>
             </Grid>

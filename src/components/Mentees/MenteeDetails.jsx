@@ -13,7 +13,6 @@ import Chip from '@mui/joy/Chip';
 import Tooltip from '@mui/joy/Tooltip';
 import EmailIcon from '@mui/icons-material/Email';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
-import OpenInNew from '@mui/icons-material/OpenInNew';
 
 export default function MenteeDetails() {
   const params = useParams();
@@ -56,46 +55,6 @@ export default function MenteeDetails() {
 
   return (
     <>
-    {/* <div className='container'>
-      <h1>Profile Details</h1>
-      <Stack
-        direction='column'
-        justifyContent='space-evenly'
-        alignItems='center'
-        spacing={3}
-      >
-        <Avatar
-          variant='outlined'
-          sx={{ width: 150, height: 150 }}
-          src={details?.profile?.avatar}
-        ></Avatar>
-        <Typography>
-          {details?.profile?.first_name} {details?.profile?.last_name}
-        </Typography>
-        <Typography>
-          Areas of Expertise:{' '}
-          <ul>
-            {details?.details?.interests?.map((interest) => (
-              <li>{interest.interest}</li>
-            ))}
-          </ul>
-        </Typography>
-        <Typography>
-          Availability:{' '}
-          <ul>
-            {details?.details?.availability?.map((avail) => (
-              <li>
-                {avail.day} @ {avail.time}
-              </li>
-            ))}
-          </ul>
-        </Typography>
-        </Stack>
-        <Button onClick={() => remove(thisMentorship.id)}>Remove</Button>
-        <Button onClick={back}>
-          Back
-        </Button>
-    </div> */}
     <div className='container'>
     <Stack direction='row' justifyContent="space-between" alignItems="center" sx={{marginBottom: '25px'}}>
       <Tooltip title="Back" variant="soft">
