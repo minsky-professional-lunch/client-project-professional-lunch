@@ -23,17 +23,33 @@ export default function ResourceCards({ resource }) {
     dispatch({ type: 'DELETE_RESOURCE', payload: resourceId });
   };
 
+  const [showFullDescription, setShowFullDescription] = useState(false);
+
+  let description = resource.about;
+
+  if (!showFullDescription) {
+    description = description.substring(0, 90) + '....';
+  }
+
   return (
     <Box>
       <Card
         variant='outlined'
         spacing={2}
-        sx={{ mb: 1.5, width: 300, display: 'flex', flexDirection: 'column' }}
+        sx={{
+          mb: 2,
+          ml: 1,
+          mr: 1,
+          width: 300,
+          height: 400,
+          display: 'flex',
+          flexDirection: 'column',
+        }}
       >
         <div>
           <Typography level='title-lg'>{resource.title}</Typography>
         </div>
-        <AspectRatio minHeight='120px' maxHeight='200px'>
+        <AspectRatio minHeight='120px' maxHeight='210px'>
           <img
             src={resource.image}
             loading='lazy'
@@ -42,25 +58,35 @@ export default function ResourceCards({ resource }) {
         </AspectRatio>
         <CardContent orientation='horizontal'>
           <div>
-            <Typography level='body-xs'>{resource.about}</Typography>
+            <Typography level='body-xs'>{description}</Typography>
+            <Typography
+              onClick={() => setShowFullDescription((prevState) => !prevState)}
+              variant='plain'
+              fontSize='sm'
+              fontWeight='sm'
+              textAlign='right'
+              textColor='primary.500'
+            >
+              {showFullDescription ? 'Less' : 'More'}
+            </Typography>
             <Typography fontSize='md' fontWeight='md' mb={2}>
               <Link href={resource.url}>Visit Resource</Link>
             </Typography>
             {user.isAdmin && (
               <>
                 <Button
-                  variant='solid'
                   size='md'
-                  color='primary'
+                  color='danger'
+                  variant='outlined'
                   sx={{ ml: 'auto', alignSelf: 'center', fontWeight: 600 }}
                   onClick={() => deleteResource(resource.id)}
                 >
                   Remove
                 </Button>
                 <Button
-                  variant='solid'
                   size='md'
-                  color='primary'
+                  color='neutral'
+                  variant='outlined'
                   sx={{ ml: '4px', alignSelf: 'center', fontWeight: 600 }}
                   onClick={() => setEditResourceIsOpen(true)}
                 >

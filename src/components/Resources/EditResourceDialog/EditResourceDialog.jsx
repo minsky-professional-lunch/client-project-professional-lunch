@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
+import Button from '@mui/joy/Button';
 import Container from '@mui/material/Container';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
@@ -67,6 +67,7 @@ export default function EditResourceDialog({ open, closeEditResource, resource }
             label='Image'
             type='text'
             placeholder={resource.image}
+            multiline
             fullWidth
             value={editResourceImage}
             onChange={(event) => setEditResourceImage(event.target.value)}
@@ -78,6 +79,7 @@ export default function EditResourceDialog({ open, closeEditResource, resource }
             label='URL'
             type='text'
             placeholder={resource.url}
+            multiline
             fullWidth
             value={editResourceUrl}
             onChange={(event) => setEditResourceUrl(event.target.value)}
@@ -89,6 +91,7 @@ export default function EditResourceDialog({ open, closeEditResource, resource }
             label='About'
             type='text'
             placeholder={resource.about}
+            multiline
             fullWidth
             value={editResourceAbout}
             onChange={(event) => setEditResourceAbout(event.target.value)}
@@ -118,13 +121,14 @@ export default function EditResourceDialog({ open, closeEditResource, resource }
         </DialogContent>
         <DialogActions>
           <Button
-            color='warning'
+            color='neutral'
+            variant='outlined'
             type='button'
             onClick={() => closeEditResource()}
           >
             Cancel
           </Button>
-          <Button type='submit'>Submit</Button>
+          <Button type='submit' color='primary' variant='outlined'>Submit</Button>
         </DialogActions>
       </Dialog>
     </>

@@ -5,6 +5,48 @@ const {
 } = require('../modules/authentication-middleware');
 const router = express.Router();
 
+// GET All Meetings
+router.get('/all', rejectUnauthenticated, async (req, res) => {
+  console.log('/meetings GET ALL route');
+  try {
+    const result = await pool.query(
+      `SELECT 
+                        meetings.id AS meeting_id,
+                        meetings.date AS meeting_date,
+                        meetings.start AS meeting_start,
+                        meetings."end" AS meeting_end,
+                        meetings.link AS meeting_link,
+                        meetings.location AS meeting_location,
+                        meetings.notes AS meeting_notes,
+                        meetings.status AS meeting_status,
+                        mentee_profile.first_name AS mentee_first_name,
+                        mentee_profile.last_name AS mentee_last_name,
+                        mentee_profile.email AS mentee_email,
+                        mentor_profile.first_name AS mentor_first_name,
+                        mentor_profile.last_name AS mentor_last_name,
+                        mentor_profile.email AS mentor_email
+                    FROM 
+                        meetings
+                    JOIN 
+                        mentorships ON meetings.mentorship_id = mentorships.id
+                    JOIN 
+                        profiles AS mentee_profile ON mentorships.mentee_id = mentee_profile.id
+                    JOIN 
+                        profiles AS mentor_profile ON mentorships.mentor_id = mentor_profile.id
+                    JOIN 
+                        "user" AS mentee_user ON mentee_profile.user_id = mentee_user.id
+                    JOIN 
+                        "user" AS mentor_user ON mentor_profile.user_id = mentor_user.id
+                    ORDER BY meeting_date, meeting_start;`
+    );
+    res.send(result.rows);
+  } catch (error) {
+    console.log(`Error in getting all meetings`, error);
+    res.sendStatus(500);
+  }
+
+})
+
 // GET meetings based on mentor status 
 router.get('/', rejectUnauthenticated, (req, res) => {
   console.log('/meetings GET route');
