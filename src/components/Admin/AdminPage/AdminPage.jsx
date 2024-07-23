@@ -10,6 +10,7 @@ import MenteeList from '../Mentees/MenteeList/MenteeList';
 import MentorList from '../Mentors/MentorList/MentorList';
 import MentorshipList from '../Mentorships/MentorshipList/MentorshipList';
 import SchoolsList from '../Schools/SchoolsList/SchoolsList';
+import MeetingsList from '../Meetings/MeetingsList/MeetingsList';
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -61,9 +62,10 @@ export default function AdminPage() {
             <Tab label='Mentors' {...a11yProps(0)} />
             <Tab label='Mentees' {...a11yProps(1)} />
             <Tab label='Mentorships' {...a11yProps(2)} />
-            <Tab label='Interests' {...a11yProps(3)} />
-            <Tab label='Schools' {...a11yProps(4)} />
-            <Tab label='Genders' {...a11yProps(5)} />
+            <Tab label='Meetings' {...a11yProps(3)} />
+            <Tab label='Fields/Interests' {...a11yProps(4)} />
+            <Tab label='Schools' {...a11yProps(5)} />
+            <Tab label='Genders' {...a11yProps(6)} />
           </Tabs>
         </Box>
         <CustomTabPanel value={value} index={0}>
@@ -76,12 +78,15 @@ export default function AdminPage() {
           <MentorshipList />
         </CustomTabPanel>
         <CustomTabPanel value={value} index={3}>
-          <InterestsList />
+          <MeetingsList />
         </CustomTabPanel>
         <CustomTabPanel value={value} index={4}>
-          <SchoolsList />
+          <InterestsList />
         </CustomTabPanel>
         <CustomTabPanel value={value} index={5}>
+          <SchoolsList />
+        </CustomTabPanel>
+        <CustomTabPanel value={value} index={6}>
           <GendersList />
         </CustomTabPanel>
       </Box>

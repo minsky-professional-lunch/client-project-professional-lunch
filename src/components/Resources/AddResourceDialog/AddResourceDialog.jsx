@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
+import Button from '@mui/joy/Button';
 import Container from '@mui/material/Container';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
@@ -123,7 +123,7 @@ export default function AddResourceDialog({ open, closeAddResource }) {
         </DialogContent>
         <DialogActions>
           <Button
-            color='warning'
+            color='neutral'
             type='button'
             onClick={() => closeAddResource()}
           >

@@ -11,6 +11,15 @@ function* fetchMeetings() {
     }
 }
 
+function* fetchAllMeetings() {
+  try {
+    const result = yield axios.get('/api/meetings/all');
+    yield put({ type: 'SET_ALL_MEETINGS', payload: result.data})
+} catch (error) {
+    console.log('Error getting all meetings:', error);
+}
+}
+
 function* requestMeeting(action) {
     try {
         yield axios.post(`/api/meetings/${action.payload.mentorID}`, {newMeeting: action.payload.newMeeting});
@@ -40,6 +49,7 @@ function* deleteMeeting(action) {
 
 function* meetingsSaga() {
     yield takeLatest('FETCH_MEETINGS', fetchMeetings);
+    yield takeLatest('FETCH_ALL_MEETINGS', fetchAllMeetings);
     yield takeLatest('REQUEST_MEETING', requestMeeting);
     yield takeLatest('ACCEPT_MEETING', acceptMeeting);
     yield takeLatest('DELETE_MEETING', deleteMeeting);

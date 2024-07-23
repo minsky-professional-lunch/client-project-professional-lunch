@@ -11,12 +11,15 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
+import TableCell, {tableCellClasses} from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import Typography from '@mui/material/Typography';
+import Stack from '@mui/material/Stack';
 import Paper from '@mui/material/Paper';
 import { Divider } from '@mui/material';
+import { styled } from '@mui/material/styles';
 
 export default function SchoolsList() {
   const dispatch = useDispatch();
@@ -48,67 +51,74 @@ export default function SchoolsList() {
     setNewSchool({ school: '' });
   };
 
-  return (
-    <div>
-      <div>
-        <div>
-          <Box
-            component='form'
-            sx={{ '& > :not(style)': { m: 1, width: '25ch' } }}
-            onSubmit={handleSubmit}
-          >
-            <TextField
-              label='Add School'
-              id='outlined-size-small'
-              size='small'
-              value={newSchool.school}
-              onChange={(event) => {
-                setNewSchool({ school: event.target.value });
-              }}
-            />
-            <Button type='submit'>Add</Button>
-          </Box>
-        </div>
+  const StyledTableCell = styled(TableCell)(({ theme }) => ({
+    [`&.${tableCellClasses.head}`]: {
+      backgroundColor: theme.palette.common.black,
+      color: theme.palette.common.white,
+    },
+    [`&.${tableCellClasses.body}`]: {
+      fontSize: 14,
+    },
+  }));
 
-        <div>
-          <TableContainer component={Paper}>
-            <Table sx={{ maxWidth: 400 }} size='small'>
-              <TableHead>
-                <TableRow>
-                  <TableCell>School</TableCell>
-                  <TableCell>Delete</TableCell>
+  return (
+    <Box>
+      <Typography>Add New School</Typography>
+      <Stack
+        component='form'
+        direction='row'
+        spacing={2} 
+        mb={2}
+        onSubmit={handleSubmit}
+      >
+        <TextField
+          label='Add School'
+          id='outlined-size-small'
+          size='small'
+          value={newSchool.school}
+          onChange={(event) => {
+            setNewSchool({ school: event.target.value });
+          }}
+        />
+        <Button type='submit' variant='outlined'>Add</Button>
+      </Stack>
+
+      <div>
+        <TableContainer>
+          <Table sx={{ maxWidth: 800 }} size='small'>
+            <TableHead>
+              <TableRow>
+                <StyledTableCell>Current Schools</StyledTableCell>
+                <StyledTableCell align='center'>Delete</StyledTableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {schools.map((school) => (
+                <TableRow
+                  key={school.id}
+                  sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                >
+                  <TableCell>{school.school}</TableCell>
+                  <TableCell align='center'>
+                    <Button onClick={() => handleOpen(school.id)} variant='outlined'>
+                      Delete
+                    </Button>
+                  </TableCell>
                 </TableRow>
-              </TableHead>
-              <TableBody>
-                {schools.map((school) => (
-                  <TableRow
-                    key={school.id}
-                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                  >
-                    <TableCell>{school.school}</TableCell>
-                    <TableCell>
-                      <Button onClick={() => handleOpen(school.id)}>
-                        Delete
-                      </Button>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
-        </div>
-        <div>
-          <Dialog open={open} onClose={handleClose}>
-            <DialogTitle>
-              {'Are you sure you want to delete school?'}
-            </DialogTitle>
-            <DialogActions>
-              <Button onClick={handleClose}>Cancel</Button>
-              <Button onClick={deleteSchool}>Yes, Delete</Button>
-            </DialogActions>
-          </Dialog>
-        </div>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
       </div>
-    </div>
+      <div>
+        <Dialog open={open} onClose={handleClose}>
+          <DialogTitle>{'Are you sure you want to delete school?'}</DialogTitle>
+          <DialogActions>
+            <Button onClick={handleClose} variant='outlined'>Cancel</Button>
+            <Button onClick={deleteSchool} variant='outlined' color='danger'>Yes, Delete</Button>
+          </DialogActions>
+        </Dialog>
+      </div>
+    </Box>
   );
 }
