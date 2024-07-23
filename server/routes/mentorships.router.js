@@ -65,7 +65,8 @@ router.get('/all', rejectUnauthenticated, async (req, res) => {
         JOIN profiles AS mentee ON mentorships.mentee_id = mentee.id
         JOIN profiles AS mentor ON mentorships.mentor_id = mentor.id
         JOIN genders on genders.id=mentee.gender
-		JOIN schools on schools.id=mentee.school;`
+		JOIN schools on schools.id=mentee.school
+    ORDER BY mentor_last_name;`
     );
     res.send(result.rows);
   } catch (error) {

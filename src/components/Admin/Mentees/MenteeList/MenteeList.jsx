@@ -14,7 +14,7 @@ export default function MenteeList() {
   const [stripe, setStripe] = useState('odd');
 
   useEffect(() => {
-    dispatch({ type: 'FETCH_PROFILES' });
+    dispatch({ type: 'FETCH_ADMIN_PROFILES' });
   }, []);
 
   return (
@@ -23,8 +23,8 @@ export default function MenteeList() {
         <Table stripe={stripe}>
           <thead>
             <tr>
-              <th style={{ width: '10%' }}>First Name</th>
               <th style={{ width: '10%' }}>Last Name</th>
+              <th style={{ width: '10%' }}>First Name</th>
               <th style={{ width: '15%' }}>Email</th>
               <th style={{ width: '15%' }}>School</th>
               <th style={{ width: '15%' }}>LinkedIn</th>
@@ -36,8 +36,8 @@ export default function MenteeList() {
           <tbody>
             {mentees.map((mentee) => (
               <tr key={mentee.id}>
-                <td>{mentee.first_name}</td>
                 <td>{mentee.last_name}</td>
+                <td>{mentee.first_name}</td>
                 <td>{mentee.email}</td>
                 <td>{mentee.school}</td>
                 <td>{!mentee.linkedin ? 'No Profile' : <a href={mentee.linkedin}>Go to Profile</a>}</td>
