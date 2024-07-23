@@ -3,10 +3,10 @@ const pool = require("../modules/pool");
 const router = express.Router();
 const {
   rejectUnauthenticated,
-} = require('../modules/authentication-middleware');
+} = require("../modules/authentication-middleware");
 
 // GET all profiles
-router.get('/', (req, res) => {
+router.get("/", (req, res) => {
   pool
     .query(`SELECT * FROM "profiles";`)
 
@@ -72,7 +72,7 @@ router.get("/my-details", async (req, res) => {
                         LEFT JOIN
                             availability_cte ON profiles.user_id = availability_cte.user_id
                         WHERE
-                            "user".id = $1;`
+                            "user".id = $1;`;
     const result2 = await pool.query(queryText2, [req.user.id]);
     const response = {
       profile: result.rows[0],
@@ -138,7 +138,7 @@ router.get("/:id", async (req, res) => {
                         LEFT JOIN
                             availability_cte ON profiles.user_id = availability_cte.user_id
                         WHERE
-                            "user".id = $1;`
+                            "user".id = $1;`;
     const result2 = await pool.query(queryText2, [req.params.id]);
     const response = {
       profile: result.rows[0],
@@ -211,27 +211,38 @@ router.post("/", async (req, res) => {
 });
 
 // PUT edit profile
-router.put('/', rejectUnauthenticated, async (req, res) => {
+router.put("/", rejectUnauthenticated, async (req, res) => {
   try {
     const queryText = `UPDATE "profiles" SET "avatar"=$1, "bio"=$2, "linkedin"=$3, "email"=$4, "gender"=$5,
                         "school"=$6 
                         WHERE "profiles"."user_id"=$7;`;
-    await pool.query(queryText, [req.body.profile.avatar, req.body.profile.bio, req.body.profile.linkedin, 
-                                 req.body.profile.email, req.body.profile.gender, req.body.profile.school, req.user.id]);
-    // await pool.query(`DELETE from profiles_interests WHERE profile_id=$1;`, req.body.profile.id);
-    // for (interest of req.body.details.interests) {
-    //   const interestID = interest.id;
-    //   await pool.query(
-    //     `INSERT INTO profiles_interests (profile_id, interest_id) VALUES ($1, $2)`,
-    //     [req.body.profile.id, interestID]
-    //   );
-    // }
+    await pool.query(queryText, [
+      req.body.profile.avatar,
+      req.body.profile.bio,
+      req.body.profile.linkedin,
+      req.body.profile.email,
+      req.body.profile.gender,
+      req.body.profile.school,
+      req.user.id,
+    ]);
+
+    const interests = req.body.details.interests;
+    console.log("interests:", interests);
+    await pool.query(`DELETE from profiles_interests WHERE profile_id=$1;`, [
+      req.body.profile.id,
+    ]);
+    for (interest of interests) {
+      await pool.query(
+        `INSERT INTO profiles_interests (profile_id, interest_id) VALUES ($1, $2)`,
+        [req.body.profile.id, interest.id]
+      );
+    }
     res.sendStatus(200);
   } catch (error) {
     console.log("Error in updating profile", error);
     res.sendStatus(500);
   }
-})
+});
 
 // DELETE profile *need to ON DELETE CASCADE mentorships
 router.delete("/", async (req, res) => {
