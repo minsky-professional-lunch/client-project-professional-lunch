@@ -22,8 +22,14 @@ export default function Profile() {
   const days = useSelector((store) => store.dayReducer);
   const times = useSelector((store) => store.timeReducer);
   const [interests, setInterests] = useState(profile?.details?.interests);
+  const [availability, setAvailability] = useState(
+    profile?.details?.availability
+  );
 
-  const [editProfile, setEditProfile] = useState({ profile: {}, details: {} });
+  const [editProfile, setEditProfile] = useState({
+    profile: {},
+    details: { availability: profileAvailability },
+  });
   console.log("Profile", profile, editProfile);
 
   useEffect(() => {
@@ -60,22 +66,57 @@ export default function Profile() {
       });
     }
   };
-  const handleDayChange = (index, event) => {
-    console.log("Day Change event", event);
+  const handleDayChange = (index, newValueId, newValueObj) => {
+    // console.log("Day Change event", event);
     console.log("Day Change index", index);
-    console.log("target.value", event.target.value);
+    console.log("newValueId", newValueId);
+    console.log("selected avail obj", newValueObj);
+    console.log("state Availability", availability);
 
-    const updatedAvailability = [...editProfile.details.availability];
-    updatedAvailability[index] = {
-      ...updatedAvailability[index],
-      day_id: Number(event.target.value),
-    };
+    // setEditProfile({
+    //   ...editProfile,
+    //   details: {
+    //     ...editProfile.details,
+    //     availability: [
+    //       ...editProfile.details.availability,
+    //       day_id: newValueId
+    //     ]
+    //   }
+    // })
+
+    // const updatedAvailability = [...editProfile.details.availability][index];
+    // console.log("updatedavail", updatedAvailability);
+    // updatedAvailability.day_id = Number(newValueId);
+    // console.log("updatedavail2", updatedAvailability);
+    // const myNewAvail = availability[index];
+    // myNewAvail.day_id = Number(newValueId);
+
+    let copyAvail = [...availability];
+    let updateCopyList = copyAvail.map((k) => {
+      console.log("item to change...", k);
+      if (k.availability_id === newValueObj?.availability_id) {
+        let copyK = { ...k };
+        copyK.day_id = Number(newValueId);
+        return copyK;
+      } else {
+        return k;
+      }
+    });
+
+    console.log("changes made to avail", updateCopyList);
+    setAvailability(updateCopyList);
+
+    // setAvailability[index] = {
+    //   setEditProfile
+    //   ...updatedAvailability[index],
+    //   day_id: Number(event.target.value),
+    // };
 
     setEditProfile({
       ...editProfile,
       details: {
         ...editProfile.details,
-        availability: updatedAvailability,
+        availability: updateCopyList,
       },
     });
   };
@@ -284,23 +325,25 @@ export default function Profile() {
               <option>{time.time}</option>
             ))}
           </select> */}
-          {profileAvailability.map((availabilityItem, index) => (
+          {availability?.map((availabilityItem, index) => (
             <div key={index}>
               <select
-                value={availabilityItem.day_id}
-                onChange={(event) => handleDayChange(index, event)}
+                value={availabilityItem?.day_id}
+                onChange={(event) =>
+                  handleDayChange(index, event.target.value, availabilityItem)
+                }
               >
-                {days.map((day) => (
+                {days?.map((day) => (
                   <option key={day.id} value={day.id}>
                     {day.day}
                   </option>
                 ))}
               </select>
               <select
-                value={availabilityItem.time_id}
-                onChange={(event) => handleTimeChange(index, event)}
+                value={availabilityItem?.time_id}
+                onChange={(event) => handleTimeChange(event.target.value)}
               >
-                {times.map((time) => (
+                {times?.map((time) => (
                   <option key={time.id} value={time.id}>
                     {time.time}
                   </option>
