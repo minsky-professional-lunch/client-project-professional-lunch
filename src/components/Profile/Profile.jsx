@@ -1,14 +1,19 @@
-import { useDispatch, useSelector } from "react-redux";
-import { useScript } from "../../hooks/useScript";
-import React, { useEffect, useState } from "react";
-import { Avatar, Stack, Typography } from "@mui/joy";
-import Button from "@mui/joy/Button";
-import Badge from "@mui/joy/Badge";
-import CameraAltIcon from "@mui/icons-material/CameraAlt";
-import Textarea from "@mui/joy/Textarea";
-import { TextField, Autocomplete } from "@mui/material";
-import Select from "@mui/joy/Select";
-import Option from "@mui/joy/Option";
+import { useDispatch, useSelector } from 'react-redux';
+import { useScript } from '../../hooks/useScript';
+import React, { useEffect, useState } from 'react';
+import { Avatar, Stack, Typography } from '@mui/joy';
+import Box from '@mui/joy/Box';
+import Button from '@mui/joy/Button';
+import ButtonGroup from '@mui/joy/ButtonGroup';
+import Badge from '@mui/joy/Badge';
+import CameraAltIcon from '@mui/icons-material/CameraAlt';
+import Input from '@mui/joy/Input';
+import FormControl from '@mui/joy/FormControl';
+import FormLabel from '@mui/joy/FormLabel';
+import Textarea from '@mui/joy/Textarea';
+import { TextField, Autocomplete } from '@mui/material';
+import Select from '@mui/joy/Select';
+import Option from '@mui/joy/Option';
 
 export default function Profile() {
   const dispatch = useDispatch();
@@ -30,15 +35,15 @@ export default function Profile() {
     profile: {},
     details: { availability: profileAvailability },
   });
-  console.log("Profile", profile, editProfile);
+  console.log('Profile', profile, editProfile);
 
   useEffect(() => {
-    dispatch({ type: "FETCH_PROFILE_DETAILS" });
-    dispatch({ type: "FETCH_SCHOOLS" });
-    dispatch({ type: "FETCH_GENDERS" });
-    dispatch({ type: "FETCH_INTERESTS" });
-    dispatch({ type: "FETCH_DAYS" });
-    dispatch({ type: "FETCH_TIMES" });
+    dispatch({ type: 'FETCH_PROFILE_DETAILS' });
+    dispatch({ type: 'FETCH_SCHOOLS' });
+    dispatch({ type: 'FETCH_GENDERS' });
+    dispatch({ type: 'FETCH_INTERESTS' });
+    dispatch({ type: 'FETCH_DAYS' });
+    dispatch({ type: 'FETCH_TIMES' });
   }, []);
 
   useEffect(() => {
@@ -47,14 +52,14 @@ export default function Profile() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("clicked");
-    console.log("editProfile", editProfile);
-    dispatch({ type: "EDIT_PROFILE", payload: editProfile });
+    console.log('clicked');
+    console.log('editProfile', editProfile);
+    dispatch({ type: 'EDIT_PROFILE', payload: editProfile });
   };
 
   const handleInterestsChange = (event, newValue) => {
-    console.log("The New Value", newValue);
-    console.log("interests", interests);
+    console.log('The New Value', newValue);
+    console.log('interests', interests);
     if (newValue.length <= 5) {
       setInterests(newValue);
       setEditProfile({
@@ -68,14 +73,14 @@ export default function Profile() {
   };
   const handleDayChange = (index, newValueId, newValueObj) => {
     // console.log("Day Change event", event);
-    console.log("Day Change index", index);
-    console.log("newValueId", newValueId);
-    console.log("selected avail obj", newValueObj);
-    console.log("state Availability", availability);
+    console.log('Day Change index', index);
+    console.log('newValueId', newValueId);
+    console.log('selected avail obj', newValueObj);
+    console.log('state Availability', availability);
 
     let copyAvail = [...availability];
     let updateCopyList = copyAvail.map((k) => {
-      console.log("item to change...", k);
+      console.log('item to change...', k);
       if (k.availability_id === newValueObj?.availability_id) {
         let copyK = { ...k };
         copyK.day_id = Number(newValueId);
@@ -85,7 +90,7 @@ export default function Profile() {
       }
     });
 
-    console.log("changes made to avail", updateCopyList);
+    console.log('changes made to avail', updateCopyList);
     setAvailability(updateCopyList);
 
     setEditProfile({
@@ -100,7 +105,7 @@ export default function Profile() {
   const handleTimeChange = (index, newValueId, newValueObj) => {
     let copyAvail = [...availability];
     let updateCopyList = copyAvail.map((k) => {
-      console.log("item to change...", k);
+      console.log('item to change...', k);
       if (k.availability_id === newValueObj?.availability_id) {
         let copyK = { ...k };
         copyK.time_id = Number(newValueId);
@@ -110,7 +115,7 @@ export default function Profile() {
       }
     });
 
-    console.log("changes made to avail", updateCopyList);
+    console.log('changes made to avail', updateCopyList);
     setAvailability(updateCopyList);
 
     setEditProfile({
@@ -145,12 +150,12 @@ export default function Profile() {
       window.cloudinary
         .createUploadWidget(
           {
-            sources: ["local", "url", "camera"],
-            cloudName: "dz2bil44j",
-            uploadPreset: "hl5wdxak",
+            sources: ['local', 'url', 'camera'],
+            cloudName: 'dz2bil44j',
+            uploadPreset: 'hl5wdxak',
           },
           (error, result) => {
-            if (!error && result && result.event === "success") {
+            if (!error && result && result.event === 'success') {
               setEditProfile({
                 ...editProfile,
                 profile: {
@@ -170,47 +175,74 @@ export default function Profile() {
   }
 
   return (
-    <div className="container">
+    <div className='container'>
       <h1>My Profile</h1>
-      <form onSubmit={handleSubmit}>
-        <Stack
-          direction="column"
-          justifyContent="space-evenly"
-          alignItems="center"
-          spacing={3}
+      <form onSubmit={handleSubmit} className='formPanel'>
+        <Box
+          sx={{
+            py: 2,
+            display: 'grid',
+            gap: 2,
+            alignItems: 'center',
+            flexWrap: 'wrap',
+          }}
         >
-          {/* <Typography>Edit Profile Picture</Typography> */}
-          <Badge
-            onClick={openWidget}
-            anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
-            variant="outlined"
-            badgeContent={
-              <CameraAltIcon
-                sx={{
-                  width: "35px",
-                  height: "35px",
-                  color: "#343A40",
-                  cursor: "pointer",
-                }}
-              />
-            }
-            badgeInset="14%"
-            sx={{ "--Badge-paddingX": "0px" }}
+          <Stack
+            direction='column'
+            justifyContent='space-evenly'
+            alignItems='center'
+            spacing={3}
           >
-            <Avatar
-              variant="outlined"
-              sx={{ width: 150, height: 150 }}
-              src={editProfile?.profile.avatar}
+            {/* <Typography>Edit Profile Picture</Typography> */}
+            <Badge
+              onClick={openWidget}
+              anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+              variant='outlined'
+              badgeContent={
+                <CameraAltIcon
+                  sx={{
+                    width: '35px',
+                    height: '35px',
+                    color: '#343A40',
+                    cursor: 'pointer',
+                  }}
+                />
+              }
+              badgeInset='14%'
+              sx={{ '--Badge-paddingX': '0px' }}
+            >
+              <Avatar
+                variant='outlined'
+                sx={{ width: 150, height: 150 }}
+                src={editProfile?.profile.avatar}
+              />
+            </Badge>
+            {useScript('https://widget.cloudinary.com/v2.0/global/all.js')}
+          </Stack>
+          <FormControl>
+            <FormLabel>Bio</FormLabel>
+            <Textarea
+              placeholder='Bio'
+              type='text'
+              id='bio'
+              minRows={3}
+              value={editProfile?.profile?.bio}
+              className='form-control'
+              onChange={(event) =>
+                setEditProfile({
+                  ...editProfile,
+                  profile: { ...editProfile.profile, bio: event.target.value },
+                })
+              }
             />
-          </Badge>
-          {useScript("https://widget.cloudinary.com/v2.0/global/all.js")}
-        </Stack>
-        <Stack direction="row" spacing={3}>
+          </FormControl>
+          {/* <Stack direction="row" spacing={3}>
           <Typography>Bio</Typography>
           <Textarea
             placeholder="Bio"
             type="text"
             id="bio"
+            minRows={4}
             value={editProfile?.profile?.bio}
             className="form-control"
             onChange={(event) =>
@@ -220,101 +252,202 @@ export default function Profile() {
               })
             }
           />
-        </Stack>
-        <Stack direction="row" spacing={3}>
-          <Typography>Email</Typography>
-          <Textarea
-            placeholder="Email"
-            type="text"
-            id="email"
-            className="form-control"
-            value={editProfile?.profile?.email}
-            onChange={(event) =>
-              setEditProfile({
-                ...editProfile,
-                profile: { ...editProfile.profile, email: event.target.value },
-              })
-            }
-          />
-        </Stack>
-        <Stack direction="row" spacing={3}>
-          <Typography>LinkedIn</Typography>
-          <Textarea
-            placeholder="LinkedIn"
-            className="form-control"
-            type="text"
-            id="linkedin"
-            value={editProfile?.profile?.linkedin}
-            onChange={(e) =>
-              setEditProfile({
-                ...editProfile,
-                profile: {
-                  ...editProfile.profile,
-                  linkedin: e.target.value,
-                },
-              })
-            }
-          />
-        </Stack>
-        <Stack direction="row" spacing={3}>
-          <Typography>Gender</Typography>
-          <select
-            value={editProfile?.profile.gender}
-            onChange={(event) =>
-              setEditProfile({
-                ...editProfile,
-                profile: {
-                  ...editProfile.profile,
-                  gender: Number(event.target.value),
-                },
-              })
-            }
-          >
-            {genders.map((gender) => (
-              <option key={gender.id} value={gender.id}>
-                {gender.gender}
-              </option>
-            ))}
-          </select>
-        </Stack>
-        <Stack direction="row" spacing={3}>
-          <Typography>School</Typography>
-          <select
-            value={editProfile?.profile.school}
-            onChange={(event) =>
-              setEditProfile({
-                ...editProfile,
-                profile: { ...editProfile.profile, school: event.target.value },
-              })
-            }
-          >
-            {schools.map((school) => (
-              <option key={school.id} value={school.id}>
-                {school.school}
-              </option>
-            ))}
-          </select>
-        </Stack>
-        <Typography>Interests</Typography>
-        <Autocomplete
-          multiple
-          options={interestsStore}
-          value={interests}
-          getOptionLabel={(option) => option.interest}
-          disableCloseOnSelect
-          onChange={handleInterestsChange}
-          renderInput={(params) => (
-            <TextField
-              {...params}
-              variant="outlined"
-              label="Add Up To 5 Interests"
-              placeholder="Interests..."
+        </Stack> */}
+          <FormControl>
+            <FormLabel>Email</FormLabel>
+            <Textarea
+              placeholder='Email'
+              type='text'
+              id='email'
+              className='form-control'
+              value={editProfile?.profile?.email}
+              onChange={(event) =>
+                setEditProfile({
+                  ...editProfile,
+                  profile: {
+                    ...editProfile.profile,
+                    email: event.target.value,
+                  },
+                })
+              }
             />
-          )}
-        />
-        <div>
-          <Typography>Availability</Typography>
-          {/* <select>
+          </FormControl>
+          {/* <Stack direction='row' spacing={3}>
+            <Typography>Email</Typography>
+            <Textarea
+              placeholder='Email'
+              type='text'
+              id='email'
+              className='form-control'
+              value={editProfile?.profile?.email}
+              onChange={(event) =>
+                setEditProfile({
+                  ...editProfile,
+                  profile: {
+                    ...editProfile.profile,
+                    email: event.target.value,
+                  },
+                })
+              }
+            />
+          </Stack> */}
+          <FormControl>
+            <FormLabel>LinkedIn</FormLabel>
+            <Textarea
+              placeholder='LinkedIn'
+              className='form-control'
+              type='text'
+              id='linkedin'
+              value={editProfile?.profile?.linkedin}
+              onChange={(e) =>
+                setEditProfile({
+                  ...editProfile,
+                  profile: {
+                    ...editProfile.profile,
+                    linkedin: e.target.value,
+                  },
+                })
+              }
+            />
+          </FormControl>
+          {/* <Stack direction='row' spacing={3}>
+            <Typography>LinkedIn</Typography>
+            <Textarea
+              placeholder='LinkedIn'
+              className='form-control'
+              type='text'
+              id='linkedin'
+              value={editProfile?.profile?.linkedin}
+              onChange={(e) =>
+                setEditProfile({
+                  ...editProfile,
+                  profile: {
+                    ...editProfile.profile,
+                    linkedin: e.target.value,
+                  },
+                })
+              }
+            />
+          </Stack> */}
+          {/* <FormControl>
+            <FormLabel>Gender</FormLabel>
+            <Select value={editProfile?.profile.gender}
+              onChange={(event) =>
+                setEditProfile({
+                  ...editProfile,
+                  profile: {
+                    ...editProfile.profile,
+                    gender: Number(event.target.value),
+                  },
+                })
+              }>
+              {genders.map((gender) => (
+                <Option key={gender.id} value={gender.id}>
+                  {gender.gender}
+                </Option>
+              ))}
+            </Select>
+          </FormControl> */}
+          <Stack direction='row' spacing={3}>
+            <Typography>Gender</Typography>
+            <select
+              value={editProfile?.profile.gender}
+              onChange={(event, value) =>
+                setEditProfile({
+                  ...editProfile,
+                  profile: {
+                    ...editProfile.profile,
+                    gender: Number(event.target.value, value),
+                  },
+                })
+              }
+            >
+              {genders.map((gender) => (
+                <option key={gender.id} value={gender.id}>
+                  {gender.gender}
+                </option>
+              ))}
+            </select>
+          </Stack>
+          {/* <FormControl>
+            <FormLabel>School</FormLabel>
+            <Select value={editProfile?.profile.school}
+              onChange={(event) =>
+                setEditProfile({
+                  ...editProfile,
+                  profile: {
+                    ...editProfile.profile,
+                    school: event.target.value,
+                  },
+                })
+              } >
+                {schools.map((school) => (
+                <Option key={school.id} value={school.id}>
+                  {school.school}
+                </Option>
+              ))}
+            </Select>
+          </FormControl> */}
+          <Stack direction='row' spacing={3}>
+            <Typography>School</Typography>
+            <select
+              value={editProfile?.profile.school}
+              onChange={(event) =>
+                setEditProfile({
+                  ...editProfile,
+                  profile: {
+                    ...editProfile.profile,
+                    school: event.target.value,
+                  },
+                })
+              }
+            >
+              {schools.map((school) => (
+                <option key={school.id} value={school.id}>
+                  {school.school}
+                </option>
+              ))}
+            </select>
+          </Stack>
+          <FormControl>
+            <FormLabel>Interests</FormLabel>
+            <Autocomplete
+            multiple
+            options={interestsStore}
+            value={interests}
+            getOptionLabel={(option) => option.interest}
+            disableCloseOnSelect
+            onChange={handleInterestsChange}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                variant='outlined'
+                label='Add Up To 5 Interests'
+                placeholder='Interests...'
+              />
+            )}
+          />
+          </FormControl>
+          {/* <Typography>Interests</Typography>
+          <Autocomplete
+            multiple
+            options={interestsStore}
+            value={interests}
+            getOptionLabel={(option) => option.interest}
+            disableCloseOnSelect
+            onChange={handleInterestsChange}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                variant='outlined'
+                label='Add Up To 5 Interests'
+                placeholder='Interests...'
+              />
+            )}
+          /> */}
+          <div>
+            <Typography>Availability</Typography>
+            {/* <select>
             {days.map((day) => (
               <option>{day.day}</option>
             ))}
@@ -324,42 +457,47 @@ export default function Profile() {
               <option>{time.time}</option>
             ))}
           </select> */}
-          {availability?.map((availabilityItem, index) => (
-            <div key={index}>
-              <select
-                value={availabilityItem?.day_id}
-                onChange={(event) =>
-                  handleDayChange(index, event.target.value, availabilityItem)
-                }
-              >
-                {days?.map((day) => (
-                  <option key={day.id} value={day.id}>
-                    {day.day}
-                  </option>
-                ))}
-              </select>
-              <select
-                value={availabilityItem?.time_id}
-                onChange={(event) =>
-                  handleTimeChange(index, event.target.value, availabilityItem)
-                }
-              >
-                {times?.map((time) => (
-                  <option key={time.id} value={time.id}>
-                    {time.time}
-                  </option>
-                ))}
-              </select>
-            </div>
-          ))}
-        </div>
+            {availability?.map((availabilityItem, index) => (
+              <div key={index}>
+                <select
+                  value={availabilityItem?.day_id}
+                  onChange={(event) =>
+                    handleDayChange(index, event.target.value, availabilityItem)
+                  }
+                >
+                  {days?.map((day) => (
+                    <option key={day.id} value={day.id}>
+                      {day.day}
+                    </option>
+                  ))}
+                </select>
+                <select
+                  value={availabilityItem?.time_id}
+                  onChange={(event) =>
+                    handleTimeChange(
+                      index,
+                      event.target.value,
+                      availabilityItem
+                    )
+                  }
+                >
+                  {times?.map((time) => (
+                    <option key={time.id} value={time.id}>
+                      {time.time}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            ))}
+          </div>
 
-        <Button sx={{ bgcolor: "#1BAC5C" }} type="submit">
-          Save Changes
-        </Button>
+          <Button sx={{ bgcolor: '#1BAC5C' }} type='submit'>
+            Save Changes
+          </Button>
+        </Box>
       </form>
       {/* This just sets up the window.cloudinary widget */}
-      {useScript("https://widget.cloudinary.com/v2.0/global/all.js")}
+      {useScript('https://widget.cloudinary.com/v2.0/global/all.js')}
       <br />
     </div>
   );
