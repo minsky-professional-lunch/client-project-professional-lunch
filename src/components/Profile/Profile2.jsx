@@ -27,14 +27,6 @@ export default function Profile2() {
   const dispatch = useDispatch();
   const profile = useSelector((store) => store.profileDetails);
   console.log('Profile Details', profile);
-  const schools = useSelector((store) => store.schoolsReducer);
-  const genders = useSelector((store) => store.gendersReducer);
-  const interestsStore = useSelector((store) => store.interestsReducer);
-  // const profileAvailability = useSelector(
-  //   (store) => store.profileDetails.details.availability
-  // );
-  const days = useSelector((store) => store.dayReducer);
-  const times = useSelector((store) => store.timeReducer);
 
   const [editProfileIsOpen, setEditProfileIsOpen] = useState(false);
   const closeEditProfile = () => setEditProfileIsOpen(false);
@@ -47,30 +39,6 @@ export default function Profile2() {
     dispatch({ type: 'FETCH_DAYS' });
     dispatch({ type: 'FETCH_TIMES' });
   }, []);
-
-  const openWidget = () => {
-    !!window.cloudinary &&
-      window.cloudinary
-        .createUploadWidget(
-          {
-            sources: ['local', 'url', 'camera'],
-            cloudName: 'dz2bil44j',
-            uploadPreset: 'hl5wdxak',
-          },
-          (error, result) => {
-            if (!error && result && result.event === 'success') {
-              setEditProfile({
-                ...editProfile,
-                profile: {
-                  ...editProfile.profile,
-                  avatar: result.info.secure_url,
-                },
-              });
-            }
-          }
-        )
-        .open();
-  };
 
   // note: if user does not have a profile yet, will this prevent them from editing their empty profile?
   if (!profile.profile) {
