@@ -36,7 +36,7 @@ export default function MyMenteesItem({ mentee }) {
     <div className='container'>
         <Grid container justifyContent='center'>
           <Box sx={{ maxHeight: '80vh', marginBottom: '10px' }}>
-            <Card sx={{ width: '75vw', boxShadow: 'lg', bgcolor: 'background.level1', cursor: 'pointer' }}>
+            <Card sx={{ width: '80vw', boxShadow: 'lg', bgcolor: 'background.level1', cursor: 'pointer' }}>
               <CardContent onClick={() => menteeDetails(mentee.mentee_user_id)}>
               <Stack direction='row' alignItems='center' spacing={2}>
                 <Avatar

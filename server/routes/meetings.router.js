@@ -66,7 +66,9 @@ router.get('/', rejectUnauthenticated, (req, res) => {
                         mentee_profile.email AS mentee_email,
                         mentor_profile.first_name AS mentor_first_name,
                         mentor_profile.last_name AS mentor_last_name,
-                        mentor_profile.email AS mentor_email
+                        mentor_profile.email AS mentor_email,
+                        mentor_profile.avatar AS mentor_avatar,
+                        mentee_profile.avatar AS mentee_avatar
                     FROM 
                         meetings
                     JOIN 

@@ -13,6 +13,7 @@ import Chip from '@mui/joy/Chip';
 import Tooltip from '@mui/joy/Tooltip';
 import EmailIcon from '@mui/icons-material/Email';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 
 export default function MenteeDetails() {
   const params = useParams();
@@ -44,8 +45,16 @@ export default function MenteeDetails() {
     history.push('/home');
   };
 
+  const connect = (mentorshipId) => {
+    console.log('Clicked', mentorshipId);
+    dispatch({
+      type: 'ACCEPT_MENTORSHIP',
+      payload: { mentorshipId: mentorshipId },
+    });
+  };
+
   const back = () => {
-    history.push('/my-mentees');
+    history.goBack();
   }
 
   // check to see if data is done loading
@@ -61,9 +70,15 @@ export default function MenteeDetails() {
         <ArrowBackIosIcon sx={{ fontSize: '2.5rem', cursor: 'pointer' }} onClick={back}/>
       </Tooltip>
       <Typography level='h2' >Profile Details</Typography>
-      <Tooltip title="Remove" variant='soft'>
-        <PersonRemoveIcon sx={{ fontSize: '3rem', cursor: 'pointer' }} onClick={() => remove(thisMentorship.id)}/>
-      </Tooltip>
+      {thisMentorship.status === 'pending' ? 
+        <Tooltip title="Remove" variant='soft'>
+          <PersonAddAlt1Icon sx={{ fontSize: '3rem', cursor: 'pointer' }} onClick={() => connect(thisMentorship.id)}/>
+        </Tooltip>
+      :
+        <Tooltip title="Remove" variant='soft'>
+          <PersonRemoveIcon sx={{ fontSize: '3rem', cursor: 'pointer' }} onClick={() => remove(thisMentorship.id)}/>
+        </Tooltip>
+      }
     </Stack>
     <Grid container justifyContent="center">
     <Box sx={{ maxHeight: '90vh' }}>
@@ -81,7 +96,7 @@ export default function MenteeDetails() {
             {details?.profile?.first_name} {details?.profile?.last_name}
           </Typography>
         <Typography sx={{ fontSize: '1.5rem' }} level='body-lg'>
-          {thisMentorship?.mentee_school}
+          {details?.details?.school_name}
         </Typography>
         <Stack direction='row' alignItems='center' spacing={1}>
           <Button component="a" href={`mailto:${details?.profile?.email}`} variant='plain' color='neutral'>

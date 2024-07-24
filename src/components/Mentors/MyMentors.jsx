@@ -23,10 +23,9 @@ export default function MyMentors() {
 
     return (
         <div className='container'>
-            <h1>My Mentors</h1>
+            <h1 align='center'>My Mentors</h1>
             {acceptedMentorships.length > 0 ?
             <>
-            <h3>Accepted</h3>
             {acceptedMentorships.map((mentor) => (
                 <MyMentorsItem key={mentor.id} mentor={mentor} />
             ))}
@@ -36,7 +35,6 @@ export default function MyMentors() {
             }
             {pendingMentorships.length > 0 ? 
             <>
-            <h3>Pending</h3>
             {pendingMentorships.map((mentor) => (
                 <MyMentorsItem key={mentor.id} mentor={mentor} />
             ))}

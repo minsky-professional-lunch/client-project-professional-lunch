@@ -14,7 +14,9 @@ function MentorHomePage() {
   const mentorships = useSelector(store => store.mentorships);
   console.log('Mentorships', mentorships);
   const pending = mentorships.filter(mentor => mentor.status === 'pending');
-  console.log('Pending', pending);
+  console.log('Pending mentorships', pending);
+  const accepted = mentorships.filter(mentor => mentor.status === 'accepted');
+  console.log('Accepted mentorships', accepted);
   const meetings = useSelector(store => store.meetings);
   console.log('Meetings', meetings);
   const meetingRequests = meetings.filter(meeting => meeting.meeting_status === 'pending');
@@ -30,10 +32,10 @@ function MentorHomePage() {
 
   return (
     <div className="container">
-      <h2>Welcome, {profile?.profile?.first_name}!</h2>
+      <h1 align='center'>Welcome, {profile?.profile?.first_name}!</h1>
       {pending.length > 0 ? 
       <>
-      <h3>Mentorship Requests</h3>
+      <h3 align='center'>Mentorship Requests</h3>
       {pending.map((mentee) => (
         <MentorRequests key={mentee.id} mentee={mentee} />
       ))}
@@ -44,7 +46,7 @@ function MentorHomePage() {
 
       {meetings.length > 0 ? 
       <>
-      <h3>Meeting Requests</h3>
+      <h3 align='center'>Meeting Requests</h3>
       {meetingRequests.map((meeting) => (
         <MeetingItem key={meeting.id} meeting={meeting} />
       ))}
@@ -60,7 +62,10 @@ function MentorHomePage() {
         }
       </>
       :
-      <h3>No upcoming meetings.</h3> 
+      <>
+      <h3 align='center'>Upcoming Meetings</h3>
+      <h4 align='center'>No upcoming meetings.</h4> 
+      </>
       }
     </div>
   );

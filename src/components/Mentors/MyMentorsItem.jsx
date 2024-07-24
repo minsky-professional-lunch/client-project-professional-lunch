@@ -4,7 +4,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import Card from '@mui/joy/Card';
 import Typography from '@mui/joy/Typography';
-import { Box, CardOverflow, Grid, CardActions, CardContent, Avatar } from '@mui/joy';
+import {
+  Box,
+  CardOverflow,
+  Grid,
+  CardActions,
+  CardContent,
+  Avatar,
+} from '@mui/joy';
 import Button from '@mui/joy/Button';
 import Stack from '@mui/joy/Stack';
 
@@ -34,30 +41,38 @@ export default function MyMentorsItem({ mentor }) {
   return (
     <div className='container'>
       <Grid container justifyContent='center'>
-        <Box sx={{ maxHeight: '80vh', marginBottom: '10px' }}>
-          <Card sx={{ width: '75vw', boxShadow: 'lg', bgcolor: 'background.level1', cursor: 'pointer' }}>
-            <CardContent>
-            <Stack direction='row' alignItems='center' spacing={2}>
+        <Box sx={{ maxHeight: '80vh', margin: '20px' }}>
+          <Card
+            sx={{
+              width: '80vw',
+              boxShadow: 'lg',
+              bgcolor: 'background.level1',
+              cursor: 'pointer',
+            }}
+          >
+            <CardContent onClick={() => mentorDetails(mentor.mentor_user_id)}>
+              <Stack direction='column' alignItems='center' spacing={2}>
                 <Avatar
                   src={mentor.mentor_avatar}
                   alt={mentor.mentor_first_name}
-                  sx={{ '--Avatar-size': '5rem', cursor: 'pointer' }}
-                  onClick={() => mentorDetails(mentor.mentor_user_id)}
+                  sx={{ '--Avatar-size': '8rem', cursor: 'pointer' }}
                 />
-                 <Stack direction='column'>
-                  <Typography level='h3' noWrap sx={{marginBottom: '10px'}}>
+                <Stack direction='column'>
+                  <Typography level='h2' noWrap sx={{ marginBottom: '10px' }}>
                     {mentor.mentor_first_name} {mentor.mentor_last_name}
                   </Typography>
-                      {mentor.status === 'accepted' ? (
-                        <></>
-                      ) : (
-                        <Button onClick={() => cancel(mentor.id)}>
-                          Cancel Request
-                        </Button>
-                      )}
                 </Stack>
-            </Stack>
+              </Stack>
             </CardContent>
+            {mentor.status === 'accepted' ? (
+              <></>
+            ) : (
+              <CardActions>
+                <Button onClick={() => cancel(mentor.id)}>
+                  Cancel Request
+                </Button>
+              </CardActions>
+            )}
           </Card>
         </Box>
       </Grid>

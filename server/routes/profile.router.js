@@ -132,7 +132,8 @@ router.get("/:id", async (req, res) => {
       "user".id AS user_id,
       "user".username,
       interests_cte.interests,
-      availability_cte.availability
+      availability_cte.availability,
+      schools.school AS school_name
     FROM
       "user"
     JOIN
@@ -141,6 +142,8 @@ router.get("/:id", async (req, res) => {
       interests_cte ON profiles.user_id = interests_cte.user_id
     LEFT JOIN
       availability_cte ON profiles.user_id = availability_cte.user_id
+    LEFT JOIN
+      schools ON profiles.school = schools.id
     WHERE
       "user".id = $1;`;
     const result2 = await pool.query(queryText2, [req.params.id]);

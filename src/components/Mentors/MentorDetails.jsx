@@ -147,6 +147,9 @@ export default function MentorDetails() {
             <Typography sx={{ fontSize: '2rem', fontWeight: 'bold'}} level='h2'>
               {details?.profile?.first_name} {details?.profile?.last_name}
             </Typography>
+            <Typography sx={{ fontSize: '1.5rem' }} level='body-lg'>
+              {details?.details?.school_name}
+            </Typography>
             <Stack direction='row' alignItems='center' spacing={1}>
               <Button component="a" href={`mailto:${details?.profile?.email}`} variant='plain' color='neutral'>
                 <EmailIcon sx={{ fontSize: '2rem' }} />
