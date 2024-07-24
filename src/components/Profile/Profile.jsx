@@ -52,6 +52,11 @@ export default function Profile() {
     dispatch({ type: "EDIT_PROFILE", payload: editProfile });
   };
 
+  const handleAdd = (event) => {
+    event.preventDefault();
+    setAvailability([...availability, { day: "", time: "" }]);
+  };
+
   const handleInterestsChange = (event, newValue) => {
     console.log("The New Value", newValue);
     console.log("interests", interests);
@@ -352,6 +357,7 @@ export default function Profile() {
               </select>
             </div>
           ))}
+          <button onClick={handleAdd}>+</button>
         </div>
 
         <Button sx={{ bgcolor: "#1BAC5C" }} type="submit">
