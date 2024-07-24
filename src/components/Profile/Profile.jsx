@@ -34,10 +34,8 @@ export default function Profile() {
   );
 
   const [editProfile, setEditProfile] = useState({
-    profile: {},
-    details: { availability: profileAvailability },
+    profile: {}, details: { availability: profileAvailability },
   });
-  console.log('Profile', profile, editProfile);
 
   useEffect(() => {
     dispatch({ type: 'FETCH_PROFILE_DETAILS' });
@@ -256,23 +254,6 @@ export default function Profile() {
               }
             />
           </FormControl>
-          {/* <Stack direction="row" spacing={3}>
-          <Typography>Bio</Typography>
-          <Textarea
-            placeholder="Bio"
-            type="text"
-            id="bio"
-            minRows={4}
-            value={editProfile?.profile?.bio}
-            className="form-control"
-            onChange={(event) =>
-              setEditProfile({
-                ...editProfile,
-                profile: { ...editProfile.profile, bio: event.target.value },
-              })
-            }
-          />
-        </Stack> */}
           <FormControl>
             <FormLabel>Email</FormLabel>
             <Textarea

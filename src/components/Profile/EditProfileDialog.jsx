@@ -1,6 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import { Avatar, Stack, Typography } from '@mui/joy';
 import Box from '@mui/joy/Box';
 import Button from '@mui/joy/Button';
@@ -19,12 +18,11 @@ import Select from '@mui/material/Select';
 import Textarea from '@mui/joy/Textarea';
 import { TextField, Autocomplete } from '@mui/material';
 import InputLabel from '@mui/material/InputLabel';
+import { useScript } from '../../hooks/useScript';
 
 export default function EditProfileDialog({ open, closeEditProfile, profile}) {
   const dispatch = useDispatch();
-  const history = useHistory();
-
-  // const profile = useSelector((store) => store.profileDetails);
+  const user = useSelector((store) => store.user);
   const schools = useSelector((store) => store.schoolsReducer);
   const genders = useSelector((store) => store.gendersReducer);
   const interestsStore = useSelector((store) => store.interestsReducer);
@@ -62,6 +60,23 @@ export default function EditProfileDialog({ open, closeEditProfile, profile}) {
     closeEditProfile();
   };
 
+  const handleAdd = (event) => {
+    event.preventDefault();
+    setAvailability([...availability, { day: "", time: "" }]);
+  };
+
+  const handleRemove = (index) => {
+    const updatedAvailability = availability.filter((_, i) => i !== index);
+    setAvailability(updatedAvailability);
+    setEditProfile({
+      ...editProfile,
+      details: {
+        ...editProfile.details,
+        availability: updatedAvailability,
+      },
+    });
+  };
+
   const handleInterestsChange = (event, newValue) => {
     console.log('The New Value', newValue);
     console.log('interests', interests);
@@ -75,6 +90,61 @@ export default function EditProfileDialog({ open, closeEditProfile, profile}) {
         },
       });
     }
+  };
+
+  const handleDayChange = (index, newValueId, newValueObj) => {
+    // console.log("Day Change event", event);
+    console.log('Day Change index', index);
+    console.log('newValueId', newValueId);
+    console.log('selected avail obj', newValueObj);
+    console.log('state Availability', availability);
+
+    let copyAvail = [...availability];
+    let updateCopyList = copyAvail.map((k) => {
+      console.log('item to change...', k);
+      if (k.availability_id === newValueObj?.availability_id) {
+        let copyK = { ...k };
+        copyK.day_id = Number(newValueId);
+        return copyK;
+      } else {
+        return k;
+      }
+    });
+
+    console.log('changes made to avail', updateCopyList);
+    setAvailability(updateCopyList);
+
+    setEditProfile({
+      ...editProfile,
+      details: {
+        ...editProfile.details,
+        availability: updateCopyList,
+      },
+    });
+  };
+
+  const handleTimeChange = (index, newValueId, newValueObj) => {
+    let copyAvail = [...availability];
+    let updateCopyList = copyAvail.map((k) => {
+      console.log('item to change...', k);
+      if (k.availability_id === newValueObj?.availability_id) {
+        let copyK = { ...k };
+        copyK.time_id = Number(newValueId);
+        return copyK;
+      } else {
+        return k;
+      }
+    });
+
+    console.log('changes made to avail', updateCopyList);
+    setAvailability(updateCopyList);
+    setEditProfile({
+      ...editProfile,
+      details: {
+        ...editProfile.details,
+        availability: updateCopyList,
+      },
+    });
   };
 
   const openWidget = () => {
@@ -101,6 +171,7 @@ export default function EditProfileDialog({ open, closeEditProfile, profile}) {
         .open();
   };
 
+
   return (
     <>
     <Dialog
@@ -110,6 +181,38 @@ export default function EditProfileDialog({ open, closeEditProfile, profile}) {
         >
         <DialogTitle>Edit Profile</DialogTitle>
         <DialogContent>
+        <Stack
+            direction='column'
+            justifyContent='space-evenly'
+            alignItems='center'
+            spacing={3}
+          >
+            {/* <Typography>Edit Profile Picture</Typography> */}
+            <Badge
+              onClick={openWidget}
+              anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+              variant='outlined'
+              badgeContent={
+                <CameraAltIcon
+                  sx={{
+                    width: '35px',
+                    height: '35px',
+                    color: '#343A40',
+                    cursor: 'pointer',
+                  }}
+                />
+              }
+              badgeInset='14%'
+              sx={{ '--Badge-paddingX': '0px' }}
+            >
+              <Avatar
+                variant='outlined'
+                sx={{ width: 150, height: 150 }}
+                src={editProfile?.profile.avatar}
+              />
+            </Badge>
+            {useScript('https://widget.cloudinary.com/v2.0/global/all.js')}
+          </Stack>
           <TextField
               sx={{ mb: 1.5, mt: 1 }}
               placeholder='Bio'
@@ -184,6 +287,29 @@ export default function EditProfileDialog({ open, closeEditProfile, profile}) {
                 </MenuItem>
               ))}
             </Select>
+            {user.isMentor ? 
+            <></>
+            : 
+            <>
+            <InputLabel>School</InputLabel>
+            <Select value={editProfile?.profile.school}
+              onChange={(event) =>
+                setEditProfile({
+                  ...editProfile,
+                  profile: {
+                    ...editProfile.profile,
+                    school: event.target.value,
+                  },
+                })
+              } >
+                {schools.map((school) => (
+                <MenuItem key={school.id} value={school.id}>
+                  {school.school}
+                </MenuItem>
+              ))}
+            </Select>
+            </>
+            }
             <InputLabel>Interests</InputLabel>
             <Autocomplete
             multiple
@@ -201,6 +327,39 @@ export default function EditProfileDialog({ open, closeEditProfile, profile}) {
               />
             )}
           />
+          <div>
+          <Typography>Availability</Typography>
+          {availability?.map((availabilityItem, index) => (
+            <div key={index}>
+              <select
+                value={availabilityItem?.day_id}
+                onChange={(event) =>
+                  handleDayChange(index, event.target.value, availabilityItem)
+                }
+              >
+                {days?.map((day) => (
+                  <option key={day.id} value={day.id}>
+                    {day.day}
+                  </option>
+                ))}
+              </select>
+              <select
+                value={availabilityItem?.time_id}
+                onChange={(event) =>
+                  handleTimeChange(index, event.target.value, availabilityItem)
+                }
+              >
+                {times?.map((time) => (
+                  <option key={time.id} value={time.id}>
+                    {time.time}
+                  </option>
+                ))}
+              </select>
+              <button onClick={() => handleRemove(index)}>-</button>
+            </div>
+          ))}
+          <button onClick={handleAdd}>+</button>
+        </div>
         </DialogContent>
         <DialogActions>
           <Button

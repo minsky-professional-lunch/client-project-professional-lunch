@@ -22,19 +22,12 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import Chip from '@mui/joy/Chip';
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 import EditProfileDialog from './EditProfileDialog';
+import EditIcon from '@mui/icons-material/Edit';
 
 export default function Profile2() {
   const dispatch = useDispatch();
   const profile = useSelector((store) => store.profileDetails);
   console.log('Profile Details', profile);
-  const schools = useSelector((store) => store.schoolsReducer);
-  const genders = useSelector((store) => store.gendersReducer);
-  const interestsStore = useSelector((store) => store.interestsReducer);
-  // const profileAvailability = useSelector(
-  //   (store) => store.profileDetails.details.availability
-  // );
-  const days = useSelector((store) => store.dayReducer);
-  const times = useSelector((store) => store.timeReducer);
 
   const [editProfileIsOpen, setEditProfileIsOpen] = useState(false);
   const closeEditProfile = () => setEditProfileIsOpen(false);
@@ -48,30 +41,6 @@ export default function Profile2() {
     dispatch({ type: 'FETCH_TIMES' });
   }, []);
 
-  const openWidget = () => {
-    !!window.cloudinary &&
-      window.cloudinary
-        .createUploadWidget(
-          {
-            sources: ['local', 'url', 'camera'],
-            cloudName: 'dz2bil44j',
-            uploadPreset: 'hl5wdxak',
-          },
-          (error, result) => {
-            if (!error && result && result.event === 'success') {
-              setEditProfile({
-                ...editProfile,
-                profile: {
-                  ...editProfile.profile,
-                  avatar: result.info.secure_url,
-                },
-              });
-            }
-          }
-        )
-        .open();
-  };
-
   // note: if user does not have a profile yet, will this prevent them from editing their empty profile?
   if (!profile.profile) {
     return <h2>Loading...</h2>;
@@ -79,85 +48,109 @@ export default function Profile2() {
 
   return (
     <div className='container'>
-      <Grid container justifyContent="center">
+      <Grid container justifyContent='center'>
         <Box sx={{ maxHeight: '90vh' }}>
-        <Stack direction='column' spacing={1.5} alignItems='center'>
-        <Card
-          sx={{
-            width: '82vw',
-            maxWidth: '100%',
-            boxShadow: 'lg',
-          }}
-        >
-          <CardContent sx={{ alignItems: 'center', textAlign: 'center' }}>
-            <Typography sx={{ fontSize: '2rem', fontWeight: 'bold'}} level='h2'>
-              {profile?.profile?.first_name} {profile?.profile?.last_name}'s Profile
-            </Typography>
-            <Avatar src={profile?.profile?.avatar} sx={{ '--Avatar-size': '10rem', marginBottom: '3px' }}/>
-            <Stack direction='row' alignItems='center' spacing={1}>
-                {profile?.profile?.linkedin != null ? 
-                <Button component="a" href={profile?.profile?.linkedin} variant='plain' color='neutral'>
-                  <LinkedInIcon sx={{ fontSize: '2.5rem' }} />
-                </Button>
-              : 
-              <></>
-              }
-            </Stack>
-          </CardContent>
-        </Card>
-        <Card sx={{
-            width: '82vw',
-            maxWidth: '100%',
-            boxShadow: 'lg',
-          }}>
-            <Stack direction='column'>
-              <Typography level='h3'>About Me</Typography>
-              <Typography sx={{ fontSize: '1.3rem' }}>{profile?.profile?.bio}</Typography>
-            </Stack>
-        </Card>
-        <Card sx={{
-        width: '82vw',
-        maxWidth: '100%',
-        boxShadow: 'lg'
-          }}>
-            <Stack direction='column'>
-              <Typography level='h3'>Interests</Typography>
-              <Stack direction='row' spacing={1} flexWrap='wrap' useFlexGap>
-              {profile?.details?.interests?.map((interest) => (
-                  <Chip sx={{ fontSize: '1.3rem', marginTop: '10px'}}>{interest.interest}</Chip>
-                ))}
-                </Stack>
-            </Stack>
-        </Card>
-        <Card sx={{
-            width: '82vw',
-            maxWidth: '100%',
-            boxShadow: 'lg'
-          }}>
-            <Stack direction='column'>
-              <Typography level='h3'>Availability</Typography>
-              <Stack direction='row' spacing={1} flexWrap='wrap' useFlexGap>
-              {profile?.details?.availability?.map((avail) => (
-                  <Chip sx={{ fontSize: '1.3rem', marginTop: '10px' }}>
-                    {avail.day} @ {avail.time}
-                  </Chip>
-                ))}
-                </Stack>
-            </Stack>
-        </Card>
-            <Button
-                  size='lg'
-                  color='neutral'
-                  variant='outlined'
-                  sx={{ ml: '4px', alignSelf: 'center', fontWeight: 600 }}
-                  onClick={() => setEditProfileIsOpen(true)}
+          <Stack direction='column' spacing={1.5} alignItems='center'>
+            <Card
+              sx={{
+                width: '82vw',
+                maxWidth: '100%',
+                boxShadow: 'lg',
+              }}
+            >
+              <Stack direction='row' justifyContent='flex-end'>
+                <Tooltip title='Edit Profile' variant='soft'>
+                  <EditIcon
+                    sx={{ fontSize: '40px', cursor: 'pointer' }}
+                    onClick={() => setEditProfileIsOpen(true)}
+                  />
+                </Tooltip>
+              </Stack>
+              <CardContent sx={{ alignItems: 'center', textAlign: 'center' }}>
+                <Avatar
+                  src={profile?.profile?.avatar}
+                  sx={{ '--Avatar-size': '10rem', marginBottom: '3px' }}
+                />
+                <Typography
+                  sx={{ fontSize: '2rem', fontWeight: 'bold' }}
+                  level='h2'
                 >
-                  Edit Profile
-                </Button>
-        </Stack>
+                  {profile?.profile?.first_name} {profile?.profile?.last_name}
+                </Typography>
+                <Stack direction='row' alignItems='center' spacing={1}>
+                  {profile?.profile?.linkedin != null ? (
+                    <Button
+                      component='a'
+                      href={profile?.profile?.linkedin}
+                      variant='plain'
+                      color='neutral'
+                    >
+                      <LinkedInIcon sx={{ fontSize: '2.5rem' }} />
+                    </Button>
+                  ) : (
+                    <></>
+                  )}
+                </Stack>
+              </CardContent>
+            </Card>
+            <Card
+              sx={{
+                width: '82vw',
+                maxWidth: '100%',
+                boxShadow: 'lg',
+              }}
+            >
+              <Stack direction='column'>
+                <Typography level='h3'>About Me</Typography>
+                <Typography sx={{ fontSize: '1.3rem' }}>
+                  {profile?.profile?.bio}
+                </Typography>
+              </Stack>
+            </Card>
+            <Card
+              sx={{
+                width: '82vw',
+                maxWidth: '100%',
+                boxShadow: 'lg',
+              }}
+            >
+              <Stack direction='column'>
+                <Typography level='h3'>Interests</Typography>
+                <Stack direction='row' spacing={1} flexWrap='wrap' useFlexGap>
+                  {profile?.details?.interests?.map((interest) => (
+                    <Chip sx={{ fontSize: '1.3rem', marginTop: '10px' }}>
+                      {interest.interest}
+                    </Chip>
+                  ))}
+                </Stack>
+              </Stack>
+            </Card>
+            <Card
+              sx={{
+                width: '82vw',
+                maxWidth: '100%',
+                boxShadow: 'lg',
+              }}
+            >
+              <Stack direction='column'>
+                <Typography level='h3'>Availability</Typography>
+                <Stack direction='row' spacing={1} flexWrap='wrap' useFlexGap>
+                  {profile?.details?.availability?.map((avail) => (
+                    <Chip sx={{ fontSize: '1.3rem', marginTop: '10px' }}>
+                      {avail.day} @ {avail.time}
+                    </Chip>
+                  ))}
+                </Stack>
+              </Stack>
+            </Card>
+          </Stack>
         </Box>
-        </Grid>
-                <EditProfileDialog open={editProfileIsOpen} closeEditProfile={closeEditProfile} profile={profile}/>
+      </Grid>
+      <EditProfileDialog
+        open={editProfileIsOpen}
+        closeEditProfile={closeEditProfile}
+        profile={profile}
+      />
     </div>
   );
 }
