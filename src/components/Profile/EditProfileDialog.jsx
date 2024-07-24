@@ -18,6 +18,7 @@ import Select from '@mui/material/Select';
 import Textarea from '@mui/joy/Textarea';
 import { TextField, Autocomplete } from '@mui/material';
 import InputLabel from '@mui/material/InputLabel';
+import { useScript } from '../../hooks/useScript';
 
 export default function EditProfileDialog({ open, closeEditProfile, profile}) {
   const dispatch = useDispatch();
@@ -146,6 +147,30 @@ export default function EditProfileDialog({ open, closeEditProfile, profile}) {
     });
   };
 
+  const openWidget = () => {
+    !!window.cloudinary &&
+      window.cloudinary
+        .createUploadWidget(
+          {
+            sources: ['local', 'url', 'camera'],
+            cloudName: 'dz2bil44j',
+            uploadPreset: 'hl5wdxak',
+          },
+          (error, result) => {
+            if (!error && result && result.event === 'success') {
+              setEditProfile({
+                ...editProfile,
+                profile: {
+                  ...editProfile.profile,
+                  avatar: result.info.secure_url,
+                },
+              });
+            }
+          }
+        )
+        .open();
+  };
+
 
   return (
     <>
@@ -156,6 +181,38 @@ export default function EditProfileDialog({ open, closeEditProfile, profile}) {
         >
         <DialogTitle>Edit Profile</DialogTitle>
         <DialogContent>
+        <Stack
+            direction='column'
+            justifyContent='space-evenly'
+            alignItems='center'
+            spacing={3}
+          >
+            {/* <Typography>Edit Profile Picture</Typography> */}
+            <Badge
+              onClick={openWidget}
+              anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+              variant='outlined'
+              badgeContent={
+                <CameraAltIcon
+                  sx={{
+                    width: '35px',
+                    height: '35px',
+                    color: '#343A40',
+                    cursor: 'pointer',
+                  }}
+                />
+              }
+              badgeInset='14%'
+              sx={{ '--Badge-paddingX': '0px' }}
+            >
+              <Avatar
+                variant='outlined'
+                sx={{ width: 150, height: 150 }}
+                src={editProfile?.profile.avatar}
+              />
+            </Badge>
+            {useScript('https://widget.cloudinary.com/v2.0/global/all.js')}
+          </Stack>
           <TextField
               sx={{ mb: 1.5, mt: 1 }}
               placeholder='Bio'
