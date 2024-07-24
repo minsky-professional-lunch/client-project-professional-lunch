@@ -43,13 +43,13 @@ export default function MeetingItem( {meeting} ) {
                     <Stack direction='row' spacing={2}>
                         <Avatar src={meeting.mentee_avatar} sx={{ '--Avatar-size': '5rem'}}/>
                         <Stack direction='column'>
-                            <Typography level="title-lg" noWrap sx={{ width: '95%' }}>
+                            <Typography level="title-lg" noWrap sx={{ width: '57vw' }}>
                                 Meeting with {meeting.mentee_first_name} {meeting.mentee_last_name}
                             </Typography>
-                            <Typography level="body-md" noWrap>
+                            <Typography level="body-md" noWrap sx={{ width: '50vw' }}>
                                 {moment(meeting.meeting_date).format('LL')}
                             </Typography>
-                            <Typography level="body-md" noWrap>
+                            <Typography level="body-md" noWrap sx={{ width: '50vw' }}>
                                 {moment(meeting.meeting_start, "hh:mm:ss").format('h:mm A')} - {moment(meeting.meeting_end, "hh:mm:ss").format('h:mm A')}
                             </Typography>
                         </Stack>
@@ -73,27 +73,21 @@ export default function MeetingItem( {meeting} ) {
             : 
             <Grid container justifyContent="center">
                 <Box sx={{ maxHeight: '80vh' }}>
-                <Card sx={{ width: '80vw' }} onClick={() => seeDetails(meeting.meeting_id)}>
-                    <Typography level="title-lg" noWrap>
-                        Meeting with {meeting.mentor_first_name} {meeting.mentor_last_name}
-                    </Typography>
-                    <Typography level="title-lg" noWrap>
-                        {moment(meeting.meeting_date).format('LL')}
-                    </Typography>
-                    <Typography level="title-md" noWrap>
-                        {moment(meeting.meeting_start, "hh:mm:ss").format('h:mm A')} - {moment(meeting.meeting_end, "hh:mm:ss").format('h:mm A')}
-                    </Typography>
-                    <Typography level="title-md" noWrap>
-                        Status: {meeting.meeting_status}
-                    </Typography>
-                  
-                    <CardActions>
-                        <Stack direction="row" justifyContent="space-evenly" alignItems="center" spacing={4}>
-                            <Button >
-                                View
-                            </Button>
+                <Card sx={{ width: '80vw', boxShadow: 'lg', bgcolor: 'background.level1', margin: '5px' }} >
+                <Stack direction='row' spacing={2}>
+                        <Avatar src={meeting.mentor_avatar} sx={{ '--Avatar-size': '5rem'}}/>
+                        <Stack direction='column'>
+                            <Typography level="title-lg" noWrap sx={{ width: '57vw' }}>
+                                Meeting with {meeting.mentor_first_name} {meeting.mentor_last_name}
+                            </Typography>
+                            <Typography level="body-md" noWrap sx={{ width: '50vw' }}>
+                                {moment(meeting.meeting_date).format('LL')} | {moment(meeting.meeting_start, "hh:mm:ss").format('h:mm A')}
+                            </Typography>
+                            <Typography level="body-md" noWrap sx={{ width: '50vw' }}>
+                                Status: {meeting.meeting_status}
+                            </Typography>
                         </Stack>
-                    </CardActions>
+                </Stack>
                 </Card>
                 </Box>
             </Grid>

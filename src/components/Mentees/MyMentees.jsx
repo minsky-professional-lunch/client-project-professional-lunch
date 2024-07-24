@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Stack, Typography } from '@mui/joy';
 import MyMenteesItem from './MyMenteesItem';
+import MentorRequests from '../Mentorships/MentorRequests';
 
 
 export default function MyMentees() {
@@ -24,10 +25,20 @@ export default function MyMentees() {
 
   return (
     <div className='container'>
-      <h1>My Mentees</h1>
+      <h1 align='center'>My Mentees</h1>
+      {pendingMentorships.length > 0 ? 
+      <>
+      <h3 align='center'>Mentorship Requests</h3>
+      {pendingMentorships.map((mentee) => (
+        <MentorRequests key={mentee.id} mentee={mentee} />
+      ))}
+      </>
+      : 
+      <></>
+      }
       {acceptedMentorships.length > 0 ?
       <>
-      <h3>Accepted</h3>
+      <h3 align='center'>Accepted Mentees</h3>
       {acceptedMentorships.map((mentee) => (
         <MyMenteesItem key={mentee.id} mentee={mentee}/>
       ))}

@@ -21,10 +21,10 @@ export default function MentorRequests({ mentee }) {
     dispatch({ type: 'FETCH_DETAILS', payload: mentee.user_id });
   }, []);
 
-  const mentorDetails = (menteeId) => {
+  const menteeDetails = (menteeId) => {
     console.log('Clicked', menteeId);
     dispatch({ type: 'FETCH_DETAILS', payload: menteeId });
-    history.push(`/mentor/details/${menteeId}`);
+    history.push(`/mentee/details/${menteeId}`);
   };
 
   const connect = (mentorshipId) => {
@@ -48,9 +48,9 @@ export default function MentorRequests({ mentee }) {
     <div className='container'>
       <Grid container justifyContent='center'>
         <Box sx={{ maxHeight: '80vh' }}>
-          <Card sx={{ width: '80vw', boxShadow: 'lg', bgcolor: 'background.level1' }}>
+          <Card sx={{ width: '80vw', boxShadow: 'lg', bgcolor: 'background.level1', margin: '10px' }}>
             <CardContent sx={{ cursor: 'pointer' }}
-                                      onClick={() => mentorDetails(mentee.mentee_user_id)}>
+                                      onClick={() => menteeDetails(mentee.mentee_user_id)}>
             <Stack direction='row' alignItems='center' spacing={2}>
               <Avatar
                 src={mentee.mentee_avatar}

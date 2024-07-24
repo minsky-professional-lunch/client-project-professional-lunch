@@ -59,6 +59,24 @@ export default function Profile() {
     dispatch({ type: 'EDIT_PROFILE', payload: editProfile });
   };
 
+  const handleAdd = (event) => {
+    event.preventDefault();
+    setAvailability([...availability, { day: "", time: "" }]);
+  };
+
+  const handleRemove = (index) => {
+    const updatedAvailability = availability.filter((_, i) => i !== index);
+
+    setAvailability(updatedAvailability);
+    setEditProfile({
+      ...editProfile,
+      details: {
+        ...editProfile.details,
+        availability: updatedAvailability,
+      },
+    });
+  };
+
   const handleInterestsChange = (event, newValue) => {
     console.log('The New Value', newValue);
     console.log('interests', interests);
@@ -459,39 +477,38 @@ export default function Profile() {
               <option>{time.time}</option>
             ))}
           </select> */}
-            {availability?.map((availabilityItem, index) => (
-              <div key={index}>
-                <select
-                  value={availabilityItem?.day_id}
-                  onChange={(event) =>
-                    handleDayChange(index, event.target.value, availabilityItem)
-                  }
-                >
-                  {days?.map((day) => (
-                    <option key={day.id} value={day.id}>
-                      {day.day}
-                    </option>
-                  ))}
-                </select>
-                <select
-                  value={availabilityItem?.time_id}
-                  onChange={(event) =>
-                    handleTimeChange(
-                      index,
-                      event.target.value,
-                      availabilityItem
-                    )
-                  }
-                >
-                  {times?.map((time) => (
-                    <option key={time.id} value={time.id}>
-                      {time.time}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            ))}
-          </div>
+
+          {availability?.map((availabilityItem, index) => (
+            <div key={index}>
+              <select
+                value={availabilityItem?.day_id}
+                onChange={(event) =>
+                  handleDayChange(index, event.target.value, availabilityItem)
+                }
+              >
+                {days?.map((day) => (
+                  <option key={day.id} value={day.id}>
+                    {day.day}
+                  </option>
+                ))}
+              </select>
+              <select
+                value={availabilityItem?.time_id}
+                onChange={(event) =>
+                  handleTimeChange(index, event.target.value, availabilityItem)
+                }
+              >
+                {times?.map((time) => (
+                  <option key={time.id} value={time.id}>
+                    {time.time}
+                  </option>
+                ))}
+              </select>
+              <button onClick={() => handleRemove(index)}>-</button>
+            </div>
+          ))}
+          <button onClick={handleAdd}>+</button>
+        </div>
 
           <Button sx={{ bgcolor: '#1BAC5C' }} type='submit'>
             Save Changes
