@@ -57,7 +57,7 @@ export default function AdminPage() {
           <Tabs
             value={value}
             onChange={handleChange}
-            aria-label='basic tabs example'
+            variant='fullWidth'
           >
             <Tab label='Mentors' {...a11yProps(0)} />
             <Tab label='Mentees' {...a11yProps(1)} />

@@ -7,8 +7,9 @@ import Avatar from '@mui/joy/Avatar';
 import Card from '@mui/joy/Card';
 import Typography from '@mui/joy/Typography';
 import { Box, CardOverflow, Grid } from '@mui/joy';
-import { CardActions, CardContent, Stack } from '@mui/material';
+import { CardActions, CardContent, Stack } from '@mui/joy';
 import Button from '@mui/joy/Button';
+import ButtonGroup from '@mui/joy/ButtonGroup';
 
 export default function MentorRequests({ mentee }) {
   const dispatch = useDispatch();
@@ -43,36 +44,41 @@ export default function MentorRequests({ mentee }) {
   };
 
   return (
+    <>
     <div className='container'>
       <Grid container justifyContent='center'>
         <Box sx={{ maxHeight: '80vh' }}>
-          <Card sx={{ width: '80vw' }}>
-            <Stack direction='column' alignItems='center' spacing={3}>
+          <Card sx={{ width: '80vw', boxShadow: 'lg', bgcolor: 'background.level1' }}>
+            <CardContent sx={{ cursor: 'pointer' }}
+                                      onClick={() => mentorDetails(mentee.mentee_user_id)}>
+            <Stack direction='row' alignItems='center' spacing={2}>
               <Avatar
-                src={details.profile.avatar}
-                alt={Avatar}
-                sx={{ '--Avatar-size': '100px' }}
+                src={mentee.mentee_avatar}
+                alt={mentee.mentee_first_name}
+                sx={{ '--Avatar-size': '6rem' }}
               />
-              <Typography level='title-lg' noWrap>
-                {mentee.mentee_first_name} {mentee.mentee_last_name}
-              </Typography>
-
-              <CardActions>
-                <Stack direction='row' alignItems='center' spacing={1}>
-                  <Button onClick={() => connect(mentee.id)}>Accept</Button>
-                  <Button onClick={() => deny(mentee.id)}>Deny</Button>
-                  <Button
-                    onClick={() => mentorDetails(mentee.mentee_user_id)}
-                    sx={{ cursor: 'pointer' }}
-                  >
-                    View Profile
-                  </Button>
-                </Stack>
-              </CardActions>
-            </Stack>
+              <Stack direction='column'>
+                <Typography level='title-lg' noWrap>
+                  {mentee.mentee_first_name} {mentee.mentee_last_name}
+                </Typography>
+                <Typography level='body-md' noWrap>
+                  {mentee.mentee_school}
+                </Typography>
+              </Stack>
+              </Stack>
+              </CardContent>
+              <CardOverflow sx={{ bgcolor: 'background.level2', alignItems: 'center' }}>
+                  <CardActions buttonFlex="1">
+                    <ButtonGroup variant="outlined" size='lg' sx={{ bgcolor: 'background.surface' }}>
+                        <Button onClick={() => connect(mentee.id)}>Accept</Button>
+                        <Button onClick={() => deny(mentee.id)}>Deny</Button>
+                    </ButtonGroup>
+                  </CardActions>
+              </CardOverflow>
           </Card>
         </Box>
       </Grid>
     </div>
+    </>
   );
 }

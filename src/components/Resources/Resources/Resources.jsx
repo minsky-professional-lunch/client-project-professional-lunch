@@ -37,7 +37,7 @@ export default function Resources() {
           <Button
             sx={{ mb: 8 }}
             variant='outlined'
-            color='success'
+            color='neutral'
             onClick={() => setAddResourceIsOpen(true)}
           >
             Add Resource
