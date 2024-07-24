@@ -5,6 +5,7 @@ import Requests from '../Mentorships/MentorRequests';
 import MentorRequests from '../Mentorships/MentorRequests';
 import MenteeRequests from '../Mentorships/MenteeRequests';
 import MeetingItem from '../Meetings/MeetingItem';
+import MyMenteesItem from '../Mentees/MyMenteesItem';
 
 function MentorHomePage() {
   const dispatch = useDispatch();
@@ -15,6 +16,8 @@ function MentorHomePage() {
   console.log('Mentorships', mentorships);
   const pending = mentorships.filter(mentor => mentor.status === 'pending');
   console.log('Pending', pending);
+  const acceptedMentorships = mentorships.filter(mentee => mentee.status === 'accepted');
+  console.log('Accepted Mentorships', acceptedMentorships);
   const meetings = useSelector(store => store.meetings);
   console.log('Meetings', meetings);
   const meetingRequests = meetings.filter(meeting => meeting.meeting_status === 'pending');
@@ -37,6 +40,16 @@ function MentorHomePage() {
       {pending.map((mentee) => (
         <MentorRequests key={mentee.id} mentee={mentee} />
       ))}
+        {acceptedMentorships.length > 0 ? 
+          <>
+          <h3>Current Mentorships</h3>
+          {acceptedMentorships.map((mentee) => (
+            <MyMenteesItem key={mentee.id} mentee={mentee} />
+          ))}
+          </>
+        : 
+        <></>
+        }
       </>
       :
       <></>
