@@ -12,8 +12,10 @@ import FormControl from '@mui/joy/FormControl';
 import FormLabel from '@mui/joy/FormLabel';
 import Textarea from '@mui/joy/Textarea';
 import { TextField, Autocomplete } from '@mui/material';
-import Select from '@mui/joy/Select';
-import Option from '@mui/joy/Option';
+// import Select from '@mui/joy/Select';
+// import Option from '@mui/joy/Option';
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
 
 export default function Profile() {
   const dispatch = useDispatch();
@@ -329,7 +331,7 @@ export default function Profile() {
               }
             />
           </Stack> */}
-          {/* <FormControl>
+          <FormControl>
             <FormLabel>Gender</FormLabel>
             <Select value={editProfile?.profile.gender}
               onChange={(event) =>
@@ -342,13 +344,13 @@ export default function Profile() {
                 })
               }>
               {genders.map((gender) => (
-                <Option key={gender.id} value={gender.id}>
+                <MenuItem key={gender.id} value={gender.id}>
                   {gender.gender}
-                </Option>
+                </MenuItem>
               ))}
             </Select>
-          </FormControl> */}
-          <Stack direction='row' spacing={3}>
+          </FormControl>
+          {/* <Stack direction='row' spacing={3}>
             <Typography>Gender</Typography>
             <select
               value={editProfile?.profile.gender}
@@ -368,7 +370,7 @@ export default function Profile() {
                 </option>
               ))}
             </select>
-          </Stack>
+          </Stack> */}
           {/* <FormControl>
             <FormLabel>School</FormLabel>
             <Select value={editProfile?.profile.school}
@@ -391,7 +393,7 @@ export default function Profile() {
           <Stack direction='row' spacing={3}>
             <Typography>School</Typography>
             <select
-              value={editProfile?.profile.school}
+              value={editProfile?.profile.school} 
               onChange={(event) =>
                 setEditProfile({
                   ...editProfile,
