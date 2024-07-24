@@ -41,14 +41,14 @@ export default function MentorItem( {mentor} ) {
             <Grid container justifyContent="center">
                 <Box sx={{ maxHeight: '80vh' }}>
                 <Card sx={{ width: '80vw', margin: '5px' }}>
-                    <Stack direction='row' alignItems='center' spacing={2}>
+                    <Stack direction='row' alignItems='center' spacing={2.5}>
                         <Avatar src={mentor.avatar} sx={{ '--Avatar-size': '6rem', marginBottom: '3px', cursor: 'pointer' }}
                             onClick={() => mentorDetails(mentor.user_id)} />
                         <Stack direction='column'>
                             <Typography level="h3" noWrap>
                                 {mentor.first_name} {mentor.last_name}
                             </Typography>
-                            <Stack direction='row' justifyContent="space-evenly" alignItems="center" spacing={2} sx={{ marginTop: '10px'}}>
+                            <Stack direction='row' justifyContent="flex-start" alignItems="center" spacing={2} sx={{ marginTop: '10px'}}>
                                 {mentor.status != 'pending' ? 
                                 <Button onClick={() => connect(mentor.id)}>
                                     Connect
