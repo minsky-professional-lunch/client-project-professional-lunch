@@ -57,6 +57,19 @@ export default function Profile() {
     setAvailability([...availability, { day: "", time: "" }]);
   };
 
+  const handleRemove = (index) => {
+    const updatedAvailability = availability.filter((_, i) => i !== index);
+
+    setAvailability(updatedAvailability);
+    setEditProfile({
+      ...editProfile,
+      details: {
+        ...editProfile.details,
+        availability: updatedAvailability,
+      },
+    });
+  };
+
   const handleInterestsChange = (event, newValue) => {
     console.log("The New Value", newValue);
     console.log("interests", interests);
@@ -355,6 +368,7 @@ export default function Profile() {
                   </option>
                 ))}
               </select>
+              <button onClick={() => handleRemove(index)}>-</button>
             </div>
           ))}
           <button onClick={handleAdd}>+</button>
@@ -370,4 +384,3 @@ export default function Profile() {
     </div>
   );
 }
-
