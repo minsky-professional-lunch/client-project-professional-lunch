@@ -42,7 +42,7 @@ export default function MyMenteesItem({ mentee }) {
                 <Avatar
                   src={mentee.mentee_avatar}
                   alt={mentee.mentee_first_name}
-                  sx={{ '--Avatar-size': '5rem' }}
+                  sx={{ '--Avatar-size': '6rem' }}
                 />
                 <Stack direction='column'>
                   <Typography level='h3' noWrap>

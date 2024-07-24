@@ -33,18 +33,20 @@ function MentorHomePage() {
   return (
     <div className="container">
       <h1 align='center'>Welcome, {profile?.profile?.first_name}!</h1>
+      <h3 align='center'>Mentorship Requests</h3>
       {pending.length > 0 ? 
       <>
-      <h3 align='center'>Mentorship Requests</h3>
       {pending.map((mentee) => (
         <MentorRequests key={mentee.id} mentee={mentee} />
       ))}
       </>
       :
-      <></>
+      <>
+      <h4 align='center'>No mentorship requests.</h4> 
+      </>
       }
 
-      {meetings.length > 0 ? 
+      {meetingRequests.length > 0 ? 
       <>
       <h3 align='center'>Meeting Requests</h3>
       {meetingRequests.map((meeting) => (
