@@ -1,43 +1,44 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { Avatar, Stack, Typography } from '@mui/joy';
-import Box from '@mui/joy/Box';
 import Button from '@mui/joy/Button';
-import ButtonGroup from '@mui/joy/ButtonGroup';
 import Badge from '@mui/joy/Badge';
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
-import Container from '@mui/material/Container';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
 import DialogTitle from '@mui/material/DialogTitle';
 import FormControl from '@mui/joy/FormControl';
-import FormLabel from '@mui/joy/FormLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
-import Textarea from '@mui/joy/Textarea';
 import { TextField, Autocomplete } from '@mui/material';
 import InputLabel from '@mui/material/InputLabel';
+import Tooltip from '@mui/joy/Tooltip';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd';
 import { useScript } from '../../hooks/useScript';
 
-export default function EditProfileDialog({ open, closeEditProfile, profile}) {
+export default function EditProfileDialog({ open, closeEditProfile, profile }) {
   const dispatch = useDispatch();
   const user = useSelector((store) => store.user);
   const schools = useSelector((store) => store.schoolsReducer);
   const genders = useSelector((store) => store.gendersReducer);
   const interestsStore = useSelector((store) => store.interestsReducer);
-  const profileAvailability = useSelector((store) => store.profileDetails.details.availability);
+  const profileAvailability = useSelector(
+    (store) => store.profileDetails.details.availability
+  );
   const days = useSelector((store) => store.dayReducer);
   const times = useSelector((store) => store.timeReducer);
 
   const [interests, setInterests] = useState(profile?.details?.interests);
-  const [availability, setAvailability] = useState(profile?.details?.availability);
+  const [availability, setAvailability] = useState(
+    profile?.details?.availability
+  );
   const [editProfile, setEditProfile] = useState({
     profile: {},
     details: { availability: profileAvailability },
   });
   console.log('Profile', profile, editProfile);
-
 
   useEffect(() => {
     setEditProfile(profile);
@@ -62,7 +63,7 @@ export default function EditProfileDialog({ open, closeEditProfile, profile}) {
 
   const handleAdd = (event) => {
     event.preventDefault();
-    setAvailability([...availability, { day: "", time: "" }]);
+    setAvailability([...availability, { day: '', time: '' }]);
   };
 
   const handleRemove = (index) => {
@@ -93,12 +94,6 @@ export default function EditProfileDialog({ open, closeEditProfile, profile}) {
   };
 
   const handleDayChange = (index, newValueId, newValueObj) => {
-    // console.log("Day Change event", event);
-    console.log('Day Change index', index);
-    console.log('newValueId', newValueId);
-    console.log('selected avail obj', newValueObj);
-    console.log('state Availability', availability);
-
     let copyAvail = [...availability];
     let updateCopyList = copyAvail.map((k) => {
       console.log('item to change...', k);
@@ -110,10 +105,7 @@ export default function EditProfileDialog({ open, closeEditProfile, profile}) {
         return k;
       }
     });
-
-    console.log('changes made to avail', updateCopyList);
     setAvailability(updateCopyList);
-
     setEditProfile({
       ...editProfile,
       details: {
@@ -135,8 +127,6 @@ export default function EditProfileDialog({ open, closeEditProfile, profile}) {
         return k;
       }
     });
-
-    console.log('changes made to avail', updateCopyList);
     setAvailability(updateCopyList);
     setEditProfile({
       ...editProfile,
@@ -171,23 +161,21 @@ export default function EditProfileDialog({ open, closeEditProfile, profile}) {
         .open();
   };
 
-
   return (
     <>
-    <Dialog
+      <Dialog
         open={open}
         onClose={closeEditProfile}
         PaperProps={{ component: 'form', onSubmit: handleSubmit }}
-        >
+      >
         <DialogTitle>Edit Profile</DialogTitle>
         <DialogContent>
-        <Stack
+          <Stack
             direction='column'
             justifyContent='space-evenly'
             alignItems='center'
             spacing={3}
           >
-            {/* <Typography>Edit Profile Picture</Typography> */}
             <Badge
               onClick={openWidget}
               anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
@@ -207,38 +195,43 @@ export default function EditProfileDialog({ open, closeEditProfile, profile}) {
             >
               <Avatar
                 variant='outlined'
-                sx={{ width: 150, height: 150 }}
+                sx={{ width: 100, height: 100 }}
                 src={editProfile?.profile.avatar}
               />
             </Badge>
             {useScript('https://widget.cloudinary.com/v2.0/global/all.js')}
           </Stack>
+          <InputLabel>About Me</InputLabel>
           <TextField
-              sx={{ mb: 1.5, mt: 1 }}
-              placeholder='Bio'
-              type='text'
-              id='bio'
-              label='Bio'
-              fullWidth
-              multiline
-              minRows={3}
-              value={editProfile?.profile?.bio}
-              className='form-control'
-              onChange={(event) =>
-                setEditProfile({
-                  ...editProfile,
-                  profile: { ...editProfile.profile, bio: event.target.value },
-                })
-              }
-            />
-            <TextField 
-            sx={{ mb: 1.5 }}
+            sx={{ mb: 1 }}
+            placeholder='Bio'
+            type='text'
+            id='bio'
+            fullWidth
+            multiline
+            minRows={2}
+            size='small'
+            margin='dense'
+            value={editProfile?.profile?.bio}
+            className='form-control'
+            onChange={(event) =>
+              setEditProfile({
+                ...editProfile,
+                profile: { ...editProfile.profile, bio: event.target.value },
+              })
+            }
+          />
+          <InputLabel>Email</InputLabel>
+          <TextField
+            sx={{ mb: 1 }}
             placeholder='Email'
             type='text'
             id='email'
             name='email'
-            label='Email'
+            fullWidth
             className='form-control'
+            size='small'
+            margin='dense'
             value={editProfile?.profile?.email}
             onChange={(event) =>
               setEditProfile({
@@ -249,69 +242,82 @@ export default function EditProfileDialog({ open, closeEditProfile, profile}) {
                 },
               })
             }
-            
-            />
-             <TextField
-              placeholder='LinkedIn'
-              className='form-control'
-              type='text'
-              id='linkedin'
-              label='LinkedIn'
-              fullWidth
-              multiline
-              value={editProfile?.profile?.linkedin}
-              onChange={(e) =>
-                setEditProfile({
-                  ...editProfile,
-                  profile: {
-                    ...editProfile.profile,
-                    linkedin: e.target.value,
-                  },
-                })
-              }
-            />
-          <InputLabel>Gender</InputLabel>
-           <Select value={editProfile?.profile.gender}
-              onChange={(event) =>
-                setEditProfile({
-                  ...editProfile,
-                  profile: {
-                    ...editProfile.profile,
-                    gender: Number(event.target.value),
-                  },
-                })
-              }>
-              {genders.map((gender) => (
-                <MenuItem key={gender.id} value={gender.id}>
-                  {gender.gender}
-                </MenuItem>
-              ))}
-            </Select>
-            {user.isMentor ? 
-            <></>
-            : 
-            <>
-            <InputLabel>School</InputLabel>
-            <Select value={editProfile?.profile.school}
-              onChange={(event) =>
-                setEditProfile({
-                  ...editProfile,
-                  profile: {
-                    ...editProfile.profile,
-                    school: event.target.value,
-                  },
-                })
-              } >
-                {schools.map((school) => (
-                <MenuItem key={school.id} value={school.id}>
-                  {school.school}
-                </MenuItem>
-              ))}
-            </Select>
-            </>
+          />
+          <InputLabel>LinkedIn</InputLabel>
+          <TextField
+            sx={{ mb: 1 }}
+            placeholder='LinkedIn'
+            className='form-control'
+            type='text'
+            id='linkedin'
+            fullWidth
+            size='small'
+            margin='dense'
+            value={editProfile?.profile?.linkedin}
+            onChange={(e) =>
+              setEditProfile({
+                ...editProfile,
+                profile: {
+                  ...editProfile.profile,
+                  linkedin: e.target.value,
+                },
+              })
             }
-            <InputLabel>Interests</InputLabel>
-            <Autocomplete
+          />
+          <InputLabel>Gender</InputLabel>
+          <Select
+            sx={{ mb: 1 }}
+            fullWidth
+            size='small'
+            margin='dense'
+            value={editProfile?.profile.gender}
+            onChange={(event) =>
+              setEditProfile({
+                ...editProfile,
+                profile: {
+                  ...editProfile.profile,
+                  gender: Number(event.target.value),
+                },
+              })
+            }
+          >
+            {genders.map((gender) => (
+              <MenuItem key={gender.id} value={gender.id}>
+                {gender.gender}
+              </MenuItem>
+            ))}
+          </Select>
+          {user.isMentor ? (
+            <></>
+          ) : (
+            <>
+              <InputLabel>School</InputLabel>
+              <Select
+                sx={{ mb: 1 }}
+                size='small'
+                margin='dense'
+                value={editProfile?.profile.school}
+                onChange={(event) =>
+                  setEditProfile({
+                    ...editProfile,
+                    profile: {
+                      ...editProfile.profile,
+                      school: event.target.value,
+                    },
+                  })
+                }
+              >
+                {schools.map((school) => (
+                  <MenuItem key={school.id} value={school.id}>
+                    {school.school}
+                  </MenuItem>
+                ))}
+              </Select>
+            </>
+          )}
+          <InputLabel sx={{ mb: 1 }}>Interests</InputLabel>
+          <Autocomplete
+            sx={{ mb: 1 }}
             multiple
             options={interestsStore}
             value={interests}
@@ -328,38 +334,73 @@ export default function EditProfileDialog({ open, closeEditProfile, profile}) {
             )}
           />
           <div>
-          <Typography>Availability</Typography>
-          {availability?.map((availabilityItem, index) => (
-            <div key={index}>
-              <select
-                value={availabilityItem?.day_id}
-                onChange={(event) =>
-                  handleDayChange(index, event.target.value, availabilityItem)
-                }
+            <Stack sx={{ mb: 0.5 }} direction='row' spacing={2}>
+              <InputLabel>Availability</InputLabel>
+              <Stack>
+                <Tooltip title='Add Availability' variant='soft'>
+                  <PlaylistAddIcon
+                    sx={{ fontSize: '25px', cursor: 'pointer' }}
+                    onClick={handleAdd}
+                  />
+                </Tooltip>
+              </Stack>
+            </Stack>
+            {availability?.map((availabilityItem, index) => (
+              <Stack
+                key={index}
+                direction='row'
+                alignItems='center'
+                justifyContent='space-between'
+                spacing={1}
               >
-                {days?.map((day) => (
-                  <option key={day.id} value={day.id}>
-                    {day.day}
-                  </option>
-                ))}
-              </select>
-              <select
-                value={availabilityItem?.time_id}
-                onChange={(event) =>
-                  handleTimeChange(index, event.target.value, availabilityItem)
-                }
-              >
-                {times?.map((time) => (
-                  <option key={time.id} value={time.id}>
-                    {time.time}
-                  </option>
-                ))}
-              </select>
-              <button onClick={() => handleRemove(index)}>-</button>
-            </div>
-          ))}
-          <button onClick={handleAdd}>+</button>
-        </div>
+                <Stack flexGrow={1} spacing={1} direction='row'>
+                  <Select
+                    value={availabilityItem?.day_id}
+                    onChange={(event) =>
+                      handleDayChange(
+                        index,
+                        event.target.value,
+                        availabilityItem
+                      )
+                    }
+                    sx={{ flex: 1 }}
+                  >
+                    {days?.map((day) => (
+                      <MenuItem key={day.id} value={day.id}>
+                        {day.day}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                  <Select
+                    value={availabilityItem?.time_id}
+                    onChange={(event) =>
+                      handleTimeChange(
+                        index,
+                        event.target.value,
+                        availabilityItem
+                      )
+                    }
+                    sx={{ flex: 1 }}
+                  >
+                    {times?.map((time) => (
+                      <MenuItem key={time.id} value={time.id}>
+                        {time.time}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </Stack>
+                <Stack>
+                  <Tooltip title='Delete Availability' variant='soft'>
+                    <DeleteForeverIcon
+                      sx={{ fontSize: '30px', cursor: 'pointer' }}
+                      onClick={() => handleRemove(index)}
+                    />
+                  </Tooltip>
+                </Stack>
+                {/* <Button onClick={() => handleRemove(index)}>-</Button> */}
+              </Stack>
+            ))}
+          </div>
         </DialogContent>
         <DialogActions>
           <Button
@@ -370,9 +411,11 @@ export default function EditProfileDialog({ open, closeEditProfile, profile}) {
           >
             Cancel
           </Button>
-          <Button type='submit' color='primary' variant='outlined'>Submit</Button>
+          <Button type='submit' color='primary' variant='outlined'>
+            Submit
+          </Button>
         </DialogActions>
-        </Dialog>
+      </Dialog>
     </>
-  )
+  );
 }

@@ -9,6 +9,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import Grid from '@mui/joy/Grid';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
@@ -62,69 +63,77 @@ export default function InterestsList() {
   }));
 
   return (
-    <Box align='center'> 
-      <Typography>Add New Interest</Typography>
-      <Stack
-        component='form'
-        direction='row'
-        align='center'
-        spacing={2}
-        mb={2}
-        onSubmit={handleSubmit}
-      >
-        <TextField
-          label='Add Interest'
-          required
-          id='outlined-size-small'
-          size='small'
-          value={newInterest.interest}
-          onChange={(event) => {
-            setNewInterest({ interest: event.target.value });
-          }}
-        />
-        <Button type='submit' variant='outlined'>
-          Add
-        </Button>
-      </Stack>
-      <TableContainer>
-        <Table sx={{ width: '50vw' }} size='small'>
-          <TableHead>
-            <TableRow>
-              <StyledTableCell>Current Fields/Interests</StyledTableCell>
-              <StyledTableCell align='center'>Delete</StyledTableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {interests.map((interest) => (
-              <TableRow
-                key={interest.id}
-                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-              >
-                <TableCell>{interest.interest}</TableCell>
-                <TableCell align='center'>
-                  <Button
-                    onClick={() => handleOpen(interest.id)}
-                    variant='outlined'
-                  >
-                    Delete
-                  </Button>
-                </TableCell>
+    <Grid
+      container
+      direction='column'
+      alignItems='center'
+      justifyContent='center'
+    >
+      <Box sx={{ width: '100%', maxWidth: 800, mt: 2 }}>
+        <Typography>Add New Interest</Typography>
+        <Stack
+          component='form'
+          direction='row'
+          spacing={2}
+          mb={2}
+          onSubmit={handleSubmit}
+        >
+          <TextField
+            label='Add Interest'
+            required
+            id='outlined-size-small'
+            size='small'
+            value={newInterest.interest}
+            onChange={(event) => {
+              setNewInterest({ interest: event.target.value });
+            }}
+          />
+          <Button type='submit' variant='outlined'>
+            Add
+          </Button>
+        </Stack>
+        <TableContainer>
+          <Table sx={{ width: '50vw' }} size='small'>
+            <TableHead>
+              <TableRow>
+                <StyledTableCell>Current Fields/Interests</StyledTableCell>
+                <StyledTableCell align='center'>Delete</StyledTableCell>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-      <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>{'Are you sure you want to delete interest?'}</DialogTitle>
-        <DialogActions>
-          <Button onClick={handleClose} variant='outlined'>
-            Cancel
-          </Button>
-          <Button onClick={deleteInterest} variant='outlined' color='danger'>
-            Yes, Delete
-          </Button>
-        </DialogActions>
-      </Dialog>
-    </Box>
+            </TableHead>
+            <TableBody>
+              {interests.map((interest) => (
+                <TableRow
+                  key={interest.id}
+                  sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                >
+                  <TableCell>{interest.interest}</TableCell>
+                  <TableCell align='center'>
+                    <Button
+                      onClick={() => handleOpen(interest.id)}
+                      variant='outlined'
+                    >
+                      Delete
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+        <Dialog open={open} onClose={handleClose}>
+          <DialogTitle>
+            {'Are you sure you want to delete interest?'}
+          </DialogTitle>
+          <DialogActions>
+            <Button onClick={handleClose} variant='outlined'>
+              Cancel
+            </Button>
+            <Button onClick={deleteInterest} variant='outlined' color='danger'>
+              Yes, Delete
+            </Button>
+          </DialogActions>
+        </Dialog>
+      </Box>
+    </Grid>
   );
 }
