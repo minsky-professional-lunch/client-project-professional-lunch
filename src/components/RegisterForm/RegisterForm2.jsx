@@ -55,28 +55,6 @@ export default function RegisterForm2() {
     <div className='container'>
       <h2>Create Profile (Page 1 of 3)</h2>
       <form onSubmit={nextPage} className='formPanel'>
-        {/* <div>
-          <div>
-            Mentor
-            <input
-              id="Mentor"
-              type="radio"
-              value={true}
-              name="role"
-              onChange={(event) => setRole(event.target.value)}
-            />
-          </div>
-          <div>
-            Mentee
-            <input
-              id="Mentee"
-              type="radio"
-              value={false}
-              name="role"
-              onChange={(event) => setRole(event.target.value)}
-            />
-          </div>
-        </div> */}
         <Box
           sx={{
             py: 2,
@@ -125,7 +103,6 @@ export default function RegisterForm2() {
               placeholder='Select a gender'
               onChange={(event, value) => setGender(value)}
             >
-              {/* Will only take in 0 as a value for gender.id and school.id and I can't figure out why */}
               {genders.map((gender) => (
                 <Option key={gender.id} value={gender.id}>
                   {gender.gender}
@@ -157,54 +134,6 @@ export default function RegisterForm2() {
             </Button>
           </ButtonGroup>
         </Box>
-        {/* <div>
-          First Name
-          <input
-            type="text"
-            value={firstName}
-            onChange={(event) => setFirstName(event.target.value)}
-          />
-        </div>
-        <div>
-          Last Name
-          <input
-            type="text"
-            value={lastName}
-            onChange={(event) => setLastName(event.target.value)}
-          />
-        </div>
-        <div>
-          Email
-          <input onChange={(event) => setEmail(event.target.value)}></input>
-        </div>
-        <div>
-          Gender
-          <select onChange={(event) => setGender(event.target.value)}>
-            <option>-------</option>
-            {genders.map((gender) => (
-              <option key={gender.id} value={gender.id}>
-                {gender.gender}
-              </option>
-            ))}
-          </select>
-        </div>
-        {currentUser.isMentor === true ? (
-          ""
-        ) : (
-          <div>
-            School
-            <select onChange={(event) => setSchool(event.target.value)}>
-              <option>-------</option>
-              {schools.map((school) => (
-                <option key={school.id} value={school.id}>
-                  {school.school}
-                </option>
-              ))}
-            </select>
-          </div>
-        )}
-
-        <button type="submit">Next</button> */}
       </form>
     </div>
   );

@@ -20,9 +20,6 @@ function RegisterForm() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  // const [firstName, setFirstName] = useState("");
-  // const [lastName, setLastName] = useState("");
-  // const [email, setEmail] = useState("");
   const [role, setRole] = useState(false);
   const errors = useSelector((store) => store.errors);
   const history = useHistory();
@@ -31,21 +28,7 @@ function RegisterForm() {
   // end registerUser
 
   const nextPage = () => {
-    // history.push("/registration/2");
     event.preventDefault();
-    // console.log(role);
-
-    // dispatch({
-    //   type: "ADD_FIRST_PAGE_INFO",
-
-    //   payload: {
-    //     username: username,
-    //     password: password,
-    //     isMentor: role,
-
-    //     // email: email,
-    //   },
-    // });
     dispatch({
       type: 'REGISTER',
       payload: {
@@ -139,10 +122,6 @@ function RegisterForm() {
           </Button>
         </ButtonGroup>
       </Box>
-      {/* <div>
-        Email
-        <input onChange={(event) => setEmail(event.target.value)}></input>
-      </div> */}
     </form>
   );
 }

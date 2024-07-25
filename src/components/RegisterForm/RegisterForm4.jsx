@@ -20,7 +20,7 @@ export default function RegisterForm4() {
   const history = useHistory();
   const dispatch = useDispatch();
   const [availability, setAvailability] = useState([{ day: '', time: '' }]);
-  const [avatar, setAvatar] = useState({avatar: ''});
+  const [avatar, setAvatar] = useState({ avatar: '' });
   const days = useSelector((store) => store.dayReducer);
   const times = useSelector((store) => store.timeReducer);
   const regInfo = useSelector(
@@ -48,11 +48,9 @@ export default function RegisterForm4() {
           },
           (error, result) => {
             if (!error && result && result.event === 'success') {
-              setAvatar({...avatar,
-                avatar: result.info.secure_url
-              })
+              setAvatar({ ...avatar, avatar: result.info.secure_url });
             }
-          },
+          }
         )
         .open();
   };
@@ -90,7 +88,7 @@ export default function RegisterForm4() {
           avatar: avatar,
         },
       });
-      history.push('/');
+      history.push('/home');
     } else {
       alert('Please select both a day and a time for all availabilities.');
     }
@@ -149,80 +147,60 @@ export default function RegisterForm4() {
       </Stack>
       <br />
       <h4>Select Availabilities</h4>
-      {/* {availability.map((avail, index) => (
-        <form className='formPanel' key={index}>
-          <select onChange={(e) => handleDayChange(index, e)} value={avail.day}>
-            <option value='' disabled>
-              Select a day
-            </option>
-            {days.map((day) => (
-              <option value={day.id} key={day.id}>
-                {day.day}
-              </option>
-            ))}
-          </select>
-          <select
-            onChange={(e) => handleTimeChange(index, e)}
-            value={avail.time}
-          >
-            <option value='' disabled>
-              Select a time
-            </option>
-            {times.map((time) => (
-              <option key={time.id} value={time.id}>
-                {time.time}
-              </option>
-            ))}
-          </select>
-          <button onClick={handleAdd}>+</button>
-        </form>
-      ))} */}
       {availability.map((avail, index) => (
         <form className='formPanel' key={index}>
-          <Box sx={{
-            py: 2,
-            display: 'grid',
-            gap: 2,
-            alignItems: 'center',
-            flexWrap: 'wrap',
-          }}>
-          <FormControl size='small'>
-            <InputLabel>Select a day</InputLabel>
-            <Select
-              label='Select a day'
-              onChange={(e) => handleDayChange(index, e)}
-              slotProps={{ input: { id: 'day' }}}
-              value={avail.day}
-            >
-              {days.map((day) => (
-                <MenuItem value={day.id} key={day.id}>
-                  {day.day}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-          <FormControl size='small'>
-            <InputLabel>Select a time of day</InputLabel>
-            <Select
-              label='Select a time of day'
-              onChange={(e) => handleTimeChange(index, e)}
-              slotProps={{ input: { id: 'time' }}}
-              value={avail.time}
-            >
-              {times.map((time) => (
-                <MenuItem key={time.id} value={time.id}>
-                  {time.time}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-          <Button color='neutral' sx={{ mb:1}} onClick={handleAdd}>Add Availability</Button>
+          <Box
+            sx={{
+              py: 2,
+              display: 'grid',
+              gap: 2,
+              alignItems: 'center',
+              flexWrap: 'wrap',
+            }}
+          >
+            <FormControl size='small'>
+              <InputLabel>Select a day</InputLabel>
+              <Select
+                label='Select a day'
+                onChange={(e) => handleDayChange(index, e)}
+                slotProps={{ input: { id: 'day' } }}
+                value={avail.day}
+              >
+                {days.map((day) => (
+                  <MenuItem value={day.id} key={day.id}>
+                    {day.day}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+            <FormControl size='small'>
+              <InputLabel>Select a time of day</InputLabel>
+              <Select
+                label='Select a time of day'
+                onChange={(e) => handleTimeChange(index, e)}
+                slotProps={{ input: { id: 'time' } }}
+                value={avail.time}
+              >
+                {times.map((time) => (
+                  <MenuItem key={time.id} value={time.id}>
+                    {time.time}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+            <Button color='neutral' sx={{ mb: 1 }} onClick={handleAdd}>
+              Add Availability
+            </Button>
           </Box>
         </form>
       ))}
       <ButtonGroup spacing='0.5rem' color='primary' variant='solid'>
-        <Button color='neutral' onClick={() => history.push('/registration/3')}>Back</Button>
-        <Button color='neutral' onClick={(event) => registerUser(event)}>Register</Button>
+        <Button color='neutral' onClick={() => history.push('/registration/3')}>
+          Back
+        </Button>
+        <Button color='neutral' onClick={(event) => registerUser(event)}>
+          Register
+        </Button>
       </ButtonGroup>
     </div>
   );

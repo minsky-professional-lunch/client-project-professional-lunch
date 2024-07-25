@@ -114,42 +114,6 @@ export default function RegisterForm3() {
               </Button>
             </ButtonGroup>
           </Box>
-
-          {/* <div>
-            LinkedIn
-            <input
-              type='text'
-              value={linkedin}
-              onChange={(event) => setLinkedin(event.target.value)}
-            />
-          </div>
-          <div>
-            Add A Little About You
-            <input
-              type='text'
-              value={bio}
-              onChange={(event) => setBio(event.target.value)}
-            />
-          </div>
-          <div>
-            <Autocomplete
-              multiple
-              options={interestsStore}
-              value={interests}
-              getOptionLabel={(option) => option.interest}
-              disableCloseOnSelect
-              onChange={handleInterestsChange}
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  variant='outlined'
-                  label='Add Up To 5 Interests'
-                  placeholder='Interests...'
-                />
-              )}
-            />
-          </div>
-          <button type='submit'>Next</button> */}
         </form>
       </>
     </div>

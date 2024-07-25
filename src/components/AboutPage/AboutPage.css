@@ -1,5 +1,5 @@
 .about-container {
-    padding: 5%;
+    padding: 0 20px;
     max-width: 800px;
     margin: 0 auto;
     display: flex;
@@ -16,7 +16,7 @@
   .about-logo {
     max-width: 100%;
     height: auto;
-    width: 30%;
+    width: 50%;
     display: block;
     margin: 0 auto 20px;
   }
