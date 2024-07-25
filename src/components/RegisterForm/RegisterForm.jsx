@@ -11,10 +11,15 @@ import Input from '@mui/joy/Input';
 import FormControl from '@mui/joy/FormControl';
 import FormLabel from '@mui/joy/FormLabel';
 import FormHelperText from '@mui/joy/FormHelperText';
+import IconButton from '@mui/material/IconButton';
+import InputAdornment from '@mui/material/InputAdornment';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 function RegisterForm() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   // const [firstName, setFirstName] = useState("");
   // const [lastName, setLastName] = useState("");
   // const [email, setEmail] = useState("");
@@ -86,10 +91,22 @@ function RegisterForm() {
           <Input
             label='Password'
             placeholder='Password'
-            type='password'
+            type={showPassword ? 'text' : 'password'}
             value={password}
             required
             onChange={(event) => setPassword(event.target.value)}
+            endDecorator={
+              <InputAdornment position='end'>
+                <IconButton
+                  onClick={() => {
+                    setShowPassword(!showPassword);
+                  }}
+                  edge='end'
+                >
+                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              </InputAdornment>
+            }
           />
         </FormControl>
         <FormControl>
