@@ -38,6 +38,15 @@ function* acceptMeeting(action) {
     }
 }
 
+function* archiveMeeting(action) {
+    try {
+        yield axios.put(`/api/meetings/archive/${action.payload}`);
+        yield put({ type: 'FETCH_MEETNGS' });
+    } catch (error) {
+        console.log('Error archiving meeting', error);
+    }
+}
+
 function* deleteMeeting(action) {
     try {
         yield axios.delete(`/api/meetings/${action.payload}`);
@@ -53,6 +62,7 @@ function* meetingsSaga() {
     yield takeLatest('REQUEST_MEETING', requestMeeting);
     yield takeLatest('ACCEPT_MEETING', acceptMeeting);
     yield takeLatest('DELETE_MEETING', deleteMeeting);
+    yield takeLatest('ARCHIVE_MEETING', archiveMeeting);
 }
 
 export default meetingsSaga;

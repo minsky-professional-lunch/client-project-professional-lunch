@@ -63,22 +63,27 @@ function MenteeHomePage() {
         : 
         <></>
       }
+      <h3 align='center'>Upcoming Meetings</h3>
+      {meetings.length === 0 ? 
+      <>
+        <h3 align='center'>No upcoming meetings. Request a meeting with your mentor to keep learning!</h3> 
+      </>
+      : 
+      <></>
+      }
       {acceptedMeetings.length > 0 ? 
       <>
-      <h3>Upcoming Meetings</h3>
       {acceptedMeetings.map((meeting) => (
         <MeetingItem key={meeting.id} meeting={meeting} />
       ))}
       </>
       :
       <>
-        <h3 align='center'>Upcoming Meetings</h3>
-        <h3 align='center'>No upcoming meetings. Request a meeting with your mentor to keep learning!</h3> 
       </>
       }
       {pendingMeetings.length > 0 ? 
       <>
-      <h3>Pending Meetings</h3>
+      <h3 align='center'>Pending Meetings</h3>
         {pendingMeetings.map((meeting) => (
           <MeetingItem key={meeting.id} meeting={meeting} />
         ))}

@@ -45,28 +45,32 @@ function MentorHomePage() {
       <h4 align='center'>No mentorship requests.</h4> 
       </>
       }
-
-      {meetingRequests.length > 0 ? 
+      <h3 align='center'>Upcoming Meetings</h3>
+      {meetings.length === 0 ? 
       <>
-      <h3 align='center'>Meeting Requests</h3>
-      {meetingRequests.map((meeting) => (
+        <h3 align='center'>No upcoming meetings.</h3> 
+      </>
+      : 
+      <></>
+      }
+      {meetingRequests.length > 0 ? 
+        <>
+        <h3 align='center'>Meeting Requests</h3>
+        {meetingRequests.map((meeting) => (
+          <MeetingItem key={meeting.id} meeting={meeting} />
+        ))}
+        </>
+      : 
+      <></>
+      }
+      {acceptedMeetings.length > 0 ? 
+      <>
+      {acceptedMeetings.map((meeting) => (
         <MeetingItem key={meeting.id} meeting={meeting} />
       ))}
-        {acceptedMeetings.length > 0 ? 
-          <>
-          <h3>Upcoming Meetings</h3>
-          {acceptedMeetings.map((meeting) => (
-            <MeetingItem key={meeting.id} meeting={meeting} />
-          ))}
-          </>
-        : 
-          <></>
-        }
       </>
       :
       <>
-      <h3 align='center'>Upcoming Meetings</h3>
-      <h4 align='center'>No upcoming meetings.</h4> 
       </>
       }
     </div>

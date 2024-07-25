@@ -37,7 +37,7 @@ export default function MeetingItem( {meeting} ) {
             {user.isMentor ? 
             <Grid container justifyContent="center">
                 <Box sx={{ maxHeight: '80vh' }}>
-                <Card sx={{ width: '80vw', boxShadow: 'lg', bgcolor: 'background.level1' }}>
+                <Card sx={{ width: '80vw', boxShadow: 'lg', bgcolor: 'background.level1', margin: '10px' }}>
                 <CardContent sx={{ cursor: 'pointer' }}
                                       onClick={() => seeDetails(meeting.meeting_id)}>
                     <Stack direction='row' spacing={2}>
@@ -73,7 +73,7 @@ export default function MeetingItem( {meeting} ) {
             : 
             <Grid container justifyContent="center">
                 <Box sx={{ maxHeight: '80vh' }}>
-                <Card sx={{ width: '80vw', boxShadow: 'lg', bgcolor: 'background.level1', margin: '5px' }} >
+                <Card sx={{ width: '80vw', boxShadow: 'lg', bgcolor: 'background.level1', margin: '10px' }} onClick={() => seeDetails(meeting.meeting_id)}>
                 <Stack direction='row' spacing={2}>
                         <Avatar src={meeting.mentor_avatar} sx={{ '--Avatar-size': '5rem'}}/>
                         <Stack direction='column'>

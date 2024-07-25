@@ -16,6 +16,7 @@ import {
 import Tooltip from '@mui/joy/Tooltip';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import Button from '@mui/joy/Button';
+import DomainVerificationIcon from '@mui/icons-material/DomainVerification';
 
 export default function MeetingDetails() {
   const dispatch = useDispatch();
@@ -36,6 +37,12 @@ export default function MeetingDetails() {
   const back = () => {
     history.goBack();
   };
+
+  const archiveMeeting = (meetingId) => {
+    console.log('clicked', meetingId);
+    dispatch({ type: 'ARCHIVE_MEETING', payload: meetingId });
+    history.push('/my-meetings');
+  }
 
   // check to see if data is done loading
   if (!thisMeeting) {
@@ -58,6 +65,15 @@ export default function MeetingDetails() {
             />
           </Tooltip>
           <Typography level='h2'>Meeting Details</Typography>
+          {thisMeeting?.meeting_status === 'accepted' ? 
+          <>
+          <Tooltip title='Archive Meeting' variant='soft'>
+            <DomainVerificationIcon sx={{ fontSize: '3rem', cursor: 'pointer' }} onClick={() => archiveMeeting(thisMeeting?.meeting_id)}/>
+          </Tooltip>
+          </>
+          : 
+          <></>
+          }
         </Stack>
         <Grid container justifyContent='center'>
           <Box sx={{ width: '90vw' }}>
@@ -93,11 +109,11 @@ export default function MeetingDetails() {
                         <Typography sx={{ fontSize: '25px' }}>{moment(thisMeeting?.meeting_start, 'hh:mm:ss').format('h:mm A')} -{' '}
                         {moment(thisMeeting?.meeting_end, 'hh:mm:ss').format('h:mm A')}</Typography>
                     </Stack>
-                    <Stack direction='row' spacing={1}>
+                    <Stack direction='column' spacing={1}>
                         <Typography sx={{ fontSize: '25px', fontWeight: 'bold'}}>Link/Location:</Typography>
                         <Typography sx={{ fontSize: '25px' }}>{thisMeeting?.meeting_link}</Typography>
                     </Stack>
-                    <Stack direction='row' spacing={1}>
+                    <Stack direction='column' spacing={1}>
                         <Typography sx={{ fontSize: '25px', fontWeight: 'bold'}}>Notes:</Typography>
                         <Typography sx={{ fontSize: '25px' }}>{thisMeeting?.meeting_notes}</Typography>
                     </Stack>
