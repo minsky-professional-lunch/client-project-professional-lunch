@@ -214,11 +214,12 @@ export default function MentorDetails() {
         justifyContent='space-evenly'
         alignItems='center'
         spacing={3}
+        margin='30px'
       >
         {user.mentorships.includes(details.profile.id) &&
         thisMentorship?.status === 'accepted' ? (
           <React.Fragment>
-            <Button startDecorator={<Add />} onClick={() => setOpen(true)}>
+            <Button startDecorator={<Add />} onClick={() => setOpen(true)} color='neutral' sx={{fontSize: '20px'}}>
               Request Meeting
             </Button>
             <Modal open={open} onClose={() => setOpen(false)}>

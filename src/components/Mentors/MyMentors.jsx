@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import {useSelector} from 'react-redux';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { Stack, Typography } from '@mui/joy';
+import { Stack, Typography, Button } from '@mui/joy';
 import MyMentorsItem from './MyMentorsItem';
+import { useHistory } from 'react-router-dom';
 
 export default function MyMentors() {
     const dispatch = useDispatch();
+    const history = useHistory();
     const user = useSelector(store => store.user);
     console.log('User', user);
     const mentorships = useSelector(store => store.mentorships);
@@ -31,7 +33,12 @@ export default function MyMentors() {
             ))}
             </>
             :
-            <></>
+            <>
+            <h3 align='center'>You currently don't have any mentors. Find a mentor now!</h3>
+                <Stack alignContent='center'>
+                    <Button color='neutral' sx={{ fontSize: '1rem'}} onClick={() => history.push('/available-mentors')}>Available Mentors</Button>
+                </Stack>
+            </>
             }
             {pendingMentorships.length > 0 ? 
             <>

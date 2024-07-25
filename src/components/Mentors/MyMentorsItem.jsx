@@ -41,7 +41,7 @@ export default function MyMentorsItem({ mentor }) {
   return (
     <div className='container'>
       <Grid container justifyContent='center'>
-        <Box sx={{ maxHeight: '80vh', margin: '20px' }}>
+        <Box sx={{ maxHeight: '80vh', margin: '10px' }}>
           <Card
             sx={{
               width: '80vw',
@@ -58,7 +58,7 @@ export default function MyMentorsItem({ mentor }) {
                   sx={{ '--Avatar-size': '8rem', cursor: 'pointer' }}
                 />
                 <Stack direction='column'>
-                  <Typography level='h2' noWrap sx={{ marginBottom: '10px' }}>
+                  <Typography level='h2' sx={{ marginBottom: '10px' }}>
                     {mentor.mentor_first_name} {mentor.mentor_last_name}
                   </Typography>
                 </Stack>
@@ -68,7 +68,7 @@ export default function MyMentorsItem({ mentor }) {
               <></>
             ) : (
               <CardActions>
-                <Button onClick={() => cancel(mentor.id)}>
+                <Button onClick={() => cancel(mentor.id)} color='neutral'>
                   Cancel Request
                 </Button>
               </CardActions>
