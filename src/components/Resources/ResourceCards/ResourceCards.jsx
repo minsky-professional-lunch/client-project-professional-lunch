@@ -16,8 +16,6 @@ import EditResourceDialog from '../EditResourceDialog/EditResourceDialog';
 
 export default function ResourceCards({ resource }) {
   const dispatch = useDispatch();
-
-  // const resources = useSelector((store) => store.resources);
   const user = useSelector((store) => store.user);
 
   const [editResourceIsOpen, setEditResourceIsOpen] = useState(false);
