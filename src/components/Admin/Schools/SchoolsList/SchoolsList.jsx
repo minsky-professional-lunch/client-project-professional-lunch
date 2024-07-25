@@ -9,6 +9,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import Grid from '@mui/joy/Grid';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell, {tableCellClasses} from '@mui/material/TableCell';
@@ -62,7 +63,8 @@ export default function SchoolsList() {
   }));
 
   return (
-    <Box>
+    <Grid container direction="column" alignItems="center" justifyContent="center">
+    <Box sx={{ width: '100%', maxWidth: 800, mt: 2 }}>
       <Typography>Add New School</Typography>
       <Stack
         component='form'
@@ -85,7 +87,7 @@ export default function SchoolsList() {
 
       <div>
         <TableContainer>
-          <Table sx={{ maxWidth: 800 }} size='small'>
+          <Table sx={{ width: '50vw' }} size='small'>
             <TableHead>
               <TableRow>
                 <StyledTableCell>Current Schools</StyledTableCell>
@@ -120,5 +122,6 @@ export default function SchoolsList() {
         </Dialog>
       </div>
     </Box>
+    </Grid>
   );
 }

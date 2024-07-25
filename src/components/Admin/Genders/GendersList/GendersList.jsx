@@ -21,6 +21,7 @@ import Paper from '@mui/material/Paper';
 import { Divider } from '@mui/material';
 import EditGenderDialog from '../EditGenderDialog/EditGenderDialog';
 import { styled } from '@mui/material/styles';
+import { Grid } from '@mui/joy';
 
 export default function GendersList() {
   const dispatch = useDispatch();
@@ -63,7 +64,9 @@ export default function GendersList() {
   }));
 
   return (
-    <Box>
+    <Grid container direction="column" alignItems="center" justifyContent="center">
+    
+    <Box sx={{ width: '100%', maxWidth: 800, mt: 2 }}>
       <Typography>Add New Gender</Typography>
       <Stack
         component='form'
@@ -85,7 +88,7 @@ export default function GendersList() {
       </Stack>
       <div>
         <TableContainer >
-          <Table sx={{ maxWidth: 800 }} size='small'>
+          <Table sx={{ width: '50vw' }} size='small'>
             <TableHead>
               <TableRow>
                 <StyledTableCell>Current Genders</StyledTableCell>
@@ -120,5 +123,6 @@ export default function GendersList() {
         </Dialog>
       </div>
     </Box>
+    </Grid>
   );
 }
