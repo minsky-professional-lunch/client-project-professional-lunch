@@ -5,9 +5,8 @@ import { useHistory } from 'react-router-dom';
 import AspectRatio from '@mui/joy/AspectRatio';
 import Card from '@mui/joy/Card';
 import Typography from '@mui/joy/Typography';
-import { Box, CardOverflow, Grid } from '@mui/joy';
-import { CardActions, CardContent, Stack } from "@mui/material";
-import Button from '@mui/joy/Button';
+import { Avatar, Box, CardOverflow, Grid } from '@mui/joy';
+import { CardActions, CardContent, Stack } from "@mui/joy";
 
 export default function MenteeRequests( {mentor} ) {
     const dispatch = useDispatch();
@@ -35,21 +34,23 @@ export default function MenteeRequests( {mentor} ) {
     return (
         <div className='container'>
             <Grid container justifyContent="center">
-                <Box sx={{ maxHeight: '80vh' }}>
-                <Card sx={{ width: '80vw' }}>
-                    <Typography level="title-lg" noWrap>
-                        {mentor.mentor_first_name} {mentor.mentor_last_name}
-                    </Typography>
-                    <CardActions>
-                        <Stack direction="row" justifyContent="space-evenly" alignItems="center" spacing={4}>
-                            <Button onClick={() => cancel(mentor.id)}>
-                                Cancel Request
-                            </Button>
-                            <Button onClick={() => mentorDetails(mentor.mentor_user_id)} sx={{ cursor: 'pointer' }}>
-                                View Profile
-                            </Button>
+                <Box sx={{ maxHeight: '80vh', margin: '10px'}}>
+                <Card sx={{
+                width: '80vw',
+                boxShadow: 'lg',
+                bgcolor: 'background.level1',
+                cursor: 'pointer',
+                }}>
+                    <CardContent sx={{ cursor: 'pointer'}} onClick={() => mentorDetails(mentor.mentor_user_id)}>
+                        <Stack direction='column' alignItems='center' spacing={2}>
+                            <Avatar src={mentor.mentor_avatar} sx={{ '--Avatar-size': '8rem' }}/>
+                            <Stack direction='column' spacing={1}>
+                            <Typography level='h2' sx={{ marginBottom: '10px' }}>
+                            {mentor.mentor_first_name} {mentor.mentor_last_name}
+                                </Typography>
+                            </Stack>
                         </Stack>
-                    </CardActions>
+                    </CardContent>
                 </Card>
                 </Box>
             </Grid>
