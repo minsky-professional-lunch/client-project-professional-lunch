@@ -1,20 +1,20 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
-import { useEffect, useState } from 'react';
-import { TextField, Autocomplete } from '@mui/material';
-import Box from '@mui/joy/Box';
-import Input from '@mui/joy/Input';
-import FormControl from '@mui/joy/FormControl';
-import FormLabel from '@mui/joy/FormLabel';
-import FormHelperText from '@mui/joy/FormHelperText';
-import Textarea from '@mui/joy/Textarea';
-import Button from '@mui/joy/Button';
-import ButtonGroup from '@mui/joy/ButtonGroup';
-import Select from '@mui/joy/Select';
-import Option from '@mui/joy/Option';
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { useEffect, useState } from "react";
+import { TextField, Autocomplete } from "@mui/material";
+import Box from "@mui/joy/Box";
+import Input from "@mui/joy/Input";
+import FormControl from "@mui/joy/FormControl";
+import FormLabel from "@mui/joy/FormLabel";
+import FormHelperText from "@mui/joy/FormHelperText";
+import Textarea from "@mui/joy/Textarea";
+import Button from "@mui/joy/Button";
+import ButtonGroup from "@mui/joy/ButtonGroup";
+import Select from "@mui/joy/Select";
+import Option from "@mui/joy/Option";
 
 export default function RegisterForm3() {
-  const [linkedin, setLinkedin] = useState('');
+  const [linkedin, setLinkedin] = useState("");
 
   const currentUser = useSelector(
     (store) => store.registrationReducer.registrationReducer
@@ -22,9 +22,9 @@ export default function RegisterForm3() {
   const schools = useSelector((store) => store.schoolsReducer);
   const genders = useSelector((store) => store.gendersReducer);
 
-  const [bio, setBio] = useState('');
+  const [bio, setBio] = useState("");
   const [interests, setInterests] = useState([]);
-  const [availability, setAvailability] = useState('');
+  const [availability, setAvailability] = useState("");
   const interestsStore = useSelector((store) => store.interestsReducer);
 
   const history = useHistory();
@@ -32,7 +32,7 @@ export default function RegisterForm3() {
 
   useEffect(() => {
     dispatch({
-      type: 'FETCH_INTERESTS',
+      type: "FETCH_INTERESTS",
     });
   }, []);
 
@@ -42,12 +42,15 @@ export default function RegisterForm3() {
     }
   };
 
-
   const nextPage = () => {
-    history.push('/registration/4');
     event.preventDefault();
+    if (interests.length === 0) {
+      window.alert("Please select one or more interests");
+      return;
+    }
+    history.push("/registration/4");
     dispatch({
-      type: 'ADD_THIRD_PAGE_INFO',
+      type: "ADD_THIRD_PAGE_INFO",
       payload: {
         linkedin: linkedin,
         interests: interests,
@@ -56,24 +59,24 @@ export default function RegisterForm3() {
     });
   };
   return (
-    <div className='container'>
+    <div className="container">
       <h2>Create Profile (Page 2 of 3)</h2>
       <>
-        <form onSubmit={nextPage} className='formPanel'>
+        <form onSubmit={nextPage} className="formPanel">
           <Box
             sx={{
               py: 2,
-              display: 'grid',
+              display: "grid",
               gap: 2,
-              alignItems: 'center',
-              flexWrap: 'wrap',
+              alignItems: "center",
+              flexWrap: "wrap",
             }}
           >
             <FormControl>
               <FormLabel>LinkedIn Profile</FormLabel>
               <Input
-                label='LinkedIn Profile'
-                placeholder='LinkedIn Profile'
+                label="LinkedIn Profile"
+                placeholder="LinkedIn Profile"
                 value={linkedin}
                 onChange={(event) => setLinkedin(event.target.value)}
               />
@@ -81,8 +84,8 @@ export default function RegisterForm3() {
             <FormControl>
               <FormLabel>User Bio</FormLabel>
               <Textarea
-                label='User Bio'
-                placeholder='Tell us a little about yourself'
+                label="User Bio"
+                placeholder="Tell us a little about yourself"
                 minRows={4}
                 value={bio}
                 onChange={(event) => setBio(event.target.value)}
@@ -100,16 +103,27 @@ export default function RegisterForm3() {
                 renderInput={(params) => (
                   <TextField
                     {...params}
-                    variant='outlined'
-                    label='Add Up To 5 Interests'
-                    placeholder='Interests...'
+                    variant="outlined"
+                    label="Add Up To 5 Interests"
+                    placeholder="Interests..."
                   />
                 )}
               />
             </FormControl>
-            <ButtonGroup spacing='0.5rem' color='primary' variant='solid'>
-              <Button color='neutral' onClick={() => history.push('/registration/2')}>Back</Button>
-              <Button color='neutral' className='btn' type='submit' name='submit' value='Next'>
+            <ButtonGroup spacing="0.5rem" color="primary" variant="solid">
+              <Button
+                color="neutral"
+                onClick={() => history.push("/registration/2")}
+              >
+                Back
+              </Button>
+              <Button
+                color="neutral"
+                className="btn"
+                type="submit"
+                name="submit"
+                value="Next"
+              >
                 Next
               </Button>
             </ButtonGroup>
