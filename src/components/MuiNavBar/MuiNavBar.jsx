@@ -162,7 +162,7 @@ export default function MuiNavBar() {
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar src={Avatar} />
+                  <Avatar src='./images/default-logo.png' />
                 </IconButton>
               </Tooltip>
               <Menu

@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import { useSelector } from 'react-redux';
@@ -15,17 +14,16 @@ import CardOverflow from '@mui/joy/CardOverflow';
 import Stack from '@mui/joy/Stack';
 import Typography from '@mui/joy/Typography';
 
-
 function UserPage() {
   const dispatch = useDispatch();
   useEffect(() => {
-    const hasReloaded = localStorage.getItem("hasReloaded");
+    const hasReloaded = localStorage.getItem('hasReloaded');
 
     if (!hasReloaded) {
-      localStorage.setItem("hasReloaded", "true");
+      localStorage.setItem('hasReloaded', 'true');
       location.reload();
     } else {
-      dispatch({ type: "CHECK_FOR_PROFILE" });
+      dispatch({ type: 'CHECK_FOR_PROFILE' });
     }
   }, []);
 
@@ -38,13 +36,19 @@ function UserPage() {
   // this component doesn't do much to start, just renders some user reducer info to the DOM
   const user = useSelector((store) => store.user);
   return (
-
-    <Stack className='container' sx={{ mb: 2 }} direction='column' alignItems='center' justifyContent='center' spacing={4}>
+    <Stack
+      className='container'
+      sx={{ mb: 2 }}
+      direction='column'
+      alignItems='center'
+      justifyContent='center'
+      spacing={4}
+    >
       <Card variant='outlined' sx={{ width: 320 }}>
         <CardOverflow>
           <AspectRatio ratio='2'>
             <img
-              src='./images/PLaunch.png'
+              src='../images/PLaunch.png'
               loading='lazy'
               alt='Professional Launch Logo'
             />
@@ -104,7 +108,6 @@ function UserPage() {
         <LogOutButton className='btn' />
       </Box> */}
     </Stack>
-
   );
 }
 
