@@ -5,6 +5,7 @@ import MeetingItem from './MeetingItem';
 
 export default function MyMeetings() {
     const meetings = useSelector(store => store.meetings);
+    const user = useSelector(store => store.user);
     console.log('Meetings', meetings);
 
     return (
@@ -13,6 +14,19 @@ export default function MyMeetings() {
         {meetings.map((meeting) => (
                 <MeetingItem key={meeting.meeting_id} meeting={meeting} />
         ))}
+        {meetings.length === 0 ? 
+            <>
+            {user.isMentor ? 
+                <h3>You currently have no upcoming meetings.</h3>
+                :
+                <>
+                <h3 align='center'>No upcoming meetings. Request a meeting with your mentor to keep learning!</h3> 
+                </>
+            }
+            </>
+        :
+        <></>
+        }
         </div>
     )
 }

@@ -1,3 +1,4 @@
+
 import React, { useEffect } from 'react';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import { useSelector } from 'react-redux';
@@ -14,10 +15,18 @@ import CardOverflow from '@mui/joy/CardOverflow';
 import Stack from '@mui/joy/Stack';
 import Typography from '@mui/joy/Typography';
 
+
 function UserPage() {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch({ type: 'CHECK_FOR_PROFILE' });
+    const hasReloaded = localStorage.getItem("hasReloaded");
+
+    if (!hasReloaded) {
+      localStorage.setItem("hasReloaded", "true");
+      location.reload();
+    } else {
+      dispatch({ type: "CHECK_FOR_PROFILE" });
+    }
   }, []);
 
   const history = useHistory();
@@ -29,6 +38,7 @@ function UserPage() {
   // this component doesn't do much to start, just renders some user reducer info to the DOM
   const user = useSelector((store) => store.user);
   return (
+
     <Stack className='container' sx={{ mb: 2 }} direction='column' alignItems='center' justifyContent='center' spacing={4}>
       <Card variant='outlined' sx={{ width: 320 }}>
         <CardOverflow>
@@ -85,13 +95,16 @@ function UserPage() {
         <Button
           variant='outlined'
           color='neutral'
+
           onClick={() => createProfile()}
         >
           Create Profile
         </Button>
+
         <LogOutButton className='btn' />
       </Box> */}
     </Stack>
+
   );
 }
 
