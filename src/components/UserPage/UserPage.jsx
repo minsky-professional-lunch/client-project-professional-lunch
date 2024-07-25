@@ -25,7 +25,7 @@ function UserPage() {
       <h2>Welcome, {user.username}!</h2>
       <p>Your ID is: {user.id}</p>
       <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
-      <Button onClick={() => createProfile()}>Create Profile</Button>
+      <Button variant='outlined' color='neutral' onClick={() => createProfile()}>Create Profile</Button>
       <LogOutButton className="btn" />
       </Box>
     </div>

@@ -5,15 +5,17 @@ import Box from '@mui/material/Box';
 import Button from '@mui/joy/Button';
 import Card from '@mui/joy/Card';
 import CardContent from '@mui/joy/CardContent';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import Grid from '@mui/joy/Grid';
 import Link from '@mui/material/Link';
+import Stack from '@mui/joy/Stack';
+import Tooltip from '@mui/joy/Tooltip';
 import Typography from '@mui/joy/Typography';
 import EditResourceDialog from '../EditResourceDialog/EditResourceDialog';
 
 export default function ResourceCards({ resource }) {
   const dispatch = useDispatch();
-
-  // const resources = useSelector((store) => store.resources);
   const user = useSelector((store) => store.user);
 
   const [editResourceIsOpen, setEditResourceIsOpen] = useState(false);
@@ -40,20 +42,24 @@ export default function ResourceCards({ resource }) {
           mb: 2,
           ml: 1,
           mr: 1,
-          width: 300,
-          height: 400,
+          width: 330,
           display: 'flex',
           flexDirection: 'column',
         }}
       >
-        <div>
+        <Stack direction='row' textAlign='center'>
           <Typography level='title-lg'>{resource.title}</Typography>
-        </div>
-        <AspectRatio minHeight='120px' maxHeight='210px'>
+        </Stack>
+        <AspectRatio minHeight='120px' maxHeight='220px'>
           <img
             src={resource.image}
             loading='lazy'
             alt='a logo for the resource'
+            // style={{
+            //   objectFit: 'contain',
+            //   width: '100%',
+            //   height: '100%',
+            // }}
           />
         </AspectRatio>
         <CardContent orientation='horizontal'>
@@ -69,29 +75,33 @@ export default function ResourceCards({ resource }) {
             >
               {showFullDescription ? 'Less' : 'More'}
             </Typography>
-            <Typography fontSize='md' fontWeight='md' mb={2}>
-              <Link href={resource.url}>Visit Resource</Link>
-            </Typography>
+            <Stack sx={{mt: 1}} direction='row' justifyContent='space-between' spacing={2}>
+              {user.isAdmin && (
+                <Stack direction='row' justifyContent='flex-end'>
+                  <Tooltip title='Delete Resource' variant='soft'>
+                    <DeleteForeverIcon
+                      sx={{ fontSize: '25px', cursor: 'pointer' }}
+                      onClick={() => deleteResource(resource.id)}
+                    />
+                  </Tooltip>
+                </Stack>
+              )}
+              <Typography fontSize='md' fontWeight='md' mb={2}>
+                <Link href={resource.url}>Visit Resource</Link>
+              </Typography>
+              {user.isAdmin && (
+                <Stack direction='row' justifyContent='flex-end'>
+                  <Tooltip title='Edit Resource' variant='soft'>
+                    <EditIcon
+                      sx={{ fontSize: '25px', cursor: 'pointer' }}
+                      onClick={() => setEditResourceIsOpen(true)}
+                    />
+                  </Tooltip>
+                </Stack>
+              )}
+            </Stack>
             {user.isAdmin && (
               <>
-                <Button
-                  size='md'
-                  color='danger'
-                  variant='outlined'
-                  sx={{ ml: 'auto', alignSelf: 'center', fontWeight: 600 }}
-                  onClick={() => deleteResource(resource.id)}
-                >
-                  Remove
-                </Button>
-                <Button
-                  size='md'
-                  color='neutral'
-                  variant='outlined'
-                  sx={{ ml: '4px', alignSelf: 'center', fontWeight: 600 }}
-                  onClick={() => setEditResourceIsOpen(true)}
-                >
-                  Edit
-                </Button>
                 <EditResourceDialog
                   open={editResourceIsOpen}
                   closeEditResource={closeEditResource}

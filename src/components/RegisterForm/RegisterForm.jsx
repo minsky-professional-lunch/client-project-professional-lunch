@@ -11,10 +11,15 @@ import Input from '@mui/joy/Input';
 import FormControl from '@mui/joy/FormControl';
 import FormLabel from '@mui/joy/FormLabel';
 import FormHelperText from '@mui/joy/FormHelperText';
+import IconButton from '@mui/material/IconButton';
+import InputAdornment from '@mui/material/InputAdornment';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 function RegisterForm() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   // const [firstName, setFirstName] = useState("");
   // const [lastName, setLastName] = useState("");
   // const [email, setEmail] = useState("");
@@ -55,46 +60,6 @@ function RegisterForm() {
 
   return (
     <form className='formPanel' onSubmit={nextPage}>
-      {/* <div>
-        <label htmlFor="username">
-          Username:
-          <input
-            type="text"
-            name="username"
-            value={username}
-            required
-            onChange={(event) => setUsername(event.target.value)}
-          />
-        </label>
-      </div>
-      <div>
-        <label htmlFor="password">
-          Password:
-          <input
-            type="password"
-            name="password"
-            value={password}
-            required
-            onChange={(event) => setPassword(event.target.value)}
-          />
-        </label>
-      </div> */}
-      {/* <div>
-        First Name
-        <input
-          type="text"
-          value={firstName}
-          onChange={(event) => setFirstName(event.target.value)}
-        />
-      </div>
-      <div>
-        Last Name
-        <input
-          type="text"
-          value={lastName}
-          onChange={(event) => setLastName(event.target.value)}
-        />
-      </div> */}
       <Box
         sx={{
           py: 2,
@@ -126,10 +91,22 @@ function RegisterForm() {
           <Input
             label='Password'
             placeholder='Password'
-            type='password'
+            type={showPassword ? 'text' : 'password'}
             value={password}
             required
             onChange={(event) => setPassword(event.target.value)}
+            endDecorator={
+              <InputAdornment position='end'>
+                <IconButton
+                  onClick={() => {
+                    setShowPassword(!showPassword);
+                  }}
+                  edge='end'
+                >
+                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              </InputAdornment>
+            }
           />
         </FormControl>
         <FormControl>
@@ -156,8 +133,8 @@ function RegisterForm() {
           <Checkbox label='I am 18 years of age or older' required />
         </FormControl>
         <ButtonGroup spacing='0.5rem' color='primary' variant='solid'>
-          <Button onClick={() => history.push('/login')} >Back</Button>
-          <Button className='btn' type='submit' name='submit' value='Next'>
+          <Button color='neutral' onClick={() => history.push('/login')} >Back</Button>
+          <Button color='neutral' className='btn' type='submit' name='submit' value='Next'>
             Next
           </Button>
         </ButtonGroup>
