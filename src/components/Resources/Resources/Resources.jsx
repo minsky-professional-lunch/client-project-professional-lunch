@@ -53,7 +53,7 @@ export default function Resources() {
           )}
         </Stack>
       </Stack>
-      <Grid container spacing={1}>
+      <Grid alignItems='center' justifyContent='center' container spacing={1}>
         {resources.map((resource) => (
           <ResourceCards key={resource.id} resource={resource} />
         ))}
