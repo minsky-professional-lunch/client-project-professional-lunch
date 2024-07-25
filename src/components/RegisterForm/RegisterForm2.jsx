@@ -151,8 +151,8 @@ export default function RegisterForm2() {
             </FormControl>
           )}
           <ButtonGroup spacing='0.5rem' color='primary' variant='solid'>
-            <Button onClick={() => history.push('/registration')} >Back</Button>
-            <Button className='btn' type='submit' name='submit'>
+            <Button color='neutral' onClick={() => history.push('/registration')} >Back</Button>
+            <Button color='neutral' className='btn' type='submit' name='submit'>
               Next
             </Button>
           </ButtonGroup>

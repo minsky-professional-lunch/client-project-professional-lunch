@@ -216,13 +216,13 @@ export default function RegisterForm4() {
               ))}
             </Select>
           </FormControl>
-          <Button sx={{ mb:1}} onClick={handleAdd}>Add Availability</Button>
+          <Button color='neutral' sx={{ mb:1}} onClick={handleAdd}>Add Availability</Button>
           </Box>
         </form>
       ))}
       <ButtonGroup spacing='0.5rem' color='primary' variant='solid'>
-        <Button onClick={() => history.push('/registration/3')}>Back</Button>
-        <Button onClick={(event) => registerUser(event)}>Register</Button>
+        <Button color='neutral' onClick={() => history.push('/registration/3')}>Back</Button>
+        <Button color='neutral' onClick={(event) => registerUser(event)}>Register</Button>
       </ButtonGroup>
     </div>
   );

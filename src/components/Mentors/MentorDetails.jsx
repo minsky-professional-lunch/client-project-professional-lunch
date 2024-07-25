@@ -79,9 +79,11 @@ export default function MentorDetails() {
 
   const back = () => {
     if (!user.isMentor) {
-      history.push('/my-mentors');
+      // history.push('/my-mentors');
+      history.goBack();
     } else if (user.isMentor) {
-      history.push('/my-mentees');
+      // history.push('/my-mentees');
+      history.goBack();
     }
   }
 
