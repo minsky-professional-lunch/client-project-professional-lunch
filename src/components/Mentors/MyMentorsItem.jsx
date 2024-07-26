@@ -57,10 +57,17 @@ export default function MyMentorsItem({ mentor }) {
                   alt={mentor.mentor_first_name}
                   sx={{ '--Avatar-size': '8rem', cursor: 'pointer' }}
                 />
-                <Stack direction='column'>
+                <Stack direction='column' alignItems='center' >
                   <Typography level='h2' sx={{ marginBottom: '10px' }}>
                     {mentor.mentor_first_name} {mentor.mentor_last_name}
                   </Typography>
+                  {mentor.status === 'Denied - not available at this time' ? 
+                  <>
+                    <Typography><b>Status:</b> {mentor.status}</Typography>
+                  </>
+                  :
+                  <></>
+                  }
                 </Stack>
               </Stack>
             </CardContent>
@@ -69,7 +76,7 @@ export default function MyMentorsItem({ mentor }) {
             ) : (
               <CardActions>
                 <Button onClick={() => cancel(mentor.id)} color='neutral'>
-                  Cancel Request
+                  Delete Request
                 </Button>
               </CardActions>
             )}

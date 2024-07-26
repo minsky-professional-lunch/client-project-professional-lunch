@@ -105,6 +105,20 @@ router.put('/', rejectUnauthenticated, async (req, res) => {
   }
 });
 
+// PUT route for updating a mentorship to denied
+router.put('/deny', rejectUnauthenticated, async (req, res) => {
+  try {
+    await pool.query(
+      `UPDATE "mentorships" SET status='Denied - not available at this time' WHERE mentorships.id=$1;`,
+      [req.body.mentorshipId]
+    );
+    res.sendStatus(201);
+  } catch (error) {
+    console.log('error in denying this mentorship', error);
+    res.sendStatus(500);
+  }
+});
+
 // DELETE route for terminating a mentorship
 router.delete('/:id', rejectUnauthenticated, async (req, res) => {
     queryText = `DELETE FROM "mentorships" WHERE mentorships.id=$1;`;

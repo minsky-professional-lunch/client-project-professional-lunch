@@ -38,6 +38,15 @@ function* acceptMentorship(action) {
     }
 }
 
+function* denyMentorship(action) {
+    try {
+        yield axios.put('/api/mentorships/deny', action.payload);
+        yield put({ type: 'FETCH_MENTORSHIPS' });    
+    }  catch (error) {
+        console.log('Error denying mentorship:', error);
+    }
+}
+
 function* deleteMentorship(action) {
     try {
         yield axios.delete(`/api/mentorships/${action.payload.mentorshipId}`);
@@ -54,6 +63,7 @@ function* mentorshipSaga() {
     yield takeLatest('REQUEST_MENTORSHIP', requestMentorship);
     yield takeLatest('ACCEPT_MENTORSHIP', acceptMentorship);
     yield takeLatest('DELETE_MENTORSHIP', deleteMentorship);
+    yield takeLatest('DENY_MENTORSHIP', denyMentorship);
 }
 
 

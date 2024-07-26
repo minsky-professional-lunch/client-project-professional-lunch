@@ -10,11 +10,20 @@ import { CardActions, CardContent, Stack } from "@mui/joy";
 import Button from '@mui/joy/Button';
 import moment from 'moment/moment';
 import ButtonGroup from '@mui/joy/ButtonGroup';
+import Divider from '@mui/joy/Divider';
+import DialogTitle from '@mui/joy/DialogTitle';
+import DialogContent from '@mui/joy/DialogContent';
+import DialogActions from '@mui/joy/DialogActions';
+import Modal from '@mui/joy/Modal';
+import ModalDialog from '@mui/joy/ModalDialog';
+import DeleteForever from '@mui/icons-material/DeleteForever';
+import WarningRoundedIcon from '@mui/icons-material/WarningRounded';
 
 export default function MeetingItem( {meeting} ) {
     const user = useSelector(store => store.user);
     const history = useHistory();
     const dispatch = useDispatch();
+    const [open, setOpen] = React.useState(false);
 
     const seeDetails = (meetingId) => {
         console.log('clicked', meetingId);
@@ -25,11 +34,13 @@ export default function MeetingItem( {meeting} ) {
         console.log('clicked', meetingId);
         dispatch({ type: 'ACCEPT_MEETING', payload: meetingId });
         dispatch({ type: 'FETCH_MEETINGS' });
+        history.push('/my-meetings');
     }
 
     const deny = (meetingId) => {
         console.log('clicked', meetingId);
-        dispatch({ type: 'DELETE_MEETING', payload: meetingId });
+        dispatch({ type: 'DENY_MEETING', payload: meetingId });
+        history.push('/my-meetings');
     }
 
     return (
@@ -55,12 +66,38 @@ export default function MeetingItem( {meeting} ) {
                         </Stack>
                     </Stack>
                 </CardContent>
-                    {meeting.meeting_status === 'pending' ? 
+                    {meeting.meeting_status === 'Pending' ? 
                     <CardOverflow sx={{ bgcolor: 'background.level2', alignItems: 'center' }}>
                         <CardActions buttonFlex="1">
                             <ButtonGroup variant="outlined" size='lg' sx={{ bgcolor: 'background.surface' }}>
                                 <Button onClick={() => accept(meeting.meeting_id)}>Accept</Button>
-                                <Button onClick={() => deny(meeting.meeting_id)}>Deny</Button>
+                                <React.Fragment>
+                                    <Button onClick={() => setOpen(true)}>
+                                        Deny
+                                    </Button>
+                                    <Modal open={open} onClose={() => setOpen(false)}>
+                                        <ModalDialog variant="outlined" role="alertdialog">
+                                        <DialogTitle>
+                                            <WarningRoundedIcon />
+                                            Confirmation
+                                        </DialogTitle>
+                                        <Divider />
+                                        <DialogContent>
+                                            Are you sure you want to deny this meeting?
+                                        </DialogContent>
+                                        <DialogActions>
+                                            <Button variant="solid" color="danger" onClick={() => { 
+                                                setOpen(false); 
+                                                deny(meeting.meeting_id)}}>
+                                            Deny meeting
+                                            </Button>
+                                            <Button variant="plain" color="neutral" onClick={() => setOpen(false)}>
+                                            Cancel
+                                            </Button>
+                                        </DialogActions>
+                                        </ModalDialog>
+                                    </Modal>
+                                    </React.Fragment>
                             </ButtonGroup>
                         </CardActions>
                     </CardOverflow>
@@ -83,8 +120,8 @@ export default function MeetingItem( {meeting} ) {
                             <Typography level="body-md" noWrap sx={{ width: '50vw' }}>
                                 {moment(meeting.meeting_date).format('LL')} | {moment(meeting.meeting_start, "hh:mm:ss").format('h:mm A')}
                             </Typography>
-                            <Typography level="body-md" noWrap sx={{ width: '50vw' }}>
-                                Status: {meeting.meeting_status}
+                            <Typography level="body-md" sx={{ width: '50vw' }}>
+                                <span><b>Status:</b></span> {meeting.meeting_status}
                             </Typography>
                         </Stack>
                 </Stack>

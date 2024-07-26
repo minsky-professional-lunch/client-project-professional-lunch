@@ -19,9 +19,9 @@ function MentorHomePage() {
   console.log('Accepted mentorships', accepted);
   const meetings = useSelector(store => store.meetings);
   console.log('Meetings', meetings);
-  const meetingRequests = meetings.filter(meeting => meeting.meeting_status === 'pending');
+  const meetingRequests = meetings.filter(meeting => meeting.meeting_status === 'Pending');
   console.log('Meeting requests', meetingRequests);
-  const acceptedMeetings = meetings.filter(meeting => meeting.meeting_status === 'accepted');
+  const acceptedMeetings = meetings.filter(meeting => meeting.meeting_status === 'Accepted');
   console.log('Accepted meetings', acceptedMeetings);
 
   useEffect(() => {
