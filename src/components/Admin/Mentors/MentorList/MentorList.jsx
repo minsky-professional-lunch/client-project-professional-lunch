@@ -25,7 +25,6 @@ export default function MentorList() {
               <th style={{ width: '10%' }}>Last Name</th>
               <th style={{ width: '10%' }}>First Name</th>
               <th style={{ width: '15%' }}>Email</th>
-              <th style={{ width: '15%' }}>School</th>
               <th style={{ width: '15%' }}>LinkedIn</th>
               <th style={{ width: '20%' }}>Bio</th>
               <th style={{ width: '20%' }}>Availability</th>
@@ -38,7 +37,6 @@ export default function MentorList() {
                 <td>{mentor.last_name}</td>
                 <td>{mentor.first_name}</td>
                 <td>{mentor.email}</td>
-                <td>{mentor.school}</td>
                 <td>
                   {!mentor.linkedin ? (
                     'No Profile'

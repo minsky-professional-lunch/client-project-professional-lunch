@@ -51,7 +51,7 @@ Before you get started, make sure you have the following software installed on y
 
 ## Acknowledgements
 
-Thanks to everyone at Emerging Digital Academy for help in getting to where we are and assisting us in developing this application. Also, a huge thanks to my cohort mates, we all leaned on each other and helped each other through these projects and we are grateful to have gone through this process with you.
+Thanks to everyone at Emerging Digital Academy for help in getting to where we are and assisting us in developing this application. Also, a huge thanks to our cohort mates, we all leaned on each other and helped each other through these projects and we are grateful to have gone through this process with you.
 
 ## Support
 If you have any suggestions, questions or issues, please email:
