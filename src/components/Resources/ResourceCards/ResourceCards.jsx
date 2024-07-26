@@ -55,11 +55,7 @@ export default function ResourceCards({ resource }) {
             src={resource.image}
             loading='lazy'
             alt='a logo for the resource'
-            // style={{
-            //   objectFit: 'contain',
-            //   width: '100%',
-            //   height: '100%',
-            // }}
+            style={{ objectFit: 'contain', width: '100%', height: '100%' }}
           />
         </AspectRatio>
         <CardContent orientation='horizontal'>

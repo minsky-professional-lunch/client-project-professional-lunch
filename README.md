@@ -1,124 +1,96 @@
-# Prime Solo Project - Starting Repo
+# Professional Launch - Client Project
 
-This version uses React, Redux, Express, Passport, and PostgreSQL (a full list of dependencies can be found in `package.json`).
+Professional Launch is a client project completed for the Emerging Digital Academy in Fargo, ND by Abdullahia Ali, Amber Schaack and Scott Schulte. It is a user focused application used to foster mentoring relationships for Professional Lunch, a local non-profit organization, focusing on creating a powerful and robust mentoring and learning platform that helps under-connected young professionals develop and build social capital. 
 
-We **STRONGLY** recommend following these instructions carefully. It's a lot, and will take some time to set up, but your life will be much easier this way in the long run.
+## Description
 
-## Use the Template for This Repository (Don't Clone)
+The Professional Launch Mentorship management system is a web-based, mobile-first, application designed to facilitate and manage mentorship relationships. The system allows mentors and mentees to create profiles, establish connections, and propose meetings. This will allow mentees to develop their skills, build a professional network, and receive guidance on career advancement to achieve career goals. Additionally, the system provides an admin interface for managing relationships and data within the application. 
 
-- Don't Fork or Clone. Instead, click the `Use this Template` button, and make a copy to your personal account. Make the project `PUBLIC`!
+## Duration
+
+- 3 week sprint
 
 ## Prerequisites
 
 Before you get started, make sure you have the following software installed on your computer:
 
-- [Node.js](https://nodejs.org/en)
-- [PostgreSQL](https://www.postgresql.org)
-- [Nodemon](https://nodemon.io)
+- Node.js
+- PostrgeSQL
+- Nodemon
 
-## Create Database and Table
+## Create Database and Tables
 
-Create a new database called `prime_app` and create a `user` table:
-
-```SQL
-CREATE TABLE "user" (
-    "id" SERIAL PRIMARY KEY,
-    "username" VARCHAR (80) UNIQUE NOT NULL,
-    "password" VARCHAR (1000) NOT NULL
-);
-```
-
-If you would like to name your database something else, you will need to change `prime_app` to the name of your new database name in `server/modules/pool.js`.
+- Create a new database called 'professional_launch' and use the queries in the database.sql file to set up your tables.
+- If you would like to name your database something else, you will need to change 'professional_launch' to the name of your new database name in server/modules/pool.js
 
 ## Development Setup Instructions
 
-- Run `npm install`.
-    - Be sure to take stock of `package.json` to see which dependencies you'll need to add.
-- Create a `.env` file at the root of the project and paste this line into the file:
+- Run npm install
+- Start postgres
+- Run npm run server
+- Run npm run client
+- Navigate to localhost:5173
 
-```plaintext
-SERVER_SESSION_SECRET=superDuperSecret
-```
+## Built With
+- HTML
+- CSS
+- Javascript
+- ReactJS
+- React Redux/Sagas
+- Axios
+- Express.js
+- PostgresSQL
+- Postico
+- Postman
+- Git
+- Bcrypt.js
+- Passport.js
+- Material UI
+- Joy UI
+- Moment.js
 
-While you're in your new `.env` file, take the time to replace `superDuperSecret` with some long random string like `25POUbVtx6RKVNWszd9ERB9Bb6` to keep your application secure. Here's a site that can help you: [Password Generator Plus](https://passwordsgenerator.net). If you don't do this step, create a secret with less than eight characters, or leave it as `superDuperSecret`, you will get a warning.
+## Acknowledgements
 
-- Start postgres if not running already by using opening up the [Postgres.app](https://postgresapp.com), or if using [Homebrew](https://brew.sh) you can use the command `brew services start postgresql`.
-- Run `npm run server` to start the server.
-- Run `npm run client` to start the client.
-- Navigate to `localhost:5173`.
+Thanks to everyone at Emerging Digital Academy for help in getting to where we are and assisting us in developing this application. Also, a huge thanks to my cohort mates, we all leaned on each other and helped each other through these projects and we are grateful to have gone through this process with you.
 
-## Debugging
+## Support
+If you have any suggestions, questions or issues, please email:
+Abdullahia at abdullahia0215@gmail.com
+Amber at aschaack9@gmail.com
+Scott at scott.r.schulte@gmail.com.
 
-To debug, you will need to run the client-side separately from the server. Start the client by running the command `npm run client`. Start the debugging server by selecting the Debug button.
+## Code of Conduct
 
-![VSCode Toolbar](documentation/images/vscode-toolbar.png)
+# Our Pledge
+In the interest of fostering an open and welcoming environment, we as contributors and maintainers pledge to making participation in our project and our community a harassment-free experience for everyone, regardless of age, body size, disability, ethnicity, gender identity and expression, level of experience, nationality, personal appearance, race, religion, or sexual identity and orientation.
 
-Then make sure `Launch Program` is selected from the dropdown, then click the green play arrow.
+# Our Standards
+Examples of behavior that contributes to creating a positive environment include:
 
-![VSCode Debug Bar](documentation/images/vscode-debug-bar.png)
+Using welcoming and inclusive language
+Being respectful of differing viewpoints and experiences
+Gracefully accepting constructive criticism
+Focusing on what is best for the community
+Showing empathy towards other community members
+Examples of unacceptable behavior by participants include:
 
-## Testing Routes with Postman
+The use of sexualized language or imagery and unwelcome sexual attention or advances
+Trolling, insulting/derogatory comments, and personal or political attacks
+Public or private harassment
+Publishing others' private information, such as a physical or electronic address, without explicit permission
+Other conduct which could reasonably be considered inappropriate in a professional setting
+Our Responsibilities
+Project maintainers are responsible for clarifying the standards of acceptable behavior and are expected to take appropriate and fair corrective action in response to any instances of unacceptable behavior.
 
-To use Postman with this repo, you will need to set up requests in Postman to register a user and login a user at a minimum.
+Project maintainers have the right and responsibility to remove, edit, or reject comments, commits, code, wiki edits, issues, and other contributions that are not aligned to this Code of Conduct, or to ban temporarily or permanently any contributor for other behaviors that they deem inappropriate, threatening, offensive, or harmful.
 
-Keep in mind that once you using the login route, Postman will manage your session cookie for you just like a browser, ensuring it is sent with each subsequent request. If you delete the `localhost` cookie in Postman, it will effectively log you out.
+# Scope
+This Code of Conduct applies both within project spaces and in public spaces when an individual is representing the project or its community. Examples of representing a project or community include using an official project e-mail address, posting via an official social media account, or acting as an appointed representative at an online or offline event. Representation of a project may be further defined and clarified by project maintainers.
 
-1. Run `npm run server` to start the server.
-2. Import the sample routes JSON file [v2](./PostmanPrimeSoloRoutesv2.json) by clicking `Import` in Postman. Select the file.
-3. Click `Collections` and `Send` the following three calls in order:
-   1. `POST /api/user/register` registers a new user, see body to change username/password.
-   2. `POST /api/user/login` will login a user, see body to change username/password.
-   3. `GET /api/user` will get user information, by default it's not very much.
+# Enforcement
+Instances of abusive, harassing, or otherwise unacceptable behavior may be reported by contacting the project team at scott.r.schulte@gmail.com. All complaints will be reviewed and investigated and will result in a response that is deemed necessary and appropriate to the circumstances. The project team is obligated to maintain confidentiality with regard to the reporter of an incident. Further details of specific enforcement policies may be posted separately.
 
-After running the login route above, you can try any other route you've created that requires a logged in user!
+Project maintainers who do not follow or enforce the Code of Conduct in good faith may face temporary or permanent repercussions as determined by other members of the project's leadership.
 
-## Production Build
-
-Before pushing to Heroku, run `npm run build` in terminal. This will create a build folder that contains the code Heroku will be pointed at. You can test this build by typing `npm start`. Keep in mind that `npm start` will let you preview the production build but will **not** auto update.
-
-- Start postgres if not running already by using opening up the [Postgres.app](https://postgresapp.com), or if using [Homebrew](https://brew.sh) you can use the command `brew services start postgresql`.
-- Run `npm start`.
-- Navigate to `localhost:5173`.
-
-## Lay of the Land
-
-There are a few videos linked below that show a walkthrough the client and sever setup to help acclimatize to the boilerplate. Please take some time to watch the videos in order to get a better understanding of what the boilerplate is like.
-
-- [Initial Set](https://vimeo.com/453297271)
-- [Server Walkthrough](https://vimeo.com/453297212)
-- [Client Walkthrough](https://vimeo.com/453297124)
-
-Directory Structure:
-
-- `src/` contains the React application.
-- `public/` contains static assets for the client-side.
-- `build/` after you build the project, contains the transpiled code from `src/` and `public/` that will be viewed on the production site.
-- `server/` contains the Express App.
-
-This code is also heavily commented. We recommend reading through the comments, getting a lay of the land, and becoming comfortable with how the code works before you start making too many changes. If you're wondering where to start, consider reading through component file comments in the following order:
-
-- src/components
-  - App/App
-  - Footer/Footer
-  - Nav/Nav
-  - AboutPage/AboutPage
-  - InfoPage/InfoPage
-  - UserPage/UserPage
-  - LoginPage/LoginPage
-  - RegisterPage/RegisterPage
-  - LogOutButton/LogOutButton
-  - ProtectedRoute/ProtectedRoute
-
-## Deployment
-
-1. Create a new Heroku project.
-1. Link the Heroku project to the project GitHub Repo.
-1. Create an Heroku Postgres database.
-1. Connect to the Heroku Postgres database from Postico.
-1. Create the necessary tables.
-1. Add an environment variable for `SERVER_SESSION_SECRET` with a nice random string for security.
-1. In the deploy section, select manual deploy.
-
-## Update Documentation
-
-Customize this ReadMe and the code comments in this project to read less like a starter repo and more like a project. Here is an example: https://gist.github.com/PurpleBooth/109311bb0361f32d87a2.
+Attribution
+This Code of Conduct is adapted from the Contributor Covenant, version 1.4, available at http://contributor-covenant.org/version/1/4

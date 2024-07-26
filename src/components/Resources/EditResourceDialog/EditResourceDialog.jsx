@@ -78,6 +78,7 @@ export default function EditResourceDialog({ open, closeEditResource, resource }
             type='text'
             placeholder={resource.url}
             multiline
+            minRows={2}
             fullWidth
             value={editResourceUrl}
             onChange={(event) => setEditResourceUrl(event.target.value)}
@@ -90,6 +91,7 @@ export default function EditResourceDialog({ open, closeEditResource, resource }
             type='text'
             placeholder={resource.about}
             multiline
+            minRows={2}
             fullWidth
             value={editResourceAbout}
             onChange={(event) => setEditResourceAbout(event.target.value)}

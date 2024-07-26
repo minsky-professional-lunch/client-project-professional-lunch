@@ -82,6 +82,8 @@ export default function AddResourceDialog({ open, closeAddResource }) {
             type='text'
             placeholder='URL'
             fullWidth
+            multiline
+            minRows={2}
             value={resourceUrl}
             onChange={(event) => setResourceUrl(event.target.value)}
             required
@@ -94,6 +96,9 @@ export default function AddResourceDialog({ open, closeAddResource }) {
             type='text'
             placeholder='About'
             fullWidth
+            multiline
+            minRows={2}
+            required
             value={resourceAbout}
             onChange={(event) => setResourceAbout(event.target.value)}
           />

@@ -98,7 +98,7 @@ export default function MuiNavBar() {
               textDecoration: "none",
             }}
           >
-            Professional Launch
+            Professional L<span style={{ color: '#ED1C24' }}>A</span>unch
           </Typography>
           <Typography
             variant="h6"
@@ -115,7 +115,7 @@ export default function MuiNavBar() {
               textDecoration: "none",
             }}
           >
-            Professional Launch
+            Professional L<span style={{ color: '#ED1C24' }}>A</span>unch
           </Typography>
           {user.id && (
             <Box sx={{ display: "flex", flexGrow: 0 }}>
