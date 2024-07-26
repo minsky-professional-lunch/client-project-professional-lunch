@@ -195,7 +195,7 @@ export default function EditProfileDialog({ open, closeEditProfile, profile }) {
             >
               <Avatar
                 variant='outlined'
-                sx={{ width: 100, height: 100 }}
+                sx={{ width: 125, height: 125 }}
                 src={editProfile?.profile.avatar}
               />
             </Badge>
