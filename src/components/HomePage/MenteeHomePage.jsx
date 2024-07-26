@@ -1,9 +1,5 @@
 import React, { useEffect } from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import MentorItem from '../Mentors/MentorItem';
-import Requests from '../Mentorships/MentorRequests';
-import MentorRequests from '../Mentorships/MentorRequests';
-import MenteeRequests from '../Mentorships/MenteeRequests';
 import MeetingItem from '../Meetings/MeetingItem';
 import MyMentorsItem from '../Mentors/MyMentorsItem';
 import { Button, Stack } from '@mui/joy';
@@ -21,11 +17,13 @@ function MenteeHomePage() {
   console.log('My Mentors', myMentors);
   const pending = mentorships.filter(mentor => mentor.status === 'pending');
   console.log('Pending', pending);
+  const denied = mentorships.filter(mentor => mentor.status === 'Denied - not available at this time');
+  console.log('Denied mentorships', denied);
   const meetings = useSelector(store => store.meetings);
   console.log('Meetings', meetings);
-  const pendingMeetings = meetings.filter(meeting => meeting.meeting_status === 'pending');
+  const pendingMeetings = meetings.filter(meeting => meeting.meeting_status === 'Pending');
   console.log('Pending meetings', pendingMeetings);
-  const acceptedMeetings = meetings.filter(meeting => meeting.meeting_status === 'accepted');
+  const acceptedMeetings = meetings.filter(meeting => meeting.meeting_status === 'Accepted');
   console.log('Accepted meetings', acceptedMeetings);
 
   useEffect(() => {
@@ -57,11 +55,21 @@ function MenteeHomePage() {
       <>
         <h3 align='center'>Pending Mentorships</h3>
         {pending.map((mentor) => (
-          <MenteeRequests key={mentor.id} mentor={mentor} />
+          <MyMentorsItem key={mentor.id} mentor={mentor} />
         ))}
         </>
         : 
         <></>
+      }
+      {denied.length > 0 ? 
+      <>
+        <h3 align='center'>Denied Mentorships</h3>
+        {denied.map((mentor) => (
+          <MyMentorsItem key={mentor.id} mentor={mentor} />
+        ))}
+      </>
+      :
+      <></>
       }
       <h3 align='center'>Upcoming Meetings</h3>
       {meetings.length === 0 ? 

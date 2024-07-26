@@ -160,81 +160,54 @@ export default function MentorDetails() {
       </Stack>
       <Grid container justifyContent='center'>
         <Box sx={{ maxHeight: '90vh' }}>
-          <Stack direction='column' spacing={1.5} alignItems='center'>
-            <Card
-              sx={{
-                width: '82vw',
-                maxWidth: '100%',
-                boxShadow: 'lg',
-              }}
-            >
-              <CardContent sx={{ alignItems: 'center', textAlign: 'center' }}>
-                <Avatar
-                  src={details?.profile?.avatar}
-                  sx={{ '--Avatar-size': '10rem', marginBottom: '3px' }}
-                />
-                <Typography
-                  sx={{ fontSize: '2rem', fontWeight: 'bold' }}
-                  level='h2'
-                >
-                  {details?.profile?.first_name} {details?.profile?.last_name}
-                </Typography>
-                <Typography sx={{ fontSize: '1.5rem' }} level='body-lg'>
-                  {details?.details?.school_name}
-                </Typography>
-                <Stack direction='row' alignItems='center' spacing={1}>
-                  <Button
-                    component='a'
-                    href={`mailto:${details?.profile?.email}`}
-                    variant='plain'
-                    color='neutral'
-                  >
-                    <EmailIcon sx={{ fontSize: '2rem' }} />
-                  </Button>
-                  {details?.profile?.linkedin != null ? (
-                    <Button
-                      component='a'
-                      href={details?.profile?.linkedin}
-                      variant='plain'
-                      color='neutral'
-                    >
-                      <LinkedInIcon sx={{ fontSize: '2.5rem' }} />
-                    </Button>
-                  ) : (
-                    <></>
-                  )}
-                </Stack>
-              </CardContent>
-            </Card>
-            <Card
-              sx={{
-                width: '82vw',
-                maxWidth: '100%',
-                boxShadow: 'lg',
-              }}
-            >
-              <Stack direction='column'>
-                <Typography level='h3'>About Me</Typography>
-                <Typography sx={{ fontSize: '1.3rem' }}>
-                  {details?.profile?.bio}
-                </Typography>
-              </Stack>
-            </Card>
-            <Card
-              sx={{
-                width: '82vw',
-                maxWidth: '100%',
-                boxShadow: 'lg',
-              }}
-            >
-              <Stack direction='column'>
-                <Typography level='h3'>Interests</Typography>
-                <Stack direction='row' spacing={1} flexWrap='wrap' useFlexGap>
-                  {details?.details?.interests?.map((interest) => (
-                    <Chip sx={{ fontSize: '1.3rem', marginTop: '10px' }}>
-                      {interest.interest}
-                    </Chip>
-                  ))}
+        <Stack direction='column' spacing={1.5} alignItems='center'>
+        <Card
+          sx={{
+            width: '82vw',
+            maxWidth: '100%',
+            boxShadow: 'lg',
+          }}
+        >
+          <CardContent sx={{ alignItems: 'center', textAlign: 'center' }}>
+            <Avatar src={details?.profile?.avatar} sx={{ '--Avatar-size': '10rem', marginBottom: '3px' }}/>
+            <Typography sx={{ fontSize: '2rem', fontWeight: 'bold'}} level='h2'>
+              {details?.profile?.first_name} {details?.profile?.last_name}
+            </Typography>
+            <Stack direction='row' alignItems='center' spacing={1}>
+              <Button component="a" href={`mailto:${details?.profile?.email}`} variant='plain' color='neutral'>
+                <EmailIcon sx={{ fontSize: '2rem' }} />
+              </Button>
+                {details?.profile?.linkedin != null ? 
+                <Button component="a" href={details?.profile?.linkedin} variant='plain' color='neutral'>
+                  <LinkedInIcon sx={{ fontSize: '2.5rem' }} />
+                </Button>
+              : 
+              <></>
+              }
+            </Stack>
+          </CardContent>
+        </Card>
+        <Card sx={{
+            width: '82vw',
+            maxWidth: '100%',
+            boxShadow: 'lg',
+          }}>
+            <Stack direction='column'>
+              <Typography level='h3'>About Me</Typography>
+              <Typography sx={{ fontSize: '1.3rem' }}>{details?.profile?.bio}</Typography>
+            </Stack>
+        </Card>
+        <Card sx={{
+        width: '82vw',
+        maxWidth: '100%',
+        boxShadow: 'lg'
+          }}>
+            <Stack direction='column'>
+              <Typography level='h3'>Interests</Typography>
+              <Stack direction='row' spacing={1} flexWrap='wrap' useFlexGap>
+              {details?.details?.interests?.map((interest) => (
+                  <Chip sx={{ fontSize: '1.3rem', marginTop: '10px'}}>{interest.interest}</Chip>
+                ))}
                 </Stack>
               </Stack>
             </Card>
@@ -254,17 +227,16 @@ export default function MentorDetails() {
                     </Chip>
                   ))}
                 </Stack>
-              </Stack>
-            </Card>
-          </Stack>
-        </Box>
-      </Grid>
+
+            </Stack>
+        </Card>
+        </Stack>
       <Stack
         direction='column'
         justifyContent='space-evenly'
         alignItems='center'
         spacing={3}
-        margin='30px'
+        margin='20px'
       >
         {user.mentorships.includes(details.profile.id) &&
         thisMentorship?.status === 'accepted' ? (
@@ -340,6 +312,8 @@ export default function MentorDetails() {
           <></>
         )}
       </Stack>
+      </Box>
+      </Grid>
     </div>
   );
 }
