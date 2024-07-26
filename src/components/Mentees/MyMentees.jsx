@@ -21,6 +21,7 @@ export default function MyMentees() {
   useEffect(() => {
     dispatch({ type: 'FETCH_PROFILES' });
     dispatch({ type: 'FETCH_MENTORSHIPS' });
+    window.scrollTo(0, 0);
   }, []);
 
   return (

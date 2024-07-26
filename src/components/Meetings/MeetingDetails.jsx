@@ -43,6 +43,7 @@ export default function MeetingDetails() {
 
   useEffect(() => {
     dispatch({ type: 'FETCH_MEETINGS' });
+    window.scrollTo(0, 0);
   }, []);
 
   const back = () => {

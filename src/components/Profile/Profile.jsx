@@ -24,7 +24,7 @@ import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 import EditProfileDialog from './EditProfileDialog';
 import EditIcon from '@mui/icons-material/Edit';
 
-export default function Profile2() {
+export default function Profile() {
   const dispatch = useDispatch();
   const profile = useSelector((store) => store.profileDetails);
   console.log('Profile Details', profile);
@@ -39,6 +39,7 @@ export default function Profile2() {
     dispatch({ type: 'FETCH_INTERESTS' });
     dispatch({ type: 'FETCH_DAYS' });
     dispatch({ type: 'FETCH_TIMES' });
+    window.scrollTo(0, 0);
   }, []);
 
   // note: if user does not have a profile yet, will this prevent them from editing their empty profile?

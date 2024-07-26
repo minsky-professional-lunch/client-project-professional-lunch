@@ -82,7 +82,8 @@ router.get('/', rejectUnauthenticated, (req, res) => {
                     JOIN 
                         "user" AS mentor_user ON mentor_profile.user_id = mentor_user.id
                     WHERE 
-                        mentee_user.id = $1;`;
+                        mentee_user.id = $1
+                    ORDER BY meeting_date, meeting_start;`;
   } else {
     queryText = `SELECT 
                         meetings.id AS meeting_id,
@@ -114,7 +115,8 @@ router.get('/', rejectUnauthenticated, (req, res) => {
                     JOIN 
                         "user" AS mentor_user ON mentor_profile.user_id = mentor_user.id
                     WHERE 
-                        mentor_user.id = $1;`;
+                        mentor_user.id = $1
+                    ORDER BY meeting_date, meeting_start;`;
   }
   pool
     .query(queryText, [req.user.id])

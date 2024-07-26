@@ -32,6 +32,7 @@ export default function AvailableMentors() {
   useEffect(() => {
     dispatch({ type: 'FETCH_PROFILES' });
     dispatch({ type: 'FETCH_INTEREST_PROFILES' });
+    window.scrollTo(0, 0);
   }, []);
 
   const mentorsPerPage = 3;

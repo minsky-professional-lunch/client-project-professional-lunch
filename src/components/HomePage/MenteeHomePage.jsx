@@ -30,14 +30,15 @@ function MenteeHomePage() {
     dispatch({ type: 'FETCH_PROFILE_DETAILS', payload: user.id });
     dispatch({ type: 'FETCH_MENTORSHIPS' });
     dispatch({ type: 'FETCH_MEETINGS' });
+    window.scrollTo(0, 0);
   }, []);
 
   return (
     <div className="container">
-      <h2 align='center'>Welcome, {profile?.profile?.first_name}!</h2>
+      <h1 align='center'>Welcome, {profile?.profile?.first_name}!</h1>
       {mentorships.length > 0 ? 
       <>
-        <h3 align='center'>My Mentors</h3>
+        <h2 align='center'>My Mentors</h2>
         {myMentors.map(mentor => (
           <MyMentorsItem key={mentor.id} mentor={mentor} />
         ))}
@@ -71,7 +72,7 @@ function MenteeHomePage() {
       :
       <></>
       }
-      <h3 align='center'>Upcoming Meetings</h3>
+      <h2 align='center'>Upcoming Meetings</h2>
       {meetings.length === 0 ? 
       <>
         <h3 align='center'>No upcoming meetings. Request a meeting with your mentor to keep learning!</h3> 

@@ -63,7 +63,7 @@ export default function AdminPage() {
             <Tab label='Mentees' {...a11yProps(1)} />
             <Tab label='Mentorships' {...a11yProps(2)} />
             <Tab label='Meetings' {...a11yProps(3)} />
-            <Tab label='Fields/Interests' {...a11yProps(4)} />
+            <Tab label='Interests' {...a11yProps(4)} />
             <Tab label='Schools' {...a11yProps(5)} />
             <Tab label='Genders' {...a11yProps(6)} />
           </Tabs>
