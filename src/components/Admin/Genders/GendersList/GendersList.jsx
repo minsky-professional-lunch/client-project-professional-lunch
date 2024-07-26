@@ -84,7 +84,7 @@ export default function GendersList() {
             setNewGender({ gender: event.target.value });
           }}
         />
-        <Button type='submit' variant='outlined'>Add</Button>
+        <Button type='submit' color='neutral' variant='outlined'>Add</Button>
       </Stack>
       <div>
         <TableContainer >
@@ -103,7 +103,7 @@ export default function GendersList() {
                 >
                   <TableCell>{gender.gender}</TableCell>
                   <TableCell align='center'>
-                    <Button onClick={() => handleOpen(gender.id)} variant='outlined'>
+                    <Button onClick={() => handleOpen(gender.id)} color='neutral' variant='outlined'>
                       Delete
                     </Button>
                   </TableCell>
@@ -117,7 +117,7 @@ export default function GendersList() {
         <Dialog open={open} onClose={handleClose}>
           <DialogTitle>{'Are you sure you want to delete gender?'}</DialogTitle>
           <DialogActions>
-            <Button onClick={handleClose} variant='outlined'>Cancel</Button>
+            <Button onClick={handleClose} variant='outlined' color='neutral'>Cancel</Button>
             <Button onClick={deleteGender} variant='outlined' color='danger'>Yes, Delete</Button>
           </DialogActions>
         </Dialog>

@@ -25,6 +25,33 @@ function AboutPage() {
           creating a supportive community where everyone can thrive.
         </p>
       </div>
+      <ul className="footer-menu">
+            <li className="footer-menu-item">
+              <a href="https://www.youtube.com/@prolunchwithricotaladin" target="_blank" rel="noopener noreferrer">
+                YouTube
+              </a>
+            </li>
+            <li className="footer-menu-item">
+              <a href="https://www.facebook.com/professionallunch/" target="_blank" rel="noopener noreferrer">
+                Facebook
+              </a>
+            </li>
+            <li className="footer-menu-item">
+              <a href="https://www.instagram.com/professionallunch/" target="_blank" rel="noopener noreferrer">
+                Instagram
+              </a>
+            </li>
+            <li className="footer-menu-item">
+              <a href="https://www.linkedin.com/company/professional-lunch" target="_blank" rel="noopener noreferrer">
+                LinkedIn
+              </a>
+            </li>
+            <li className="footer-menu-item">
+              <a href="https://www.tiktok.com/@professionallunch" target="_blank" rel="noopener noreferrer">
+                TikTok
+              </a>
+            </li>
+          </ul>
     </div>
   );
 }

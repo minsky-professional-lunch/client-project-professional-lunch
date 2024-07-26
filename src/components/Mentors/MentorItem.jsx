@@ -50,7 +50,7 @@ export default function MentorItem( {mentor} ) {
                             </Typography>
                             <Stack direction='row' justifyContent="flex-start" alignItems="center" spacing={2} sx={{ marginTop: '10px'}}>
                                 {mentor.status != 'pending' ? 
-                                <Button onClick={() => connect(mentor.id)}>
+                                <Button color='neutral' onClick={() => connect(mentor.id)}>
                                     Connect
                                 </Button>
                                 : 

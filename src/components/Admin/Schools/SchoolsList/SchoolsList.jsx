@@ -82,7 +82,7 @@ export default function SchoolsList() {
             setNewSchool({ school: event.target.value });
           }}
         />
-        <Button type='submit' variant='outlined'>Add</Button>
+        <Button type='submit' variant='outlined' color='neutral'>Add</Button>
       </Stack>
 
       <div>
@@ -102,7 +102,7 @@ export default function SchoolsList() {
                 >
                   <TableCell>{school.school}</TableCell>
                   <TableCell align='center'>
-                    <Button onClick={() => handleOpen(school.id)} variant='outlined'>
+                    <Button onClick={() => handleOpen(school.id)} variant='outlined' color='neutral'>
                       Delete
                     </Button>
                   </TableCell>
@@ -116,7 +116,7 @@ export default function SchoolsList() {
         <Dialog open={open} onClose={handleClose}>
           <DialogTitle>{'Are you sure you want to delete school?'}</DialogTitle>
           <DialogActions>
-            <Button onClick={handleClose} variant='outlined'>Cancel</Button>
+            <Button onClick={handleClose} variant='outlined' color='neutral'>Cancel</Button>
             <Button onClick={deleteSchool} variant='outlined' color='danger'>Yes, Delete</Button>
           </DialogActions>
         </Dialog>
