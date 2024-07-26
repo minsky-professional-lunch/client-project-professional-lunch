@@ -88,7 +88,7 @@ export default function InterestsList() {
               setNewInterest({ interest: event.target.value });
             }}
           />
-          <Button type='submit' variant='outlined'>
+          <Button type='submit' variant='outlined' color='neutral'>
             Add
           </Button>
         </Stack>
@@ -111,6 +111,7 @@ export default function InterestsList() {
                     <Button
                       onClick={() => handleOpen(interest.id)}
                       variant='outlined'
+                      color='neutral'
                     >
                       Delete
                     </Button>
@@ -125,7 +126,7 @@ export default function InterestsList() {
             {'Are you sure you want to delete interest?'}
           </DialogTitle>
           <DialogActions>
-            <Button onClick={handleClose} variant='outlined'>
+            <Button onClick={handleClose} variant='outlined' color='neutral'>
               Cancel
             </Button>
             <Button onClick={deleteInterest} variant='outlined' color='danger'>

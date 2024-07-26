@@ -2,7 +2,15 @@ import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
-import { Avatar, Stack, Typography, Grid, Box , Card, CardContent } from '@mui/joy';
+import {
+  Avatar,
+  Stack,
+  Typography,
+  Grid,
+  Box,
+  Card,
+  CardContent,
+} from '@mui/joy';
 import Button from '@mui/joy/Button';
 import FormControl from '@mui/joy/FormControl';
 import FormLabel from '@mui/joy/FormLabel';
@@ -31,8 +39,7 @@ export default function MentorDetails() {
   console.log('User', user);
   const mentorships = useSelector((store) => store.mentorships);
   const thisMentorship = mentorships?.filter(
-    (mentor) =>
-      mentor.mentor_user_id === Number(params.id)
+    (mentor) => mentor.mentor_user_id === Number(params.id)
   )[0];
   console.log('This mentorship', thisMentorship);
   console.log('Mentorships', mentorships);
@@ -72,7 +79,10 @@ export default function MentorDetails() {
   const request = (event) => {
     event.preventDefault();
     setOpen(false);
-    dispatch({ type: 'REQUEST_MEETING', payload: {newMeeting: newMeeting, mentorID: params.id} });
+    dispatch({
+      type: 'REQUEST_MEETING',
+      payload: { newMeeting: newMeeting, mentorID: params.id },
+    });
     console.log('submit');
     console.table(newMeeting);
   };
@@ -85,13 +95,13 @@ export default function MentorDetails() {
       // history.push('/my-mentees');
       history.goBack();
     }
-  }
+  };
 
   const handleChange = (event) => {
     console.log(event.target.id);
     let myMeetingId = thisMentorship?.id;
     console.log('myMeetingId', myMeetingId);
-    let myCopyMeeting = {...newMeeting, mentorship_id: myMeetingId};
+    let myCopyMeeting = { ...newMeeting, mentorship_id: myMeetingId };
     console.log('meeting', myCopyMeeting);
     switch (event.target.id) {
       case 'date':
@@ -119,22 +129,36 @@ export default function MentorDetails() {
 
   return (
     <div className='container'>
-      <Stack direction='row' justifyContent="space-between" alignItems="center" sx={{marginBottom: '25px'}}>
-        <Tooltip title="Back" variant="soft">
-          <ArrowBackIosIcon sx={{ fontSize: '2.5rem', cursor: 'pointer' }} onClick={back}/>
+      <Stack
+        direction='row'
+        justifyContent='space-between'
+        alignItems='center'
+        sx={{ marginBottom: '25px' }}
+      >
+        <Tooltip title='Back' variant='soft'>
+          <ArrowBackIosIcon
+            sx={{ fontSize: '2.5rem', cursor: 'pointer' }}
+            onClick={back}
+          />
         </Tooltip>
-        <Typography level='h2' >Profile Details</Typography>
+        <Typography level='h2'>Profile Details</Typography>
         {!user.mentorships.includes(details.profile.id) ? (
-          <Tooltip title="Connect" variant="soft">
-            <PersonAddAlt1Icon sx={{ fontSize: '3rem', cursor: 'pointer' }} onClick={() => connect(details?.profile?.id)} />
+          <Tooltip title='Connect' variant='soft'>
+            <PersonAddAlt1Icon
+              sx={{ fontSize: '3rem', cursor: 'pointer' }}
+              onClick={() => connect(details?.profile?.id)}
+            />
           </Tooltip>
         ) : (
-          <Tooltip title="Remove" variant='soft'>
-            <PersonRemoveIcon sx={{ fontSize: '3rem', cursor: 'pointer' }} onClick={() => remove(thisMentorship.id)}/>
+          <Tooltip title='Remove' variant='soft'>
+            <PersonRemoveIcon
+              sx={{ fontSize: '3rem', cursor: 'pointer' }}
+              onClick={() => remove(thisMentorship.id)}
+            />
           </Tooltip>
         )}
       </Stack>
-      <Grid container justifyContent="center">
+      <Grid container justifyContent='center'>
         <Box sx={{ maxHeight: '90vh' }}>
         <Stack direction='column' spacing={1.5} alignItems='center'>
         <Card
@@ -185,22 +209,25 @@ export default function MentorDetails() {
                   <Chip sx={{ fontSize: '1.3rem', marginTop: '10px'}}>{interest.interest}</Chip>
                 ))}
                 </Stack>
-            </Stack>
-        </Card>
-        <Card sx={{
-            width: '82vw',
-            maxWidth: '100%',
-            boxShadow: 'lg'
-          }}>
-            <Stack direction='column'>
-              <Typography level='h3'>Availability</Typography>
-              <Stack direction='row' spacing={1} flexWrap='wrap' useFlexGap>
-              {details?.details?.availability?.map((avail) => (
-                  <Chip sx={{ fontSize: '1.3rem', marginTop: '10px' }}>
-                    {avail.day} @ {avail.time}
-                  </Chip>
-                ))}
+              </Stack>
+            </Card>
+            <Card
+              sx={{
+                width: '82vw',
+                maxWidth: '100%',
+                boxShadow: 'lg',
+              }}
+            >
+              <Stack direction='column'>
+                <Typography level='h3'>Availability</Typography>
+                <Stack direction='row' spacing={1} flexWrap='wrap' useFlexGap>
+                  {details?.details?.availability?.map((avail) => (
+                    <Chip sx={{ fontSize: '1.3rem', marginTop: '10px' }}>
+                      {avail.day} @ {avail.time}
+                    </Chip>
+                  ))}
                 </Stack>
+
             </Stack>
         </Card>
         </Stack>
@@ -214,7 +241,12 @@ export default function MentorDetails() {
         {user.mentorships.includes(details.profile.id) &&
         thisMentorship?.status === 'accepted' ? (
           <React.Fragment>
-            <Button startDecorator={<Add />} onClick={() => setOpen(true)} color='neutral' sx={{fontSize: '20px'}}>
+            <Button
+              startDecorator={<Add />}
+              onClick={() => setOpen(true)}
+              color='neutral'
+              sx={{ fontSize: '20px' }}
+            >
               Request Meeting
             </Button>
             <Modal open={open} onClose={() => setOpen(false)}>
@@ -239,7 +271,7 @@ export default function MentorDetails() {
                       <Input
                         required
                         type='time'
-                        slotProps={{ input: { id: 'start' } }}
+                        slotProps={{ input: { id: 'start', step: 900 } }} // 900 seconds = 15 minutes
                         value={newMeeting.start}
                         onChange={handleChange}
                       />
@@ -249,7 +281,7 @@ export default function MentorDetails() {
                       <Input
                         required
                         type='time'
-                        slotProps={{ input: { id: 'end' } }}
+                        slotProps={{ input: { id: 'end', step: 900 } }} // 900 seconds = 15 minutes
                         value={newMeeting.end}
                         onChange={handleChange}
                       />
@@ -270,7 +302,7 @@ export default function MentorDetails() {
                         onChange={handleChange}
                       />
                     </FormControl>
-                    <Button type='submit'>Submit</Button>
+                    <Button type='submit' color='neutral'>Submit</Button>
                   </Stack>
                 </form>
               </ModalDialog>
