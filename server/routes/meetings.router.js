@@ -159,7 +159,7 @@ router.post('/:id', rejectUnauthenticated, (req, res) => {
 
 // Accept meeting
 router.put('/accept/:id', rejectUnauthenticated, (req, res) => {
-  queryText = `UPDATE "meetings" SET "status"='accepted' WHERE "meetings".id=$1;`;
+  queryText = `UPDATE "meetings" SET "status"='Accepted' WHERE "meetings".id=$1;`;
   pool.query(queryText, [req.params.id])
   .then(() => {
     res.sendStatus(201);
@@ -178,6 +178,18 @@ router.put('/archive/:id', rejectUnauthenticated, (req, res) => {
   })
   .catch((error) => {
     console.log('error archiving meeting', error);
+    res.sendStatus(500);
+  });
+});
+
+router.put('/deny/:id', rejectUnauthenticated, (req, res) => {
+  queryText = `UPDATE "meetings" SET "status"='Denied - not available at this time' WHERE "meetings".id=$1;`;
+  pool.query(queryText, [req.params.id])
+  .then(() => {
+    res.sendStatus(201);
+  })
+  .catch((error) => {
+    console.log('error denying meeting', error);
     res.sendStatus(500);
   });
 });
