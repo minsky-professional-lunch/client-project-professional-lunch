@@ -25,6 +25,7 @@ export default function Resources() {
 
   useEffect(() => {
     dispatch({ type: 'FETCH_RESOURCES' });
+    window.scrollTo(0, 0);
   }, []);
 
   return (

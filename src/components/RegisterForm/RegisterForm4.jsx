@@ -89,7 +89,7 @@ export default function RegisterForm4() {
           avatar: avatar,
         },
       });
-      history.push('/home');
+      history.push('/profile');
     } else {
       alert('Please select both a day and a time for all availabilities.');
     }
@@ -191,7 +191,7 @@ export default function RegisterForm4() {
                 </Select>
               </FormControl>
               <Button color='neutral' sx={{ mb: 1 }} onClick={handleAdd}>
-                Add Availability
+                Add More Availability
               </Button>
             </Box>
           </form>

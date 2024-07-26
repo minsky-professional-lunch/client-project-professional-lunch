@@ -22,6 +22,7 @@ export default function MyMentorsItem({ mentor }) {
   useEffect(() => {
     dispatch({ type: 'FETCH_PROFILES' });
     dispatch({ type: 'FETCH_MEETINGS' });
+    window.scrollTo(0, 0);
   }, []);
 
   const mentorDetails = (mentorId) => {

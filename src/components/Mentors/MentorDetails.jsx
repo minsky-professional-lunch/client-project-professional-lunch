@@ -27,6 +27,10 @@ import EmailIcon from '@mui/icons-material/Email';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import Chip from '@mui/joy/Chip';
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
+import DeleteForever from '@mui/icons-material/DeleteForever';
+import WarningRoundedIcon from '@mui/icons-material/WarningRounded';
+import Divider from '@mui/joy/Divider';
+import DialogActions from '@mui/joy/DialogActions';
 
 export default function MentorDetails() {
   const params = useParams();
@@ -44,6 +48,7 @@ export default function MentorDetails() {
   console.log('This mentorship', thisMentorship);
   console.log('Mentorships', mentorships);
   const [open, setOpen] = React.useState(false);
+  const [confirm, setConfirm] = useState(false);
   const [requested, setRequested] = useState(false);
 
   const [newMeeting, setNewMeeting] = useState({
@@ -59,6 +64,7 @@ export default function MentorDetails() {
     dispatch({ type: 'FETCH_MENT_DETAILS', payload: params.id });
     dispatch({ type: 'FETCH_MENTORSHIPS' });
     console.log('New meeting', newMeeting);
+    window.scrollTo(0, 0);
   }, []);
 
   const connect = (mentorId) => {
@@ -150,12 +156,33 @@ export default function MentorDetails() {
             />
           </Tooltip>
         ) : (
+          <React.Fragment>
           <Tooltip title='Remove' variant='soft'>
-            <PersonRemoveIcon
-              sx={{ fontSize: '3rem', cursor: 'pointer' }}
-              onClick={() => remove(thisMentorship.id)}
-            />
+            <PersonRemoveIcon sx={{ fontSize: '3rem', cursor: 'pointer' }} onClick={() => setConfirm(true)}/>
           </Tooltip>
+            <Modal open={confirm} onClose={() => setConfirm(false)}>
+              <ModalDialog variant="outlined" role="alertdialog">
+                <DialogTitle>
+                  <WarningRoundedIcon />
+                  Confirmation
+                </DialogTitle>
+                <Divider />
+                <DialogContent>
+                  Are you sure you want to remove this mentorship?
+                </DialogContent>
+                <DialogActions>
+                  <Button variant="solid" color="danger" onClick={() => { 
+                      setConfirm(false); 
+                      remove(thisMentorship.id)}}>
+                    Remove
+                  </Button>
+                  <Button variant="plain" color="neutral" onClick={() => setConfirm(false)}>
+                    Cancel
+                  </Button>
+                </DialogActions>
+              </ModalDialog>
+            </Modal>
+          </React.Fragment>
         )}
       </Stack>
       <Grid container justifyContent='center'>
@@ -314,6 +341,19 @@ export default function MentorDetails() {
       </Stack>
       </Box>
       </Grid>
+      <div>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+      </div>
     </div>
   );
 }

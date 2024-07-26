@@ -14,6 +14,14 @@ import Tooltip from '@mui/joy/Tooltip';
 import EmailIcon from '@mui/icons-material/Email';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
+import Divider from '@mui/joy/Divider';
+import DialogTitle from '@mui/joy/DialogTitle';
+import DialogContent from '@mui/joy/DialogContent';
+import DialogActions from '@mui/joy/DialogActions';
+import Modal from '@mui/joy/Modal';
+import ModalDialog from '@mui/joy/ModalDialog';
+import DeleteForever from '@mui/icons-material/DeleteForever';
+import WarningRoundedIcon from '@mui/icons-material/WarningRounded';
 
 export default function MenteeDetails() {
   const params = useParams();
@@ -30,10 +38,13 @@ export default function MenteeDetails() {
   )[0];
   console.log('This mentorship', thisMentorship);
   console.log('Mentorships', mentorships);
+  const [open, setOpen] = React.useState(false);
+
 
   useEffect(() => {
     dispatch({ type: 'FETCH_MENT_DETAILS', payload: params.id });
     dispatch({ type: 'FETCH_MENTORSHIPS' });
+    window.scrollTo(0, 0);
   }, []);
 
   const remove = (mentorshipId) => {
@@ -75,9 +86,35 @@ export default function MenteeDetails() {
           <PersonAddAlt1Icon sx={{ fontSize: '3rem', cursor: 'pointer' }} onClick={() => connect(thisMentorship.id)}/>
         </Tooltip>
       :
-        <Tooltip title="Remove" variant='soft'>
-          <PersonRemoveIcon sx={{ fontSize: '3rem', cursor: 'pointer' }} onClick={() => remove(thisMentorship.id)}/>
+      <>
+      <React.Fragment>
+        <Tooltip title='Remove' variant='soft'>
+          <PersonRemoveIcon sx={{ fontSize: '3rem', cursor: 'pointer' }} onClick={() => setOpen(true)}/>
         </Tooltip>
+          <Modal open={open} onClose={() => setOpen(false)}>
+            <ModalDialog variant="outlined" role="alertdialog">
+              <DialogTitle>
+                <WarningRoundedIcon />
+                Confirmation
+              </DialogTitle>
+              <Divider />
+              <DialogContent>
+                Are you sure you want to remove this mentorship?
+              </DialogContent>
+              <DialogActions>
+                <Button variant="solid" color="danger" onClick={() => { 
+                    setOpen(false); 
+                    remove(thisMentorship.id)}}>
+                  Remove
+                </Button>
+                <Button variant="plain" color="neutral" onClick={() => setOpen(false)}>
+                  Cancel
+                </Button>
+              </DialogActions>
+            </ModalDialog>
+          </Modal>
+        </React.Fragment>
+        </>
       }
     </Stack>
     <Grid container justifyContent="center">

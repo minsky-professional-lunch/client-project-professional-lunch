@@ -19,6 +19,7 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 function RegisterForm() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [role, setRole] = useState(false);
   const errors = useSelector((store) => store.errors);
@@ -29,6 +30,13 @@ function RegisterForm() {
 
   const nextPage = () => {
     event.preventDefault();
+
+    if (password !== confirmPassword) {
+      // Add validation error handling
+      alert('Passwords do not match');
+      return;
+    }
+
     dispatch({
       type: 'REGISTER',
       payload: {
@@ -84,6 +92,27 @@ function RegisterForm() {
                   onClick={() => {
                     setShowPassword(!showPassword);
                   }}
+                  edge='end'
+                >
+                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              </InputAdornment>
+            }
+          />
+        </FormControl>
+        <FormControl>
+          <FormLabel>Confirm Password</FormLabel>
+          <Input
+            label='Confirm Password'
+            placeholder='Confirm Password'
+            type={showPassword ? 'text' : 'password'}
+            value={confirmPassword}
+            required
+            onChange={(event) => setConfirmPassword(event.target.value)}
+            endDecorator={
+              <InputAdornment position='end'>
+                <IconButton
+                  onClick={() => setShowPassword(!showPassword)}
                   edge='end'
                 >
                   {showPassword ? <VisibilityOff /> : <Visibility />}

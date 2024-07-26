@@ -10,7 +10,9 @@ import { Typography } from '@mui/joy';
 
 export default function MyMeetings() {
     const meetings = useSelector(store => store.meetings);
-    const upcomingMeetings = meetings.filter(meeting => meeting.meeting_status != 'completed');
+    const denied = meetings.filter(meeting => meeting.meeting_status === 'Denied - not available at this time');
+    const upcomingMeetings = meetings.filter(meeting => meeting.meeting_status === 'Accepted');
+    const pending = meetings.filter(meeting => meeting.meeting_status === 'Pending');
     const archiveMeetings = meetings.filter(meeting => meeting.meeting_status === 'completed');
     console.log('archive', archiveMeetings);
     console.log('upcoming meetings', upcomingMeetings);
@@ -20,9 +22,36 @@ export default function MyMeetings() {
     return (
         <div className="container">
         <h1 align='center'>My Meetings</h1>
-        {upcomingMeetings.map((meeting) => (
-                <MeetingItem key={meeting.meeting_id} meeting={meeting} />
-        ))}
+        {upcomingMeetings.length > 0 ? 
+            <>
+            <h2 align='center'>Upcoming</h2>
+            {upcomingMeetings.map((meeting) => (
+                    <MeetingItem key={meeting.meeting_id} meeting={meeting} />
+            ))}
+            </>
+        : 
+        <></>
+        }
+        {pending.length > 0 ? 
+        <>
+        <h2 align='center'>Pending</h2>
+        {pending.map((meeting) => (
+                    <MeetingItem key={meeting.meeting_id} meeting={meeting} />
+            ))}
+        </>
+        :
+        <></>
+        }
+        {denied.length > 0 ? 
+        <>
+        <h2 align='center'>Denied</h2>
+        {denied.map((meeting) => (
+                    <MeetingItem key={meeting.meeting_id} meeting={meeting} />
+            ))}
+        </>
+        :
+        <></>
+        }
         {meetings.length === 0 ? 
             <>
             {user.isMentor ? 
