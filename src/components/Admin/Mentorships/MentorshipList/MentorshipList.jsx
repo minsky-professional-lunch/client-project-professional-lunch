@@ -2,6 +2,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import Table from '@mui/joy/Table';
 import Sheet from '@mui/joy/Sheet';
+import MentorshipGrid from './MentorshipGrid';
 
 export default function MentorshipList() {
   const dispatch = useDispatch();
@@ -17,7 +18,7 @@ export default function MentorshipList() {
 
   return (
     <>
-      <Sheet>
+      {/* <Sheet>
         <Table stripe={stripe}>
           <thead>
             <tr>
@@ -44,7 +45,8 @@ export default function MentorshipList() {
             ))}
           </tbody>
         </Table>
-      </Sheet>
+      </Sheet> */}
+      <MentorshipGrid />
     </>
   )
 }

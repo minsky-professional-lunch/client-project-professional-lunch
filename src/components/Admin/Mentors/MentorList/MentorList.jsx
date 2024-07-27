@@ -2,6 +2,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import Table from '@mui/joy/Table';
 import Sheet from '@mui/joy/Sheet';
+import MentorGrid from './MentorGrid';
 
 export default function MentorList() {
   const dispatch = useDispatch();
@@ -18,14 +19,13 @@ export default function MentorList() {
 
   return (
     <>
-      <Sheet>
+      {/* <Sheet>
         <Table stripe={stripe}>
           <thead>
             <tr>
               <th style={{ width: '10%' }}>Last Name</th>
               <th style={{ width: '10%' }}>First Name</th>
               <th style={{ width: '15%' }}>Email</th>
-              <th style={{ width: '15%' }}>School</th>
               <th style={{ width: '15%' }}>LinkedIn</th>
               <th style={{ width: '20%' }}>Bio</th>
               <th style={{ width: '20%' }}>Availability</th>
@@ -38,13 +38,8 @@ export default function MentorList() {
                 <td>{mentor.last_name}</td>
                 <td>{mentor.first_name}</td>
                 <td>{mentor.email}</td>
-                <td>{mentor.school}</td>
                 <td>
-                  {!mentor.linkedin ? (
-                    'No Profile'
-                  ) : (
-                    <a href={mentor.linkedin}>Go to Profile</a>
-                  )}
+                  {!mentor.linkedin ? 'No Profile' : <a href={mentor.linkedin}>Go to Profile</a>}
                 </td>
                 <td>{mentor.bio}</td>
                 <td>{mentor.availability}</td>
@@ -53,7 +48,8 @@ export default function MentorList() {
             ))}
           </tbody>
         </Table>
-      </Sheet>
+      </Sheet> */}
+      <MentorGrid />
     </>
   );
 }

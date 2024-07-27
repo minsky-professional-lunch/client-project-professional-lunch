@@ -96,7 +96,7 @@ export default function InterestsList() {
           <Table sx={{ width: '50vw' }} size='small'>
             <TableHead>
               <TableRow>
-                <StyledTableCell>Current Fields/Interests</StyledTableCell>
+                <StyledTableCell>Current Interests</StyledTableCell>
                 <StyledTableCell align='center'>Delete</StyledTableCell>
               </TableRow>
             </TableHead>
