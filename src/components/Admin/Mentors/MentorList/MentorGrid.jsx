@@ -2,7 +2,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 
-
 export default function MentorGrid() {
   const dispatch = useDispatch();
 
@@ -10,7 +9,7 @@ export default function MentorGrid() {
   console.log('Profiles', adminProfiles);
   const mentors = adminProfiles.filter((profile) => profile.isMentor);
   console.log('Mentors', mentors);
-  
+
   const [tableData, setTableData] = useState([]);
 
   const columns = [
@@ -21,8 +20,8 @@ export default function MentorGrid() {
     { field: 'linkedin', headerName: 'LinkedIn', width: 250 },
     { field: 'bio', headerName: 'Bio', width: 300 },
     { field: 'availability', headerName: 'Availability', width: 300 },
-    { field: 'interests', headerName: 'Interests', width: 300 }
-  ]
+    { field: 'interests', headerName: 'Interests', width: 300 },
+  ];
 
   useEffect(() => {
     dispatch({ type: 'FETCH_ADMIN_PROFILES' });
@@ -31,22 +30,28 @@ export default function MentorGrid() {
   let rows = [];
   rows = mentors.map((mentor, index) => {
     return (rows = {
-      id: mentor.id, 
+      id: mentor.id,
       last_name: mentor.last_name,
       first_name: mentor.first_name,
       email: mentor.email,
       linkedin: mentor.linkedin,
       bio: mentor.bio,
       availability: mentor.availability,
-      interests: mentor.interests
-    })
-  })
-  
+      interests: mentor.interests,
+    });
+  });
+
   return (
     <>
-    <div style={{ height: '100%', width: '100%' }}>
-      <DataGrid rows={rows} columns={columns} getRowHeight={() => 'auto'} />
-    </div>
+      <div style={{ height: '100%', width: '100%' }}>
+        <DataGrid
+          rows={rows}
+          columns={columns}
+          pageSize={25} // Set default page size to 25
+          rowsPerPageOptions={[10, 25, 50]}
+          getRowHeight={() => 'auto'}
+        />
+      </div>
     </>
-  )
+  );
 }

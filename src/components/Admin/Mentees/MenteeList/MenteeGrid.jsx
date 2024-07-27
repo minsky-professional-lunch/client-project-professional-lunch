@@ -2,14 +2,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 
-
 export default function MenteeGrid() {
   const dispatch = useDispatch();
 
   const profiles = useSelector((store) => store.adminProfiles);
   const mentees = profiles.filter((profile) => !profile.isMentor);
   console.log('Mentees', mentees);
-  
+
   const [tableData, setTableData] = useState([]);
 
   const columns = [
@@ -21,8 +20,8 @@ export default function MenteeGrid() {
     { field: 'linkedin', headerName: 'LinkedIn', width: 250 },
     { field: 'bio', headerName: 'Bio', width: 300 },
     { field: 'availability', headerName: 'Availability', width: 300 },
-    { field: 'interests', headerName: 'Interests', width: 300 }
-  ]
+    { field: 'interests', headerName: 'Interests', width: 300 },
+  ];
 
   useEffect(() => {
     dispatch({ type: 'FETCH_ADMIN_PROFILES' });
@@ -31,7 +30,7 @@ export default function MenteeGrid() {
   let rows = [];
   rows = mentees.map((mentee, index) => {
     return (rows = {
-      id: mentee.id, 
+      id: mentee.id,
       last_name: mentee.last_name,
       first_name: mentee.first_name,
       email: mentee.email,
@@ -39,15 +38,21 @@ export default function MenteeGrid() {
       linkedin: mentee.linkedin,
       bio: mentee.bio,
       availability: mentee.availability,
-      interests: mentee.interests
-    })
-  })
-  
+      interests: mentee.interests,
+    });
+  });
+
   return (
     <>
-    <div style={{ height: '100%', width: '100%' }}>
-      <DataGrid rows={rows} columns={columns} getRowHeight={() => 'auto'}/>
-    </div>
+      <div style={{ height: '100%', width: '100%' }}>
+        <DataGrid
+          rows={rows}
+          columns={columns}
+          pageSize={25} // Set default page size to 25
+          rowsPerPageOptions={[10, 25, 50]}
+          getRowHeight={() => 'auto'}
+        />
+      </div>
     </>
-  )
+  );
 }
