@@ -45,7 +45,7 @@ export default function MentorGrid() {
   return (
     <>
     <div style={{ height: '100%', width: '100%' }}>
-      <DataGrid rows={rows} columns={columns} />
+      <DataGrid rows={rows} columns={columns} getRowHeight={() => 'auto'} />
     </div>
     </>
   )

@@ -67,7 +67,7 @@ export default function GendersList() {
   return (
     <Grid container direction="column" alignItems="center" justifyContent="center">
     
-    <Box sx={{ width: '100%', maxWidth: 800, mt: 2 }}>
+    {/* <Box sx={{ width: '100%', maxWidth: 800, mt: 2 }}> */}
       <Typography>Add New Gender</Typography>
       <Stack
         component='form'
@@ -85,9 +85,9 @@ export default function GendersList() {
             setNewGender({ gender: event.target.value });
           }}
         />
-        <Button type='submit' color='neutral' variant='outlined'>Add</Button>
+        <Button type='submit' color='neutral'>Add</Button>
       </Stack>
-      <div>
+      <Stack>
         <TableContainer >
           <Table sx={{ width: '50vw' }} size='small'>
             <TableHead>
@@ -113,8 +113,7 @@ export default function GendersList() {
             </TableBody>
           </Table>
         </TableContainer>
-      </div>
-      <div>
+      
         <Dialog open={open} onClose={handleClose}>
           <DialogTitle>{'Are you sure you want to delete gender?'}</DialogTitle>
           <DialogActions>
@@ -122,8 +121,8 @@ export default function GendersList() {
             <Button onClick={deleteGender} variant='outlined' color='danger'>Yes, Delete</Button>
           </DialogActions>
         </Dialog>
-      </div>
-    </Box>
+      </Stack>
+    {/* </Box> */}
     </Grid>
   );
 }

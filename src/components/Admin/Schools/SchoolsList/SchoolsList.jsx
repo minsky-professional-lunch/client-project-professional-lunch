@@ -65,7 +65,7 @@ export default function SchoolsList() {
 
   return (
     <Grid container direction="column" alignItems="center" justifyContent="center">
-    <Box sx={{ width: '100%', maxWidth: 800, mt: 2 }}>
+    
       <Typography>Add New School</Typography>
       <Stack
         component='form'
@@ -83,10 +83,10 @@ export default function SchoolsList() {
             setNewSchool({ school: event.target.value });
           }}
         />
-        <Button type='submit' variant='outlined' color='neutral'>Add</Button>
+        <Button type='submit' color='neutral'>Add</Button>
       </Stack>
 
-      <div>
+      <Stack>
         <TableContainer>
           <Table sx={{ width: '50vw' }} size='small'>
             <TableHead>
@@ -112,8 +112,7 @@ export default function SchoolsList() {
             </TableBody>
           </Table>
         </TableContainer>
-      </div>
-      <div>
+     
         <Dialog open={open} onClose={handleClose}>
           <DialogTitle>{'Are you sure you want to delete school?'}</DialogTitle>
           <DialogActions>
@@ -121,8 +120,8 @@ export default function SchoolsList() {
             <Button onClick={deleteSchool} variant='outlined' color='danger'>Yes, Delete</Button>
           </DialogActions>
         </Dialog>
-      </div>
-    </Box>
+      </Stack>
+    
     </Grid>
   );
 }

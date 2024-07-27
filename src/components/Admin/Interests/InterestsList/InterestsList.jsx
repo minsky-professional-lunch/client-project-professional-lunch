@@ -70,7 +70,7 @@ export default function InterestsList() {
       alignItems='center'
       justifyContent='center'
     >
-      <Box sx={{ width: '100%', maxWidth: 800, mt: 2 }}>
+      {/* <Box sx={{ width: '100%', mt: 2 }}> */}
         <Typography>Add New Interest</Typography>
         <Stack
           component='form'
@@ -89,10 +89,11 @@ export default function InterestsList() {
               setNewInterest({ interest: event.target.value });
             }}
           />
-          <Button type='submit' variant='outlined' color='neutral'>
+          <Button type='submit' color='neutral'>
             Add
           </Button>
         </Stack>
+        <Stack>
         <TableContainer>
           <Table sx={{ width: '50vw' }} size='small'>
             <TableHead>
@@ -135,7 +136,8 @@ export default function InterestsList() {
             </Button>
           </DialogActions>
         </Dialog>
-      </Box>
+        </Stack>
+      {/* </Box> */}
     </Grid>
   );
 }
