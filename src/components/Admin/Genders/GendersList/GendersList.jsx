@@ -55,8 +55,9 @@ export default function GendersList() {
 
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
-      backgroundColor: theme.palette.common.black,
-      color: theme.palette.common.white,
+      backgroundColor: theme.palette.common.white,
+      color: theme.palette.common.black,
+      fontSize: 18,
     },
     [`&.${tableCellClasses.body}`]: {
       fontSize: 14,
