@@ -50,8 +50,12 @@ export default function MeetingsGrid() {
         <DataGrid
           rows={rows}
           columns={columns}
-          pageSize={25} // Set default page size to 25
-          rowsPerPageOptions={[10, 25, 50]}
+          initialState={{
+            pagination: {
+              paginationModel: { pageSize: 25, page: 0 },
+            },
+          }}
+          pageSizeOptions={[10, 25, 50]}
         />
       </div>
     </>
