@@ -97,8 +97,9 @@ export default function MuiNavBar() {
               color: "inherit",
               textDecoration: "none",
             }}
+            onClick={() => history.push('/home')}
           >
-            Professional L<span style={{ color: '#ED1C24' }}>A</span>unch
+            Professional L<span style={{ color: '#184025' }}>A</span>unch
           </Typography>
           <Typography
             variant="h6"
@@ -114,8 +115,9 @@ export default function MuiNavBar() {
               color: "inherit",
               textDecoration: "none",
             }}
+            onClick={() => history.push('/home')}
           >
-            Professional L<span style={{ color: '#ED1C24' }}>A</span>unch
+            Professional L<span style={{ color: '#184025' }}>A</span>unch
           </Typography>
           {user.id && (
             <Box sx={{ display: "flex", flexGrow: 0 }}>

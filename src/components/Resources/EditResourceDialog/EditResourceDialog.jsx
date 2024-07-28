@@ -128,7 +128,7 @@ export default function EditResourceDialog({ open, closeEditResource, resource }
           >
             Cancel
           </Button>
-          <Button type='submit' color='primary' variant='outlined'>Submit</Button>
+          <Button type='submit' color='neutral'>Submit</Button>
         </DialogActions>
       </Dialog>
     </>
