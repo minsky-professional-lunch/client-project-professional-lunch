@@ -115,7 +115,7 @@ export default function GendersList() {
         </TableContainer>
       
         <Dialog open={open} onClose={handleClose}>
-          <DialogTitle>{'Are you sure you want to delete gender?'}</DialogTitle>
+          <DialogTitle>{'Are you sure you want to delete this gender?'}</DialogTitle>
           <DialogActions>
             <Button onClick={handleClose} variant='outlined' color='neutral'>Cancel</Button>
             <Button onClick={deleteGender} variant='outlined' color='danger'>Yes, Delete</Button>

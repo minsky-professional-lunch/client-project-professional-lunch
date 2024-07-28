@@ -125,7 +125,7 @@ export default function InterestsList() {
         </TableContainer>
         <Dialog open={open} onClose={handleClose}>
           <DialogTitle>
-            {'Are you sure you want to delete interest?'}
+            {'Are you sure you want to delete this interest?'}
           </DialogTitle>
           <DialogActions>
             <Button onClick={handleClose} variant='outlined' color='neutral'>

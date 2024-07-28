@@ -114,7 +114,7 @@ export default function SchoolsList() {
         </TableContainer>
      
         <Dialog open={open} onClose={handleClose}>
-          <DialogTitle>{'Are you sure you want to delete school?'}</DialogTitle>
+          <DialogTitle>{'Are you sure you want to delete this school?'}</DialogTitle>
           <DialogActions>
             <Button onClick={handleClose} variant='outlined' color='neutral'>Cancel</Button>
             <Button onClick={deleteSchool} variant='outlined' color='danger'>Yes, Delete</Button>
