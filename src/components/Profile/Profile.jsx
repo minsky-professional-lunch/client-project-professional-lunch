@@ -152,6 +152,13 @@ export default function Profile() {
         closeEditProfile={closeEditProfile}
         profile={profile}
       />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
     </div>
   );
 }
