@@ -17,6 +17,8 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 const settings = [
   "Home",
   "Profile",
+  "Mentorships",
+  "Meetings",
   "Available Mentors",
   "Resources",
   "Admin",
@@ -49,6 +51,12 @@ export default function MuiNavBar() {
       history.push("/home");
     } else if (setting === "Profile") {
       history.push("/profile");
+    } else if (setting === "Mentorships") {
+      {
+        user.isMentor ? history.push('/my-mentees') : history.push('/my-mentors');
+      }
+    } else if (setting === "Meetings") {
+      history.push("/my-meetings");
     } else if (setting === "Available Mentors") {
       history.push("/available-mentors");
     } else if (setting === "Resources") {

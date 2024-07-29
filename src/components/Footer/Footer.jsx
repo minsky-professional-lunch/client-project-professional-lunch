@@ -1,4 +1,5 @@
 import React from 'react';
+import { useEffect, useState, useRef } from 'react';
 import './Footer.css';
 import Box from '@mui/material/Box';
 import BottomNavigation from '@mui/material/BottomNavigation';
@@ -14,6 +15,40 @@ function Footer() {
   const [value, setValue] = React.useState(0);
   const history = useHistory();
   const user = useSelector((store) => store.user);
+
+  // State to track if the footer should be visible
+  const [showFooter, setShowFooter] = useState(false);
+
+   // Ref to store the timeout ID
+   const timeoutRef = useRef(null);
+
+   // Function to handle visibility
+   const handleVisibility = () => {
+     setShowFooter(true);
+ 
+     // Clear the previous timeout
+     if (timeoutRef.current) {
+       clearTimeout(timeoutRef.current);
+     }
+ 
+     // Set a new timeout to hide the footer after 3 seconds of inactivity
+     timeoutRef.current = setTimeout(() => {
+       setShowFooter(false);
+     }, 3000);
+   };
+ 
+   // Add event listeners for scroll, touch, and mouse events
+   useEffect(() => {
+     window.addEventListener('scroll', handleVisibility);
+     window.addEventListener('touchmove', handleVisibility);
+     window.addEventListener('mousemove', handleVisibility);
+ 
+     return () => {
+       window.removeEventListener('scroll', handleVisibility);
+       window.removeEventListener('touchmove', handleVisibility);
+       window.removeEventListener('mousemove', handleVisibility);
+     };
+   }, []);
 
   const goHome = () => {
     history.push('/home');
@@ -44,7 +79,7 @@ function Footer() {
       <br />
       <br />
       <br />
-      {user.id && (
+      {user.id && showFooter && (
         <Box
           sx={{
             position: 'fixed',
