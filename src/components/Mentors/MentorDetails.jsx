@@ -353,6 +353,8 @@ export default function MentorDetails() {
         <br />
         <br />
         <br />
+        <br />
+        <br />
       </div>
     </div>
   );

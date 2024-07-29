@@ -17,6 +17,8 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 const settings = [
   "Home",
   "Profile",
+  "Mentorships",
+  "Meetings",
   "Available Mentors",
   "Resources",
   "Admin",
@@ -49,6 +51,12 @@ export default function MuiNavBar() {
       history.push("/home");
     } else if (setting === "Profile") {
       history.push("/profile");
+    } else if (setting === "Mentorships") {
+      {
+        user.isMentor ? history.push('/my-mentees') : history.push('/my-mentors');
+      }
+    } else if (setting === "Meetings") {
+      history.push("/my-meetings");
     } else if (setting === "Available Mentors") {
       history.push("/available-mentors");
     } else if (setting === "Resources") {
@@ -91,14 +99,15 @@ export default function MuiNavBar() {
               mr: 2,
               display: { xs: "none", md: "flex" },
               flexGrow: 1,
-              fontFamily: "monospace",
+              fontFamily: "Tahoma",
               fontWeight: 700,
               letterSpacing: ".3rem",
               color: "inherit",
               textDecoration: "none",
             }}
+            onClick={() => history.push('/home')}
           >
-            Professional L<span style={{ color: '#ED1C24' }}>A</span>unch
+            Professional L<span style={{ color: '#184025' }}>A</span>unch
           </Typography>
           <Typography
             variant="h6"
@@ -108,14 +117,15 @@ export default function MuiNavBar() {
               mr: 2,
               display: { xs: "flex", md: "none" },
               flexGrow: 1,
-              fontFamily: "monospace",
+              fontFamily: "Tahoma",
               fontWeight: 700,
               letterSpacing: ".1rem",
               color: "inherit",
               textDecoration: "none",
             }}
+            onClick={() => history.push('/home')}
           >
-            Professional L<span style={{ color: '#ED1C24' }}>A</span>unch
+            Professional L<span style={{ color: '#184025' }}>A</span>unch
           </Typography>
           {user.id && (
             <Box sx={{ display: "flex", flexGrow: 0 }}>

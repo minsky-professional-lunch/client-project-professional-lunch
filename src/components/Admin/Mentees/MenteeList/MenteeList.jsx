@@ -2,6 +2,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import Table from '@mui/joy/Table';
 import Sheet from '@mui/joy/Sheet';
+import { DataGrid } from '@mui/x-data-grid';
+import MenteeGrid from './MenteeGrid';
 
 export default function MenteeList() {
   const dispatch = useDispatch();
@@ -19,7 +21,7 @@ export default function MenteeList() {
 
   return (
     <>
-      <Sheet>
+      {/* <Sheet>
         <Table stripe={stripe}>
           <thead>
             <tr>
@@ -48,7 +50,8 @@ export default function MenteeList() {
             ))}
           </tbody>
         </Table>
-      </Sheet>
+      </Sheet> */}
+      <MenteeGrid />
     </>
   );
 }

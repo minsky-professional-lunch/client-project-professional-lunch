@@ -26,7 +26,12 @@ function RegisterForm() {
   const history = useHistory();
   const dispatch = useDispatch();
 
-  // end registerUser
+  // Function to autofill the username/password input
+  const handleAutoFill = () => {
+    setUsername('menteetest3@gmail.com');
+    setPassword('password123');
+    setConfirmPassword('password123');
+  };
 
   const nextPage = () => {
     event.preventDefault();
@@ -60,7 +65,7 @@ function RegisterForm() {
           flexWrap: 'wrap',
         }}
       >
-        <h2>Register User</h2>
+        <h2 onClick={handleAutoFill}>Register User</h2>
         {errors.registrationMessage && (
           <h3 className='alert' role='alert'>
             {errors.registrationMessage}

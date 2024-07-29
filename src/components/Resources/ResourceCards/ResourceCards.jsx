@@ -7,6 +7,9 @@ import Card from '@mui/joy/Card';
 import CardContent from '@mui/joy/CardContent';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogTitle from '@mui/material/DialogTitle';
 import Grid from '@mui/joy/Grid';
 import Link from '@mui/material/Link';
 import Stack from '@mui/joy/Stack';
@@ -21,8 +24,16 @@ export default function ResourceCards({ resource }) {
   const [editResourceIsOpen, setEditResourceIsOpen] = useState(false);
   const closeEditResource = () => setEditResourceIsOpen(false);
 
-  const deleteResource = (resourceId) => {
-    dispatch({ type: 'DELETE_RESOURCE', payload: resourceId });
+  const [open, setOpen] = useState(false);
+  const [resourceToDelete, setResourceToDelete] = useState(null);
+  const handleClose = () => setOpen(false);
+  const handleOpen = (resourceId) => {
+    setResourceToDelete(resourceId);
+    setOpen(true);
+  };
+
+  const deleteResource = () => {
+    dispatch({ type: 'DELETE_RESOURCE', payload: resourceToDelete });
   };
 
   const [showFullDescription, setShowFullDescription] = useState(false);
@@ -76,8 +87,8 @@ export default function ResourceCards({ resource }) {
                 <Stack direction='row' justifyContent='flex-end'>
                   <Tooltip title='Delete Resource' variant='soft'>
                     <DeleteForeverIcon
-                      sx={{ fontSize: '25px', cursor: 'pointer' }}
-                      onClick={() => deleteResource(resource.id)}
+                      sx={{ fontSize: '40px', cursor: 'pointer' }}
+                      onClick={() => handleOpen(resource.id)}
                     />
                   </Tooltip>
                 </Stack>
@@ -89,7 +100,7 @@ export default function ResourceCards({ resource }) {
                 <Stack direction='row' justifyContent='flex-end'>
                   <Tooltip title='Edit Resource' variant='soft'>
                     <EditIcon
-                      sx={{ fontSize: '25px', cursor: 'pointer' }}
+                      sx={{ fontSize: '40px', cursor: 'pointer' }}
                       onClick={() => setEditResourceIsOpen(true)}
                     />
                   </Tooltip>
@@ -107,6 +118,19 @@ export default function ResourceCards({ resource }) {
             )}
           </div>
         </CardContent>
+        <Dialog open={open} onClose={handleClose}>
+          <DialogTitle>
+            {'Are you sure you want to delete this resource?'}
+          </DialogTitle>
+          <DialogActions>
+            <Button onClick={handleClose} variant='outlined' color='neutral'>
+              Cancel
+            </Button>
+            <Button onClick={deleteResource} variant='outlined' color='danger'>
+              Yes, Delete
+            </Button>
+          </DialogActions>
+        </Dialog>
       </Card>
     </Box>
   );

@@ -54,8 +54,9 @@ export default function InterestsList() {
 
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
-      backgroundColor: theme.palette.common.black,
-      color: theme.palette.common.white,
+      backgroundColor: theme.palette.common.grey,
+      color: theme.palette.common.black,
+      fontSize: 18,
     },
     [`&.${tableCellClasses.body}`]: {
       fontSize: 14,
@@ -69,7 +70,7 @@ export default function InterestsList() {
       alignItems='center'
       justifyContent='center'
     >
-      <Box sx={{ width: '100%', maxWidth: 800, mt: 2 }}>
+      {/* <Box sx={{ width: '100%', mt: 2 }}> */}
         <Typography>Add New Interest</Typography>
         <Stack
           component='form'
@@ -88,15 +89,16 @@ export default function InterestsList() {
               setNewInterest({ interest: event.target.value });
             }}
           />
-          <Button type='submit' variant='outlined' color='neutral'>
+          <Button type='submit' color='neutral'>
             Add
           </Button>
         </Stack>
+        <Stack>
         <TableContainer>
           <Table sx={{ width: '50vw' }} size='small'>
             <TableHead>
               <TableRow>
-                <StyledTableCell>Current Fields/Interests</StyledTableCell>
+                <StyledTableCell>Current Interests</StyledTableCell>
                 <StyledTableCell align='center'>Delete</StyledTableCell>
               </TableRow>
             </TableHead>
@@ -123,7 +125,7 @@ export default function InterestsList() {
         </TableContainer>
         <Dialog open={open} onClose={handleClose}>
           <DialogTitle>
-            {'Are you sure you want to delete interest?'}
+            {'Are you sure you want to delete this interest?'}
           </DialogTitle>
           <DialogActions>
             <Button onClick={handleClose} variant='outlined' color='neutral'>
@@ -134,7 +136,8 @@ export default function InterestsList() {
             </Button>
           </DialogActions>
         </Dialog>
-      </Box>
+        </Stack>
+      {/* </Box> */}
     </Grid>
   );
 }

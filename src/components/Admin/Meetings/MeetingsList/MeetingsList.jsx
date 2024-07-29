@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import Table from '@mui/joy/Table';
 import Sheet from '@mui/joy/Sheet';
 import moment from 'moment/moment';
+import MeetingsGrid from './MeetingsGrid';
 
 export default function MeetingsList() {
   const dispatch = useDispatch();
@@ -18,7 +19,7 @@ export default function MeetingsList() {
 
   return (
     <>
-      <Sheet>
+      {/* <Sheet>
         <Table stripe={stripe}>
           <thead>
             <tr>
@@ -45,7 +46,8 @@ export default function MeetingsList() {
             ))}
           </tbody>
         </Table>
-      </Sheet>
+      </Sheet> */}
+      <MeetingsGrid />
     </>
   )
 }

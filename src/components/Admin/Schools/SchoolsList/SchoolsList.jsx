@@ -54,8 +54,9 @@ export default function SchoolsList() {
 
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
-      backgroundColor: theme.palette.common.black,
-      color: theme.palette.common.white,
+      backgroundColor: theme.palette.common.white,
+      color: theme.palette.common.black,
+      fontSize: 18,
     },
     [`&.${tableCellClasses.body}`]: {
       fontSize: 14,
@@ -64,7 +65,7 @@ export default function SchoolsList() {
 
   return (
     <Grid container direction="column" alignItems="center" justifyContent="center">
-    <Box sx={{ width: '100%', maxWidth: 800, mt: 2 }}>
+    
       <Typography>Add New School</Typography>
       <Stack
         component='form'
@@ -82,10 +83,10 @@ export default function SchoolsList() {
             setNewSchool({ school: event.target.value });
           }}
         />
-        <Button type='submit' variant='outlined' color='neutral'>Add</Button>
+        <Button type='submit' color='neutral'>Add</Button>
       </Stack>
 
-      <div>
+      <Stack>
         <TableContainer>
           <Table sx={{ width: '50vw' }} size='small'>
             <TableHead>
@@ -111,17 +112,16 @@ export default function SchoolsList() {
             </TableBody>
           </Table>
         </TableContainer>
-      </div>
-      <div>
+     
         <Dialog open={open} onClose={handleClose}>
-          <DialogTitle>{'Are you sure you want to delete school?'}</DialogTitle>
+          <DialogTitle>{'Are you sure you want to delete this school?'}</DialogTitle>
           <DialogActions>
             <Button onClick={handleClose} variant='outlined' color='neutral'>Cancel</Button>
             <Button onClick={deleteSchool} variant='outlined' color='danger'>Yes, Delete</Button>
           </DialogActions>
         </Dialog>
-      </div>
-    </Box>
+      </Stack>
+    
     </Grid>
   );
 }

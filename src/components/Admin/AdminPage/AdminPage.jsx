@@ -58,14 +58,48 @@ export default function AdminPage() {
             value={value}
             onChange={handleChange}
             variant='fullWidth'
+            textColor="inherit"
+          TabIndicatorProps={{
+            style: {
+              backgroundColor: 'black',
+            }
+          }}
           >
-            <Tab label='Mentors' {...a11yProps(0)} />
-            <Tab label='Mentees' {...a11yProps(1)} />
-            <Tab label='Mentorships' {...a11yProps(2)} />
-            <Tab label='Meetings' {...a11yProps(3)} />
-            <Tab label='Interests' {...a11yProps(4)} />
-            <Tab label='Schools' {...a11yProps(5)} />
-            <Tab label='Genders' {...a11yProps(6)} />
+            <Tab label='Mentors' {...a11yProps(0)} sx={{
+              '&.Mui-selected': {
+                color: 'black',
+              },
+            }} />
+            <Tab label='Mentees' {...a11yProps(1)} sx={{
+              '&.Mui-selected': {
+                color: 'black',
+              },
+            }}/>
+            <Tab label='Mentorships' {...a11yProps(2)} sx={{
+              '&.Mui-selected': {
+                color: 'black',
+              },
+            }}/>
+            <Tab label='Meetings' {...a11yProps(3)} sx={{
+              '&.Mui-selected': {
+                color: 'black',
+              },
+            }}/>
+            <Tab label='Interests' {...a11yProps(4)} sx={{
+              '&.Mui-selected': {
+                color: 'black',
+              },
+            }}/>
+            <Tab label='Schools' {...a11yProps(5)} sx={{
+              '&.Mui-selected': {
+                color: '',
+              },
+            }}/>
+            <Tab label='Genders' {...a11yProps(6)} sx={{
+              '&.Mui-selected': {
+                color: 'black',
+              },
+            }}/>
           </Tabs>
         </Box>
         <CustomTabPanel value={value} index={0}>

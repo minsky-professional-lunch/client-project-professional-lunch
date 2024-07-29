@@ -12,10 +12,12 @@ import Input from '@mui/joy/Input';
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
 import Select from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
+import LibraryAddIcon from '@mui/icons-material/LibraryAdd';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/joy/FormLabel';
 import FormHelperText from '@mui/joy/FormHelperText';
+import Tooltip from '@mui/joy/Tooltip';
 
 export default function RegisterForm4() {
   const history = useHistory();
@@ -148,9 +150,21 @@ export default function RegisterForm4() {
           {useScript('https://widget.cloudinary.com/v2.0/global/all.js')}
         </Stack>
         <br />
-        <h4>Select Availabilities</h4>
+        <Stack direction='row' alignItems='center' spacing={2}>
+          <Stack>
+            <h4>Select Availabilities</h4>
+          </Stack>
+          <Stack>
+            <Tooltip title='Add More Availability' variant='soft'>
+              <LibraryAddIcon
+                sx={{ fontSize: '25px', cursor: 'pointer' }}
+                onClick={handleAdd}
+              />
+            </Tooltip>
+          </Stack>
+        </Stack>
         {availability.map((avail, index) => (
-          <form  key={index}>
+          <form key={index}>
             <Box
               sx={{
                 py: 2,
@@ -190,9 +204,9 @@ export default function RegisterForm4() {
                   ))}
                 </Select>
               </FormControl>
-              <Button color='neutral' sx={{ mb: 1 }} onClick={handleAdd}>
+              {/* <Button color='neutral' sx={{ mb: 1 }} onClick={handleAdd}>
                 Add More Availability
-              </Button>
+              </Button> */}
             </Box>
           </form>
         ))}
@@ -227,14 +241,13 @@ export default function RegisterForm4() {
             <Typography>
               5. Promote a Safe Environment: I will foster a safe and inclusive
               environment for all participants, free from harassment,
-              discrimination, and any form of abuse. 
-              </Typography>
-              <br />
-              <Typography>
-              By adhering to these
-              principles, I commit to upholding the values and mission of The
-              Professional L(A)unch Mentoring Platform and ensuring a
-              positive and enriching experience for all involved.
+              discrimination, and any form of abuse.
+            </Typography>
+            <br />
+            <Typography>
+              By adhering to these principles, I commit to upholding the values
+              and mission of The Professional L(A)unch Mentoring Platform and
+              ensuring a positive and enriching experience for all involved.
             </Typography>
             <br />
           </FormControl>
@@ -254,28 +267,29 @@ export default function RegisterForm4() {
               times.
             </Typography>
             <Typography>
-            2. Maintain Professionalism: I will conduct myself with integrity and
-            professionalism in all interactions, both online and in person.
+              2. Maintain Professionalism: I will conduct myself with integrity
+              and professionalism in all interactions, both online and in
+              person.
             </Typography>
             <Typography>
-            3. Respect Privacy: I will respect the confidentiality and privacy of all mentors and
-            fellow mentees, and will not share their personal information without consent.
+              3. Respect Privacy: I will respect the confidentiality and privacy
+              of all mentors and fellow mentees, and will not share their
+              personal information without consent.
             </Typography>
             <Typography>
-            4. Engage Positively: I will actively participate in the mentoring relationship and be
-            open to feedback and guidance from my mentor.
+              4. Engage Positively: I will actively participate in the mentoring
+              relationship and be open to feedback and guidance from my mentor.
             </Typography>
             <Typography>
               5. Promote a Safe Environment: I will foster a safe and inclusive
               environment for all participants, free from harassment,
-              discrimination, and any form of abuse. 
-              </Typography>
-              <br/>
-              <Typography>
-              By adhering to these
-              principles, I commit to upholding the values and mission of The
-              Professional L(A)unch Mentoring Platform and ensuring a
-              positive and enriching experience for all involved.
+              discrimination, and any form of abuse.
+            </Typography>
+            <br />
+            <Typography>
+              By adhering to these principles, I commit to upholding the values
+              and mission of The Professional L(A)unch Mentoring Platform and
+              ensuring a positive and enriching experience for all involved.
             </Typography>
             <br />
           </FormControl>

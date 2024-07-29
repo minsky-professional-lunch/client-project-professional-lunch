@@ -129,12 +129,13 @@ export default function AddResourceDialog({ open, closeAddResource }) {
         <DialogActions>
           <Button
             color='neutral'
+            variant='outlined'
             type='button'
             onClick={() => closeAddResource()}
           >
             Cancel
           </Button>
-          <Button type='submit'>Submit</Button>
+          <Button type='submit'color='neutral'>Submit</Button>
         </DialogActions>
       </Dialog>
     </div>
