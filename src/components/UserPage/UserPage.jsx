@@ -48,7 +48,7 @@ function UserPage() {
         <CardOverflow>
           <AspectRatio ratio='2'>
             <img
-              src='../images/PLaunch.png'
+              src='images/PLaunch.png'
               loading='lazy'
               alt='Professional Launch Logo'
             />

@@ -5,7 +5,7 @@ function AboutPage() {
   return (
     <div className="about-container">
       <div className="about-section">
-        <img src="../images/PLaunch.png" alt="Professional Launch Logo" className="about-logo" />
+        <img src="images/PLaunch.png" alt="Professional Launch Logo" className="about-logo" />
         <h1 className="about-title">What Is Professional Launch?</h1>
         <p className="about-text">
           The Professional Launch Mentorship management system is a web-based,
