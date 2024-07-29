@@ -10,6 +10,8 @@ CREATE TABLE "user" (
     "isAdmin" boolean DEFAULT false,
     "isMentor" boolean DEFAULT false
 );
+CREATE UNIQUE INDEX user_pkey ON "user"(id int4_ops);
+CREATE UNIQUE INDEX user_username_key ON "user"(username text_ops);
 
 CREATE TABLE profiles (
     id SERIAL PRIMARY KEY,
@@ -53,12 +55,14 @@ CREATE TABLE IF NOT EXISTS "schools" (
 	"school" VARCHAR NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS "availability" (
-	"id" SERIAL PRIMARY KEY,
-	"user_id" INT REFERENCES "user" ON DELETE CASCADE,
-	"day" INT REFERENCES "days",
-	"time" INT REFERENCES "times"
+CREATE TABLE availability (
+    id SERIAL PRIMARY KEY,
+    profile_id integer REFERENCES profiles(id) ON DELETE CASCADE,
+    day integer REFERENCES days(id),
+    time integer REFERENCES times(id)
 );
+
+CREATE UNIQUE INDEX availability_pkey ON availability(id int4_ops);
 
 CREATE TABLE IF NOT EXISTS "days" (
 	"id" SERIAL PRIMARY KEY,
@@ -70,13 +74,17 @@ CREATE TABLE IF NOT EXISTS "times" (
 	"time" VARCHAR NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS "mentorships" (
-	"id" SERIAL PRIMARY KEY,
-	"requested_at" TIMESTAMP NOT NULL DEFAULT NOW(),
-	"mentee_id" INT REFERENCES "profiles" NOT NULL,
-	"mentor_id" INT REFERENCES "profiles" NOT NULL,
-	"status" VARCHAR DEFAULT 'pending'
+CREATE TABLE mentorships (
+    id SERIAL PRIMARY KEY,
+    requested_at timestamp without time zone NOT NULL DEFAULT now(),
+    mentee_id integer NOT NULL REFERENCES profiles(id),
+    mentor_id integer NOT NULL REFERENCES profiles(id),
+    status character varying DEFAULT 'pending'::character varying,
+    CONSTRAINT mentorships_mentee_id_mentor_id_key UNIQUE (mentee_id, mentor_id)
 );
+
+CREATE UNIQUE INDEX mentorships_pkey ON mentorships(id int4_ops);
+CREATE UNIQUE INDEX mentorships_mentee_id_mentor_id_key ON mentorships(mentee_id int4_ops,mentor_id int4_ops);
 
 CREATE TABLE meetings (
     id SERIAL PRIMARY KEY,
@@ -103,17 +111,22 @@ CREATE TABLE IF NOT EXISTS "resources" (
 
 INSERT INTO "interests" ("interest")
 VALUES
-('Architecture'),
-('Arts'),
-('Business'),
-('Education'),
-('Engineering'),
-('Health Sciences'),
-('Human Services'),
-('Marketing'),
-('Math'),
-('Psychology'),
-('Veterinary Sciences'),
+('Business and Entreprenuership'),
+('Technology and IT'),
+('Healthcare and Medicine'),
+('Engineering and Manufacturing'),
+('Law and Legal Services'),
+('Marketing and Advertising'),
+('Finance and Accounting'),
+('Arts and Entertainment'),
+('Public Relations and Communications'),
+('Non-Profit and Social Work'),
+('Government and Public Policy'),
+('Environmental Science and Sustainability'),
+('Academic and Career Planning'),
+('Professional Development'),
+('Personal Growth'),
+('Skill Development'),
 ('Other');
 
 INSERT INTO "genders" ("gender")
@@ -132,6 +145,7 @@ VALUES
 ('Fargo South'),
 ('Horace High'),
 ('Moorhead High'),
+('Northern Cass'),
 ('Oak Grove'),
 ('Park Christian'),
 ('West Fargo High'),
@@ -139,8 +153,11 @@ VALUES
 ('Concordia'),
 ('MSCTC'),
 ('MSUM'),
+('NDSCS'),
 ('NDSU'),
 ('Rasmussen'),
+('University of Mary'),
+('Not Applicable'),
 ('Other');
 
 INSERT INTO "days" ("day")
