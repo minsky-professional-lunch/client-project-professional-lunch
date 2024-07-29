@@ -41,6 +41,7 @@ export default function RegisterForm2() {
     dispatch({
       type: "FETCH_GENDERS",
     });
+    window.scrollTo(0, 0);
   }, []);
 
   const nextPage = () => {

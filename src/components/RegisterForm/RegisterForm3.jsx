@@ -34,6 +34,7 @@ export default function RegisterForm3() {
     dispatch({
       type: "FETCH_INTERESTS",
     });
+    window.scrollTo(0, 0);
   }, []);
 
   const handleAutoFill = () => {
@@ -81,7 +82,7 @@ export default function RegisterForm3() {
               <FormLabel>LinkedIn Profile</FormLabel>
               <Input
                 label="LinkedIn Profile"
-                placeholder="LinkedIn Profile"
+                placeholder="https://www.linkedin.com/in/profile-name/"
                 value={linkedin}
                 onChange={(event) => setLinkedin(event.target.value)}
               />

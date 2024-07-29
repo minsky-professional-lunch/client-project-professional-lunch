@@ -17,6 +17,7 @@ import Typography from '@mui/joy/Typography';
 function UserPage() {
   const dispatch = useDispatch();
   useEffect(() => {
+    window.scrollTo(0, 0);
     const hasReloaded = localStorage.getItem('hasReloaded');
 
     if (!hasReloaded) {

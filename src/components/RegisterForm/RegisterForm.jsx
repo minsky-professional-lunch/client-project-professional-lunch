@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import Button from '@mui/joy/Button';
@@ -28,10 +28,14 @@ function RegisterForm() {
 
   // Function to autofill the username/password input
   const handleAutoFill = () => {
-    setUsername('menteetest3@gmail.com');
+    setUsername('johnthompson@gmail.com');
     setPassword('password123');
     setConfirmPassword('password123');
   };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const nextPage = () => {
     event.preventDefault();

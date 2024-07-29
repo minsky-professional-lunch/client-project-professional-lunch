@@ -38,6 +38,7 @@ export default function RegisterForm4() {
     dispatch({
       type: 'FETCH_TIMES',
     });
+    window.scrollTo(0, 0);
   }, [dispatch]);
 
   const openWidget = () => {
