@@ -34,7 +34,7 @@ function Footer() {
      // Set a new timeout to hide the footer after 3 seconds of inactivity
      timeoutRef.current = setTimeout(() => {
        setShowFooter(false);
-     }, 3000);
+     }, 2000);
    };
  
    // Add event listeners for scroll, touch, and mouse events
