@@ -87,7 +87,7 @@ export default function ResourceCards({ resource }) {
                 <Stack direction='row' justifyContent='flex-end'>
                   <Tooltip title='Delete Resource' variant='soft'>
                     <DeleteForeverIcon
-                      sx={{ fontSize: '25px', cursor: 'pointer' }}
+                      sx={{ fontSize: '40px', cursor: 'pointer' }}
                       onClick={() => handleOpen(resource.id)}
                     />
                   </Tooltip>
@@ -100,7 +100,7 @@ export default function ResourceCards({ resource }) {
                 <Stack direction='row' justifyContent='flex-end'>
                   <Tooltip title='Edit Resource' variant='soft'>
                     <EditIcon
-                      sx={{ fontSize: '25px', cursor: 'pointer' }}
+                      sx={{ fontSize: '40px', cursor: 'pointer' }}
                       onClick={() => setEditResourceIsOpen(true)}
                     />
                   </Tooltip>

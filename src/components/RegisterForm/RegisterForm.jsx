@@ -28,7 +28,7 @@ function RegisterForm() {
 
   // Function to autofill the username/password input
   const handleAutoFill = () => {
-    setUsername('menteetest2@gmail.com');
+    setUsername('menteetest3@gmail.com');
     setPassword('password123');
     setConfirmPassword('password123');
   };

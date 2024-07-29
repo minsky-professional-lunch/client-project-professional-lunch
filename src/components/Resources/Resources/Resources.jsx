@@ -30,7 +30,7 @@ export default function Resources() {
 
   return (
     <Container maxWidth='lg'>
-      <Stack sx={{ mb: 2 }} direction='row' alignItems='center' spacing={4}>
+      <Stack sx={{ mb: 2 }} direction='row' alignItems='center' spacing={2}>
         <Stack>
           <Typography sx={{ fontSize: '2rem', fontWeight: 'bold' }} level='h2'>
             Resources
@@ -41,7 +41,7 @@ export default function Resources() {
             <>
               <Tooltip title='Add Resource' variant='soft'>
                 <LibraryAddIcon
-                  sx={{ fontSize: '25px', cursor: 'pointer' }}
+                  sx={{ fontSize: '40px', cursor: 'pointer' }}
                   onClick={() => setAddResourceIsOpen(true)}
                 />
               </Tooltip>
