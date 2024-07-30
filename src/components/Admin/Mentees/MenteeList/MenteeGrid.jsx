@@ -50,7 +50,7 @@ export default function MenteeGrid() {
           columns={columns}
           initialState={{
             pagination: {
-              paginationModel: { pageSize: 25, page: 0 },
+              paginationModel: { pageSize: 10, page: 0 },
             },
           }}
           pageSizeOptions={[10, 25, 50]}
