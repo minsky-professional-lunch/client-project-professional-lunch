@@ -10,8 +10,6 @@ CREATE TABLE "user" (
     "isAdmin" boolean DEFAULT false,
     "isMentor" boolean DEFAULT false
 );
-CREATE UNIQUE INDEX user_pkey ON "user"(id int4_ops);
-CREATE UNIQUE INDEX user_username_key ON "user"(username text_ops);
 
 CREATE TABLE profiles (
     id SERIAL PRIMARY KEY,
@@ -62,8 +60,6 @@ CREATE TABLE availability (
     time integer REFERENCES times(id)
 );
 
-CREATE UNIQUE INDEX availability_pkey ON availability(id int4_ops);
-
 CREATE TABLE IF NOT EXISTS "days" (
 	"id" SERIAL PRIMARY KEY,
 	"day" VARCHAR NOT NULL
@@ -82,9 +78,6 @@ CREATE TABLE mentorships (
     status character varying DEFAULT 'pending'::character varying,
     CONSTRAINT mentorships_mentee_id_mentor_id_key UNIQUE (mentee_id, mentor_id)
 );
-
-CREATE UNIQUE INDEX mentorships_pkey ON mentorships(id int4_ops);
-CREATE UNIQUE INDEX mentorships_mentee_id_mentor_id_key ON mentorships(mentee_id int4_ops,mentor_id int4_ops);
 
 CREATE TABLE meetings (
     id SERIAL PRIMARY KEY,

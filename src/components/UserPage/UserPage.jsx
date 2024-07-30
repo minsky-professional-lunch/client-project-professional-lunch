@@ -17,6 +17,7 @@ import Typography from '@mui/joy/Typography';
 function UserPage() {
   const dispatch = useDispatch();
   useEffect(() => {
+    window.scrollTo(0, 0);
     const hasReloaded = localStorage.getItem('hasReloaded');
 
     if (!hasReloaded) {
@@ -48,7 +49,7 @@ function UserPage() {
         <CardOverflow>
           <AspectRatio ratio='2'>
             <img
-              src='../images/PLaunch.png'
+              src='images/PLaunch.png'
               loading='lazy'
               alt='Professional Launch Logo'
             />

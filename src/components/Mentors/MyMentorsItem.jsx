@@ -77,7 +77,7 @@ export default function MyMentorsItem({ mentor }) {
             ) : (
               <CardActions>
                 <Button onClick={() => cancel(mentor.id)} color='neutral'>
-                  Delete Request
+                  Cancel Request
                 </Button>
               </CardActions>
             )}

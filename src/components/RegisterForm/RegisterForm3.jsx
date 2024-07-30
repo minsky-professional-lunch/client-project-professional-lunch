@@ -34,12 +34,13 @@ export default function RegisterForm3() {
     dispatch({
       type: "FETCH_INTERESTS",
     });
+    window.scrollTo(0, 0);
   }, []);
 
-  const handleAutoFill = () => {
-    setLinkedin('http://www.linkedin/in/johnthompson');
-    setBio('I am a college sophomore looking to go into accounting and finance. I am also looking for help with academic and career planning.');
-  }
+  // const handleAutoFill = () => {
+  //   setLinkedin('http://www.linkedin/in/johnthompson');
+  //   setBio('I am a college sophomore looking to go into accounting and finance. I am also looking for help with academic and career planning.');
+  // }
 
   const handleInterestsChange = (event, newValue) => {
     if (newValue.length <= 5) {
@@ -65,7 +66,7 @@ export default function RegisterForm3() {
   };
   return (
     <div className="container">
-      <h2 onClick={handleAutoFill}>Create Profile (Page 2 of 3)</h2>
+      <h2>Create Profile (Page 2 of 3)</h2>
       <>
         <form onSubmit={nextPage} className="formPanel">
           <Box
@@ -81,7 +82,7 @@ export default function RegisterForm3() {
               <FormLabel>LinkedIn Profile</FormLabel>
               <Input
                 label="LinkedIn Profile"
-                placeholder="LinkedIn Profile"
+                placeholder="https://www.linkedin.com/in/profile-name/"
                 value={linkedin}
                 onChange={(event) => setLinkedin(event.target.value)}
               />
