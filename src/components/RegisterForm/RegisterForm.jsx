@@ -27,11 +27,11 @@ function RegisterForm() {
   const dispatch = useDispatch();
 
   // Function to autofill the username/password input
-  const handleAutoFill = () => {
-    setUsername('johnthompsontest@gmail.com');
-    setPassword('password123');
-    setConfirmPassword('password123');
-  };
+  // const handleAutoFill = () => {
+  //   setUsername('johnmthompson@gmail.com');
+  //   setPassword('password123');
+  //   setConfirmPassword('password123');
+  // };
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -69,7 +69,7 @@ function RegisterForm() {
           flexWrap: 'wrap',
         }}
       >
-        <h2 onClick={handleAutoFill}>Register User</h2>
+        <h2>Register User</h2>
         {errors.registrationMessage && (
           <h3 className='alert' role='alert'>
             {errors.registrationMessage}

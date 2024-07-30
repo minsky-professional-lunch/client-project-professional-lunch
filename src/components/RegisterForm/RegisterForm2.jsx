@@ -27,11 +27,11 @@ export default function RegisterForm2() {
   const history = useHistory();
   const dispatch = useDispatch();
 
-  const handleAutoFill = () => {
-    setFirstName('John');
-    setLastName('Thompson');
-    setEmail('mentee2024@gmail.com');
-  };
+  // const handleAutoFill = () => {
+  //   setFirstName('John');
+  //   setLastName('Thompson');
+  //   setEmail('mentee2024@gmail.com');
+  // };
 
 
   useEffect(() => {
@@ -61,7 +61,7 @@ export default function RegisterForm2() {
 
   return (
     <div className="container">
-      <h2 onClick={handleAutoFill}>Create Profile (Page 1 of 3)</h2>
+      <h2>Create Profile (Page 1 of 3)</h2>
       <form onSubmit={nextPage} className="formPanel">
         <Box
           sx={{
